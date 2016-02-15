@@ -9,34 +9,69 @@ namespace ConsoleApplication1
 {
     class Angle
     {
-        public int dergees { get; set; }
-        public int arcminutes { get; set; }
-        public int arcseconds { get; set; }
+
+        private int degrees;
+        private int arcminutes;
+        private int arcseconds;
+        public int Degrees {
+            get { return degrees; }
+            set { degrees = value; }
+        }
+
+        public int Arcminutes
+        {
+            get { return arcminutes; }
+            set
+            {
+                if (value > 59)
+                {
+                    degrees += value / 60;
+                    arcminutes = value % 60;
+                    return;
+                }
+                arcminutes = value;
+            }
+        }
+
+        public int Arcseconds
+        {
+            get { return arcseconds; }
+            set
+            {
+                if (value > 59)
+                {
+                    arcminutes += value / 60;
+                    arcseconds = value % 60;
+                    return;
+                }
+                arcseconds = value;
+            }
+        }
 
         public Angle(int arcseconds)
         {
-            dergees = arcseconds / 3600;
-            arcminutes = arcseconds % 3600;
-            this.arcseconds = arcseconds % 60;
+            Degrees = arcseconds / 3600;
+            Arcminutes = (arcseconds % 3600) / 60;
+            this.Arcseconds = arcseconds % 60;
         }
 
         public Angle(int d, int m, int s)
         {
-            dergees = d;
-            arcminutes = m;
-            arcseconds = s;
+            Degrees = d;
+            Arcminutes = m;
+            Arcseconds = s;
         }
 
         public Angle(Angle obj)
         {
-            dergees = obj.dergees;
-            arcminutes = obj.arcminutes;
-            arcseconds = obj.arcseconds;
+            Degrees = obj.Degrees;
+            Arcminutes = obj.Arcminutes;
+            Arcseconds = obj.Arcseconds;
         }
 
         public static int ToSeconds(Angle obj)
         {
-            return obj.dergees*3600 + obj.arcminutes*60 + obj.arcseconds;
+            return obj.Degrees * 3600 + obj.Arcminutes * 60 + obj.Arcseconds;
         }
         public static Angle operator +(Angle obj1, Angle obj2)
         {
@@ -55,7 +90,7 @@ namespace ConsoleApplication1
 
         public static Angle operator *(int multiplier, Angle obj)
         {
-            return obj*multiplier;
+            return obj * multiplier;
         }
 
         public static Angle operator /(Angle obj, int divisor)
@@ -70,7 +105,7 @@ namespace ConsoleApplication1
 
         public override string ToString()
         {
-            return String.Format("Degrees: {0}, minutes of arc: {1}, seconds of arc: {2}", dergees, arcminutes, arcseconds);
+            return String.Format("Degrees: {0}, minutes of arc: {1}, seconds of arc: {2}", Degrees, Arcminutes, Arcseconds);
         }
 
         public override bool Equals(object obj)
@@ -98,7 +133,7 @@ namespace ConsoleApplication1
             return Angle.ToSeconds(obj1) > Angle.ToSeconds(obj2);
         }
 
-        public static bool operator < (Angle obj1, Angle obj2)
+        public static bool operator <(Angle obj1, Angle obj2)
         {
             return Angle.ToSeconds(obj1) < Angle.ToSeconds(obj2);
         }

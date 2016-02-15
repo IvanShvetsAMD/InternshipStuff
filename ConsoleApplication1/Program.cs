@@ -101,23 +101,34 @@ namespace ConsoleApplication1
             #endregion
 
 
-            Angle angle1 = new Angle(3600);
-            Angle angle2 = new Angle(1, 0, 0);
+            Angle angle1 = new Angle(4000);
+            Console.WriteLine(Angle.ToSeconds(angle1));
+            Angle angle2 = new Angle(1, 61, 0);
+            
+            Console.WriteLine("\nAngle1: " + Angle.ToSeconds(angle1) + "\nAngle2: " + Angle.ToSeconds(angle2));
+            Console.WriteLine("\nAngle1: " + angle1.ToString() + "\nAngle2: " + angle2.ToString());
 
             angle2 = angle1 + angle2;
-            Console.WriteLine(Angle.ToSeconds(angle1) + ", " + Angle.ToSeconds(angle2));
+            Console.WriteLine("\nAngle1: " + Angle.ToSeconds(angle1) + "\nAngle2: " + Angle.ToSeconds(angle2));
+            Console.WriteLine("\nAngle1: " + angle1.ToString() + "\nAngle2: " + angle2.ToString());
 
             angle2 = angle2 - angle1;
-            Console.WriteLine(Angle.ToSeconds(angle1) + ", " + Angle.ToSeconds(angle2));
-            Console.WriteLine(angle2 == angle1);
+            Console.WriteLine("\nAngle1: " + Angle.ToSeconds(angle1) + "\nAngle2: " + Angle.ToSeconds(angle2));
+            Console.WriteLine("\nAngle1: " + angle1.ToString() + "\nAngle2: " + angle2.ToString());
+            Console.WriteLine("Equal: " + (angle2 == angle1));
 
             angle2 -= angle1;
-            Console.WriteLine(Angle.ToSeconds(angle1) + ", " + Angle.ToSeconds(angle2));
-            Console.WriteLine(angle2 == angle1);
-            
-            Console.WriteLine(Angle.ToSeconds(angle1) + ", " + Angle.ToSeconds(angle2));
+            Console.WriteLine("\nAngle1: " + Angle.ToSeconds(angle1) + "\nAngle2: " + Angle.ToSeconds(angle2));
+            Console.WriteLine("\nAngle1: " + angle1.ToString() + "\nAngle2: " + angle2.ToString());
+            Console.WriteLine("Equal: " + (angle2 == angle1));
+
+            Console.WriteLine("\nAngle1: " + Angle.ToSeconds(angle1) + "\nAngle2: " + Angle.ToSeconds(angle2));
+            Console.WriteLine("\nAngle1: " + angle1.ToString() + "\nAngle2: " + angle2.ToString());
             Console.WriteLine("Greater: " + (angle2 > angle1));
             Console.WriteLine("Lesser: " + (angle2 < angle1));
+
+            Console.WriteLine("Greater or equal: " + (angle2 >= angle1));
+            Console.WriteLine("Less or equal: " + (angle2 <= angle1));
 
         }
     }
