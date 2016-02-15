@@ -155,12 +155,6 @@ namespace Code
             }
         }
 
-        public void ShiftGasForward(uint OriginCompartment, uint DestinationComnpartment, float Volume)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public AircraftLighterThanAir(uint ballastmass, string gastype, float gasvolume, 
             List<GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
