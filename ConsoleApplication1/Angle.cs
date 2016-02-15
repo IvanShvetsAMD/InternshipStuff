@@ -13,6 +13,7 @@ namespace ConsoleApplication1
         private int degrees;
         private int arcminutes;
         private int arcseconds;
+
         public int Degrees {
             get { return degrees; }
             set { degrees = value; }
@@ -23,7 +24,7 @@ namespace ConsoleApplication1
             get { return arcminutes; }
             set
             {
-                if (value > 59)
+                if (value > 59 || value < -59)
                 {
                     degrees += value / 60;
                     arcminutes = value % 60;
@@ -38,7 +39,7 @@ namespace ConsoleApplication1
             get { return arcseconds; }
             set
             {
-                if (value > 59)
+                if (value > 59 || value < -59)
                 {
                     arcminutes += value / 60;
                     arcseconds = value % 60;
