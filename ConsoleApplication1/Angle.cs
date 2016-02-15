@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,6 +41,76 @@ namespace ConsoleApplication1
         public static Angle operator +(Angle obj1, Angle obj2)
         {
             return new Angle(Angle.ToSeconds(obj1) + Angle.ToSeconds(obj2));
+        }
+
+        public static Angle operator -(Angle obj1, Angle obj2)
+        {
+            return new Angle(Angle.ToSeconds(obj1) - Angle.ToSeconds(obj2));
+        }
+
+        public static Angle operator *(Angle obj, int multiplier)
+        {
+            return new Angle(Angle.ToSeconds(obj) * multiplier);
+        }
+
+        public static Angle operator *(int multiplier, Angle obj)
+        {
+            return obj*multiplier;
+        }
+
+        public static Angle operator /(Angle obj, int divisor)
+        {
+            return new Angle(Angle.ToSeconds(obj) / divisor);
+        }
+
+        public static Angle operator /(int divisor, Angle obj)
+        {
+            return new Angle(Angle.ToSeconds(obj) / divisor);
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Degrees: {0}, minutes of arc: {1}, seconds of arc: {2}", dergees, arcminutes, arcseconds);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj.ToString() == ToString();
+        }
+
+        public static bool Equals(Angle obj1, Angle obj2)
+        {
+            return obj1.ToString() == obj2.ToString();
+        }
+
+        public static bool operator ==(Angle obj1, Angle obj2)
+        {
+            return Equals(obj1, obj2);
+        }
+
+        public static bool operator !=(Angle obj1, Angle obj2)
+        {
+            return !Equals(obj1, obj2);
+        }
+
+        public static bool operator >(Angle obj1, Angle obj2)
+        {
+            return Angle.ToSeconds(obj1) > Angle.ToSeconds(obj2);
+        }
+
+        public static bool operator < (Angle obj1, Angle obj2)
+        {
+            return Angle.ToSeconds(obj1) < Angle.ToSeconds(obj2);
+        }
+
+        public static bool operator >=(Angle obj1, Angle obj2)
+        {
+            return Angle.ToSeconds(obj1) >= Angle.ToSeconds(obj2);
+        }
+
+        public static bool operator <=(Angle obj1, Angle obj2)
+        {
+            return Angle.ToSeconds(obj1) <= Angle.ToSeconds(obj2);
         }
     }
 }
