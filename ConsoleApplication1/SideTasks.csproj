@@ -45,8 +45,11 @@
   <ItemGroup>
     <Compile Include="Angle.cs" />
     <Compile Include="ClassesAndStructs.cs" />
+    <Compile Include="IOnOff.cs" />
+    <Compile Include="LightingSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
