@@ -153,19 +153,16 @@ namespace ConsoleApplication1
             ConcertEquipment.Add(new Speaker(100, 21000, rnd.Next(10, 30)));
             ConcertEquipment.Add(new Amplifier(700, rnd.Next(2, 20)));
             ConcertEquipment.Add(new LaserSystem(rnd.Next(200, 230), "waves"));
-            ConcertEquipment.Add(new Projector(rnd.Next(70, 100), new byte[8], 10));
+            ConcertEquipment.Add(new Projector(rnd.Next(70, 100), new byte[88], 10));
 
             foreach (var eq in ConcertEquipment)
             {
                 eq.StartEquipment();
                 Console.WriteLine(eq);
             }
+            Console.WriteLine();
             foreach (var eq in ConcertEquipment)
-            {
                 eq.StopEquipment();
-            }
-
-
         }
     }
 }
