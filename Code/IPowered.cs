@@ -7,13 +7,23 @@ using System.Threading.Tasks;
 
 namespace Code
 {
-    interface IPowered
+    interface IEnginePowerManagement
     {
-        void DecreasePower(int EngineNumber);
-        void IncreasePower(int EngineNumber);
-        float GetCurrentPower(int EngineNumber);
+        void DecreasePower(Engine engine);
+        void IncreasePower(Engine engine);
+        float GetCurrentPower(Engine engine);
         float GetTotalCurrentPower();
-        void StartEngine(int EngineNumber);
-        void StopEngine(int EngineNumber);
+    }
+
+    interface IEngineStartStop
+    {
+        void StartEngine(Engine engine);
+        void StopEngine(Engine engine);
+    }
+
+
+    interface IPowered : IEnginePowerManagement, IEngineStartStop
+    {
+        
     }
 }

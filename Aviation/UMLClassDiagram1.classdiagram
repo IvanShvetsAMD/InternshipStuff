@@ -1030,81 +1030,16 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="255f10a7-8d9f-44ae-9648-8f5c24b3f8b1" name="IPowered" isAbstract="false" isLeaf="false">
         <elementDefinition Id="f7fe2530-ea32-4dd5-a9d2-cf17398858fe" />
-        <ownedOperations>
-          <operation Id="b53fd62f-f192-41fe-b578-cb3b392cd5c3" name="StartEngine" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="33ee8239-f822-433b-978b-9d95bdcfb73a" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="3eae36ca-9092-4485-8bef-8612f5afa365" name="EngineNumber" direction="In">
-                  <elementDefinition Id="99de8e47-57b5-4a72-ada2-9ed6562abd30" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="a89c1bf3-2b0d-4898-a2f3-80f673570822" name="StopEngine" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="8b684521-ef42-4823-9c61-39c2239791a2" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="e7db4c36-c06a-4ff1-9f1e-0986be8f9b39" name="EngineNumber" direction="In">
-                  <elementDefinition Id="c3889de4-eb7e-4415-889f-2509b2baede0" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="03dffc14-f4ce-402d-8e74-b049192b9b9a" name="IncreasePower" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="2525dfac-0191-4c83-b353-a9b23e72c7ff" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="ccd9181d-36eb-4527-91fe-4adda8348227" name="EngineNumber" direction="In">
-                  <elementDefinition Id="352629c4-6838-4bc6-961d-ee3209159e07" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="08b8bdbe-ca7c-4050-80af-cb01063a9ffb" name="DecreasePower" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="0d170446-70f5-454d-a5f7-38cf5dc26510" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="ee1d7372-ff23-4e2a-8e23-1ec0c6bdf7c5" name="EngineNumber" direction="In">
-                  <elementDefinition Id="ff616fa1-e4f6-4de2-9605-598883dd817b" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="14fb9fe2-6f91-4e34-8024-adc9bd5bea5c" name="GetCurrentPower" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="1e20cecb-8e43-448c-a389-26d5f21db566" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="52763d41-9449-4d27-b543-f4c4eabfd093" direction="Return">
-                  <elementDefinition Id="dfc7be72-5361-44b6-ab3f-c87b37abfa38" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="d705b26d-d0dc-4c11-b6da-75dc0446674d" LastKnownName="float" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="8483fc00-f2ca-4b13-a0aa-5edcedb7af59" name="EngineNumber" direction="In">
-                  <elementDefinition Id="36008a18-b4c4-4ced-8a23-0f0cb8d40fa0" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-        </ownedOperations>
+        <generalsInternal>
+          <generalization Id="dfef9c78-38a2-495a-9024-4acb7b84bde8" isSubstitutable="false">
+            <interfaceMoniker Id="f29937c8-aad1-46cf-bc25-aef1c9f1904a" LastKnownName="IEnginePowerManagement" />
+            <elementDefinition Id="92749ed8-5a0f-4fab-a213-43c414179f1e" />
+          </generalization>
+          <generalization Id="5fd0335a-ae58-45c2-a7f2-9c694a56d241" isSubstitutable="false">
+            <interfaceMoniker Id="8817078f-aa4a-4d60-a3a6-e2cd05cffa62" LastKnownName="IEngineStartStop" />
+            <elementDefinition Id="5778532c-a7dd-4f2c-9603-f3ae9509d1df" />
+          </generalization>
+        </generalsInternal>
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -1181,9 +1116,9 @@
       <class Id="5dd1b334-6a0a-48e2-8c58-8efcc4a0d7cb" name="PoweredAircraft" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="67e94481-043e-4369-ad63-df597a6b0b2b" />
         <suppliersInternal>
-          <interfaceRealization Id="5979d942-8850-4ae9-80a1-15b6af382b52">
+          <interfaceRealization Id="0ca501c0-453e-4dc7-942f-3aa6b9d509d4">
             <interfaceMoniker Id="255f10a7-8d9f-44ae-9648-8f5c24b3f8b1" LastKnownName="IPowered" />
-            <elementDefinition Id="c9b729d2-0d0a-40da-bd57-8399567cc795" />
+            <elementDefinition Id="30ecf041-9c9b-46cb-8b4a-8a1f52181f87" />
           </interfaceRealization>
         </suppliersInternal>
         <generalsInternal>
@@ -1241,58 +1176,6 @@
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="92a05f0e-4eb0-4813-bdd5-72f9a9451bc2" name="StartEngine" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="34916a15-964e-4f32-bdf3-3ed1b38d4717" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="d263427f-ef6e-489e-90d4-f1b753bf40fe" name="EngineNumber" direction="In">
-                  <elementDefinition Id="60372ddb-f267-40b1-a8c7-e2e04f0c4551" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="2a8b78c5-3363-4dd9-bf04-187d9cc4d143" name="StopEngine" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="5e3ea1ae-98d3-412e-9325-6d284044e188" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="5712f05c-a2dc-492c-b2de-95ee97084877" name="EngineNumber" direction="In">
-                  <elementDefinition Id="9d893084-8d67-4915-9dd1-72704d39e229" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="1edff7d4-5a38-4b69-80fd-9066dfea0ae6" name="IncreasePower" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="6e187626-19d0-4139-a52c-813323456c4b" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="0f7d9a9c-be14-48a4-9029-692db4894356" name="EngineNumber" direction="In">
-                  <elementDefinition Id="0a1b1fb1-9ba8-4431-901b-00695e2b09c7" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="33189cab-98c7-4ce8-9f3a-b066f8ab47ce" name="DecreasePower" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="e70d646f-89f5-40c4-9b11-5a8b0118058f" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="c944a240-07a8-4faa-9918-2ec33f4b1072" name="EngineNumber" direction="In">
-                  <elementDefinition Id="f8d2a9ed-4dac-4f19-83f8-22cff57a524d" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
           <operation Id="4b6a44eb-536b-4e8a-a8de-4b1908441e52" name="GetFuelCapacity" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="baa1f603-31f3-4a59-b6b3-0de3b8c1cee4" />
             <ownedParameters>
@@ -1306,27 +1189,6 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="af13e389-a700-469d-8d19-36171fa670f0" name="GetCurrentPower" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="6e87d18d-20eb-431e-b1db-9c1426cfcd97" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="58409845-de31-405c-88dc-0708ebe85200" direction="Return">
-                  <elementDefinition Id="b11ef1ba-a71a-4c5f-bbe3-4405284dafac" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="677d79dc-0ac5-4e1d-b301-3525c50f5c60" LastKnownName="float" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="bd32f682-85be-43b2-82ed-641f168ef29e" name="EngineNumber" direction="In">
-                  <elementDefinition Id="f3889aa0-3242-4b64-93f5-95da89ea1b7b" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="e00acf1e-a994-4e8b-8c89-5fac647829b7" LastKnownName="Integer" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
           <operation Id="551ea670-528f-4d42-8e69-d5f799b95df8" name="GetMaxTakeoffWeight" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="2dec3ee1-4905-4ed0-a205-12d19b54a1b3" />
             <ownedParameters>
@@ -1335,6 +1197,79 @@
                   <elementDefinition Id="8dbb8d3b-6800-455f-9f63-8af4063385aa" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="18197114-4073-4284-9a72-6abea1d6ccc2" LastKnownName="Integer" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="9851a624-e7e0-4a97-a8c8-af1e17f7cf14" name="DecreasePower" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2e3a2a50-2148-46eb-97e5-4237ab3e5b27" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ec2f61a8-41a0-4c3a-ad5c-aef44d99e768" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="b425e8dd-c574-44b3-a041-d20f3ba03d73" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="ba7c818f-7921-4248-8392-510750cb7a07" name="GetCurrentPower" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="5cf3f88d-6722-4186-bd93-dbc860451397" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bc3dcfdb-63fe-400a-86b3-829c9c31e201" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="c08d5d07-8393-4c12-9e7d-68f9666102c8" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="646b62a7-4fa1-4549-9ad5-4b53ed97138a" direction="Return" isUnique="false">
+                  <elementDefinition Id="c39975a9-f6f6-4eba-98b9-97673bc2a8d6" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="677d79dc-0ac5-4e1d-b301-3525c50f5c60" LastKnownName="float" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="caeb91d3-4c80-49f3-91ee-c38ecc205197" name="IncreasePower" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6211c63b-3eb7-47a2-b872-349c815b5ce3" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5f78a0f8-4b21-4b7e-9e2a-9e59a40bdcc0" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="1604e8cd-a375-4a43-a5ea-79e4e386ebc4" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="840dd550-db9a-4383-8124-ab5dede7c004" name="StartEngine" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="94633ffb-bcb5-4b6e-9e1f-276d421f5b6c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e17a2f29-cab8-43f3-b3c6-49ced522d904" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="15516192-c7b2-4cfc-a054-17e8fc0cd95a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="e4eb7a25-084e-4164-9a46-22cabf6ee43f" name="StopEngine" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="711b91c7-8890-4cee-b8eb-7c42b46d7603" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b19d61a3-f6c7-49fc-aff6-edfb9b2978a4" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="3ec66efe-0278-4aaa-a3b0-193367466ed1" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -1872,11 +1807,6 @@
         <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
       </referencedType>
     </packageHasNamedElement>
-    <packageHasNamedElement>
-      <referencedType Id="d705b26d-d0dc-4c11-b6da-75dc0446674d" name="float" isAbstract="false" isLeaf="false" cachedFullName="float">
-        <elementDefinition Id="ffda06f3-0eed-4c0c-a5dd-d5ced7933d2c" />
-      </referencedType>
-    </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
       <class Id="aef5693b-9099-4a75-a773-661ed41e4437" name="Helicopter" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="bad61d58-b46c-4f38-9e87-8ce1c376bd0b" />
@@ -1959,6 +1889,98 @@
         <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
       </referencedType>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" name="Engine" isAbstract="false" isLeaf="false" cachedFullName="Aviation::Engine">
+        <elementDefinition Id="089dcf8c-accb-49bc-bc18-a5aec75faaba" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="f29937c8-aad1-46cf-bc25-aef1c9f1904a" name="IEnginePowerManagement" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="768019c9-dd33-45fa-b46e-c15fb03072f1" />
+        <ownedOperations>
+          <operation Id="0d57709b-33d8-48c3-a96f-14984993dc59" name="DecreasePower" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e8175e2c-f197-4e72-934a-c778afc3728b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7d3f033d-59da-4442-82bb-6e3e3ae7ef60" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="742332f5-3edc-46b5-ade7-fd873b6cb581" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="f3be91fb-1ab0-42f3-a55c-42c4f3a1ea48" name="GetCurrentPower" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="96283552-5a2c-4225-a816-e693342ecb6e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7bc7d510-0fe1-498f-aff5-cbe9f52c8f03" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="58a0e197-6805-462b-bf2d-8e57f46534cd" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a794959c-a1c8-401b-b22f-478ef57b06b3" direction="Return" isUnique="false">
+                  <elementDefinition Id="2e2810ce-beb3-4158-a6f6-442cedefb9b2" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="677d79dc-0ac5-4e1d-b301-3525c50f5c60" LastKnownName="float" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="4329ce74-c707-42ce-ac91-9e0d79bbd6be" name="IncreasePower" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f31bb049-c61b-456f-b9df-2ef3e99561c8" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="595964cc-071f-4d3e-acf5-d57c0da59ba0" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="aba116ad-e13f-4302-ba5e-7f106a54711d" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="8817078f-aa4a-4d60-a3a6-e2cd05cffa62" name="IEngineStartStop" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4741bdde-6f5a-4c22-b934-1707aeeef169" />
+        <ownedOperations>
+          <operation Id="0eb02635-1099-40e5-ba87-e555a6f4651b" name="StartEngine" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1e8521b6-bba1-41b7-8060-b9114c21a387" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="9082c735-a072-4a28-a55f-cae5f5c6339a" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="5f42aaee-d383-47fa-8558-4f5e4dfd5232" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="52124721-61a9-44d3-abeb-3b969fe11559" name="StopEngine" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="491b809f-3494-4782-bd6d-0fad6e5835ba" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ab4660bc-d1f3-4a15-91b5-15c9c609a9de" name="engine" direction="In" isUnique="false">
+                  <elementDefinition Id="501c590d-22e2-47c3-bf19-a29a1bf2a3fe" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="3987aa39-b000-4119-bbd1-94bdafd7ae43" LastKnownName="Engine" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="aa33ce3b-3ed0-4f54-b55d-a884aab529d9" name="Aviation">
     <elementDefinition Id="d8e43e9b-684b-4490-b986-672211458095" />

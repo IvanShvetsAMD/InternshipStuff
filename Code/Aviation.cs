@@ -43,48 +43,52 @@ namespace Code
         public List<Engine> Engines { get; private set; }
         public int FuelCapacity { get; private set; }
 
-        public void DecreasePower(int EngineNumber)
-        {
-            if (Engines[EngineNumber].CurrentPower > 5)
-            {
-                Engines[EngineNumber].CurrentPower -= 5;
-                Engines[EngineNumber].FuelFlow -= 0.5f;
-            }
-            else
-            {
-                Engines[EngineNumber].CurrentPower = 0;
-                Engines[EngineNumber].FuelFlow = 0f;
-            }
-        }
-
-        public void IncreasePower(int EngineNumber)
-        {
-            if (Engines[EngineNumber].CurrentPower < 96)
-            {
-                Engines[EngineNumber].CurrentPower += 5;
-                Engines[EngineNumber].FuelFlow += 0.5f;
-            }
-            else
-            {
-                Engines[EngineNumber].CurrentPower = 100;
-                Engines[EngineNumber].FuelFlow = 10f;
-            }
-        }
-
         public float GetCurrentPower(int EngineNumber) => Engines[EngineNumber].CurrentPower;
 
-        public float GetTotalCurrentPower() => Engines.Sum((engine => engine.CurrentPower));
-
-        public void StartEngine(int EngineNumber)
+        public void DecreasePower(Engine engine)
         {
-            Engines[EngineNumber].WarmUp();
-            Engines[EngineNumber].Start();
+            if (engine.CurrentPower > 5)
+            {
+                engine.CurrentPower -= 5;
+                engine.FuelFlow -= 0.5f;
+            }
+            else
+            {
+                engine.CurrentPower = 0;
+                engine.FuelFlow = 0f;
+            }
         }
 
-        public void StopEngine(int EngineNumber)
+        public void IncreasePower(Engine engine)
         {
-            Engines[EngineNumber].Stop();
-            Engines[EngineNumber].Cooldown();
+            if (engine.CurrentPower < 96)
+            {
+                engine.CurrentPower += 5;
+                engine.FuelFlow += 0.5f;
+            }
+            else
+            {
+                engine.CurrentPower = 100;
+                engine.FuelFlow = 10f;
+            }
+        }
+
+        public float GetCurrentPower(Engine engine)
+        {
+            return engine.CurrentPower;
+        }
+
+        public float GetTotalCurrentPower() => Engines.Sum((engine => engine.CurrentPower));
+        public void StartEngine(Engine engine)
+        {
+            engine.WarmUp();
+            engine.Start();
+        }
+
+        public void StopEngine(Engine engine)
+        {
+            engine.Stop();
+            engine.Cooldown();
         }
 
         public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
