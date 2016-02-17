@@ -20,6 +20,14 @@ namespace Code
         protected string ParentAircraftID { get; private set; }
         public float FuelFlow { get; set; }
 
+        public override string ToString()
+        {
+            return
+                String.Format(
+                    "Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximun power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}",
+                    Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraftID, FuelFlow);
+        }
+
         public void Cooldown()
         {
             Console.WriteLine("Cooling down started");
@@ -64,6 +72,12 @@ namespace Code
         public void IncreaseMixture() => Mixture += 10;
         public void LeanMixture() => Mixture -= 10;
 
+        public override string ToString()
+        {
+            return "Type: piston engine" + base.ToString() +
+                   String.Format("number of pistons: {0}, volume: {1}, mixture: {2}", NumberOfPistons, Volume, Mixture);
+        }
+
         public PistonEngine(uint numberofpistons, float volume, string manufacturer,
             string model, string serialnumber, float maxpower, float operatingtime,
             string parentaircraftID, float fuelflow) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
@@ -83,6 +97,17 @@ namespace Code
 
         public void DecreaseFuelFlow() { }
         public void IncreaseFuelFlow() { }
+
+        public override string ToString()
+        {
+            string FinalString;
+            FinalString = "Type: Jet engine" + base.ToString() + String.Format("EGT: {0}, Isp: {1}, number of cycles{2}, propellants: ");
+            foreach (var propellant in Propellants)
+            {
+                FinalString += " " + propellant;
+            }
+            return FinalString;
+        }
 
         public JetEngine(int egt, int isp, int numberofcycles, List<string> propellants,
             string manufacturer, string model, string serialnumber,

@@ -28,6 +28,12 @@ namespace Code
             Console.WriteLine("Parking brake set.");
         }
 
+        public override string ToString()
+        {
+            return String.Format("Manufacturer: {0}, model: {1}, maximum takeoff weight: {2}, Vne: {3}, Serial number: {4}", Manufacturer, Model, MaxTakeoffWeight, Vne, SerialNumber);
+        }
+        
+
         public Aircraft(string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
         {
             Manufacturer = manufacturer;
@@ -44,6 +50,16 @@ namespace Code
         public int FuelCapacity { get; private set; }
 
         public float GetCurrentPower(int EngineNumber) => Engines[EngineNumber].CurrentPower;
+
+        public override string ToString()
+        {
+            string FinalString = base.ToString() + String.Format("fuel capacity: {1}\n Engines:", FuelCapacity);
+            for (int i = 0; i < Engines.Count; i++)
+            {
+                FinalString += String.Format("\n\tEngine number: {0}, {1}", i, Engines[i]);
+            }
+            return FinalString;
+        }
 
         public void DecreasePower(Engine engine)
         {
@@ -106,6 +122,16 @@ namespace Code
         public float GasVolume { get; private set; }
         public List<GasCompartment> Compartments { get; private set; }
 
+        public override string ToString()
+        {
+            string FinalString = base.ToString();
+            FinalString += string.Format("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:");
+            for (int i = 0; i < Compartments.Count; i++)
+            {
+                FinalString += String.Format("\n\tCompartment number: {0}, {1}", i, Compartments[i]);
+            }
+            return FinalString;
+        }
 
         public void DumpBallast(uint TankNumber, uint mass)
         {

@@ -11,6 +11,11 @@ namespace Code
         public float Capacity { get; private set; }
         public float CurrentVolume { get; set; }
 
+        public override string ToString()
+        {
+            return String.Format("capacity: {0}, current volume: {1}", Capacity, CurrentVolume);
+        }
+
         public GasCompartment(float capacity, float currentvolume)
         {
             Capacity = capacity;
