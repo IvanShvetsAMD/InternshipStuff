@@ -88,12 +88,35 @@ namespace Code
         }
     }
 
+
+    enum Propellants
+    {
+        Jet_A,
+        Jet_B,
+        EthylAlcohol,
+        RP_1,
+        LH2,
+        Hydrazine,
+        MonoMethylHydrazine,
+        UnSymmetricalDimethylHydrazine,
+        Lithium,
+        Fluorine
+    }
+
+    enum Oxidisers
+    {
+        GOX,
+        LOX,
+        DinitrogenTetroxide,
+        High_TestPeroxide
+    }
     class JetEngine : Engine
     {
         protected int EGT { get; private set; }
         protected int Isp { get; private set; }
         public int NumberOfCycles { get; set; }
-        protected List<string> Propellants { get; private set; }
+        protected List<Propellants> Propellants { get; private set; }
+        protected List<Oxidisers> Oxidisers { get; private set; }
 
         public void DecreaseFuelFlow() { }
         public void IncreaseFuelFlow() { }
@@ -106,10 +129,11 @@ namespace Code
             {
                 FinalString += " " + propellant;
             }
-            return FinalString;
+            //return FinalString;
+            return Oxidisers.Aggregate("\noxidiser list:", (current, value) => current + ("\n\t" + value));
         }
 
-        public JetEngine(int egt, int isp, int numberofcycles, List<string> propellants,
+        public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
@@ -117,6 +141,7 @@ namespace Code
             Isp = isp;
             NumberOfCycles = numberofcycles;
             Propellants = propellants;
+            Oxidisers = oxidisers;
         }
 
     }
@@ -130,10 +155,10 @@ namespace Code
             throw new NotImplementedException();
         }
 
-        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<string> propellants,
+        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow) 
-            : base(egt, isp, numberofcycles, propellants, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             HasSupersonicCombustion = hassupersoniccombustion;
         }
@@ -145,10 +170,10 @@ namespace Code
         protected bool IsReignitable { get; private set; }
         protected string NozzleBellType { get; private set; }
 
-        public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, List<string> propellants,
+        public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow) 
-            : base(egt, isp, numberofcycles, propellants, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
 
         }
@@ -165,10 +190,10 @@ namespace Code
 
         public void StopGenerator() { }
 
-        public TurbineEngine(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<string> propellants,
+        public TurbineEngine(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(egt, isp, numberofcycles, propellants, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             HasReverse = hasreverse;
             NumberOfShafts = numberofshafts;
@@ -181,10 +206,11 @@ namespace Code
         public float BypassRatio { get; private set; }
         public bool IsGeared { get; private set; }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<string> propellants,
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, 
+            List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             BypassRatio = bypassratio;
             IsGeared = isgeared;
@@ -199,10 +225,11 @@ namespace Code
         public void IncreaseGearingRatio() { }
         public void DecreaseGearingratio() { }
 
-        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<string> propellants,
+        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, 
+            List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             GearingRatio = gearingratio;
             MaxTorque = maxtorque;
@@ -216,10 +243,10 @@ namespace Code
         public void InjectCoolant() { }
         public void StopCoolant() { }
 
-        public Turbojet(String precoolant, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<string> propellants,
+        public Turbojet(String precoolant, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             Precoolant = precoolant;
         }

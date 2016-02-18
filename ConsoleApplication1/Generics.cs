@@ -13,11 +13,10 @@ namespace SideTasts
 
         public T GetItem(int i)
         {
-            if (i < itemset.Length)
-                if (itemset[i] != null)
-                    return itemset[i];
-                
-             throw new Exception("out of array bounds");
+            if (i < itemset.Length && itemset[i] != null)
+                return itemset[i];
+
+            throw new Exception("out of array bounds");
         }
 
         public void SetItem(T obj, int i)
