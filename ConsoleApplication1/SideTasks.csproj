@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Angle.cs" />
     <Compile Include="ClassesAndStructs.cs" />
+    <Compile Include="Generics.cs" />
     <Compile Include="IOnOff.cs" />
     <Compile Include="LightingSystem.cs" />
     <Compile Include="Program.cs" />

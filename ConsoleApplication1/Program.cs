@@ -102,7 +102,7 @@ namespace ConsoleApplication1
 
             #region 
 
-//Angle angle1 = new Angle(4020);
+            //Angle angle1 = new Angle(4020);
             //Console.WriteLine(Angle.ToSeconds(angle1));
             //Angle angle2 = new Angle(1, 61, 0);
             //Console.WriteLine(Angle.ToSeconds(angle2));
@@ -143,26 +143,63 @@ namespace ConsoleApplication1
 
             #endregion
 
+            #region 
 
-            List<IOnOff> ConcertEquipment = new List<IOnOff>(8);
-            
-            ConcertEquipment.Add(new Speaker(100, 21000, 40));
-            ConcertEquipment.Add(new Amplifier(400, 4));
-            ConcertEquipment.Add(new LaserSystem(300, "stars"));
-            ConcertEquipment.Add(new Projector(80, new byte[8], 0));
-            ConcertEquipment.Add(new Speaker(100, 21000, rnd.Next(10, 30)));
-            ConcertEquipment.Add(new Amplifier(700, rnd.Next(2, 20)));
-            ConcertEquipment.Add(new LaserSystem(rnd.Next(200, 230), "waves"));
-            ConcertEquipment.Add(new Projector(rnd.Next(70, 100), new byte[88], 10));
+            //List<IOnOff> ConcertEquipment = new List<IOnOff>(8);
 
-            foreach (var eq in ConcertEquipment)
-            {
-                eq.StartEquipment();
-                Console.WriteLine(eq);
-            }
-            Console.WriteLine();
-            foreach (var eq in ConcertEquipment)
-                eq.StopEquipment();
+            //ConcertEquipment.Add(new Speaker(100, 21000, 40));
+            //ConcertEquipment.Add(new Amplifier(400, 4));
+            //ConcertEquipment.Add(new LaserSystem(300, "stars"));
+            //ConcertEquipment.Add(new Projector(80, new byte[8], 0));
+            //ConcertEquipment.Add(new Speaker(100, 21000, rnd.Next(10, 30)));
+            //ConcertEquipment.Add(new Amplifier(700, rnd.Next(2, 20)));
+            //ConcertEquipment.Add(new LaserSystem(rnd.Next(200, 230), "waves"));
+            //ConcertEquipment.Add(new Projector(rnd.Next(70, 100), new byte[88], 10));
+
+            //foreach (var eq in ConcertEquipment)
+            //{
+            //    eq.StartEquipment();
+            //    Console.WriteLine(eq);
+            //}
+            //Console.WriteLine();
+            //foreach (var eq in ConcertEquipment)
+            //    eq.StopEquipment();
+
+            #endregion
+
+            GenericArrayClass<string> words = new GenericArrayClass<string>(4);
+
+            words[0] = "kettle";
+            words[1] = "spoon";
+            words[2] = "fork";
+            words[3] = "salad fork";
+
+            Console.WriteLine(words);
+
+            Console.WriteLine("\nSwapping by index");
+            words.SwapByIndex(2, 3);
+            Console.WriteLine(words);
+
+            Console.WriteLine("\nSwapping by value");
+            words.SwapByValue("kettle", "fork");
+            Console.WriteLine(words);
+
+            GenericArrayClass<Angle> angles = new GenericArrayClass<Angle>(4);
+            angles[0] = new Angle(rnd.Next(0, 6000));
+            angles[1] = new Angle(2);
+            angles[2] = new Angle(3);
+            angles[3] = new Angle(4);
+
+            Console.WriteLine(angles);
+
+            Console.WriteLine("\nSwapping by index");
+            angles.SwapByIndex(2, 3);
+            Console.WriteLine(angles);
+
+            Console.WriteLine("\nSwapping by value");
+            angles.SwapByValue(new Angle(4), new Angle(3));
+            Console.WriteLine(angles);
+
         }
     }
 }
