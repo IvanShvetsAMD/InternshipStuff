@@ -53,7 +53,7 @@ namespace Code
 
         public override string ToString()
         {
-            string FinalString = base.ToString() + String.Format("fuel capacity: {1}\n Engines:", FuelCapacity);
+            string FinalString = base.ToString() + String.Format(" fuel capacity: {0}\n Engines:", FuelCapacity);
             for (int i = 0; i < Engines.Count; i++)
             {
                 FinalString += String.Format("\n\tEngine number: {0}, {1}", i, Engines[i]);
@@ -120,17 +120,13 @@ namespace Code
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
         public float GasVolume { get; private set; }
-        public List<GasCompartment> Compartments { get; private set; }
+        public Dictionary<uint, GasCompartment> Compartments { get; private set; }
 
         public override string ToString()
         {
             string FinalString = base.ToString();
-            FinalString += string.Format("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:");
-            for (int i = 0; i < Compartments.Count; i++)
-            {
-                FinalString += String.Format("\n\tCompartment number: {0}, {1}", i, Compartments[i]);
-            }
-            return FinalString;
+            FinalString += string.Format("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:", BallastMass, GasType, GasVolume);
+            return Compartments.Aggregate(FinalString, (current, gasCompartment) => current + String.Format("\n\tCompartment number : {0}, {1}", gasCompartment.Key, gasCompartment.ToString()));
         }
 
         public void DumpBallast(uint TankNumber, uint mass)
@@ -147,46 +143,35 @@ namespace Code
 
         public void ShiftGasAft(uint OriginCompartment, uint DestinationComnpartment, float Volume)
         {
-            //if (Volume > 0)
-            //    if (Volume < Compartments[(int)OriginCompartment].Capacity)
-            //    {
-            //        if (Volume <=
-            //            (Compartments[(int)DestinationComnpartment].Capacity -
-            //             Compartments[(int)DestinationComnpartment].CurrentVolume))
-            //        {
-            //            Compartments[(int)OriginCompartment].CurrentVolume -= Volume;
-            //            Compartments[(int)DestinationComnpartment].CurrentVolume += Volume;
-            //            return;
-            //        }
-            //        Compartments[(int)OriginCompartment].
-            //    }
-            
+            if (OriginCompartment == DestinationComnpartment)
+                return;
+            if (OriginCompartment > Compartments.Count || DestinationComnpartment > Compartments.Count)
+                return;
             while (true)
             {
-                Compartments[(int) OriginCompartment].CurrentVolume -= 1;
-                Compartments[(int) DestinationComnpartment].CurrentVolume += 1;
+                Compartments[OriginCompartment].CurrentVolume -= 1;
+                Compartments[DestinationComnpartment].CurrentVolume += 1;
                 Volume -= 1;
-                if (Compartments[(int) DestinationComnpartment].CurrentVolume >=
-                    Compartments[(int) DestinationComnpartment].Capacity)
+                if (Compartments[DestinationComnpartment].CurrentVolume >=
+                    Compartments[DestinationComnpartment].Capacity)
                 {
-                    Compartments[(int) OriginCompartment].CurrentVolume +=
-                        Compartments[(int) DestinationComnpartment].CurrentVolume -
-                        Compartments[(int) DestinationComnpartment].Capacity;
-                    Compartments[(int)DestinationComnpartment].CurrentVolume =
-                        Compartments[(int)DestinationComnpartment].Capacity;
+                    Compartments[OriginCompartment].CurrentVolume +=
+                        Compartments[DestinationComnpartment].CurrentVolume -
+                        Compartments[DestinationComnpartment].Capacity;
+                    Compartments[DestinationComnpartment].CurrentVolume = Compartments[DestinationComnpartment].Capacity;
                     break;
                 }
                 if (Volume <= 0)
                 {
-                    Compartments[(int) OriginCompartment].CurrentVolume += -1*Volume;
-                    Compartments[(int) DestinationComnpartment].CurrentVolume -= Volume;
+                    Compartments[OriginCompartment].CurrentVolume += -1 * Volume;
+                    Compartments[DestinationComnpartment].CurrentVolume -= -Volume;
                     break;
                 }
             }
         }
 
-        public AircraftLighterThanAir(uint ballastmass, string gastype, float gasvolume, 
-            List<GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
+        public AircraftLighterThanAir(uint ballastmass, string gastype, float gasvolume,
+            Dictionary<uint, GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             BallastMass = ballastmass;
@@ -229,8 +214,8 @@ namespace Code
     class FixedWingAircraft : AircraftHeavierThanAir
     {
         private List<Wing> Wings { get;  set; } 
-        public int CruiseSpeed { get; }
-        public int StallSpeed { get; }
+        public int? CruiseSpeed { get; }
+        public int? StallSpeed { get; }
 
         public FixedWingAircraft(List<Wing> wings, int cruisespeed, int stallspeed, List<Engine> engines,
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)

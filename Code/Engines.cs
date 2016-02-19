@@ -225,7 +225,7 @@ namespace Code
 
         public override string ToString()
         {
-            return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, (IsGeared ? "has a geared fan" : "has direct drive fan"));
+            return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, IsGeared ? "has a geared fan" : "has direct drive fan");
         }
 
         public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
