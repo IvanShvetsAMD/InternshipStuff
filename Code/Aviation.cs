@@ -32,7 +32,6 @@ namespace Code
         {
             return String.Format("Manufacturer: {0}, model: {1}, maximum takeoff weight: {2}, Vne: {3}, Serial number: {4}", Manufacturer, Model, MaxTakeoffWeight, Vne, SerialNumber);
         }
-        
 
         public Aircraft(string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
         {
@@ -120,7 +119,7 @@ namespace Code
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
         public float GasVolume { get; private set; }
-        public Dictionary<uint, GasCompartment> Compartments { get; private set; }
+        public Dictionary<uint, GasCompartment> Compartments { get; }
 
         public override string ToString()
         {

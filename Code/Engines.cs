@@ -4,6 +4,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace Code
         {
             return
                 String.Format(
-                    "Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximun power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}",
+                    ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximun power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}",
                     Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraftID, FuelFlow);
         }
 
@@ -60,6 +61,19 @@ namespace Code
             OperatingTime = operatingtime;
             ParentAircraftID = parentaircraftID;
             FuelFlow = fuelflow;
+        }
+
+        public class EngineComparer : IEqualityComparer<Engine>
+        {
+            public bool Equals(Engine x, Engine y)
+            {
+                return x.SerialNumber == y.SerialNumber;
+            }
+
+            public int GetHashCode(Engine obj)
+            {
+                return obj.GetHashCode();
+            }
         }
     }
 
@@ -124,13 +138,13 @@ namespace Code
         public override string ToString()
         {
             string FinalString;
-            FinalString = "Type: Jet engine" + base.ToString() + String.Format("EGT: {0}, Isp: {1}, number of cycles{2}, \npropellants: ", EGT, Isp, NumberOfCycles);
+            FinalString = "Type: Jet engine" + base.ToString() + String.Format(", EGT: {0}, Isp: {1}, number of cycles: {2}, \npropellants: ", EGT, Isp, NumberOfCycles);
             foreach (var propellant in Propellants)
             {
                 FinalString += "\n\t" + propellant;
             }
             //return FinalString;
-            return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value));
+            return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value)) + "\n";
         }
 
         public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
@@ -198,6 +212,8 @@ namespace Code
         private Generator generator { get; set; }
         protected List<Spool> Spools { get; private set; }
 
+        public Dictionary<Generator, double> Gens = new Dictionary<Generator, double>(new GeneratorComparer()); 
+
         public void StartGenerator() => generator.GenerateCurrent();
 
         public void StopGenerator() { }
@@ -207,7 +223,7 @@ namespace Code
             return string.Format("{0}, Number of shafts: {1}, {2}", base.ToString(), NumberOfShafts, HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
         }
 
-        public TurbineEngine(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public TurbineEngine(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
             : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
@@ -215,6 +231,7 @@ namespace Code
             HasReverse = hasreverse;
             NumberOfShafts = numberofshafts;
             Spools = spools;
+            Gens = gens;
         }
     }
 
@@ -228,11 +245,11 @@ namespace Code
             return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, IsGeared ? "has a geared fan" : "has direct drive fan");
         }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens,  List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             BypassRatio = bypassratio;
             IsGeared = isgeared;
@@ -253,11 +270,11 @@ namespace Code
             return string.Format("{0}, gearing ratio: {1}, max torque: {2}", base.ToString(), GearingRatio, MaxTorque);
         }
 
-        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             GearingRatio = gearingratio;
             MaxTorque = maxtorque;
@@ -276,10 +293,10 @@ namespace Code
             return base.ToString() + ", precoolant: " + Precoolant;
         }
 
-        public Turbojet(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public Turbojet(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, string precoolant = null)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             Precoolant = precoolant ?? "none";
         }
@@ -293,5 +310,24 @@ namespace Code
         public void GenerateCurrent() { }
 
         public Generator() { }
+
+        public Generator(float c, float v)
+        {
+            OutputCurrent = c;
+            OutputVoltage = v;
+        }
+    }
+
+    class GeneratorComparer : IEqualityComparer<Generator>
+    {
+        public bool Equals(Generator x, Generator y)
+        {
+            return x.OutputCurrent == y.OutputCurrent && x.OutputVoltage == y.OutputVoltage;
+        }
+
+        public int GetHashCode(Generator obj)
+        {
+            return obj.ToString().GetHashCode();
+        }
     }
 }

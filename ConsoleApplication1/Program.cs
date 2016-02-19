@@ -199,7 +199,6 @@ namespace ConsoleApplication1
             Console.WriteLine("\nSwapping by value");
             angles.SwapByValue(new Angle(4), new Angle(3));
             Console.WriteLine(angles);
-
         }
     }
 }

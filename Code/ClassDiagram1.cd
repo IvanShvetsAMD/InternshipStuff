@@ -59,6 +59,14 @@
   </Class>
   <Class Name="Code.Engine">
     <Position X="7.5" Y="1.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Code.Engine.EngineComparer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Engines.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAgABAAAACAAAAAEAACAAAIAAAkAAAAgIAgAAAASAAA=</HashCode>
       <FileName>Engines.cs</FileName>
