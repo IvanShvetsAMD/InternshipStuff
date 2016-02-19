@@ -47,7 +47,7 @@ namespace Code
 
         public void WarmUp()
         {
-            Console.WriteLine(  "Warming up engine core for 1 minute. Monitor temps afterward.");
+            Console.WriteLine("Warming up engine core for 1 minute. Monitor temps afterward.");
         }
 
         public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
@@ -157,7 +157,7 @@ namespace Code
 
         public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow) 
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
             : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
             HasSupersonicCombustion = hassupersoniccombustion;
@@ -172,7 +172,7 @@ namespace Code
 
         public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow) 
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
             : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
 
@@ -206,7 +206,7 @@ namespace Code
         public float BypassRatio { get; private set; }
         public bool IsGeared { get; private set; }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, 
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
@@ -225,7 +225,7 @@ namespace Code
         public void IncreaseGearingRatio() { }
         public void DecreaseGearingratio() { }
 
-        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, 
+        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
