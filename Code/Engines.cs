@@ -322,12 +322,25 @@ namespace Code
     {
         public bool Equals(Generator x, Generator y)
         {
-            return x.OutputCurrent == y.OutputCurrent && x.OutputVoltage == y.OutputVoltage;
+            return NearlyEqual(x.OutputCurrent, y.OutputCurrent, 0.00001f) && NearlyEqual(x.OutputVoltage, y.OutputVoltage, 0.00001f);
         }
 
         public int GetHashCode(Generator obj)
         {
             return obj.ToString().GetHashCode();
+        }
+
+        public bool NearlyEqual(float a, float b, float epsilon)
+        {
+            float absA = Math.Abs(a);
+            float absB = Math.Abs(b);
+            float diff = Math.Abs(a - b);
+
+            if (a == b)
+                return true;
+            if (a == 0 || b == 0 || diff < float.Epsilon)
+                return diff < epsilon;
+            return diff / (absA + absB) < epsilon;
         }
     }
 }
