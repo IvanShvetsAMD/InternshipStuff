@@ -25,7 +25,7 @@ namespace Code
         public int MaxTemp { get; private set; }
         public bool HasCoolingChannels { get; private set; }
 
-        public TurbineBlade(int maxtemp, bool hascoolingchannels, int length, int chord, string MaterialType):base(length, chord, MaterialType)
+        public TurbineBlade(int maxtemp, bool hascoolingchannels, int length, int chord, string materialType):base(length, chord, materialType)
         {
             MaxTemp = maxtemp;
             HasCoolingChannels = hascoolingchannels;
@@ -36,7 +36,7 @@ namespace Code
     {
         public bool HasSupersonicTip { get; private set; }
 
-        public RotorBlade(bool hassupersonictip, int length, int chord, string MaterialType) : base(length, chord, MaterialType)
+        public RotorBlade(bool hassupersonictip, int length, int chord, string materialType) : base(length, chord, materialType)
         {
             HasSupersonicTip = hassupersonictip;
         }

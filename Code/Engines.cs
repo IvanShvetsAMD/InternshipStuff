@@ -124,10 +124,10 @@ namespace Code
         public override string ToString()
         {
             string FinalString;
-            FinalString = "Type: Jet engine" + base.ToString() + String.Format("EGT: {0}, Isp: {1}, number of cycles{2}, propellants: ");
+            FinalString = "Type: Jet engine" + base.ToString() + String.Format("EGT: {0}, Isp: {1}, number of cycles{2}, \npropellants: ", EGT, Isp, NumberOfCycles);
             foreach (var propellant in Propellants)
             {
-                FinalString += " " + propellant;
+                FinalString += "\n\t" + propellant;
             }
             //return FinalString;
             return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value));
@@ -155,6 +155,11 @@ namespace Code
             throw new NotImplementedException();
         }
 
+        public override string ToString()
+        {
+            return base.ToString() + "Type: " + (HasSupersonicCombustion ? "Scramjet" : "Ramjet");
+        }
+
         public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
@@ -170,12 +175,19 @@ namespace Code
         protected bool IsReignitable { get; private set; }
         protected string NozzleBellType { get; private set; }
 
+        public override string ToString()
+        {
+            return base.ToString() + "Nozzle bell type: " + NozzleBellType +
+                   (IsReignitable ? ", Engine is reignitable" : ", Engine is not regnitable");
+        }
+
         public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
             : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
-
+            IsReignitable = isreignitable;
+            NozzleBellType = nozzlebelltype;
         }
     }
 
@@ -189,6 +201,11 @@ namespace Code
         public void StartGenerator() => generator.GenerateCurrent();
 
         public void StopGenerator() { }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, Number of shafts: {1}, {2}", base.ToString(), NumberOfShafts, HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
+        }
 
         public TurbineEngine(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
@@ -205,6 +222,11 @@ namespace Code
     {
         public float BypassRatio { get; private set; }
         public bool IsGeared { get; private set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, (IsGeared ? "has a geared fan" : "has direct drive fan"));
+        }
 
         public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
@@ -225,6 +247,12 @@ namespace Code
         public void IncreaseGearingRatio() { }
         public void DecreaseGearingratio() { }
 
+
+        public override string ToString()
+        {
+            return string.Format("{0}, gearing ratio: {1}, max torque: {2}", base.ToString(), GearingRatio, MaxTorque);
+        }
+
         public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
@@ -243,12 +271,17 @@ namespace Code
         public void InjectCoolant() { }
         public void StopCoolant() { }
 
-        public Turbojet(String precoolant, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public override string ToString()
+        {
+            return base.ToString() + ", precoolant: " + Precoolant;
+        }
+
+        public Turbojet(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, string precoolant = null)
             : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
         {
-            Precoolant = precoolant;
+            Precoolant = precoolant ?? "none";
         }
     }
 
