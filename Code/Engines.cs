@@ -130,7 +130,7 @@ namespace Code
                 FinalString += " " + propellant;
             }
             //return FinalString;
-            return Oxidisers.Aggregate("\noxidiser list:", (current, value) => current + ("\n\t" + value));
+            return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value));
         }
 
         public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
