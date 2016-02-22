@@ -62,30 +62,12 @@ namespace Code
 
         public void DecreasePower(Engine engine)
         {
-            if (engine.CurrentPower > 5)
-            {
-                engine.CurrentPower -= 5;
-                engine.FuelFlow -= 0.5f;
-            }
-            else
-            {
-                engine.CurrentPower = 0;
-                engine.FuelFlow = 0f;
-            }
+            engine.DecreasePower();
         }
 
         public void IncreasePower(Engine engine)
         {
-            if (engine.CurrentPower < 96)
-            {
-                engine.CurrentPower += 5;
-                engine.FuelFlow += 0.5f;
-            }
-            else
-            {
-                engine.CurrentPower = 100;
-                engine.FuelFlow = 10f;
-            }
+            engine.IncreasePower();
         }
 
         public float GetCurrentPower(Engine engine)
@@ -117,6 +99,7 @@ namespace Code
             catch (InvalidOperationException e)
             {
                 Console.WriteLine(e.Message + "engine number: " + Engines.IndexOf(engine));
+                throw new Exception("Engine if already off", e);
             }
         }
 
@@ -125,6 +108,16 @@ namespace Code
         {
             Engines = engines;
             FuelCapacity = fuelcapacity;
+        }
+
+        public void MaxPower(Engine engine)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void IdlePower(Engine engine)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -154,30 +147,30 @@ namespace Code
             }
         }
 
-        public void ShiftGas(uint OriginCompartment, uint DestinationComnpartment, float Volume)
+        public void ShiftGas(uint OriginCompartment, uint DestinationCompartment, float Volume)
         {
-            if (OriginCompartment == DestinationComnpartment)
-                return;
-            if (OriginCompartment > Compartments.Count || DestinationComnpartment > Compartments.Count)
-                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", OriginCompartment, DestinationComnpartment);
+            if (OriginCompartment == DestinationCompartment)
+                throw new Exception("No point in shifting gas - the source and the destination match.");
+            if (!Compartments.ContainsKey(OriginCompartment) || !Compartments.ContainsKey(DestinationCompartment))
+                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", OriginCompartment, DestinationCompartment);
             while (true)
             {
                 Compartments[OriginCompartment].CurrentVolume -= 1;
-                Compartments[DestinationComnpartment].CurrentVolume += 1;
+                Compartments[DestinationCompartment].CurrentVolume += 1;
                 Volume -= 1;
-                if (Compartments[DestinationComnpartment].CurrentVolume >=
-                    Compartments[DestinationComnpartment].Capacity)
+                if (Compartments[DestinationCompartment].CurrentVolume >=
+                    Compartments[DestinationCompartment].Capacity)
                 {
                     Compartments[OriginCompartment].CurrentVolume +=
-                        Compartments[DestinationComnpartment].CurrentVolume -
-                        Compartments[DestinationComnpartment].Capacity;
-                    Compartments[DestinationComnpartment].CurrentVolume = Compartments[DestinationComnpartment].Capacity;
+                        Compartments[DestinationCompartment].CurrentVolume -
+                        Compartments[DestinationCompartment].Capacity;
+                    Compartments[DestinationCompartment].CurrentVolume = Compartments[DestinationCompartment].Capacity;
                     break;
                 }
                 if (Volume <= 0)
                 {
                     Compartments[OriginCompartment].CurrentVolume += -1 * Volume;
-                    Compartments[DestinationComnpartment].CurrentVolume -= -Volume;
+                    Compartments[DestinationCompartment].CurrentVolume -= -Volume;
                     break;
                 }
             }

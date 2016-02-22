@@ -10,6 +10,7 @@ namespace Code
     {
         public uint OriginCompartment { get; set; }
         public uint DestinationCompartment { get; set; }
+
         public GasCompartmentsNotFoundException(){}
 
         public GasCompartmentsNotFoundException(string message): base(message){}

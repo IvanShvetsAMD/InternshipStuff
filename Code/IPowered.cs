@@ -24,6 +24,7 @@ namespace Code
 
     interface IPowered : IEnginePowerManagement, IEngineStartStop
     {
-        
+        void MaxPower(Engine engine);
+        void IdlePower(Engine engine);
     }
 }

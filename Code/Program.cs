@@ -13,9 +13,9 @@ namespace Code
             #region 
 
             JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0);
+                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
             JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0);
+                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
             var compartments = new Dictionary<uint, GasCompartment>
@@ -29,18 +29,40 @@ namespace Code
                 new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
             Console.WriteLine(baloon);
             Console.WriteLine("\n\nComparing gas compartments:");
-            Console.WriteLine("\t{0}");
+            
 
             Console.WriteLine("\n shifting gas");
             try
             {
-                baloon.ShiftGas(0, 1, -4.5f);
+                baloon.ShiftGas(0, 1, 4.5f);
+                //baloon.ShiftGas(0, 0, 4.5f);
+                //baloon.ShiftGas(0, 4, -4.5f);
             }
             catch (GasCompartmentsNotFoundException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("\n{0} (origin: {1}, destination: {2}).\n", e.Message, e.OriginCompartment,
+                    e.DestinationCompartment);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("An attempt was made to shift lifting gas\n");
             }
             Console.WriteLine(baloon);
+
+            Console.WriteLine();
+            Console.WriteLine("Attemting to stop an engine");
+            try
+            {
+                baloon.Engines[0].Stop();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
 
             ////Turbofan tb = new Turbofan(3, false, true, 3,new Dictionary<Generator, double>(),  new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A }, new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0);

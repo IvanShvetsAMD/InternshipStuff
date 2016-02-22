@@ -15,9 +15,9 @@ namespace Code
     {
         public string Manufacturer { get; }
         public string Model { get; }
-        public float CurrentPower { get; set; }
+        public virtual float CurrentPower { get; protected set; }
         protected string SerialNumber { get; }
-        public float MaxPower { get; private set; }
+        public virtual float MaxPower { get; protected set; }
         protected float OperatingTime { get; private set; }
         protected string ParentAircraftID { get; private set; }
         public float FuelFlow { get; set; }
@@ -27,8 +27,8 @@ namespace Code
         {
             return
                 String.Format(
-                    ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximun power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}",
-                    Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraftID, FuelFlow);
+                    ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximun power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}, Status: {8}",
+                    Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraftID, FuelFlow, OnOffStatus);
         }
 
         public void Cooldown()
@@ -39,7 +39,7 @@ namespace Code
         public void Start()
         {
             if (OnOffStatus == OnOff.Running)
-                throw new InvalidOperationException("The engine is allready running.");
+                throw new InvalidOperationException("The engine is already running.");
 
             CurrentPower = 5;
             FuelFlow = 0.5f;
@@ -49,10 +49,38 @@ namespace Code
         public void Stop()
         {
             if (OnOffStatus == OnOff.Stopped)
-                throw new InvalidOperationException("The engine was allready stopped.");
+                throw new InvalidOperationException("The engine was already stopped or wasn't even started.");
             CurrentPower = 0;
             FuelFlow = 0f;
             OnOffStatus = OnOff.Stopped;
+        }
+
+        public virtual void IncreasePower()
+        {
+            if (CurrentPower < 96)
+            {
+                CurrentPower += 5;
+                FuelFlow += 0.5f;
+            }
+            else
+            {
+                CurrentPower = 100;
+                FuelFlow = 10f;
+            }
+        }
+
+        public virtual void DecreasePower()
+        {
+            if (CurrentPower > 5)
+            {
+                CurrentPower -= 5;
+                FuelFlow -= 0.5f;
+            }
+            else
+            {
+                CurrentPower = 0;
+                FuelFlow = 0f;
+            }
         }
 
         public void WarmUp()
@@ -60,7 +88,7 @@ namespace Code
             Console.WriteLine("Warming up engine core for 1 minute. Monitor temps afterward.");
         }
 
-        public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
+        public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
         {
             Manufacturer = manufacturer;
             Model = model;
@@ -70,6 +98,7 @@ namespace Code
             OperatingTime = operatingtime;
             ParentAircraftID = parentaircraftID;
             FuelFlow = fuelflow;
+            OnOffStatus = stat;
         }
 
         public class EngineComparer : IEqualityComparer<Engine>
@@ -108,7 +137,7 @@ namespace Code
 
         public PistonEngine(uint numberofpistons, float volume, string manufacturer,
             string model, string serialnumber, float maxpower, float operatingtime,
-            string parentaircraftID, float fuelflow) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            string parentaircraftID, float fuelflow, OnOff stat) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             NumberOfPistons = numberofpistons;
             Volume = volume;
@@ -165,7 +194,7 @@ namespace Code
 
         public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             EGT = egt;
             Isp = isp;
@@ -192,8 +221,8 @@ namespace Code
 
         public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             HasSupersonicCombustion = hassupersoniccombustion;
         }
@@ -213,11 +242,25 @@ namespace Code
 
         public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             IsReignitable = isreignitable;
             NozzleBellType = nozzlebelltype;
+        }
+    }
+
+    class SolidFuelRocketEngine : RocketEngine
+    {
+        public sealed override float MaxPower { get { return MaxPower; } protected set {} }
+        public sealed override float CurrentPower { get { return MaxPower; } protected set { CurrentPower = MaxPower; } }
+
+        public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, 
+            List<Propellants> propellants, List<Oxidisers> oxidisers, string manufacturer, string model, string serialnumber, 
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat) 
+            : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers, 
+                  manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+        {
         }
     }
 
@@ -241,8 +284,8 @@ namespace Code
 
         public TurbineEngine(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             HasReverse = hasreverse;
             NumberOfShafts = numberofshafts;
@@ -264,15 +307,15 @@ namespace Code
         public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens,  List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             BypassRatio = bypassratio;
             IsGeared = isgeared;
         }
     }
 
-    class Turboshaft : TurbineEngine
+    sealed class Turboshaft : TurbineEngine
     {
         public float GearingRatio { get; private set; }
         public float MaxTorque { get; private set; }
@@ -280,6 +323,15 @@ namespace Code
         public void IncreaseGearingRatio() { }
         public void DecreaseGearingratio() { }
 
+        public sealed override void IncreasePower()
+        {
+            base.IncreasePower();
+        }
+
+        public override void DecreasePower()
+        {
+            base.DecreasePower();
+        }
 
         public override string ToString()
         {
@@ -289,8 +341,8 @@ namespace Code
         public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             GearingRatio = gearingratio;
             MaxTorque = maxtorque;
@@ -311,8 +363,8 @@ namespace Code
 
         public Turbojet(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, string precoolant = null)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow)
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat, string precoolant = null)
+            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             Precoolant = precoolant ?? "none";
         }
