@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Security;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace Code
         protected float OperatingTime { get; private set; }
         protected string ParentAircraftID { get; private set; }
         public float FuelFlow { get; set; }
+        public OnOff OnOffStatus { get; set; }
 
         public override string ToString()
         {
@@ -36,14 +38,21 @@ namespace Code
 
         public void Start()
         {
+            if (OnOffStatus == OnOff.Running)
+                throw new InvalidOperationException("The engine is allready running.");
+
             CurrentPower = 5;
             FuelFlow = 0.5f;
+            OnOffStatus = OnOff.Running;
         }
 
         public void Stop()
         {
+            if (OnOffStatus == OnOff.Stopped)
+                throw new InvalidOperationException("The engine was allready stopped.");
             CurrentPower = 0;
             FuelFlow = 0f;
+            OnOffStatus = OnOff.Stopped;
         }
 
         public void WarmUp()
@@ -77,6 +86,12 @@ namespace Code
         }
     }
 
+    enum OnOff
+    {
+        Running,
+        Stopped
+    }
+
     class PistonEngine : Engine
     {
         protected uint NumberOfPistons { get; private set; }
@@ -88,8 +103,7 @@ namespace Code
 
         public override string ToString()
         {
-            return "Type: piston engine" + base.ToString() +
-                   String.Format("number of pistons: {0}, volume: {1}, mixture: {2}", NumberOfPistons, Volume, Mixture);
+            return String.Format("Type: piston engine {0}, number of pistons: {1}, volume: {2}, mixture: {3}", base.ToString(), NumberOfPistons, Volume, Mixture);
         }
 
         public PistonEngine(uint numberofpistons, float volume, string manufacturer,
@@ -138,12 +152,14 @@ namespace Code
         public override string ToString()
         {
             string FinalString;
-            FinalString = "Type: Jet engine" + base.ToString() + String.Format(", EGT: {0}, Isp: {1}, number of cycles: {2}, \npropellants: ", EGT, Isp, NumberOfCycles);
+            FinalString = String.Format(
+                "Type: Jet engine, {0}, EGT: {1}, Isp: {2}, number of cycles: {3}, \npropellants: ", base.ToString(), EGT, Isp, NumberOfCycles);
+
             foreach (var propellant in Propellants)
             {
                 FinalString += "\n\t" + propellant;
             }
-            //return FinalString;
+            
             return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value)) + "\n";
         }
 

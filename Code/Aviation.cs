@@ -96,14 +96,28 @@ namespace Code
         public float GetTotalCurrentPower() => Engines.Sum((engine => engine.CurrentPower));
         public void StartEngine(Engine engine)
         {
-            engine.WarmUp();
-            engine.Start();
+            try
+            {
+                engine.WarmUp();
+                engine.Start();
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message + "engine number: " + Engines.IndexOf(engine));
+            }
         }
 
         public void StopEngine(Engine engine)
         {
-            engine.Stop();
-            engine.Cooldown();
+            try
+            {
+                engine.Stop();
+                engine.Cooldown();
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine(e.Message + "engine number: " + Engines.IndexOf(engine));
+            }
         }
 
         public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
@@ -140,12 +154,12 @@ namespace Code
             }
         }
 
-        public void ShiftGasAft(uint OriginCompartment, uint DestinationComnpartment, float Volume)
+        public void ShiftGas(uint OriginCompartment, uint DestinationComnpartment, float Volume)
         {
             if (OriginCompartment == DestinationComnpartment)
                 return;
             if (OriginCompartment > Compartments.Count || DestinationComnpartment > Compartments.Count)
-                return;
+                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", OriginCompartment, DestinationComnpartment);
             while (true)
             {
                 Compartments[OriginCompartment].CurrentVolume -= 1;

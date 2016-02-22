@@ -10,7 +10,6 @@ namespace Code
     interface ILighterThanAir
     {
         void DumpBallast(uint TankNumber, uint mass);
-        void ShiftGasAft(uint OriginCompartment, uint DestinationComnpartment,  float Volume);
-        //void ShiftGasForward(uint Compartment, uint DestinationComnpartment, float Volume);
+        void ShiftGas(uint OriginCompartment, uint DestinationComnpartment,  float Volume);
     }
 }
