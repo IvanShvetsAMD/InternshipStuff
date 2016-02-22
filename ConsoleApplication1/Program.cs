@@ -312,7 +312,7 @@ namespace ConsoleApplication1
                 Console.WriteLine(o.GetType().Name);
             }
 
-            Console.WriteLine();
+            Console.WriteLine("LINQ");
             foreach (var o in trylinq(stuff))
             {
                 Console.WriteLine(o.GetType().Name);
@@ -326,18 +326,14 @@ namespace ConsoleApplication1
             List<object> final = new List<object>();
 
             final.AddRange(list.Where(o => o.GetType().Name == "ElectricParameters").Select(o => o));
-            final.AddRange(list.Where(o => o.GetType().Name == "Angle").Select(o => o));
-            List<object> subquerry = (from o1 in list
-                where o1.GetType().Name == "Generator"
-                select o1) as List<object>;
-
-            var a = subquerry.ToList();
+            var subquery = from o1 in list
+                        where o1.GetType().Name == "Generator"
+                        select o1;
 
 
-
-
-            //var querry = from gen in subquerry
-            //             where gen.
+            
+            
+            final.AddRange(subquery);
 
 
             return final;
