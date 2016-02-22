@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using SideTasts;
 
 namespace ConsoleApplication1
 {
+    public delegate bool ArrangeDelegate(object obj1, object obj2);
     class Program
     {
         public static void StopGenerator(ref Generator gen, ref ElectricParameters ep)
@@ -37,6 +40,37 @@ namespace ConsoleApplication1
             ep.Current = 3;
         }
 
+        public static bool RearrangeMethod1(object obj1, object obj2)
+        {
+            if (obj1 is Generator)
+                return true;
+            if (obj1 is Angle && obj2 is ElectricParameters)
+                return true;
+            if (obj1 is ElectricParameters)
+                return false;
+            return false;
+        }
+
+        public static List<object> Rearrange (List<object> list,  ArrangeDelegate arrangedelegate)
+        {
+            var flag = true;
+
+            for (int i = 1; (i <= (list.Count - 1)) && flag; i++)
+            {
+                flag = false;
+                for (int j = 0; j < (list.Count - 1); j++)
+                {
+                    if(arrangedelegate(list[j], list[j + 1]))
+                    {
+                        var temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+                        flag = true;
+                    }
+                }
+            }
+            return list;
+        }
 
         static void Main(string[] args)
         {
@@ -167,38 +201,140 @@ namespace ConsoleApplication1
 
             #endregion
 
-            GenericArrayClass<string> words = new GenericArrayClass<string>(4);
+            #region 
 
-            words[0] = "kettle";
-            words[1] = "spoon";
-            words[2] = "fork";
-            words[3] = "salad fork";
+            //GenericArrayClass<string> words = new GenericArrayClass<string>(4);
 
-            Console.WriteLine(words);
+            //words[0] = "kettle";
+            //words[1] = "spoon";
+            //words[2] = "fork";
+            //words[3] = "salad fork";
 
-            Console.WriteLine("\nSwapping by index");
-            words.SwapByIndex(2, 3);
-            Console.WriteLine(words);
+            //Console.WriteLine(words);
 
-            Console.WriteLine("\nSwapping by value");
-            words.SwapByValue("kettle", "fork");
-            Console.WriteLine(words);
+            //Console.WriteLine("\nSwapping by index");
+            //words.SwapByIndex(2, 3);
+            //Console.WriteLine(words);
 
-            GenericArrayClass<Angle> angles = new GenericArrayClass<Angle>(4);
-            angles[0] = new Angle(rnd.Next(0, 6000));
-            angles[1] = new Angle(2);
-            angles[2] = new Angle(3);
-            angles[3] = new Angle(4);
+            //Console.WriteLine("\nSwapping by value");
+            //words.SwapByValue("kettle", "fork");
+            //Console.WriteLine(words);
 
-            Console.WriteLine(angles);
+            //GenericArrayClass<Angle> angles = new GenericArrayClass<Angle>(4);
+            //angles[0] = new Angle(rnd.Next(0, 6000));
+            //angles[1] = new Angle(2);
+            //angles[2] = new Angle(3);
+            //angles[3] = new Angle(4);
 
-            Console.WriteLine("\nSwapping by index");
-            angles.SwapByIndex(2, 3);
-            Console.WriteLine(angles);
+            //Console.WriteLine(angles);
 
-            Console.WriteLine("\nSwapping by value");
-            angles.SwapByValue(new Angle(4), new Angle(3));
-            Console.WriteLine(angles);
+            //Console.WriteLine("\nSwapping by index");
+            //angles.SwapByIndex(2, 3);
+            //Console.WriteLine(angles);
+
+            //Console.WriteLine("\nSwapping by value");
+            //angles.SwapByValue(new Angle(4), new Angle(3));
+            //Console.WriteLine(angles);
+
+            #endregion
+
+
+            List<Object> stuff = new List<object>();
+            stuff.Add(new Generator(4, 4));
+            stuff.Add(new Generator(3, 8));
+            stuff.Add(new Angle(3, 4, 5));
+            stuff.Add(new Angle(400));
+            stuff.Add(new Generator(220, 10));
+            stuff.Add(new ElectricParameters(1, 1));
+
+            List<object> stuff2 = new List<object>(stuff);
+            List<object> stuff3 = new List<object>(stuff);
+            List<object> stuff4 = new List<object>(stuff);
+
+            ArrangeDelegate ad1 = new ArrangeDelegate(RearrangeMethod1);
+            stuff = Rearrange(stuff, ad1);
+            Console.WriteLine("\nafter first rearrangement(delegate)\n");
+            foreach (var obj in stuff)
+            {
+                Console.WriteLine(obj.GetType().Name);
+            }
+
+            stuff2 = Rearrange(stuff2, delegate(object obj1, object obj2)
+            {
+                if (obj1 is Generator)
+                    return true;
+                if (obj1 is ElectricParameters && obj2 is Angle)
+                    return true;
+                if (obj1 is Angle)
+                    return false;
+                return false;
+            }
+            );
+
+            Console.WriteLine("\nafter second rearrangement (anonymous function)\n");
+            foreach (var obj in stuff2)
+            {
+                Console.WriteLine(obj.GetType().Name);
+            }
+
+            
+
+            stuff3 = Rearrange(stuff3, (obj1, obj2) =>
+            {
+                if (obj1 is Angle)
+                    return true;
+                if (obj1 is ElectricParameters && obj2 is Generator)
+                    return true;
+                if (obj1 is Generator)
+                    return false;
+                return false;
+            });
+            Console.WriteLine("\nafter N3\n");
+            foreach (var o in stuff3)
+            {
+                Console.WriteLine(o.GetType().Name);
+            }
+
+            Console.WriteLine();
+            var b = stuff.Change((obj1, obj2) =>
+            {
+                if (obj1 is Angle)
+                    return true;
+                if (obj1 is ElectricParameters && obj2 is Generator)
+                    return true;
+                if (obj1 is Generator)
+                    return false;
+                return false;
+            });
+
+            foreach (var o in b)
+            {
+                Console.WriteLine(o.GetType().Name);
+            }
+
+            Console.WriteLine();
+            foreach (var o in trylinq(stuff))
+            {
+                Console.WriteLine(o.GetType().Name);
+            }
+
+            
         }
+
+        public static List<object> trylinq(List<object> list)
+        {
+            List<object> final = new List<object>();
+
+            final.AddRange(list.Where(o => o.GetType().Name == "ElectricParameters").Select(o => o));
+            final.AddRange(list.Where(o => o.GetType().Name == "Angle").Select(o => o));
+            //List<Generator> subquerry = from o in list
+            //                            where o.GetType().Name == "Generator"
+            //                            select o;
+            //var querry = from obj in subquerry
+            //             where obj.OutputCurrent
+            
+
+            return final;
+        } 
     }
 }

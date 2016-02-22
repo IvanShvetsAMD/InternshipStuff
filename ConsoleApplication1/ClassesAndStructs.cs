@@ -75,5 +75,26 @@ namespace ConsoleApplication1
             Console.WriteLine("Electrical parameters:");
             Console.WriteLine(vt);
         }
+
+        public static List<object> Change(this List<object> list, ArrangeDelegate ad)
+        {
+            var flag = true;
+
+            for (int i = 1; (i <= (list.Count - 1)) && flag; i++)
+            {
+                flag = false;
+                for (int j = 0; j < (list.Count - 1); j++)
+                {
+                    if (ad(list[j], list[j + 1]))
+                    {
+                        var temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+                        flag = true;
+                    }
+                }
+            }
+            return list;
+        }
     }
 }

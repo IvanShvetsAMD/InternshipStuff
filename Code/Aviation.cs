@@ -99,7 +99,7 @@ namespace Code
             catch (InvalidOperationException e)
             {
                 Console.WriteLine(e.Message + "engine number: " + Engines.IndexOf(engine));
-                throw new Exception("\nEngine if already off", e);
+                //throw new Exception("\nEngine if already off", e);
                 throw;
             }
         }
