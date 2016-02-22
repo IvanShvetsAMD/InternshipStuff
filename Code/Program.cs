@@ -1,6 +1,9 @@
-﻿using System;
+﻿#define OPTIONALCOMPILATION
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,8 +13,9 @@ namespace Code
     {
         static void Main()
         {
-            #region 
+            #region
 
+#if OPTIONALCOMPILATION
             JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
                 new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
             JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
@@ -46,6 +50,7 @@ namespace Code
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                Debug.WriteLine(e.Message);
             }
             finally
             {
@@ -57,12 +62,15 @@ namespace Code
             Console.WriteLine("Attemting to stop an engine");
             try
             {
-                baloon.Engines[0].Stop();
+                baloon.StopEngine(baloon.Engines[0]);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException != null ? e.InnerException.Message : "no inner exception");
             }
+#endif
+
 
 
             ////Turbofan tb = new Turbofan(3, false, true, 3,new Dictionary<Generator, double>(),  new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A }, new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0);
@@ -75,11 +83,11 @@ namespace Code
 
             //Console.WriteLine(tb.Gens.ContainsKey(new Generator(4, 4)));
 
-            //String[] ox = Enum.GetNames(typeof (Oxidisers));
-            //foreach (var s in ox)
-            //{
-            //    Console.WriteLine(s);
-            //}
+            String[] ox = Enum.GetNames(typeof(Oxidisers));
+            foreach (var s in ox)
+            {
+                Console.WriteLine(s);
+            }
 
             #endregion
         }

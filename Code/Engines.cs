@@ -49,7 +49,7 @@ namespace Code
         public void Stop()
         {
             if (OnOffStatus == OnOff.Stopped)
-                throw new InvalidOperationException("The engine was already stopped or wasn't even started.");
+                throw new InvalidOperationException("\nThe engine was already stopped or wasn't even started.");
             CurrentPower = 0;
             FuelFlow = 0f;
             OnOffStatus = OnOff.Stopped;
@@ -325,6 +325,7 @@ namespace Code
 
         public sealed override void IncreasePower()
         {
+            //check for torque limits
             base.IncreasePower();
         }
 
