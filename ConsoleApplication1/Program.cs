@@ -312,7 +312,7 @@ namespace ConsoleApplication1
                 Console.WriteLine(o.GetType().Name);
             }
 
-            Console.WriteLine("LINQ");
+            Console.WriteLine("\nLINQ");
             foreach (var o in trylinq(stuff))
             {
                 Console.WriteLine(o.GetType().Name);
