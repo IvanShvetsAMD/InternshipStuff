@@ -327,12 +327,18 @@ namespace ConsoleApplication1
 
             final.AddRange(list.Where(o => o.GetType().Name == "ElectricParameters").Select(o => o));
             final.AddRange(list.Where(o => o.GetType().Name == "Angle").Select(o => o));
-            //List<Generator> subquerry = from o in list
-            //                            where o.GetType().Name == "Generator"
-            //                            select o;
-            //var querry = from obj in subquerry
-            //             where obj.OutputCurrent
-            
+            List<object> subquerry = (from o1 in list
+                where o1.GetType().Name == "Generator"
+                select o1) as List<object>;
+
+            var a = subquerry.ToList();
+
+
+
+
+            //var querry = from gen in subquerry
+            //             where gen.
+
 
             return final;
         } 
