@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using SideTasts;
 
 namespace ConsoleApplication1
@@ -237,7 +238,8 @@ namespace ConsoleApplication1
             //Console.WriteLine(angles);
 
             #endregion
-
+            
+            #region 
 
             List<Object> stuff = new List<object>();
             stuff.Add(new Generator(4, 4));
@@ -249,7 +251,7 @@ namespace ConsoleApplication1
 
             List<object> stuff2 = new List<object>(stuff);
             List<object> stuff3 = new List<object>(stuff);
-
+            List<object> stuff4 = new List<object>(stuff);
 
             Console.WriteLine("Original collection:\n");
             foreach (var obj in stuff)
@@ -275,14 +277,14 @@ namespace ConsoleApplication1
                     return false;
                 return false;
             }
-            );
+                );
 
             Console.WriteLine("\nafter second rearrangement (anonymous function)\n");
             foreach (var obj in stuff2)
             {
                 Console.WriteLine(obj.GetType().Name);
             }
-            
+
 
             stuff3 = Rearrange(stuff3, (obj1, obj2) =>
             {
@@ -322,6 +324,73 @@ namespace ConsoleApplication1
             {
                 Console.WriteLine(o.GetType().Name);
             }
+
+            #endregion
+
+
+            stuff4.Add(new Generator(4, 4));
+            stuff4.Add(new ElectricParameters(1, 1));
+            Console.WriteLine("\nDistinct\n");
+            foreach (var source in stuff4.OfType<ElectricParameters>().Distinct())
+            {
+                Console.WriteLine(source);
+            }
+
+            Console.WriteLine("\nSelect\n");
+            foreach (var result in stuff4.OfType<Generator>().Select(obj => obj.OutputCurrent))
+            {
+                Console.WriteLine(result);
+            }
+
+            Console.WriteLine("\nGroupJoin\n");
+            foreach (var result in stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element, (stuff4element, stuff3element) => new {stuff3element.GetType().Name, stuff4element.GetType().FullName}))
+            {
+                Console.WriteLine(result);
+            }
+
+
+            Console.WriteLine("\nOrderByDescending and ThenByDescending\n");
+            foreach (var source in stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj=> obj.GetType().Namespace))
+            {
+                Console.WriteLine(source + " " + source.GetType().Name);
+            }
+
+            Console.WriteLine("\nGroupBy\n");
+            var b2 = stuff4.GroupBy(obj => obj.GetType().Name);
+            foreach (var VARIABLE in b2)
+            {
+                Console.WriteLine(VARIABLE.Key);
+            }
+
+
+            Console.WriteLine("\nConcat\n");
+            foreach (var source in stuff.Concat(stuff4))
+            {
+                Console.WriteLine(source);
+            }
+
+
+            Console.WriteLine("\nLast\n");
+            try
+            {
+                Console.WriteLine(stuff4.Concat(stuff3).Last());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+            Console.WriteLine(stuff.Aggregate("\nAggregation of types: ", (current, obj) => current + "\n\t" + obj.GetType().FullName));
+
+            Console.WriteLine("\nSequence equal: {0}", stuff.SequenceEqual(stuff));
+
+            Console.WriteLine("\nRepeating random angles\n");
+            foreach (var result in Enumerable.Repeat(new Angle(), 4))
+            {
+                Console.WriteLine(result);
+            }
+
         }
 
         public static List<object> trylinq(List<object> list)

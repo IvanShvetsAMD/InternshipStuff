@@ -14,7 +14,8 @@ namespace ConsoleApplication1
         private int arcminutes;
         private int arcseconds;
 
-        public int Degrees {
+        public int Degrees
+        {
             get { return degrees; }
             set { degrees = value; }
         }
@@ -55,6 +56,8 @@ namespace ConsoleApplication1
             Arcminutes = (arcseconds % 3600) / 60;
             this.Arcseconds = arcseconds % 60;
         }
+
+        public Angle() : this(new Random().Next(0, 5000)) { }
 
         public Angle(int d, int m, int s)
         {
