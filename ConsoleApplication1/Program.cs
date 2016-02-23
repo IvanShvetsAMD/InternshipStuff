@@ -35,7 +35,7 @@ namespace ConsoleApplication1
             //ep = new ElectricParameters(0, 3);
 
             gen.OutputVoltage = 10;
-            gen.OutputCurrent = 0;                       
+            gen.OutputCurrent = 0;
 
             ep.Voltage = 3;
             ep.Current = 3;
@@ -52,7 +52,7 @@ namespace ConsoleApplication1
             return false;
         }
 
-        public static List<object> Rearrange (List<object> list,  ArrangeDelegate arrangedelegate)
+        public static List<object> Rearrange(List<object> list, ArrangeDelegate arrangedelegate)
         {
             var flag = true;
 
@@ -61,7 +61,7 @@ namespace ConsoleApplication1
                 flag = false;
                 for (int j = 0; j < (list.Count - 1); j++)
                 {
-                    if(arrangedelegate(list[j], list[j + 1]))
+                    if (arrangedelegate(list[j], list[j + 1]))
                     {
                         var temp = list[j];
                         list[j] = list[j + 1];
@@ -238,7 +238,7 @@ namespace ConsoleApplication1
             //Console.WriteLine(angles);
 
             #endregion
-            
+
             #region 
 
             List<Object> stuff = new List<object>();
@@ -267,7 +267,7 @@ namespace ConsoleApplication1
                 Console.WriteLine(obj.GetType().Name);
             }
 
-            stuff2 = Rearrange(stuff2, delegate(object obj1, object obj2)
+            stuff2 = Rearrange(stuff2, delegate (object obj1, object obj2)
             {
                 if (obj1 is Generator)
                     return true;
@@ -343,14 +343,14 @@ namespace ConsoleApplication1
             }
 
             Console.WriteLine("\nGroupJoin\n");
-            foreach (var result in stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element, (stuff4element, stuff3element) => new {stuff3element.GetType().Name, stuff4element.GetType().FullName}))
+            foreach (var result in stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element, (stuff4element, stuff3element) => new { stuff3element.GetType().Name, stuff4element.GetType().FullName }))
             {
                 Console.WriteLine(result);
             }
 
 
             Console.WriteLine("\nOrderByDescending and ThenByDescending\n");
-            foreach (var source in stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj=> obj.GetType().Namespace))
+            foreach (var source in stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj => obj.GetType().Namespace))
             {
                 Console.WriteLine(source + " " + source.GetType().Name);
             }
@@ -391,6 +391,26 @@ namespace ConsoleApplication1
                 Console.WriteLine(result);
             }
 
+
+            Console.WriteLine("\nClosures\n");
+            Func<Angle, Angle> assignment = AngleMiltiplierProvider();
+            Angle arg = new Angle(100);
+            Angle arg2 = assignment(arg);
+            Console.WriteLine(arg2);
+            arg2 = assignment(arg2);
+            Console.WriteLine(arg2);
+        }
+
+        public static Func<Angle, Angle> AngleMiltiplierProvider()
+        {
+            double multiplier = 2.5;
+            Func<Angle, Angle> multiply = delegate(Angle angle)
+            {
+                multiplier += 1;
+                Angle a = new Angle((int) (multiplier*Angle.ToSeconds(angle)));
+                return a;
+            };
+            return multiply;
         }
 
         public static List<object> trylinq(List<object> list)
@@ -399,11 +419,11 @@ namespace ConsoleApplication1
 
             final.AddRange(list.Where(o => o.GetType().Name == "ElectricParameters").Select(o => o));
             var subquery = from o1 in list
-                        where o1.GetType().Name == "Generator"
-                        select o1;
-            
+                           where o1.GetType().Name == "Generator"
+                           select o1;
+
             final.AddRange(subquery);
             return final;
-        } 
+        }
     }
 }
