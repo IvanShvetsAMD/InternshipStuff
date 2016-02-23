@@ -404,10 +404,10 @@ namespace ConsoleApplication1
         public static Func<Angle, Angle> AngleMiltiplierProvider()
         {
             double multiplier = 2.5;
-            Func<Angle, Angle> multiply = delegate(Angle angle)
+            Func<Angle, Angle> multiply = delegate (Angle angle)
             {
                 multiplier += 1;
-                Angle a = new Angle((int) (multiplier*Angle.ToSeconds(angle)));
+                Angle a = new Angle((int)(multiplier * Angle.ToSeconds(angle)));
                 return a;
             };
             return multiply;
