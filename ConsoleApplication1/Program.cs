@@ -241,15 +241,21 @@ namespace ConsoleApplication1
 
             List<Object> stuff = new List<object>();
             stuff.Add(new Generator(4, 4));
-            stuff.Add(new Generator(3, 8));
             stuff.Add(new Angle(3, 4, 5));
+            stuff.Add(new Generator(3, 8));
             stuff.Add(new Angle(400));
             stuff.Add(new Generator(220, 10));
             stuff.Add(new ElectricParameters(1, 1));
 
             List<object> stuff2 = new List<object>(stuff);
             List<object> stuff3 = new List<object>(stuff);
-            List<object> stuff4 = new List<object>(stuff);
+
+
+            Console.WriteLine("Original collection:\n");
+            foreach (var obj in stuff)
+            {
+                Console.WriteLine(obj.GetType().Name);
+            }
 
             ArrangeDelegate ad1 = new ArrangeDelegate(RearrangeMethod1);
             stuff = Rearrange(stuff, ad1);
@@ -276,7 +282,6 @@ namespace ConsoleApplication1
             {
                 Console.WriteLine(obj.GetType().Name);
             }
-
             
 
             stuff3 = Rearrange(stuff3, (obj1, obj2) =>
@@ -295,7 +300,7 @@ namespace ConsoleApplication1
                 Console.WriteLine(o.GetType().Name);
             }
 
-            Console.WriteLine();
+            Console.WriteLine("\nUsing an extension method:\n");
             var b = stuff.Change((obj1, obj2) =>
             {
                 if (obj1 is Angle)
@@ -317,8 +322,6 @@ namespace ConsoleApplication1
             {
                 Console.WriteLine(o.GetType().Name);
             }
-
-            
         }
 
         public static List<object> trylinq(List<object> list)
@@ -329,13 +332,8 @@ namespace ConsoleApplication1
             var subquery = from o1 in list
                         where o1.GetType().Name == "Generator"
                         select o1;
-
-
-            
             
             final.AddRange(subquery);
-
-
             return final;
         } 
     }
