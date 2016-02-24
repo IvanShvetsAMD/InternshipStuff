@@ -27,7 +27,7 @@ namespace Code
         {
             return
                 String.Format(
-                    ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximun power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}, Status: {8}",
+                    ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximum power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}, Status: {8}",
                     Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraftID, FuelFlow, OnOffStatus);
         }
 
@@ -86,6 +86,11 @@ namespace Code
         public void WarmUp()
         {
             Console.WriteLine("Warming up engine core for 1 minute. Monitor temps afterward.");
+        }
+
+        public Engine()
+        {
+            
         }
 
         public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
@@ -192,6 +197,10 @@ namespace Code
             return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value)) + "\n";
         }
 
+        public JetEngine()
+        {
+            
+        }
         public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
@@ -292,6 +301,11 @@ namespace Code
             Spools = spools;
             Gens = gens;
         }
+
+        protected TurbineEngine()
+        {
+            
+        }
     }
 
     class Turbofan : TurbineEngine
@@ -312,6 +326,10 @@ namespace Code
         {
             BypassRatio = bypassratio;
             IsGeared = isgeared;
+        }
+
+        public Turbofan() 
+        {
         }
     }
 

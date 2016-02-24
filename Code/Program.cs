@@ -33,7 +33,7 @@ namespace Code
                 new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
             Console.WriteLine(baloon);
             Console.WriteLine("\n\nComparing gas compartments:");
-            
+
 
             Console.WriteLine("\n shifting gas");
             try
@@ -87,6 +87,23 @@ namespace Code
             foreach (var s in ox)
             {
                 Console.WriteLine(s);
+            }
+
+            var tjf = TurbineEngineFactory.GeTurbineEngineFactoryFactory();
+
+            var tj = new Turbofan();
+
+            if (tjf.TryMakeTurbofan(4, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
+                new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped, out tj))
+            {
+                Console.WriteLine();
+                Console.WriteLine(tj);
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("No engine could be created");
             }
 
             #endregion

@@ -45,9 +45,10 @@
     <Compile Include="ILighterThanAir.cs" />
     <Compile Include="IPowered.cs" />
     <Compile Include="IVariableWingActions.cs" />
+    <Compile Include="PoweredAircraftFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Spool.cs" />
-    <Compile Include="TurbofanFactory.cs" />
+    <Compile Include="TurbineEngineFactory.cs" />
     <Compile Include="Wings.cs" />
   </ItemGroup>
   <ItemGroup>
