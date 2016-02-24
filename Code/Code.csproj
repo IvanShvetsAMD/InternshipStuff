@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;OPTIONALCOMPILATION</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -47,6 +47,7 @@
     <Compile Include="IVariableWingActions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Spool.cs" />
+    <Compile Include="TurbofanFactory.cs" />
     <Compile Include="Wings.cs" />
   </ItemGroup>
   <ItemGroup>

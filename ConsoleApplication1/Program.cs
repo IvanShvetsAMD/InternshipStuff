@@ -342,7 +342,7 @@ namespace ConsoleApplication1
                 Console.WriteLine(result);
             }
 
-            Console.WriteLine("\nGroupJoin\n");
+            Console.WriteLine("\nJoin\n");
             foreach (var result in stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element, (stuff4element, stuff3element) => new { stuff3element.GetType().Name, stuff4element.GetType().FullName }))
             {
                 Console.WriteLine(result);

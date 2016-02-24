@@ -1,4 +1,4 @@
-﻿#define OPTIONALCOMPILATION
+﻿
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +15,7 @@ namespace Code
         {
             #region
 
-#if OPTIONALCOMPILATION
+#if DEBUG
             JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
                 new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
             JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
@@ -67,7 +67,7 @@ namespace Code
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                Console.WriteLine(e.InnerException != null ? e.InnerException.Message : "no inner exception");
+                Console.WriteLine(e.InnerException?.Message ?? "no inner exception");
             }
 #endif
 

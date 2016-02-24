@@ -10,7 +10,7 @@
   <Class Name="Code.PoweredAircraft">
     <Position X="4" Y="17.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAJAAAQAAAAAEAAIAAAAAAAAAABAAEAAAAAAIAAA=</HashCode>
+      <HashCode>AAAIBJAAAQAAAAAEAAIAAAAAAEAAABAAEAAAAAAIAAA=</HashCode>
       <FileName>Aviation.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -37,21 +37,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Code.Blade">
-    <Position X="11.25" Y="18.25" Width="1.5" />
+    <Position X="13.5" Y="18.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAgAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blades.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Code.TurbineBlade">
-    <Position X="10" Y="21" Width="1.75" />
+    <Position X="12.5" Y="21.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAAA=</HashCode>
       <FileName>Blades.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Code.RotorBlade">
-    <Position X="12.25" Y="21" Width="2" />
+    <Position X="15.5" Y="21.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blades.cs</FileName>
@@ -68,7 +68,7 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAgABAAAACAAAAAEAACAAAIAAAkAAAAgIAgAAAASAAA=</HashCode>
+      <HashCode>AAgABAAAASAAAAAEAACAAAIAAAkAAAAgMAgAAAATAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -103,7 +103,7 @@
   <Class Name="Code.TurbineEngine">
     <Position X="10.75" Y="10.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAABAEBAAAAAAAAEAAAECAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAABAAAAAAABAEBAAAAAAAAEAAAECAAAAAAACAAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,9 +115,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Code.Turboshaft">
-    <Position X="10.5" Y="14" Width="2" />
+    <Position X="10.5" Y="17" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAEAAAAAAEAAAAAAgAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>AAAAABAAEQAAAAAEAAAAAAgAAAAAAAAAEAAAAAAAACA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -180,7 +180,7 @@
   <Interface Name="Code.ILighterThanAir">
     <Position X="19" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
       <FileName>ILighterThanAir.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -201,7 +201,7 @@
   <Interface Name="Code.IPowered">
     <Position X="20" Y="11.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IPowered.cs</FileName>
     </TypeIdentifier>
   </Interface>
