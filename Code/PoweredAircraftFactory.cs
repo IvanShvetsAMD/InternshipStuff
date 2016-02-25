@@ -15,7 +15,7 @@ namespace Code
         static HeavierThanAirAircraftFactory() { }
         private HeavierThanAirAircraftFactory() { }
 
-        public static HeavierThanAirAircraftFactory GetPoweredAircraftFactory() => LazyInstance.Value;
+        public static HeavierThanAirAircraftFactory GetHeavierThanAirAircraftFactory() => LazyInstance.Value;
 
         public RotorCraft MakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor", 
                                                             int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
@@ -40,6 +40,11 @@ namespace Code
         public FixedWingAircraft MakeFixedWingAircraft(List<Wing> wings, string serialnumber, int cruisespeed = 0, int stallspeed = 0, 
                                                         int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
         {
+            if (string.IsNullOrWhiteSpace(serialnumber))
+                throw new ArgumentException("No serial number provided");
+            if (wings == null || wings.Count == 0)
+                throw new ArgumentNullException(nameof(wings), "no wings list provided or it's empty");
+
             Turbofan tj;
             if (TurbineEngineFactory.GeTurbineEngineFactory()
                     .TryMakeTurbofan(4, 3, new Dictionary<Generator, double>(new GeneratorComparer()),

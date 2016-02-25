@@ -13,61 +13,66 @@ namespace Code
     {
         static void Main()
         {
-#if DEBUG
-            JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+
+            #region 
+
+            //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
+            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
-            var compartments = new Dictionary<uint, GasCompartment>
-            {
-                {0, new GasCompartment(20, 15)},
-                {1, new GasCompartment(20, 10)},
-                {2, new GasCompartment(20, 15)},
-                {3, new GasCompartment(15, 10)} };
+            //var compartments = new Dictionary<uint, GasCompartment>
+            //{
+            //    {0, new GasCompartment(20, 15)},
+            //    {1, new GasCompartment(20, 10)},
+            //    {2, new GasCompartment(20, 15)},
+            //    {3, new GasCompartment(15, 10)} };
 
-            LighterThanAirAircraft baloon = new LighterThanAirAircraft(300, "He", 100000, compartments,
-                new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
-            Console.WriteLine(baloon);
-            Console.WriteLine("\n\nComparing gas compartments:");
+            //LighterThanAirAircraft baloon = new LighterThanAirAircraft(300, "He", 100000, compartments,
+            //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
+            //Console.WriteLine(baloon);
+            //Console.WriteLine("\n\nComparing gas compartments:");
 
 
-            Console.WriteLine("\n shifting gas");
-            try
-            {
-                baloon.ShiftGas(0, 1, 4.5f);
-                //baloon.ShiftGas(0, 0, 4.5f);
-                //baloon.ShiftGas(0, 4, -4.5f);
-            }
-            catch (GasCompartmentsNotFoundException e)
-            {
-                Console.WriteLine("\n{0} (origin: {1}, destination: {2}).\n", e.Message, e.OriginCompartment,
-                    e.DestinationCompartment);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Debug.WriteLine(e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("An attempt was made to shift lifting gas\n");
-            }
-            Console.WriteLine(baloon);
+            //Console.WriteLine("\n shifting gas");
+            //try
+            //{
+            //    baloon.ShiftGas(0, 1, 4.5f);
+            //    //baloon.ShiftGas(0, 0, 4.5f);
+            //    //baloon.ShiftGas(0, 4, -4.5f);
+            //}
+            //catch (GasCompartmentsNotFoundException e)
+            //{
+            //    Console.WriteLine("\n{0} (origin: {1}, destination: {2}).\n", e.Message, e.OriginCompartment,
+            //        e.DestinationCompartment);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //    Debug.WriteLine(e.Message);
+            //}
+            //finally
+            //{
+            //    Console.WriteLine("An attempt was made to shift lifting gas\n");
+            //}
+            //Console.WriteLine(baloon);
 
-            Console.WriteLine();
-            Console.WriteLine("Attemting to stop an engine");
-            try
-            {
-                baloon.StopEngine(baloon.Engines[0]);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.InnerException?.Message ?? "no inner exception");
-            }
-#endif
+            //Console.WriteLine();
+            //Console.WriteLine("Attemting to stop an engine");
+            //try
+            //{
+            //    baloon.StopEngine(baloon.Engines[0]);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //    Console.WriteLine(e.InnerException?.Message ?? "no inner exception");
+            //}
+
+            #endregion
+
+
 
 
 
@@ -102,6 +107,20 @@ namespace Code
             {
                 Console.WriteLine();
                 Console.WriteLine("No engine could be created");
+            }
+
+
+            HeavierThanAirAircraftFactory htaaf = HeavierThanAirAircraftFactory.GetHeavierThanAirAircraftFactory();
+            Console.WriteLine("\n\n\n");
+            try
+            {
+                Aircraft plane = htaaf.MakeFixedWingAircraft(new List<Wing> {new Wing(23, 120) }, "1000008", 400, 150, 160000);
+                Console.WriteLine("\n\n\n");
+                Console.WriteLine(plane);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
     }
