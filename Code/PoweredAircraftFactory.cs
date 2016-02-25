@@ -17,23 +17,39 @@ namespace Code
 
         public static HeavierThanAirAircraftFactory GetPoweredAircraftFactory() => LazyInstance.Value;
 
-        public RotorCraft MakeHeavierThanAirTurbofanAircraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor", int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
+        public RotorCraft MakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor", 
+                                                            int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
         {
             if (string.IsNullOrWhiteSpace(serialnumber))
                 throw new ArgumentException("No serial number provided");
             if (rotorblades == null)
                 throw new ArgumentNullException(nameof(rotorblades), "No rotor(s) provided");
 
-            Turbofan tj;
+            Turboshaft tj;
             if (TurbineEngineFactory.GeTurbineEngineFactory()
-                    .TryMakeTurbofan(4, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
+                    .TryMakeTurboshaft(1,0, 4, new Dictionary<Generator, double>(new GeneratorComparer()),
                         new List<Spool>(), 600, 500, 5, new List<Propellants> {Propellants.Jet_A},
-                        new List<Oxidisers> {Oxidisers.GOX}, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0,
+                        new List<Oxidisers> {Oxidisers.GOX}, "Standart", "generic turboshaft", "100000008", 27000, 88, 0,
                         OnOff.Stopped, out tj))
             {
                 return new RotorCraft(numberofrotors, rotorblades, rotortype, new List<Engine> {tj}, fuelcapacity, manufacturer, "generic model", maxTOweight, 0, serialnumber);
             }
-            return new RotorCraft(numberofrotors, rotorblades, rotortype, new List<Engine> { tj }, fuelcapacity, manufacturer, "generic model", maxTOweight, 0, serialnumber);
+            return null;
+        }
+
+        public FixedWingAircraft MakeFixedWingAircraft(List<Wing> wings, string serialnumber, int cruisespeed = 0, int stallspeed = 0, 
+                                                        int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
+        {
+            Turbofan tj;
+            if (TurbineEngineFactory.GeTurbineEngineFactory()
+                    .TryMakeTurbofan(4, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
+                        new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+                        new List<Oxidisers> { Oxidisers.GOX }, "Standart", "generic model", "100000008", 27000, 88, 0,
+                        OnOff.Stopped, out tj))
+            {
+                return new FixedWingAircraft(wings, cruisespeed, stallspeed, new List<Engine> { tj }, fuelcapacity, manufacturer, "generic model", maxTOweight, 0, serialnumber);
+            }
+            return null;
         }
     }
 }
