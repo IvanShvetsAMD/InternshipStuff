@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace SideTasts
 {
@@ -367,16 +368,23 @@ namespace SideTasts
                 Console.WriteLine(source);
             }
 
-
+            stuff4.ForEach(obj => Console.WriteLine(obj));
             Console.WriteLine("\nLast\n");
             try
             {
-                Console.WriteLine(stuff4.Concat(stuff3).Last());
+                Console.WriteLine(stuff4.Concat(stuff3).Last(o => o.GetType().Name == "Angle"));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+
+            List<int> ints = new List<int> {1, 2, 3, 4, 5, 6};
+
+
+            bool hasFive = ints.Any(i => i == 5);
+
+
 
 
             Console.WriteLine(stuff.Aggregate("\nAggregation of types: ", (current, obj) => current + "\n\t" + obj.GetType().FullName));
