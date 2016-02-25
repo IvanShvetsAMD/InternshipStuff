@@ -13,8 +13,6 @@ namespace Code
     {
         static void Main()
         {
-            #region
-
 #if DEBUG
             JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
                 new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
@@ -105,8 +103,6 @@ namespace Code
                 Console.WriteLine();
                 Console.WriteLine("No engine could be created");
             }
-
-            #endregion
         }
     }
 }

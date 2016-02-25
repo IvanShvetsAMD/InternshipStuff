@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using SideTasts;
 
-namespace ConsoleApplication1
+namespace SideTasts
 {
     public delegate bool ArrangeDelegate(object obj1, object obj2);
     class Program
@@ -320,7 +316,7 @@ namespace ConsoleApplication1
             }
 
             Console.WriteLine("\nLINQ\n");
-            foreach (var o in trylinq(stuff))
+            foreach (var o in Trylinq(stuff))
             {
                 Console.WriteLine(o.GetType().Name);
             }
@@ -413,7 +409,7 @@ namespace ConsoleApplication1
             return multiply;
         }
 
-        public static List<object> trylinq(List<object> list)
+        public static IEnumerable<object> Trylinq(List<object> list)
         {
             List<object> final = new List<object>();
 
