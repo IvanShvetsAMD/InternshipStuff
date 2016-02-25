@@ -235,15 +235,17 @@ namespace SideTasts
 
             #endregion
 
-            #region 
+            #region
 
-            List<Object> stuff = new List<object>();
-            stuff.Add(new Generator(4, 4));
-            stuff.Add(new Angle(3, 4, 5));
-            stuff.Add(new Generator(3, 8));
-            stuff.Add(new Angle(400));
-            stuff.Add(new Generator(220, 10));
-            stuff.Add(new ElectricParameters(1, 1));
+            List<object> stuff = new List<object>
+            {
+                new Generator(4, 4),
+                new Angle(3, 4, 5),
+                new Generator(3, 8),
+                new Angle(400),
+                new Generator(220, 10),
+                new ElectricParameters(1, 1)
+            };
 
             List<object> stuff2 = new List<object>(stuff);
             List<object> stuff3 = new List<object>(stuff);
@@ -257,7 +259,7 @@ namespace SideTasts
 
             ArrangeDelegate ad1 = new ArrangeDelegate(RearrangeMethod1);
             stuff = Rearrange(stuff, ad1);
-            Console.WriteLine("\nafter first rearrangement(delegate)\n");
+            Console.WriteLine("\nAfter the first rearrangement(delegate)\n");
             foreach (var obj in stuff)
             {
                 Console.WriteLine(obj.GetType().Name);

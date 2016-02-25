@@ -122,7 +122,7 @@ namespace Code
         }
     }
 
-    class AircraftLighterThanAir : PoweredAircraft, ILighterThanAir
+    class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
     {
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
@@ -177,7 +177,7 @@ namespace Code
             }
         }
 
-        public AircraftLighterThanAir(uint ballastmass, string gastype, float gasvolume,
+        public LighterThanAirAircraft(uint ballastmass, string gastype, float gasvolume,
             Dictionary<uint, GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
@@ -188,11 +188,11 @@ namespace Code
         }
     }
 
-    class AircraftHeavierThanAir : PoweredAircraft
+    class HeavierThanAirAircraft : PoweredAircraft
     {
 
 
-        public AircraftHeavierThanAir(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
+        public HeavierThanAirAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             
@@ -200,7 +200,7 @@ namespace Code
         
     }
 
-    class RotorCraft : AircraftHeavierThanAir
+    class RotorCraft : HeavierThanAirAircraft
     {
         public int NumberOfRotors { get; private set; }
         public List<RotorBlade> RotorBlades { get; private set; } 
@@ -218,7 +218,7 @@ namespace Code
         }
     }
 
-    class FixedWingAircraft : AircraftHeavierThanAir
+    class FixedWingAircraft : HeavierThanAirAircraft
     {
         private List<Wing> Wings { get;  set; } 
         public int? CruiseSpeed { get; }

@@ -27,7 +27,7 @@ namespace Code
                 {2, new GasCompartment(20, 15)},
                 {3, new GasCompartment(15, 10)} };
 
-            AircraftLighterThanAir baloon = new AircraftLighterThanAir(300, "He", 100000, compartments,
+            LighterThanAirAircraft baloon = new LighterThanAirAircraft(300, "He", 100000, compartments,
                 new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
             Console.WriteLine(baloon);
             Console.WriteLine("\n\nComparing gas compartments:");
@@ -87,7 +87,7 @@ namespace Code
                 Console.WriteLine(s);
             }
 
-            var tjf = TurbineEngineFactory.GeTurbineEngineFactoryFactory();
+            var tjf = TurbineEngineFactory.GeTurbineEngineFactory();
 
             var tj = new Turbofan();
 

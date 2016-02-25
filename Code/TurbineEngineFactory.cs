@@ -15,7 +15,7 @@ namespace Code
 
         private TurbineEngineFactory() { }
 
-        public static TurbineEngineFactory GeTurbineEngineFactoryFactory() => LazyInstance.Value;
+        public static TurbineEngineFactory GeTurbineEngineFactory() => LazyInstance.Value;
 
         public Turbofan MakeTurbofan(float bypassratio, uint numberofshafts, Dictionary<Generator, double> gens,
             List<Spool> spools, int egt, int isp,

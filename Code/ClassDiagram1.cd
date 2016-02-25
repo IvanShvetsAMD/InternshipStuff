@@ -1,216 +1,260 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Code.Aircraft">
-    <Position X="4.25" Y="13.75" Width="2" />
+  <Class Name="Code.Aircraft" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAkAAAAAAQAAAAAEAAAAAAAAAAEAAAAAAAgAAAAAQBA=</HashCode>
       <FileName>Aviation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.PoweredAircraft">
-    <Position X="4" Y="17.25" Width="2.5" />
+  <Class Name="Code.PoweredAircraft" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIBJAAAQAAAAAEAAIAAAAAAEAAABAAEAAAAAAIAAA=</HashCode>
       <FileName>Aviation.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Code.AircraftHeavierThanAir">
-    <Position X="4.25" Y="22" Width="2" />
+  <Class Name="Code.HeavierThanAirAircraft" Collapsed="true">
+    <Position X="4" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Aviation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.RotorCraft">
-    <Position X="2.75" Y="24" Width="1.5" />
+  <Class Name="Code.RotorCraft" Collapsed="true">
+    <Position X="3" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACCAAAACAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>Aviation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.FixedWingAircraft">
-    <Position X="6" Y="24" Width="1.75" />
+  <Class Name="Code.FixedWingAircraft" Collapsed="true">
+    <Position X="5.25" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAAAAAABAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Aviation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Blade">
-    <Position X="12.25" Y="19.75" Width="1.5" />
+  <Class Name="Code.Blade" Collapsed="true">
+    <Position X="8.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAgAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blades.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.TurbineBlade">
-    <Position X="10.75" Y="22.5" Width="1.75" />
+  <Class Name="Code.TurbineBlade" Collapsed="true">
+    <Position X="7.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAAAAAAAAAAA=</HashCode>
       <FileName>Blades.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.RotorBlade">
-    <Position X="13.5" Y="22.5" Width="2" />
+  <Class Name="Code.RotorBlade" Collapsed="true">
+    <Position X="9.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blades.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Engine">
-    <Position X="7" Y="1.5" Width="1.5" />
-    <NestedTypes>
-      <Class Name="Code.Engine.EngineComparer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Engines.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
+  <Class Name="Code.Engine" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgABAAAASAAAAAEAACAAAIAAAkAAAAgMAgAAAATAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.PistonEngine">
-    <Position X="5.25" Y="6.75" Width="1.75" />
+  <Class Name="Code.PistonEngine" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQABAAAAAAAAAAEAAAAAgAAAAAAAAAAAAIAAAAEAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.JetEngine">
-    <Position X="8.5" Y="6.75" Width="2" />
+  <Class Name="Code.JetEngine" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIQIAAAAAAAAAAAEAAAAAAAAACBAAgAAAACAAAAAAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Ramjet">
-    <Position X="3.75" Y="10.75" Width="2.25" />
+  <Class Name="Code.Ramjet" Collapsed="true">
+    <Position X="1" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAQAAAAAAAAAAAAAACAAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.RocketEngine">
-    <Position X="7.25" Y="10.75" Width="1.5" />
+  <Class Name="Code.RocketEngine" Collapsed="true">
+    <Position X="3.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAAEAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.TurbineEngine">
-    <Position X="10.75" Y="10.75" Width="1.5" />
+  <Class Name="Code.SolidFuelRocketEngine" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Engines.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Code.TurbineEngine" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAAAAABAEBAAAAAAAAEAAAECAAAAAAACAAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Turbofan">
-    <Position X="8.5" Y="15.5" Width="1.5" />
+  <Class Name="Code.Turbofan" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAEAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Turboshaft">
-    <Position X="10.5" Y="15.5" Width="2" />
+  <Class Name="Code.Turboshaft" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAEQAAAAAEAAAAAAgAAAAAAAAAEAAAAAAAACA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Turbojet">
-    <Position X="13.25" Y="15.5" Width="1.5" />
+  <Class Name="Code.Turbojet" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAAAAAAAAQAAAAAEAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Generator">
-    <Position X="20.75" Y="1.5" Width="1.5" />
+  <Class Name="Code.Generator" Collapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAQAAAAQ=</HashCode>
       <FileName>Engines.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.GasCompartment">
-    <Position X="19" Y="1.5" Width="1.5" />
+  <Class Name="Code.GeneratorComparer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAEAAAAAAAAA=</HashCode>
+      <FileName>Engines.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Code.GasCompartmentsNotFoundException" Collapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Code.GasCompartment" Collapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAEAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GasCompartment.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Program">
-    <Position X="19" Y="4.25" Width="1.5" />
+  <Class Name="Code.GasCompartmentComparer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAEAAAAAAAAA=</HashCode>
+      <FileName>GasCompartment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Code.Program" Collapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Spool">
-    <Position X="20.75" Y="4.25" Width="1.5" />
+  <Class Name="Code.Spool" Collapsed="true">
+    <Position X="15" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Spool.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.Wing">
-    <Position X="15.75" Y="1.5" Width="1.5" />
+  <Class Name="Code.TurbineEngineFactory" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACBAAAAAAAAEAAAAAAAAAAEAAAAAAIAAAwAAAQA=</HashCode>
+      <FileName>TurbineEngineFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Code.Wing" Collapsed="true">
+    <Position X="8.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAACAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Wings.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Code.VariableGeometryWing">
-    <Position X="15.5" Y="5" Width="2" />
-    <InheritanceLine Type="Code.Wing" FixedFromPoint="true">
-      <Path>
-        <Point X="16.5" Y="3.44" />
-        <Point X="16.5" Y="5" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="Code.VariableGeometryWing" Collapsed="true">
+    <Position X="8.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAACAAABBAAAAABAAAA=</HashCode>
       <FileName>Wings.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="Code.ILighterThanAir">
-    <Position X="19" Y="6.75" Width="1.5" />
+  <Interface Name="Code.ILighterThanAir" Collapsed="true">
+    <Position X="15" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
       <FileName>ILighterThanAir.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Code.IEnginePowerManagement">
-    <Position X="19" Y="9" Width="1.5" />
+  <Interface Name="Code.IEnginePowerManagement" Collapsed="true">
+    <Position X="18" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAAQAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>IPowered.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Code.IEngineStartStop">
-    <Position X="20.75" Y="9" Width="1.5" />
+  <Interface Name="Code.IEngineStartStop" Collapsed="true">
+    <Position X="15.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>IPowered.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Code.IPowered">
-    <Position X="20" Y="11.5" Width="1.75" />
+  <Interface Name="Code.IPowered" Collapsed="true">
+    <Position X="16.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IPowered.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Code.IVariableWingActions">
-    <Position X="20.75" Y="6.75" Width="1.5" />
+  <Interface Name="Code.IVariableWingActions" Collapsed="true">
+    <Position X="16.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAABAAAAABAAAA=</HashCode>
       <FileName>IVariableWingActions.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="Code.OnOff" Collapsed="true">
+    <Position X="15" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Engines.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Code.Propellants" Collapsed="true">
+    <Position X="18.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABAEAAAAAAQAAAAAQgACCAAAAACAAAAAAAAAABAAA=</HashCode>
+      <FileName>Engines.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Code.Oxidisers" Collapsed="true">
+    <Position X="16.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAgAAAAAAAAAAAAAAAAAAAAAACABAAAAAAA=</HashCode>
+      <FileName>Engines.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
