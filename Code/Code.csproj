@@ -42,10 +42,11 @@
     <Compile Include="Engines.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="GasCompartment.cs" />
+    <Compile Include="IAddComponents.cs" />
     <Compile Include="ILighterThanAir.cs" />
     <Compile Include="IPowered.cs" />
     <Compile Include="IVariableWingActions.cs" />
-    <Compile Include="PoweredAircraftFactory.cs" />
+    <Compile Include="HeavierThanAirAircraftFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Spool.cs" />
     <Compile Include="TurbineEngineFactory.cs" />

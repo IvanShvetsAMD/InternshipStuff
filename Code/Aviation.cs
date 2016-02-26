@@ -41,6 +41,9 @@ namespace Code
             Vne = vne;
             SerialNumber = serialnumber;
         }
+
+        protected Aircraft() { }
+
     }
 
     class PoweredAircraft : Aircraft, IPowered
@@ -104,12 +107,14 @@ namespace Code
             }
         }
 
-        public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
-            : base (manufacturer, model, maxTOweight, vne, serialnumber)
+        public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
+            : base(manufacturer, model, maxTOweight, vne, serialnumber)
         {
             Engines = engines;
             FuelCapacity = fuelcapacity;
         }
+
+        protected PoweredAircraft() { }
 
         public void MaxPower(Engine engine)
         {
@@ -192,23 +197,26 @@ namespace Code
     {
 
 
-        public HeavierThanAirAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
+        public HeavierThanAirAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            
+
         }
-        
+
+        protected HeavierThanAirAircraft() { }
     }
 
     class RotorCraft : HeavierThanAirAircraft
     {
         public int NumberOfRotors { get; private set; }
-        public List<RotorBlade> RotorBlades { get; private set; } 
+        public List<RotorBlade> RotorBlades { get; private set; }
         public string RotorType { get; private set; }
 
         void EjectRotorBlades() => RotorBlades.Clear();
 
-        public RotorCraft(int numberofrotors, List<RotorBlade> rotorblades, string rotortype, List<Engine> engines, 
+        public RotorCraft() { }
+
+        public RotorCraft(int numberofrotors, List<RotorBlade> rotorblades, string rotortype, List<Engine> engines,
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
@@ -220,13 +228,13 @@ namespace Code
 
     class FixedWingAircraft : HeavierThanAirAircraft
     {
-        private List<Wing> Wings { get;  set; } 
+        private List<Wing> Wings { get; set; }
         public int? CruiseSpeed { get; }
         public int? StallSpeed { get; }
 
         public FixedWingAircraft(List<Wing> wings, int cruisespeed, int stallspeed, List<Engine> engines,
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
-            : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber) 
+            : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             Wings = wings;
             CruiseSpeed = cruisespeed;
