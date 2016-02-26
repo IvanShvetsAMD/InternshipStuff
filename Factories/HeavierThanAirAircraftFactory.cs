@@ -10,7 +10,7 @@ namespace Factories
         private IAddEngines turbineEngineInstaller;
 
 
-        private HeavierThanAirAircraftFactory(IAddEngines turbineEngineInstaller)
+        public HeavierThanAirAircraftFactory(IAddEngines turbineEngineInstaller)
         {
             this.turbineEngineInstaller = turbineEngineInstaller;
         }

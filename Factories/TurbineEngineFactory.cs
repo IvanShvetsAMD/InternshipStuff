@@ -9,9 +9,9 @@ namespace Factories
     {
         static readonly Lazy<TurbineEngineFactory> LazyInstance = new Lazy<TurbineEngineFactory>(() => new TurbineEngineFactory(), true);
 
-        static TurbineEngineFactory() { }
+        //static TurbineEngineFactory() { }
 
-        private TurbineEngineFactory() { }
+        public TurbineEngineFactory() { }
 
         public static TurbineEngineFactory GeTurbineEngineFactory() => LazyInstance.Value;
 
