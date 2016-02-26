@@ -74,6 +74,83 @@ namespace Code
             }
         }
 
+
+        public Turbofan TryMakeTurbofan(float bypassratio, uint numberofshafts, Dictionary<Generator, double> gens,
+            List<Spool> spools, int egt, int isp,
+            int numberofcycles, List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model,
+            string serialnumber,
+            float maxpower, float operatingtime, float fuelflow, OnOff stat,
+            bool isgeared = false,
+            bool hasreverse = true, string parentvehicleID = null)
+        {
+            Turbofan turbofan = new Turbofan();
+
+            try
+            {
+                turbofan = MakeTurbofan(bypassratio, numberofshafts, gens, spools, egt, isp,
+                    numberofcycles, fueList,
+                    oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared, hasreverse,
+                    parentvehicleID);
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                Console.WriteLine(argumentNullException.Message);
+                switch (argumentNullException.ParamName)
+                {
+                    case nameof(spools):
+                        spools = new List<Spool>();
+                        TryMakeTurbofan(bypassratio, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
+                            hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(serialnumber):
+                        serialnumber = "no serial number specified";
+                        TryMakeTurbofan(bypassratio, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
+                            hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(fueList):
+                        fueList = new List<Propellants>();
+                        TryMakeTurbofan(bypassratio, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
+                            hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(oxidisers):
+                        oxidisers = new List<Oxidisers>();
+                        TryMakeTurbofan(bypassratio, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
+                            hasreverse,
+                            parentvehicleID);
+                        break;
+                }
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine(argumentException.Message);
+                if (argumentException.ParamName == nameof(numberofshafts))
+                {
+                    numberofshafts = 1;
+                    TryMakeTurbofan(bypassratio, numberofshafts, gens, spools, egt, isp,
+                        numberofcycles, fueList,
+                        oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
+                        hasreverse,
+                        parentvehicleID);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return turbofan;
+        }
+
         public Turboshaft MakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts,
             Dictionary<Generator, double> gens,
             List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
@@ -83,7 +160,7 @@ namespace Code
             GeneralConditionsChecker(numberofshafts, spools, fueList, oxidisers, serialnumber);
 
             if (maxtorque <= 0)
-                throw new ApplicationException("No max torque data was provided");
+                throw new ArgumentException("No max torque data was provided", nameof(maxtorque));
 
             return new Turboshaft(gearingR, maxtorque, hasreverse, numberofshafts, gens, spools, egt, isp,
                 numberofcycles, fueList,
@@ -127,32 +204,106 @@ namespace Code
             }
         }
 
+
+        public Turboshaft TryMakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts,
+            Dictionary<Generator, double> gens,
+            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
+            List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
+            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true,
+            string parentvehicleID = null)
+        {
+            Turboshaft turboshaft = new Turboshaft();
+
+            try
+            {
+                turboshaft = MakeTurboshaft(gearingR, maxtorque, numberofshafts, gens, spools, egt, isp,
+                    numberofcycles, fueList,
+                    oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                    parentvehicleID);
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                Console.WriteLine(argumentNullException.Message);
+                switch (argumentNullException.ParamName)
+                {
+                    case nameof(spools):
+                        spools = new List<Spool>();
+                        TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(serialnumber):
+                        serialnumber = "no serial number specified";
+                        TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(fueList):
+                        fueList = new List<Propellants>();
+                        TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(oxidisers):
+                        oxidisers = new List<Oxidisers>();
+                        TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                }
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine(argumentException.Message);
+                switch (argumentException.ParamName)
+                {
+                    case nameof(numberofshafts):
+                        numberofshafts = 1;
+                        TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(maxtorque):
+                        maxtorque = 1;
+                        TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return turboshaft;
+        }
         private void GeneralConditionsChecker(uint numberofshafts, List<Spool> spools, List<Propellants> fueList, List<Oxidisers> oxidisers, string serialnumber)
         {
             if (numberofshafts < 1)
-                throw new ArgumentException("There could be no turbofan with less than one shaft");
+                throw new ArgumentException("There could be no turbofan with less than one shaft", nameof(numberofshafts));
             if (spools == null)
                 throw new ArgumentNullException(nameof(spools), "A turbine engine has to have some spools");
-            if (fueList == null || oxidisers == null)
-                throw new ArgumentException(
-                    "The engine needs fuels and oxidisers, otherwise the very notion of an engine becomes meaningless.");
+            if (fueList == null)
+                throw new ArgumentNullException(nameof(fueList),
+                    "The engine needs fuels, otherwise the very notion of an engine becomes meaningless.");
+            if (oxidisers == null)
+                throw new ArgumentNullException(nameof(oxidisers),
+                    "The engine needs oxidisers, otherwise the very notion of an engine becomes meaningless.");
             if (string.IsNullOrWhiteSpace(serialnumber))
                 throw new ArgumentNullException(nameof(serialnumber), "No serial number provided");
         }
 
-        public static Turbojet MakeTurbojet(uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles,
+        public Turbojet MakeTurbojet(uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles,
                                             List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
                                             float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
         {
-            if (numberofshafts < 1)
-                throw new ArgumentException("There could be no turbofan with less than one shaft");
-            if (spools == null)
-                throw new ArgumentNullException(nameof(spools), "A turbine engine has to have some spools");
-            if (fueList == null || oxidisers == null)
-                throw new ArgumentException(
-                    "The engine needs fuels and oxidisers, otherwise the very notion of an engine becomes meaningless.");
-            if (string.IsNullOrWhiteSpace(serialnumber))
-                throw new ArgumentNullException(nameof(serialnumber), "No serial number provided");
+            GeneralConditionsChecker(numberofshafts, spools, fueList, oxidisers, serialnumber);
 
             return new Turbojet(hasreverse, numberofshafts, gens, spools, egt, isp,
                 numberofcycles, fueList,
@@ -192,6 +343,75 @@ namespace Code
                 incomingTurbojet = null;
                 return false;
             }
+        }
+
+        public Turbojet TryMakeTurbojet(uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools,
+            int egt, int isp, int numberofcycles,
+            List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model, string serialnumber,
+            float maxpower,
+            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
+        {
+            Turbojet turbojet = new Turbojet();
+
+            try
+            {
+                turbojet = MakeTurbojet(numberofshafts, gens, spools, egt, isp,
+                    numberofcycles, fueList,
+                    oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                    parentvehicleID);
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                Console.WriteLine(argumentNullException.Message);
+                switch (argumentNullException.ParamName)
+                {
+                    case nameof(spools):
+                        spools = new List<Spool>();
+                        TryMakeTurbojet(numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(serialnumber):
+                        serialnumber = "no serial number specified";
+                        TryMakeTurbojet(numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(fueList):
+                        fueList = new List<Propellants>();
+                        TryMakeTurbojet(numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                    case nameof(oxidisers):
+                        oxidisers = new List<Oxidisers>();
+                        TryMakeTurbojet(numberofshafts, gens, spools, egt, isp,
+                            numberofcycles, fueList,
+                            oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                            parentvehicleID);
+                        break;
+                }
+            }
+            catch (ArgumentException argumentException)
+            {
+                Console.WriteLine(argumentException.Message);
+                if (argumentException.ParamName == nameof(numberofshafts))
+                {
+                    numberofshafts = 1;
+                    TryMakeTurbojet(numberofshafts, gens, spools, egt, isp,
+                        numberofcycles, fueList,
+                        oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
+                        parentvehicleID);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return turbojet;
         }
     }
 }

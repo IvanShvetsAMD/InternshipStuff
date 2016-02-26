@@ -90,7 +90,7 @@ namespace Code
 
         public Engine()
         {
-            
+
         }
 
         public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
@@ -193,13 +193,13 @@ namespace Code
             {
                 FinalString += "\n\t" + propellant;
             }
-            
+
             return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value)) + "\n";
         }
 
         public JetEngine()
         {
-            
+
         }
         public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
@@ -261,13 +261,13 @@ namespace Code
 
     class SolidFuelRocketEngine : RocketEngine
     {
-        public sealed override float MaxPower { get { return MaxPower; } protected set {} }
+        public sealed override float MaxPower { get { return MaxPower; } protected set { } }
         public sealed override float CurrentPower { get { return MaxPower; } protected set { CurrentPower = MaxPower; } }
 
-        public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, 
-            List<Propellants> propellants, List<Oxidisers> oxidisers, string manufacturer, string model, string serialnumber, 
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat) 
-            : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers, 
+        public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
+            List<Propellants> propellants, List<Oxidisers> oxidisers, string manufacturer, string model, string serialnumber,
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers,
                   manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
         }
@@ -280,7 +280,7 @@ namespace Code
         private Generator generator { get; set; }
         protected List<Spool> Spools { get; private set; }
 
-        public Dictionary<Generator, double> Gens = new Dictionary<Generator, double>(new GeneratorComparer()); 
+        public Dictionary<Generator, double> Gens = new Dictionary<Generator, double>(new GeneratorComparer());
 
         public void StartGenerator() => generator.GenerateCurrent();
 
@@ -304,7 +304,7 @@ namespace Code
 
         protected TurbineEngine()
         {
-            
+
         }
     }
 
@@ -318,7 +318,7 @@ namespace Code
             return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, IsGeared ? "has a geared fan" : "has a direct drive fan");
         }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens,  List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
@@ -328,7 +328,7 @@ namespace Code
             IsGeared = isgeared;
         }
 
-        public Turbofan() 
+        public Turbofan()
         {
         }
     }
@@ -357,6 +357,8 @@ namespace Code
             return string.Format("{0}, gearing ratio: {1}, max torque: {2}", base.ToString(), GearingRatio, MaxTorque);
         }
 
+        public Turboshaft() { }
+
         public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
@@ -379,6 +381,8 @@ namespace Code
         {
             return base.ToString() + ", precoolant: " + Precoolant;
         }
+
+        public Turbojet() { }
 
         public Turbojet(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,

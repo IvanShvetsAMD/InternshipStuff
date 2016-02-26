@@ -18,8 +18,8 @@ namespace Code
 
             //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
             //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+            ////JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            ////    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
             //var compartments = new Dictionary<uint, GasCompartment>
@@ -92,36 +92,36 @@ namespace Code
                 Console.WriteLine(s);
             }
 
-            var tjf = TurbineEngineFactory.GeTurbineEngineFactory();
+            //var tjf = TurbineEngineFactory.GeTurbineEngineFactory();
 
-            var tj = new Turbofan();
+            //var tj = new Turbofan();
 
-            if (tjf.TryMakeTurbofan(4, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
-                new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped, out tj))
-            {
-                Console.WriteLine();
-                Console.WriteLine(tj);
-            }
-            else
-            {
-                Console.WriteLine();
-                Console.WriteLine("No engine could be created");
-            }
+            //if (tjf.TryMakeTurbofan(4, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
+            //    new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped, out tj))
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine(tj);
+            //}
+            //else
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine("No engine could be created");
+            //}
 
 
-            HeavierThanAirAircraftFactory htaaf = HeavierThanAirAircraftFactory.GetHeavierThanAirAircraftFactory();
-            Console.WriteLine("\n\n\n");
-            try
-            {
-                Aircraft plane = htaaf.MakeFixedWingAircraft(new List<Wing> {new Wing(23, 120) }, "1000008", 400, 150, 160000);
-                Console.WriteLine("\n\n\n");
-                Console.WriteLine(plane);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            //HeavierThanAirAircraftFactory htaaf = HeavierThanAirAircraftFactory.GetHeavierThanAirAircraftFactory();
+            //Console.WriteLine("\n\n\n");
+            //try
+            //{
+            //    Aircraft plane = htaaf.MakeFixedWingAircraft(new List<Wing> {new Wing(23, 120) }, "1000008", 400, 150, 160000);
+            //    Console.WriteLine("\n\n\n");
+            //    Console.WriteLine(plane);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //}
         }
     }
 }
