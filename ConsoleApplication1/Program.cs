@@ -53,10 +53,10 @@ namespace SideTasts
         {
             var flag = true;
 
-            for (int i = 1; (i <= (list.Count - 1)) && flag; i++)
+            for (int i = 1; (i <= list.Count - 1) && flag; i++)
             {
                 flag = false;
-                for (int j = 0; j < (list.Count - 1); j++)
+                for (int j = 0; j < list.Count - 1; j++)
                 {
                     if (arrangedelegate(list[j], list[j + 1]))
                     {
@@ -258,8 +258,8 @@ namespace SideTasts
                 Console.WriteLine(obj.GetType().Name);
             }
 
-            ArrangeDelegate ad1 = new ArrangeDelegate(RearrangeMethod1);
-            stuff = Rearrange(stuff, ad1);
+            ArrangeDelegate arrangeDelegate = new ArrangeDelegate(RearrangeMethod1);
+            stuff = Rearrange(stuff, arrangeDelegate);
             Console.WriteLine("\nAfter the first rearrangement(delegate)\n");
             foreach (var obj in stuff)
             {
@@ -276,9 +276,9 @@ namespace SideTasts
                     return false;
                 return false;
             }
-                );
+            );
 
-            Console.WriteLine("\nafter second rearrangement (anonymous function)\n");
+            Console.WriteLine("\nAfter second rearrangement (anonymous function)\n");
             foreach (var obj in stuff2)
             {
                 Console.WriteLine(obj.GetType().Name);
@@ -379,7 +379,7 @@ namespace SideTasts
                 Console.WriteLine(e.Message);
             }
 
-            List<int> ints = new List<int> {1, 2, 3, 4, 5, 6};
+            List<int> ints = new List<int> { 1, 2, 3, 4, 5, 6 };
 
 
             bool hasFive = ints.Any(i => i == 5);
