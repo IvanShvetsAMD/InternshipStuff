@@ -124,7 +124,9 @@ namespace PresentationCode
             ServiceLocator.RegisterAll();
             HeavierThanAirAircraftFactory factory = ServiceLocator.Get<HeavierThanAirAircraftFactory>();
 
-            Console.WriteLine(factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor", 42, 73, "TEST manufacturer", 4242));
+            RotorCraft rotorCraft = factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor",
+                42, 73, "TEST manufacturer", 4242);
+            Console.WriteLine(rotorCraft);
         }
     }
 }

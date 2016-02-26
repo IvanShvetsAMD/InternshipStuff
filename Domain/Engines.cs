@@ -273,7 +273,7 @@ namespace Domain
         private Generator generator { get; set; }
         protected List<Spool> Spools { get; private set; }
 
-        public Dictionary<Generator, double> Gens = new Dictionary<Generator, double>(new GeneratorComparer());
+        //public Dictionary<Generator, double> Gens = new Dictionary<Generator, double>(new GeneratorComparer());
 
         public void StartGenerator() => generator.GenerateCurrent();
 
@@ -292,7 +292,7 @@ namespace Domain
             HasReverse = hasreverse;
             NumberOfShafts = numberofshafts;
             Spools = spools;
-            Gens = gens;
+            //Gens = gens;
         }
 
         protected TurbineEngine()
