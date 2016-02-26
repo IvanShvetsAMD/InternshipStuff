@@ -273,8 +273,6 @@ namespace Domain
         private Generator generator { get; set; }
         protected List<Spool> Spools { get; private set; }
 
-        //public Dictionary<Generator, double> Gens = new Dictionary<Generator, double>(new GeneratorComparer());
-
         public void StartGenerator() => generator.GenerateCurrent();
 
         public void StopGenerator() { }
@@ -284,7 +282,7 @@ namespace Domain
             return string.Format("{0}, Number of shafts: {1}, {2}", base.ToString(), NumberOfShafts, HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
         }
 
-        public TurbineEngine(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public TurbineEngine(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
             : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
@@ -292,7 +290,6 @@ namespace Domain
             HasReverse = hasreverse;
             NumberOfShafts = numberofshafts;
             Spools = spools;
-            //Gens = gens;
         }
 
         protected TurbineEngine()
@@ -311,11 +308,11 @@ namespace Domain
             return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, IsGeared ? "has a geared fan" : "has a direct drive fan");
         }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             BypassRatio = bypassratio;
             IsGeared = isgeared;
@@ -352,11 +349,11 @@ namespace Domain
 
         public Turboshaft() { }
 
-        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             GearingRatio = gearingratio;
             MaxTorque = maxtorque;
@@ -377,10 +374,10 @@ namespace Domain
 
         public Turbojet() { }
 
-        public Turbojet(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public Turbojet(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat, string precoolant = null)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             Precoolant = precoolant ?? "none";
         }
