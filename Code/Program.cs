@@ -1,13 +1,9 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Domain;
+using Factories;
+using Infrastructure;
 
-namespace Code
+namespace PresentationCode
 {
     class Program
     {
@@ -122,6 +118,10 @@ namespace Code
             //{
             //    Console.WriteLine(e);
             //}
+
+
+            ServiceLocator.RegisterAll();
+            HeavierThanAirAircraftFactory factory = ServiceLocator.Get<HeavierThanAirAircraftFactory>();
         }
     }
 }

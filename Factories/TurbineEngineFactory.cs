@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain;
 
-namespace Code
+namespace Factories
 {
-    class TurbineEngineFactory
+    public class TurbineEngineFactory
     {
         static readonly Lazy<TurbineEngineFactory> LazyInstance = new Lazy<TurbineEngineFactory>(() => new TurbineEngineFactory(), true);
 

@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using Interfaces;
+using Domain;
 
-namespace Code
+namespace Factories
 {
-    class HeavierThanAirAircraftFactory
+    public class HeavierThanAirAircraftFactory
     {
-        static readonly Lazy<HeavierThanAirAircraftFactory> LazyInstance = new Lazy<HeavierThanAirAircraftFactory>(
-            () => new HeavierThanAirAircraftFactory(), LazyThreadSafetyMode.ExecutionAndPublication);
+        private IAddEngines turbineEngineInstaller;
 
-        static HeavierThanAirAircraftFactory() { }
-        private HeavierThanAirAircraftFactory() { }
 
-        public static HeavierThanAirAircraftFactory GetHeavierThanAirAircraftFactory() => LazyInstance.Value;
+        private HeavierThanAirAircraftFactory(IAddEngines turbineEngineInstaller)
+        {
+            this.turbineEngineInstaller = turbineEngineInstaller;
+        }
+
 
         public RotorCraft MakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor",
                                                             int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
@@ -62,7 +61,14 @@ namespace Code
                 Console.WriteLine(e.Message);
             }
 
-            
+            rotorCraft = AddTurboshaftEngines(rotorCraft);
+
+            return rotorCraft;
+        }
+
+        private RotorCraft AddTurboshaftEngines(RotorCraft rotorCraft)
+        {
+            rotorCraft = turbineEngineInstaller.AddTurboshaftEngines(rotorCraft) as RotorCraft;
             return rotorCraft;
         }
 

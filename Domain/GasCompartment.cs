@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Code
+namespace Domain
 {
-    class GasCompartment
+    public class GasCompartment
     {
         public float Capacity { get; private set; }
         public float CurrentVolume { get; set; }
@@ -23,7 +20,7 @@ namespace Code
         }
     }
 
-    class GasCompartmentComparer : IEqualityComparer<GasCompartment>
+    public class GasCompartmentComparer : IEqualityComparer<GasCompartment>
     {
         public bool Equals(GasCompartment x, GasCompartment y)
         {

@@ -1,17 +1,10 @@
 ﻿using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Security;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Code
+namespace Domain
 {
-    abstract class Engine
+    public abstract class Engine
     {
         public string Manufacturer { get; }
         public string Model { get; }
@@ -120,13 +113,13 @@ namespace Code
         }
     }
 
-    enum OnOff
+    public enum OnOff
     {
         Running,
         Stopped
     }
 
-    class PistonEngine : Engine
+    public class PistonEngine : Engine
     {
         protected uint NumberOfPistons { get; private set; }
         protected float Volume { get; private set; }
@@ -151,7 +144,7 @@ namespace Code
     }
 
 
-    enum Propellants
+    public enum Propellants
     {
         Jet_A,
         Jet_B,
@@ -165,14 +158,14 @@ namespace Code
         Fluorine
     }
 
-    enum Oxidisers
+    public enum Oxidisers
     {
         GOX,
         LOX,
         DinitrogenTetroxide,
         High_TestPeroxide
     }
-    class JetEngine : Engine
+    public class JetEngine : Engine
     {
         protected int EGT { get; private set; }
         protected int Isp { get; private set; }
@@ -214,7 +207,7 @@ namespace Code
 
     }
 
-    class Ramjet : JetEngine
+    public class Ramjet : JetEngine
     {
         public bool HasSupersonicCombustion { get; private set; }
 
@@ -238,7 +231,7 @@ namespace Code
 
     }
 
-    class RocketEngine : JetEngine
+    public class RocketEngine : JetEngine
     {
         protected bool IsReignitable { get; private set; }
         protected string NozzleBellType { get; private set; }
@@ -259,7 +252,7 @@ namespace Code
         }
     }
 
-    class SolidFuelRocketEngine : RocketEngine
+    public class SolidFuelRocketEngine : RocketEngine
     {
         public sealed override float MaxPower { get { return MaxPower; } protected set { } }
         public sealed override float CurrentPower { get { return MaxPower; } protected set { CurrentPower = MaxPower; } }
@@ -273,7 +266,7 @@ namespace Code
         }
     }
 
-    class TurbineEngine : JetEngine
+    public class TurbineEngine : JetEngine
     {
         public bool HasReverse { get; private set; }
         public uint NumberOfShafts { get; private set; }
@@ -308,7 +301,7 @@ namespace Code
         }
     }
 
-    class Turbofan : TurbineEngine
+    public class Turbofan : TurbineEngine
     {
         public float BypassRatio { get; private set; }
         public bool IsGeared { get; private set; }
@@ -333,7 +326,7 @@ namespace Code
         }
     }
 
-    sealed class Turboshaft : TurbineEngine
+    public sealed class Turboshaft : TurbineEngine
     {
         public float GearingRatio { get; private set; }
         public float MaxTorque { get; private set; }
@@ -370,7 +363,7 @@ namespace Code
         }
     }
 
-    class Turbojet : TurbineEngine
+    public class Turbojet : TurbineEngine
     {
         public string Precoolant { get; }
 
@@ -393,7 +386,7 @@ namespace Code
         }
     }
 
-    class Generator
+    public class Generator
     {
         public float OutputCurrent { get; private set; }
         public float OutputVoltage { get; private set; }
@@ -409,7 +402,7 @@ namespace Code
         }
     }
 
-    class GeneratorComparer : IEqualityComparer<Generator>
+    public class GeneratorComparer : IEqualityComparer<Generator>
     {
         public bool Equals(Generator x, Generator y)
         {

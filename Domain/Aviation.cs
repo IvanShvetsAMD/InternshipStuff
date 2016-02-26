@@ -1,15 +1,10 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Code
+namespace Domain
 {
-    abstract class Aircraft
+    public abstract class Aircraft
     {
         public string Manufacturer { get; }
         public string Model { get; }
@@ -46,7 +41,7 @@ namespace Code
 
     }
 
-    class PoweredAircraft : Aircraft, IPowered
+    public class PoweredAircraft : Aircraft, IPowered
     {
         public List<Engine> Engines { get; private set; }
         public int FuelCapacity { get; private set; }
@@ -127,7 +122,7 @@ namespace Code
         }
     }
 
-    class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
+    public class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
     {
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
@@ -193,7 +188,7 @@ namespace Code
         }
     }
 
-    class HeavierThanAirAircraft : PoweredAircraft
+    public class HeavierThanAirAircraft : PoweredAircraft
     {
 
 
@@ -206,7 +201,7 @@ namespace Code
         protected HeavierThanAirAircraft() { }
     }
 
-    class RotorCraft : HeavierThanAirAircraft
+    public class RotorCraft : HeavierThanAirAircraft
     {
         public int NumberOfRotors { get; private set; }
         public List<RotorBlade> RotorBlades { get; private set; }
@@ -226,9 +221,9 @@ namespace Code
         }
     }
 
-    class FixedWingAircraft : HeavierThanAirAircraft
+    public class FixedWingAircraft : HeavierThanAirAircraft
     {
-        private List<Wing> Wings { get; set; }
+        public List<Wing> Wings { get; private set; }
         public int? CruiseSpeed { get; }
         public int? StallSpeed { get; }
 

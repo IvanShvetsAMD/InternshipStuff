@@ -1,13 +1,8 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Code
+namespace Domain
 {
-    class Spool
+    public class Spool
     {
         protected List<TurbineBlade> Blades { get; private set; }
         protected string Type { get; }
