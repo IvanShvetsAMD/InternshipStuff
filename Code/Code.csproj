@@ -39,10 +39,11 @@
   <ItemGroup>
     <Compile Include="Aviation.cs" />
     <Compile Include="Blades.cs" />
+    <Compile Include="EngineInstaller.cs" />
     <Compile Include="Engines.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="GasCompartment.cs" />
-    <Compile Include="IAddComponents.cs" />
+    <Compile Include="IAddEngines.cs" />
     <Compile Include="ILighterThanAir.cs" />
     <Compile Include="IPowered.cs" />
     <Compile Include="IVariableWingActions.cs" />
