@@ -2,7 +2,7 @@
 {
     interface ILighterThanAir
     {
-        void DumpBallast(uint TankNumber, uint mass);
-        void ShiftGas(uint OriginCompartment, uint DestinationComnpartment,  float Volume);
+        void DumpBallast(uint mass);
+        void ShiftGas(int OriginCompartment, int DestinationComnpartment,  float Volume);
     }
 }

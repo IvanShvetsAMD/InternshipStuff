@@ -4,8 +4,8 @@ namespace Domain
 {
     class GasCompartmentsNotFoundException : Exception
     {
-        public uint OriginCompartment { get; set; }
-        public uint DestinationCompartment { get; set; }
+        public int OriginCompartment { get; set; }
+        public int DestinationCompartment { get; set; }
 
         public GasCompartmentsNotFoundException(){}
 
@@ -13,15 +13,15 @@ namespace Domain
 
         public GasCompartmentsNotFoundException(string message, Exception inner): base(message, inner){}
 
-        public GasCompartmentsNotFoundException(string message, uint originCompartment,
-            uint destinationCompartment) : base(message)
+        public GasCompartmentsNotFoundException(string message, int originCompartment,
+            int destinationCompartment) : base(message)
         {
             OriginCompartment = originCompartment;
             DestinationCompartment = destinationCompartment;
         }
 
-        public GasCompartmentsNotFoundException(string message, Exception inner, uint originCompartment,
-            uint destinationCompartment) : base(message, inner)
+        public GasCompartmentsNotFoundException(string message, Exception inner, int originCompartment,
+            int destinationCompartment) : base(message, inner)
         {
             OriginCompartment = originCompartment;
             DestinationCompartment = destinationCompartment;

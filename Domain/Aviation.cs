@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Domain
 {
@@ -127,16 +128,21 @@ namespace Domain
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
         public float GasVolume { get; private set; }
-        public Dictionary<uint, GasCompartment> Compartments { get; }
+        public List<GasCompartment> Compartments { get; }
 
         public override string ToString()
         {
-            string FinalString = base.ToString();
-            FinalString += string.Format("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:", BallastMass, GasType, GasVolume);
-            return Compartments.Aggregate(FinalString, (current, gasCompartment) => current + String.Format("\n\tCompartment number : {0}, {1}", gasCompartment.Key, gasCompartment.ToString()));
+            StringBuilder final = new StringBuilder(base.ToString());
+            final.AppendFormat("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:", BallastMass, GasType, GasVolume);
+
+            foreach (var gasCompartment in Compartments)
+            {
+                final.AppendFormat("\n\tCompartment number: {0}, {1} ", Compartments.IndexOf(gasCompartment),gasCompartment);
+            }
+            return final.ToString();
         }
 
-        public void DumpBallast(uint TankNumber, uint mass)
+        public void DumpBallast(uint mass)
         {
             if (BallastMass > mass)
             {
@@ -148,11 +154,11 @@ namespace Domain
             }
         }
 
-        public void ShiftGas(uint OriginCompartment, uint DestinationCompartment, float Volume)
+        public void ShiftGas(int OriginCompartment, int DestinationCompartment, float Volume)
         {
             if (OriginCompartment == DestinationCompartment)
                 throw new Exception("No point in shifting gas - the source and the destination match.");
-            if (!Compartments.ContainsKey(OriginCompartment) || !Compartments.ContainsKey(DestinationCompartment))
+            if (OriginCompartment >= Compartments.Count || DestinationCompartment >= Compartments.Count)
                 throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", OriginCompartment, DestinationCompartment);
             while (true)
             {
@@ -178,7 +184,7 @@ namespace Domain
         }
 
         public LighterThanAirAircraft(uint ballastmass, string gastype, float gasvolume,
-            Dictionary<uint, GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
+            List<GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             BallastMass = ballastmass;

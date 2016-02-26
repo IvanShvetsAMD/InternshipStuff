@@ -15,16 +15,17 @@ namespace PresentationCode
 
             //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
             //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            ////JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            ////    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
-            //var compartments = new Dictionary<uint, GasCompartment>
+            //var compartments = new List<GasCompartment>
             //{
-            //    {0, new GasCompartment(20, 15)},
-            //    {1, new GasCompartment(20, 10)},
-            //    {2, new GasCompartment(20, 15)},
-            //    {3, new GasCompartment(15, 10)} };
+            //    new GasCompartment(20, 15),
+            //    new GasCompartment(20, 10),
+            //    new GasCompartment(20, 15),
+            //    new GasCompartment(15, 10)
+            //};
 
             //LighterThanAirAircraft baloon = new LighterThanAirAircraft(300, "He", 100000, compartments,
             //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
