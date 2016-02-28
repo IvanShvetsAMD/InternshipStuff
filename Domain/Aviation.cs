@@ -1,15 +1,11 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Code
+namespace Domain
 {
-    abstract class Aircraft
+    public abstract class Aircraft
     {
         public string Manufacturer { get; }
         public string Model { get; }
@@ -41,14 +37,17 @@ namespace Code
             Vne = vne;
             SerialNumber = serialnumber;
         }
+
+        protected Aircraft() { }
+
     }
 
-    class PoweredAircraft : Aircraft, IPowered
+    public class PoweredAircraft : Aircraft, IPowered
     {
         public List<Engine> Engines { get; private set; }
         public int FuelCapacity { get; private set; }
 
-        public float GetCurrentPower(int EngineNumber) => Engines[EngineNumber].CurrentPower;
+        public float GetCurrentPower(int engineNumber) => Engines[engineNumber].CurrentPower;
 
         public override string ToString()
         {
@@ -104,12 +103,14 @@ namespace Code
             }
         }
 
-        public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
-            : base (manufacturer, model, maxTOweight, vne, serialnumber)
+        public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
+            : base(manufacturer, model, maxTOweight, vne, serialnumber)
         {
             Engines = engines;
             FuelCapacity = fuelcapacity;
         }
+
+        protected PoweredAircraft() { }
 
         public void MaxPower(Engine engine)
         {
@@ -122,21 +123,26 @@ namespace Code
         }
     }
 
-    class AircraftLighterThanAir : PoweredAircraft, ILighterThanAir
+    public class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
     {
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
         public float GasVolume { get; private set; }
-        public Dictionary<uint, GasCompartment> Compartments { get; }
+        public List<GasCompartment> Compartments { get; }
 
         public override string ToString()
         {
-            string FinalString = base.ToString();
-            FinalString += string.Format("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:", BallastMass, GasType, GasVolume);
-            return Compartments.Aggregate(FinalString, (current, gasCompartment) => current + String.Format("\n\tCompartment number : {0}, {1}", gasCompartment.Key, gasCompartment.ToString()));
+            StringBuilder final = new StringBuilder(base.ToString());
+            final.AppendFormat("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:", BallastMass, GasType, GasVolume);
+
+            foreach (var gasCompartment in Compartments)
+            {
+                final.AppendFormat("\n\tCompartment number: {0}, {1} ", Compartments.IndexOf(gasCompartment),gasCompartment);
+            }
+            return final.ToString();
         }
 
-        public void DumpBallast(uint TankNumber, uint mass)
+        public void DumpBallast(uint mass)
         {
             if (BallastMass > mass)
             {
@@ -148,11 +154,11 @@ namespace Code
             }
         }
 
-        public void ShiftGas(uint OriginCompartment, uint DestinationCompartment, float Volume)
+        public void ShiftGas(int OriginCompartment, int DestinationCompartment, float Volume)
         {
             if (OriginCompartment == DestinationCompartment)
                 throw new Exception("No point in shifting gas - the source and the destination match.");
-            if (!Compartments.ContainsKey(OriginCompartment) || !Compartments.ContainsKey(DestinationCompartment))
+            if (OriginCompartment >= Compartments.Count || DestinationCompartment >= Compartments.Count)
                 throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", OriginCompartment, DestinationCompartment);
             while (true)
             {
@@ -177,8 +183,8 @@ namespace Code
             }
         }
 
-        public AircraftLighterThanAir(uint ballastmass, string gastype, float gasvolume,
-            Dictionary<uint, GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
+        public LighterThanAirAircraft(uint ballastmass, string gastype, float gasvolume,
+            List<GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             BallastMass = ballastmass;
@@ -188,27 +194,30 @@ namespace Code
         }
     }
 
-    class AircraftHeavierThanAir : PoweredAircraft
+    public class HeavierThanAirAircraft : PoweredAircraft
     {
 
 
-        public AircraftHeavierThanAir(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber) 
+        public HeavierThanAirAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            
+
         }
-        
+
+        protected HeavierThanAirAircraft() { }
     }
 
-    class RotorCraft : AircraftHeavierThanAir
+    public class RotorCraft : HeavierThanAirAircraft
     {
         public int NumberOfRotors { get; private set; }
-        public List<RotorBlade> RotorBlades { get; private set; } 
+        public List<RotorBlade> RotorBlades { get; private set; }
         public string RotorType { get; private set; }
 
         void EjectRotorBlades() => RotorBlades.Clear();
 
-        public RotorCraft(int numberofrotors, List<RotorBlade> rotorblades, string rotortype, List<Engine> engines, 
+        public RotorCraft() { }
+
+        public RotorCraft(int numberofrotors, List<RotorBlade> rotorblades, string rotortype, List<Engine> engines,
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
@@ -218,15 +227,15 @@ namespace Code
         }
     }
 
-    class FixedWingAircraft : AircraftHeavierThanAir
+    public class FixedWingAircraft : HeavierThanAirAircraft
     {
-        private List<Wing> Wings { get;  set; } 
+        public List<Wing> Wings { get; private set; }
         public int? CruiseSpeed { get; }
         public int? StallSpeed { get; }
 
         public FixedWingAircraft(List<Wing> wings, int cruisespeed, int stallspeed, List<Engine> engines,
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
-            : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber) 
+            : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             Wings = wings;
             CruiseSpeed = cruisespeed;

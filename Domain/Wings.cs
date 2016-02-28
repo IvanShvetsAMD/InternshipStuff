@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Code
+﻿namespace Domain
 {
-    class Wing
+    public class Wing
     {
         public int FuelCapacity { get; private set; }
         public float RootThickness { get; private set; }
@@ -19,7 +13,7 @@ namespace Code
         }
     }
 
-    class VariableGeometryWing : Wing, IVariableWingActions
+    public class VariableGeometryWing : Wing, IVariableWingActions
     {
         public float MaxBackSweepAngle { get; private set; }
         public float MaxForwardSweepAngle { get; private set; }

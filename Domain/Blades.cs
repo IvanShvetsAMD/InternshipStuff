@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Code
+﻿namespace Domain
 {
-    abstract class Blade
+    public abstract class Blade
     {
         public int Length { get; protected set; }
         public int Chord { get; protected set; }
@@ -20,7 +14,7 @@ namespace Code
         }
     }
 
-    class TurbineBlade : Blade
+    public class TurbineBlade : Blade
     {
         public int MaxTemp { get; private set; }
         public bool HasCoolingChannels { get; private set; }
@@ -32,7 +26,7 @@ namespace Code
         }
     }
 
-    class RotorBlade : Blade
+    public class RotorBlade : Blade
     {
         public bool HasSupersonicTip { get; private set; }
 

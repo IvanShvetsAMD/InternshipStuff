@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
-using SideTasts;
 
-namespace ConsoleApplication1
+namespace SideTasts
 {
     public delegate bool ArrangeDelegate(object obj1, object obj2);
     class Program
@@ -34,7 +32,7 @@ namespace ConsoleApplication1
             //ep = new ElectricParameters(0, 3);
 
             gen.OutputVoltage = 10;
-            gen.OutputCurrent = 0;                       
+            gen.OutputCurrent = 0;
 
             ep.Voltage = 3;
             ep.Current = 3;
@@ -51,16 +49,16 @@ namespace ConsoleApplication1
             return false;
         }
 
-        public static List<object> Rearrange (List<object> list,  ArrangeDelegate arrangedelegate)
+        public static List<object> Rearrange(List<object> list, ArrangeDelegate arrangedelegate)
         {
             var flag = true;
 
-            for (int i = 1; (i <= (list.Count - 1)) && flag; i++)
+            for (int i = 1; (i <= list.Count - 1) && flag; i++)
             {
                 flag = false;
-                for (int j = 0; j < (list.Count - 1); j++)
+                for (int j = 0; j < list.Count - 1; j++)
                 {
-                    if(arrangedelegate(list[j], list[j + 1]))
+                    if (arrangedelegate(list[j], list[j + 1]))
                     {
                         var temp = list[j];
                         list[j] = list[j + 1];
@@ -238,28 +236,37 @@ namespace ConsoleApplication1
 
             #endregion
 
+            #region
 
-            List<Object> stuff = new List<object>();
-            stuff.Add(new Generator(4, 4));
-            stuff.Add(new Generator(3, 8));
-            stuff.Add(new Angle(3, 4, 5));
-            stuff.Add(new Angle(400));
-            stuff.Add(new Generator(220, 10));
-            stuff.Add(new ElectricParameters(1, 1));
+            List<object> stuff = new List<object>
+            {
+                new Generator(4, 4),
+                new Angle(3, 4, 5),
+                new Generator(3, 8),
+                new Angle(400),
+                new Generator(220, 10),
+                new ElectricParameters(1, 1)
+            };
 
             List<object> stuff2 = new List<object>(stuff);
             List<object> stuff3 = new List<object>(stuff);
             List<object> stuff4 = new List<object>(stuff);
 
-            ArrangeDelegate ad1 = new ArrangeDelegate(RearrangeMethod1);
-            stuff = Rearrange(stuff, ad1);
-            Console.WriteLine("\nafter first rearrangement(delegate)\n");
+            Console.WriteLine("Original collection:\n");
             foreach (var obj in stuff)
             {
                 Console.WriteLine(obj.GetType().Name);
             }
 
-            stuff2 = Rearrange(stuff2, delegate(object obj1, object obj2)
+            ArrangeDelegate arrangeDelegate = new ArrangeDelegate(RearrangeMethod1);
+            stuff = Rearrange(stuff, arrangeDelegate);
+            Console.WriteLine("\nAfter the first rearrangement(delegate)\n");
+            foreach (var obj in stuff)
+            {
+                Console.WriteLine(obj.GetType().Name);
+            }
+
+            stuff2 = Rearrange(stuff2, delegate (object obj1, object obj2)
             {
                 if (obj1 is Generator)
                     return true;
@@ -271,13 +278,12 @@ namespace ConsoleApplication1
             }
             );
 
-            Console.WriteLine("\nafter second rearrangement (anonymous function)\n");
+            Console.WriteLine("\nAfter second rearrangement (anonymous function)\n");
             foreach (var obj in stuff2)
             {
                 Console.WriteLine(obj.GetType().Name);
             }
 
-            
 
             stuff3 = Rearrange(stuff3, (obj1, obj2) =>
             {
@@ -295,7 +301,7 @@ namespace ConsoleApplication1
                 Console.WriteLine(o.GetType().Name);
             }
 
-            Console.WriteLine();
+            Console.WriteLine("\nUsing an extension method:\n");
             var b = stuff.Change((obj1, obj2) =>
             {
                 if (obj1 is Angle)
@@ -313,30 +319,117 @@ namespace ConsoleApplication1
             }
 
             Console.WriteLine("\nLINQ\n");
-            foreach (var o in trylinq(stuff))
+            foreach (var o in Trylinq(stuff))
             {
                 Console.WriteLine(o.GetType().Name);
             }
 
-            
+            #endregion
+
+
+            stuff4.Add(new Generator(4, 4));
+            stuff4.Add(new ElectricParameters(1, 1));
+            Console.WriteLine("\nDistinct\n");
+            foreach (var source in stuff4.OfType<ElectricParameters>().Distinct())
+            {
+                Console.WriteLine(source);
+            }
+
+            Console.WriteLine("\nSelect\n");
+            foreach (var result in stuff4.OfType<Generator>().Select(obj => obj.OutputCurrent))
+            {
+                Console.WriteLine(result);
+            }
+
+            Console.WriteLine("\nJoin\n");
+            foreach (var result in stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element, (stuff4element, stuff3element) => new { stuff3element.GetType().Name, stuff4element.GetType().FullName }))
+            {
+                Console.WriteLine(result);
+            }
+
+
+            Console.WriteLine("\nOrderByDescending and ThenByDescending\n");
+            foreach (var source in stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj => obj.GetType().Namespace))
+            {
+                Console.WriteLine(source + " " + source.GetType().Name);
+            }
+
+            Console.WriteLine("\nGroupBy\n");
+            var b2 = stuff4.GroupBy(obj => obj.GetType().Name);
+            foreach (var VARIABLE in b2)
+            {
+                Console.WriteLine(VARIABLE.Key);
+            }
+
+
+            Console.WriteLine("\nConcat\n");
+            foreach (var source in stuff.Concat(stuff4))
+            {
+                Console.WriteLine(source);
+            }
+
+            stuff4.ForEach(obj => Console.WriteLine(obj));
+            Console.WriteLine("\nLast\n");
+            try
+            {
+                Console.WriteLine(stuff4.Concat(stuff3).Last(o => o.GetType().Name == "Angle"));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            List<int> ints = new List<int> { 1, 2, 3, 4, 5, 6 };
+
+
+            bool hasFive = ints.Any(i => i == 5);
+
+
+
+
+            Console.WriteLine(stuff.Aggregate("\nAggregation of types: ", (current, obj) => current + "\n\t" + obj.GetType().FullName));
+
+            Console.WriteLine("\nSequence equal: {0}", stuff.SequenceEqual(stuff));
+
+            Console.WriteLine("\nRepeating random angles\n");
+            foreach (var result in Enumerable.Repeat(new Angle(), 4))
+            {
+                Console.WriteLine(result);
+            }
+
+
+            Console.WriteLine("\nClosures\n");
+            Func<Angle, Angle> assignment = AngleMiltiplierProvider();
+            Angle arg = new Angle(100);
+            Angle arg2 = assignment(arg);
+            Console.WriteLine(arg2);
+            arg2 = assignment(arg2);
+            Console.WriteLine(arg2);
         }
 
-        public static List<object> trylinq(List<object> list)
+        public static Func<Angle, Angle> AngleMiltiplierProvider()
+        {
+            double multiplier = 2.5;
+            Func<Angle, Angle> multiply = delegate (Angle angle)
+            {
+                multiplier += 1;
+                Angle a = new Angle((int)(multiplier * Angle.ToSeconds(angle)));
+                return a;
+            };
+            return multiply;
+        }
+
+        public static IEnumerable<object> Trylinq(List<object> list)
         {
             List<object> final = new List<object>();
 
             final.AddRange(list.Where(o => o.GetType().Name == "ElectricParameters").Select(o => o));
             var subquery = from o1 in list
-                        where o1.GetType().Name == "Generator"
-                        select o1;
+                           where o1.GetType().Name == "Generator"
+                           select o1;
 
-
-            
-            
             final.AddRange(subquery);
-
-
             return final;
-        } 
+        }
     }
 }

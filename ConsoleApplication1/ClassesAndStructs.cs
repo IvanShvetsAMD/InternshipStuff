@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace SideTasts
 {
     class Generator
     {
@@ -34,7 +31,7 @@ namespace ConsoleApplication1
             return gen.OutputVoltage / 1000;
         } 
     }
-    static class  Ammeter
+    static class Ammeter
     {
         public static double MeasureCurrentInMilliamps(Generator gen)
         {

@@ -1,17 +1,10 @@
 ﻿using System;
-using System.CodeDom;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Security;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Code
+namespace Domain
 {
-    abstract class Engine
+    public abstract class Engine
     {
         public string Manufacturer { get; }
         public string Model { get; }
@@ -27,7 +20,7 @@ namespace Code
         {
             return
                 String.Format(
-                    ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximun power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}, Status: {8}",
+                    ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximum power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}, Status: {8}",
                     Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraftID, FuelFlow, OnOffStatus);
         }
 
@@ -88,6 +81,11 @@ namespace Code
             Console.WriteLine("Warming up engine core for 1 minute. Monitor temps afterward.");
         }
 
+        public Engine()
+        {
+
+        }
+
         public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
         {
             Manufacturer = manufacturer;
@@ -115,13 +113,13 @@ namespace Code
         }
     }
 
-    enum OnOff
+    public enum OnOff
     {
         Running,
         Stopped
     }
 
-    class PistonEngine : Engine
+    public class PistonEngine : Engine
     {
         protected uint NumberOfPistons { get; private set; }
         protected float Volume { get; private set; }
@@ -146,7 +144,7 @@ namespace Code
     }
 
 
-    enum Propellants
+    public enum Propellants
     {
         Jet_A,
         Jet_B,
@@ -160,14 +158,14 @@ namespace Code
         Fluorine
     }
 
-    enum Oxidisers
+    public enum Oxidisers
     {
         GOX,
         LOX,
         DinitrogenTetroxide,
         High_TestPeroxide
     }
-    class JetEngine : Engine
+    public class JetEngine : Engine
     {
         protected int EGT { get; private set; }
         protected int Isp { get; private set; }
@@ -188,10 +186,14 @@ namespace Code
             {
                 FinalString += "\n\t" + propellant;
             }
-            
+
             return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value)) + "\n";
         }
 
+        public JetEngine()
+        {
+
+        }
         public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat) : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
@@ -205,7 +207,7 @@ namespace Code
 
     }
 
-    class Ramjet : JetEngine
+    public class Ramjet : JetEngine
     {
         public bool HasSupersonicCombustion { get; private set; }
 
@@ -229,7 +231,7 @@ namespace Code
 
     }
 
-    class RocketEngine : JetEngine
+    public class RocketEngine : JetEngine
     {
         protected bool IsReignitable { get; private set; }
         protected string NozzleBellType { get; private set; }
@@ -250,39 +252,37 @@ namespace Code
         }
     }
 
-    class SolidFuelRocketEngine : RocketEngine
+    public class SolidFuelRocketEngine : RocketEngine
     {
-        public sealed override float MaxPower { get { return MaxPower; } protected set {} }
+        public sealed override float MaxPower { get { return MaxPower; } protected set { } }
         public sealed override float CurrentPower { get { return MaxPower; } protected set { CurrentPower = MaxPower; } }
 
-        public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles, 
-            List<Propellants> propellants, List<Oxidisers> oxidisers, string manufacturer, string model, string serialnumber, 
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat) 
-            : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers, 
+        public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
+            List<Propellants> propellants, List<Oxidisers> oxidisers, string manufacturer, string model, string serialnumber,
+            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers,
                   manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
         }
     }
 
-    class TurbineEngine : JetEngine
+    public class TurbineEngine : JetEngine
     {
         public bool HasReverse { get; private set; }
         public uint NumberOfShafts { get; private set; }
-        private Generator generator { get; set; }
+        private Generator Generator { get; set; }
         protected List<Spool> Spools { get; private set; }
 
-        public Dictionary<Generator, double> Gens = new Dictionary<Generator, double>(new GeneratorComparer()); 
-
-        public void StartGenerator() => generator.GenerateCurrent();
+        public void StartGenerator() => Generator.GenerateCurrent();
 
         public void StopGenerator() { }
 
         public override string ToString()
         {
-            return string.Format("{0}, Number of shafts: {1}, {2}", base.ToString(), NumberOfShafts, HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
+            return string.Format("{0}, {1}, Number of shafts: {2}, {3}", base.ToString(), Generator, NumberOfShafts, HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
         }
 
-        public TurbineEngine(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public TurbineEngine(bool hasreverse, uint numberofshafts, Generator generator, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
             : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
@@ -290,32 +290,41 @@ namespace Code
             HasReverse = hasreverse;
             NumberOfShafts = numberofshafts;
             Spools = spools;
-            Gens = gens;
+            Generator = generator;
+        }
+
+        protected TurbineEngine()
+        {
+
         }
     }
 
-    class Turbofan : TurbineEngine
+    public class Turbofan : TurbineEngine
     {
         public float BypassRatio { get; private set; }
         public bool IsGeared { get; private set; }
 
         public override string ToString()
         {
-            return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, IsGeared ? "has a geared fan" : "has direct drive fan");
+            return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, IsGeared ? "has a geared fan" : "has a direct drive fan");
         }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens,  List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Generator generator, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, generator, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             BypassRatio = bypassratio;
             IsGeared = isgeared;
         }
+
+        public Turbofan()
+        {
+        }
     }
 
-    sealed class Turboshaft : TurbineEngine
+    public sealed class Turboshaft : TurbineEngine
     {
         public float GearingRatio { get; private set; }
         public float MaxTorque { get; private set; }
@@ -339,18 +348,20 @@ namespace Code
             return string.Format("{0}, gearing ratio: {1}, max torque: {2}", base.ToString(), GearingRatio, MaxTorque);
         }
 
-        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turboshaft() { }
+
+        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Generator generator, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, generator, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             GearingRatio = gearingratio;
             MaxTorque = maxtorque;
         }
     }
 
-    class Turbojet : TurbineEngine
+    public class Turbojet : TurbineEngine
     {
         public string Precoolant { get; }
 
@@ -362,54 +373,14 @@ namespace Code
             return base.ToString() + ", precoolant: " + Precoolant;
         }
 
-        public Turbojet(bool hasreverse, uint numberofshafts, Dictionary<Generator, double> gens, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public Turbojet() { }
+
+        public Turbojet(bool hasreverse, uint numberofshafts, Generator generator, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat, string precoolant = null)
-            : base(hasreverse, numberofshafts, gens, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, generator, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             Precoolant = precoolant ?? "none";
-        }
-    }
-
-    class Generator
-    {
-        public float OutputCurrent { get; private set; }
-        public float OutputVoltage { get; private set; }
-
-        public void GenerateCurrent() { }
-
-        public Generator() { }
-
-        public Generator(float c, float v)
-        {
-            OutputCurrent = c;
-            OutputVoltage = v;
-        }
-    }
-
-    class GeneratorComparer : IEqualityComparer<Generator>
-    {
-        public bool Equals(Generator x, Generator y)
-        {
-            return NearlyEqual(x.OutputCurrent, y.OutputCurrent, 0.00001f) && NearlyEqual(x.OutputVoltage, y.OutputVoltage, 0.00001f);
-        }
-
-        public int GetHashCode(Generator obj)
-        {
-            return obj.ToString().GetHashCode();
-        }
-
-        public bool NearlyEqual(float a, float b, float epsilon)
-        {
-            float absA = Math.Abs(a);
-            float absB = Math.Abs(b);
-            float diff = Math.Abs(a - b);
-
-            if (a == b)
-                return true;
-            if (a == 0 || b == 0 || diff < float.Epsilon)
-                return diff < epsilon;
-            return diff / (absA + absB) < epsilon;
         }
     }
 }
