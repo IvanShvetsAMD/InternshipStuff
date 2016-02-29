@@ -270,10 +270,10 @@ namespace Domain
     {
         public bool HasReverse { get; private set; }
         public uint NumberOfShafts { get; private set; }
-        private Generator generator { get; set; }
+        private Generator Generator { get; set; }
         protected List<Spool> Spools { get; private set; }
 
-        public void StartGenerator() => generator.GenerateCurrent();
+        public void StartGenerator() => Generator.GenerateCurrent();
 
         public void StopGenerator() { }
 
@@ -282,7 +282,7 @@ namespace Domain
             return string.Format("{0}, Number of shafts: {1}, {2}", base.ToString(), NumberOfShafts, HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
         }
 
-        public TurbineEngine(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public TurbineEngine(bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
             : base(egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
@@ -290,6 +290,7 @@ namespace Domain
             HasReverse = hasreverse;
             NumberOfShafts = numberofshafts;
             Spools = spools;
+            Generator = gen;
         }
 
         protected TurbineEngine()
@@ -308,11 +309,11 @@ namespace Domain
             return string.Format("{0}, bypass ratio: {1}, {2}", base.ToString(), BypassRatio, IsGeared ? "has a geared fan" : "has a direct drive fan");
         }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             BypassRatio = bypassratio;
             IsGeared = isgeared;
@@ -349,11 +350,11 @@ namespace Domain
 
         public Turboshaft() { }
 
-        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
+        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
             List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             GearingRatio = gearingratio;
             MaxTorque = maxtorque;
@@ -374,54 +375,54 @@ namespace Domain
 
         public Turbojet() { }
 
-        public Turbojet(bool hasreverse, uint numberofshafts, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public Turbojet(bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat, string precoolant = null)
-            : base(hasreverse, numberofshafts, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            : base(hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
             Precoolant = precoolant ?? "none";
         }
     }
 
-    public class Generator
-    {
-        public float OutputCurrent { get; private set; }
-        public float OutputVoltage { get; private set; }
+    //public class Generator
+    //{
+    //    public float OutputCurrent { get; private set; }
+    //    public float OutputVoltage { get; private set; }
 
-        public void GenerateCurrent() { }
+    //    public void GenerateCurrent() { }
 
-        public Generator() { }
+    //    public Generator() { }
 
-        public Generator(float c, float v)
-        {
-            OutputCurrent = c;
-            OutputVoltage = v;
-        }
-    }
+    //    public Generator(float c, float v)
+    //    {
+    //        OutputCurrent = c;
+    //        OutputVoltage = v;
+    //    }
+    //}
 
-    public class GeneratorComparer : IEqualityComparer<Generator>
-    {
-        public bool Equals(Generator x, Generator y)
-        {
-            return NearlyEqual(x.OutputCurrent, y.OutputCurrent, 0.00001f) && NearlyEqual(x.OutputVoltage, y.OutputVoltage, 0.00001f);
-        }
+    //public class GeneratorComparer : IEqualityComparer<Generator>
+    //{
+    //    public bool Equals(Generator x, Generator y)
+    //    {
+    //        return NearlyEqual(x.OutputCurrent, y.OutputCurrent, 0.00001f) && NearlyEqual(x.OutputVoltage, y.OutputVoltage, 0.00001f);
+    //    }
 
-        public int GetHashCode(Generator obj)
-        {
-            return obj.ToString().GetHashCode();
-        }
+    //    public int GetHashCode(Generator obj)
+    //    {
+    //        return obj.ToString().GetHashCode();
+    //    }
 
-        public bool NearlyEqual(float a, float b, float epsilon)
-        {
-            float absA = Math.Abs(a);
-            float absB = Math.Abs(b);
-            float diff = Math.Abs(a - b);
+    //    public bool NearlyEqual(float a, float b, float epsilon)
+    //    {
+    //        float absA = Math.Abs(a);
+    //        float absB = Math.Abs(b);
+    //        float diff = Math.Abs(a - b);
 
-            if (a == b)
-                return true;
-            if (a == 0 || b == 0 || diff < float.Epsilon)
-                return diff < epsilon;
-            return diff / (absA + absB) < epsilon;
-        }
-    }
+    //        if (a == b)
+    //            return true;
+    //        if (a == 0 || b == 0 || diff < float.Epsilon)
+    //            return diff < epsilon;
+    //        return diff / (absA + absB) < epsilon;
+    //    }
+    //}
 }
