@@ -45,6 +45,7 @@
     <Compile Include="Engines.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="GasCompartment.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="ILighterThanAir.cs" />
     <Compile Include="IPowered.cs" />
     <Compile Include="IVariableWingActions.cs" />
