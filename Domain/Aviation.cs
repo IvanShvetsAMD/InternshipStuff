@@ -11,7 +11,7 @@ namespace Domain
         public string Model { get; }
         public int MaxTakeoffWeight { get; private set; }
         public int Vne { get; private set; }
-        protected string SerialNumber { get; }
+        public string SerialNumber { get; }
 
 
         public void ReleaseParkingBrake()

@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logger
+namespace LoggerService
 {
     public delegate void LogChangedDelegate(LogEventArgs e);
     public class Logger
     {
+        static Lazy<Logger> LazyInstance = new Lazy<Logger>(() => new Logger(), true);
         private string Log;
         private string directory = "D:\\";
         private string filename = "Voting Server Log";
+        public LogChangedDelegate AddToLogEvent;
+
+
 
         public string Directory
         {
@@ -33,16 +37,24 @@ namespace Logger
             }
         }
 
-        public LogChangedDelegate LogChangedEvent;
+        private Logger()
+        {
+            AddToLogEvent += AddToLog;
+            //LogChangedEvent += A
+        }
 
-        public Logger() { }
+        public static Logger GetLogger() => LazyInstance.Value;
 
-        public void AddToLog(string a)
+        private void AddToLog(string a)
         {
             Log += Environment.NewLine + "[" + DateTime.Now + "] " + a;
+        }
 
-            LogChangedDelegate handler = LogChangedEvent;
-            handler?.Invoke(new LogEventArgs(this));
+        private void AddToLog(LogEventArgs args)
+        {
+            if (args.Log != null)
+                AddToLog(args.Log.Log);
+            AddToLog(args.LogText);
         }
 
         public void ExportToFile()

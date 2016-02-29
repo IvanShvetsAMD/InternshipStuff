@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Interfaces;
 using Domain;
+using LoggerService;
 
 namespace Factories
 {
+    
     public class HeavierThanAirAircraftFactory
     {
         private IAddEngines turbineEngineInstaller;
-
 
         public HeavierThanAirAircraftFactory(IAddEngines engineInstaller)
         {
@@ -63,6 +64,7 @@ namespace Factories
             }
 
             rotorCraft = AddTurboshaftEngines(rotorCraft);
+            Logger.GetLogger().AddToLogEvent(new LogEventArgs(String.Format("new rotorcraft created (SN:{0})", rotorCraft.SerialNumber)));
 
             return rotorCraft;
         }

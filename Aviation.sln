@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factories", "Factories\Factories.csproj", "{47D57597-4E74-4465-87C2-00CDA989CF42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{151B3A71-6920-428E-8691-5E0E818A4654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "Logger\LoggerService.csproj", "{151B3A71-6920-428E-8691-5E0E818A4654}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

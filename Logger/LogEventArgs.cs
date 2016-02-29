@@ -1,4 +1,4 @@
-﻿namespace Logger
+﻿namespace LoggerService
 {
     public class LogEventArgs
     {
@@ -13,9 +13,8 @@
 
         public LogEventArgs(string a)
         {
+            Log = null;
             LogText = a;
-            if (Log != null)
-                Log.AddToLog(a);
         }
     }
 }

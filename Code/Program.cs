@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using Domain;
 using Factories;
 using Infrastructure;
+using LoggerService;
 
 namespace PresentationCode
 {
+    public delegate void LogChangedDelegate(LogEventArgs e);
     class Program
     {
         static void Main()
         {
+            Logger log = Logger.GetLogger();
+            
+            
 
             #region 
 
@@ -128,6 +135,11 @@ namespace PresentationCode
             RotorCraft rotorCraft = factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor",
                 42, 73, "TEST manufacturer", 4242);
             Console.WriteLine(rotorCraft);
+
+            log.AddToLogEvent(new LogEventArgs("TEST"));
+            Console.WriteLine("\n\n\n");
+            Thread.Sleep(2000);
+            Console.WriteLine(log);
         }
     }
 }
