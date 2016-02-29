@@ -1,5 +1,5 @@
-﻿using Interfaces;
-using ActionImplementations;
+﻿using ActionImplementations;
+using Interfaces;
 using Ninject;
 
 namespace Infrastructure

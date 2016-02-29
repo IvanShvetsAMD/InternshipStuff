@@ -39,7 +39,7 @@ namespace PresentationCode
 
         private void LogChangedEventHandler(LogEventArgs e)
         {
-            Invoke((Action) delegate { richTextBox1.Text = e.Log.ToString(); });
+            Invoke((Action) delegate { richTextBox1.Text += e.LogText; });
         }
 
         private void LogForm_FormClosing(object sender, FormClosingEventArgs e)

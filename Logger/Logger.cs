@@ -43,11 +43,12 @@ namespace LoggerService
 
         public void AddToLog(string a)
         {
-            Log += Environment.NewLine + "[" + DateTime.Now + "] " + a;
+            string addition = Environment.NewLine + "[" + DateTime.Now + "] " + a;
+            Log += addition;
 
             LogChangedDelegate handler = LogChangedEvent;
             if (handler != null)
-                handler(new LogEventArgs(this));
+                handler(new LogEventArgs(addition));
         }
 
         public void AddToLog(LogEventArgs args)
