@@ -64,7 +64,7 @@ namespace Factories
             }
 
             rotorCraft = AddTurboshaftEngines(rotorCraft);
-            Logger.GetLogger().AddToLogEvent(new LogEventArgs(String.Format("new rotorcraft created (SN:{0})", rotorCraft.SerialNumber)));
+            Logger.GetLogger().AddToLog(new LogEventArgs(String.Format("new rotorcraft created (SN:{0})", rotorCraft.SerialNumber)));
 
             return rotorCraft;
         }

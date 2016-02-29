@@ -13,7 +13,7 @@ namespace LoggerService
         private string Log;
         private string directory = "D:\\";
         private string filename = "Voting Server Log";
-        public LogChangedDelegate AddToLogEvent;
+        public event LogChangedDelegate LogChangedEvent;
 
 
 
@@ -37,20 +37,20 @@ namespace LoggerService
             }
         }
 
-        private Logger()
-        {
-            AddToLogEvent += AddToLog;
-            //LogChangedEvent += A
-        }
+        private Logger() { }
 
         public static Logger GetLogger() => LazyInstance.Value;
 
-        private void AddToLog(string a)
+        public void AddToLog(string a)
         {
             Log += Environment.NewLine + "[" + DateTime.Now + "] " + a;
+
+            LogChangedDelegate handler = LogChangedEvent;
+            if (handler != null)
+                handler(new LogEventArgs(this));
         }
 
-        private void AddToLog(LogEventArgs args)
+        public void AddToLog(LogEventArgs args)
         {
             if (args.Log != null)
                 AddToLog(args.Log.Log);

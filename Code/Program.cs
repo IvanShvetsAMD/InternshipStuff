@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using Domain;
 using Factories;
 using Infrastructure;
@@ -12,11 +14,12 @@ namespace PresentationCode
     public delegate void LogChangedDelegate(LogEventArgs e);
     class Program
     {
+        [STAThread]
         static void Main()
         {
             Logger log = Logger.GetLogger();
-            
-            
+
+
 
             #region 
 
@@ -136,10 +139,42 @@ namespace PresentationCode
                 42, 73, "TEST manufacturer", 4242);
             Console.WriteLine(rotorCraft);
 
-            log.AddToLogEvent(new LogEventArgs("TEST"));
+            //log.LogChangedEvent(new LogEventArgs("TEST"));
+            //Console.WriteLine("\n\n\n");
+            //Thread.Sleep(2000);
+            //Console.WriteLine(log);
+
+
+
+            //Task sideTask = new Task(() =>
+            //{
+            //    LogForm lf = LogForm.GetLogForm();
+            //    lf.ShowDialog();
+            //    Application.Run(lf);
+            //});
+
+            //sideTask.Start();
+
+            //LogForm lf = LogForm.GetLogForm();
+            //lf.Show();
+            //Application.Run(lf);
+
+            Thread t = new Thread(new ThreadStart(StartNewStaThread));
+            t.Start();
+
+
+            Thread.Sleep(4000);
+
             Console.WriteLine("\n\n\n");
-            Thread.Sleep(2000);
-            Console.WriteLine(log);
+            RotorCraft rotorCraft2 = factory.TryMakeRotorCraft("000000002", new List<RotorBlade>(), "standart TEST rotor2",
+                42, 73, "TEST manufacturer2", 4242);
+            Console.WriteLine(rotorCraft2);
+        }
+
+        [STAThread]
+        private static void StartNewStaThread()
+        {
+            Application.Run(LogForm.GetLogForm());
         }
     }
 }
