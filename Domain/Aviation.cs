@@ -225,6 +225,13 @@ namespace Domain
             RotorBlades = rotorblades;
             RotorType = rotortype;
         }
+
+        public override string ToString()
+        {
+            StringBuilder final = new StringBuilder(base.ToString());
+            final.AppendFormat(", number of rotors: {0}, type opf rotor: {1}", NumberOfRotors, RotorType);
+            return final.ToString();
+        }
     }
 
     public class FixedWingAircraft : HeavierThanAirAircraft
@@ -240,6 +247,13 @@ namespace Domain
             Wings = wings;
             CruiseSpeed = cruisespeed;
             StallSpeed = stallspeed;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder final = new StringBuilder(base.ToString());
+            final.AppendFormat(", cruise speed: {0}, stall speed: {1}", CruiseSpeed, StallSpeed);
+            return final.ToString();
         }
     }
 }

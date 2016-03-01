@@ -9,7 +9,7 @@ namespace LoggerService
     public delegate void LogChangedDelegate(LogEventArgs e);
     public class Logger
     {
-        static Lazy<Logger> LazyInstance = new Lazy<Logger>(() => new Logger(), true);
+        static Lazy<Logger> lazyInstance = new Lazy<Logger>(() => new Logger(), true);
         private string Log;
         private string directory = "D:\\";
         private string filename = "Voting Server Log";
@@ -39,7 +39,7 @@ namespace LoggerService
 
         private Logger() { }
 
-        public static Logger GetLogger() => LazyInstance.Value;
+        public static Logger GetLogger() => lazyInstance.Value;
 
         public void AddToLog(string a)
         {

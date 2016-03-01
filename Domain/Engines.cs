@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Domain
 {
@@ -130,7 +131,7 @@ namespace Domain
 
         public override string ToString()
         {
-            return String.Format("Type: piston engine {0}, number of pistons: {1}, volume: {2}, mixture: {3}", base.ToString(), NumberOfPistons, Volume, Mixture);
+            return String.Format("Type: piston engine, number of pistons: {0}, volume: {1}, mixture: {2}, {3}", NumberOfPistons, Volume, Mixture, base.ToString());
         }
 
         public PistonEngine(uint numberofpistons, float volume, string manufacturer,
@@ -142,7 +143,6 @@ namespace Domain
             Mixture = 0;
         }
     }
-
 
     public enum Propellants
     {
@@ -178,16 +178,29 @@ namespace Domain
 
         public override string ToString()
         {
-            string FinalString;
-            FinalString = String.Format(
-                "Type: Jet engine, {0}, EGT: {1}, Isp: {2}, number of cycles: {3}, \npropellants: ", base.ToString(), EGT, Isp, NumberOfCycles);
+            //string FinalString;
+            //FinalString = String.Format(
+            //    "Type: Jet engine, {0}, EGT: {1}, Isp: {2}, number of cycles: {3}, \npropellants: ", base.ToString(), EGT, Isp, NumberOfCycles);
+
+            //foreach (var propellant in Propellants)
+            //{
+            //    FinalString += "\n\t" + propellant;
+            //}
+
+            //return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value)) + "\n";
+
+            StringBuilder final = new StringBuilder();
+            final.AppendFormat("Type: Jet engine, EGT: {0}, Isp: {1}, number of cycles: {2},\npropellants: ", EGT, Isp, NumberOfCycles);
 
             foreach (var propellant in Propellants)
             {
-                FinalString += "\n\t" + propellant;
+                final.AppendFormat("\n\t{0}", propellant);
             }
 
-            return Oxidisers.Aggregate(FinalString + "\noxidiser list:", (current, value) => current + ("\n\t" + value)) + "\n";
+            final.Append(Oxidisers.Aggregate(final + "\noxidisers list:", (current, value) => current + ("\n\t" + value)));
+
+            final.AppendFormat("\n{0}", base.ToString());
+            return final.ToString();
         }
 
         public JetEngine()
@@ -263,6 +276,8 @@ namespace Domain
             : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers,
                   manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
+            MaxPower = maxpower;
+            CurrentPower = CurrentPower;
         }
     }
 
@@ -383,46 +398,4 @@ namespace Domain
             Precoolant = precoolant ?? "none";
         }
     }
-
-    //public class Generator
-    //{
-    //    public float OutputCurrent { get; private set; }
-    //    public float OutputVoltage { get; private set; }
-
-    //    public void GenerateCurrent() { }
-
-    //    public Generator() { }
-
-    //    public Generator(float c, float v)
-    //    {
-    //        OutputCurrent = c;
-    //        OutputVoltage = v;
-    //    }
-    //}
-
-    //public class GeneratorComparer : IEqualityComparer<Generator>
-    //{
-    //    public bool Equals(Generator x, Generator y)
-    //    {
-    //        return NearlyEqual(x.OutputCurrent, y.OutputCurrent, 0.00001f) && NearlyEqual(x.OutputVoltage, y.OutputVoltage, 0.00001f);
-    //    }
-
-    //    public int GetHashCode(Generator obj)
-    //    {
-    //        return obj.ToString().GetHashCode();
-    //    }
-
-    //    public bool NearlyEqual(float a, float b, float epsilon)
-    //    {
-    //        float absA = Math.Abs(a);
-    //        float absB = Math.Abs(b);
-    //        float diff = Math.Abs(a - b);
-
-    //        if (a == b)
-    //            return true;
-    //        if (a == 0 || b == 0 || diff < float.Epsilon)
-    //            return diff < epsilon;
-    //        return diff / (absA + absB) < epsilon;
-    //    }
-    //}
 }
