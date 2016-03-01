@@ -12,7 +12,7 @@ namespace LoggerService
         static Lazy<Logger> lazyInstance = new Lazy<Logger>(() => new Logger(), true);
         private string Log;
         private string directory = "D:\\";
-        private string filename = "Voting Server Log";
+        private string filename = "Log file";
         public event LogChangedDelegate LogChangedEvent;
 
 
