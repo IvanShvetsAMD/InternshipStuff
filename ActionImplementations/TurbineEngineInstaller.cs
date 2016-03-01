@@ -21,9 +21,5 @@ namespace ActionImplementations
                 "99999999", 2000, 3, 0, OnOff.Stopped, false));
             return aircraft;
         }
-        public TurbineEngineInstaller()
-        {
-            
-        }
     }
 }

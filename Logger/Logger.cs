@@ -59,17 +59,16 @@ namespace LoggerService
             AddToLog(args.LogText);
         }
 
-        public void ExportToFile()
+        public async void ExportToFile()
         {
             AddToLog("Log exported to file (" + Directory + "\\" + FileName + ".txt)");
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(Directory + "\\" + FileName + ".txt", true))
                 file.WriteLine(ToString());
+                //await file.WriteLineAsync(ToString());
+
         }
 
-        public override string ToString()
-        {
-            return String.Format("Log ({0}): {1}", DateTime.Now, Log);
-        }
+        public override string ToString() => String.Format("Log ({0}): {1}", DateTime.Now, Log);
 
         public override bool Equals(object obj)
         {

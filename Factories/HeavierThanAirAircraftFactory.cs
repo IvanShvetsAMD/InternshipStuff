@@ -6,15 +6,14 @@ using LoggerService;
 
 namespace Factories
 {
-    
+
     public class HeavierThanAirAircraftFactory
     {
         private IAddEngines turbineEngineInstaller;
 
         public HeavierThanAirAircraftFactory(IAddEngines engineInstaller)
         {
-            if (engineInstaller != null)
-                turbineEngineInstaller = engineInstaller;
+            turbineEngineInstaller = engineInstaller;
         }
 
 
@@ -29,7 +28,7 @@ namespace Factories
             return new RotorCraft(numberofrotors, rotorblades, rotortype, new List<Engine>(), fuelcapacity, manufacturer, "generic model", maxTOweight, 0, serialnumber);
         }
 
-        public RotorCraft TryMakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades,string rotortype = "standart rotor",
+        public RotorCraft TryMakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor",
             int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker",
             int maxTOweight = 1000)
         {

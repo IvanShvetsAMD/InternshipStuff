@@ -153,6 +153,8 @@ namespace PresentationCode
             Console.WriteLine(rotorCraft2);
 
             log.ExportToFile();
+            log.FileName = "NumberTWO";
+            log.ExportToFile();
         }
 
         [STAThread]
