@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
@@ -155,6 +156,45 @@ namespace PresentationCode
             log.ExportToFile();
             log.FileName = "NumberTWO";
             log.ExportToFile();
+
+            log.AddToLog(log.FindInLog("000000002").ToString());
+            log.AddToLogWithOffset("Testing the offset method");
+
+            log.AddToLog("sdasdsadsadad");
+            Thread.Sleep(2000);
+            Console.WriteLine(log.CalculatePostTimeDifference());
+
+
+            
+
+           
+            switch (Console.ReadLine().ToUpper())
+            {
+                case "US":
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                    break;
+                case "UK":
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+                    break;
+                default:
+                    Console.WriteLine("wrong answer)");
+                    break;
+            }
+
+            switch (Thread.CurrentThread.CurrentCulture.ToString())
+            {
+                case "en-US":
+                    Console.WriteLine("honor, behavior...");
+                    Console.WriteLine(TimeZone.CurrentTimeZone.StandardName);
+                    break;
+                case "en-GB":
+                    Console.WriteLine("colour, monetisation...");
+                    Console.WriteLine(TimeZone.CurrentTimeZone.StandardName);
+                    break;
+            }
+
+
+            log.Dispose();
         }
 
         [STAThread]
