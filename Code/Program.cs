@@ -10,7 +10,6 @@ using Domain;
 using Factories;
 using Infrastructure;
 using LoggerService;
-using System.Timers;
 
 namespace PresentationCode
 {
