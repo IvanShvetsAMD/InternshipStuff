@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Aviation.cs" />
     <Compile Include="Blades.cs" />
+    <Compile Include="Decorator.cs" />
     <Compile Include="Engines.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="GasCompartment.cs" />

@@ -235,6 +235,10 @@ namespace PresentationCode
             Console.WriteLine("\n\n\n\n");
             Console.WriteLine(decorator2);
 
+
+
+
+
             log.Dispose();
         }
 
