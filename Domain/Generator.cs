@@ -8,7 +8,9 @@ namespace Domain
         public float OutputCurrent { get; private set; }
         public float OutputVoltage { get; private set; }
 
-        public void GenerateCurrent() { }
+        public void GenerateCurrent() {
+            Console.WriteLine("Generating current");
+        }
 
         public Generator() { }
 

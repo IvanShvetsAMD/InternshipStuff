@@ -1,6 +1,6 @@
 ﻿namespace Domain
 {
-    interface IVariableWingActions
+    public interface IVariableWingActions
     {
         void DecreaseAngle(float Angle);
         void IncreaseAngle(float Angle);
