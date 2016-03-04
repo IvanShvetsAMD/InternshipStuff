@@ -154,30 +154,30 @@ namespace Domain
             }
         }
 
-        public void ShiftGas(int OriginCompartment, int DestinationCompartment, float Volume)
+        public void ShiftGas(int originCompartment, int destinationCompartment, float Volume)
         {
-            if (OriginCompartment == DestinationCompartment)
+            if (originCompartment == destinationCompartment)
                 throw new Exception("No point in shifting gas - the source and the destination match.");
-            if (OriginCompartment >= Compartments.Count || DestinationCompartment >= Compartments.Count)
-                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", OriginCompartment, DestinationCompartment);
+            if (originCompartment >= Compartments.Count || destinationCompartment >= Compartments.Count)
+                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
             while (true)
             {
-                Compartments[OriginCompartment].CurrentVolume -= 1;
-                Compartments[DestinationCompartment].CurrentVolume += 1;
+                Compartments[originCompartment].CurrentVolume -= 1;
+                Compartments[destinationCompartment].CurrentVolume += 1;
                 Volume -= 1;
-                if (Compartments[DestinationCompartment].CurrentVolume >=
-                    Compartments[DestinationCompartment].Capacity)
+                if (Compartments[destinationCompartment].CurrentVolume >=
+                    Compartments[destinationCompartment].Capacity)
                 {
-                    Compartments[OriginCompartment].CurrentVolume +=
-                        Compartments[DestinationCompartment].CurrentVolume -
-                        Compartments[DestinationCompartment].Capacity;
-                    Compartments[DestinationCompartment].CurrentVolume = Compartments[DestinationCompartment].Capacity;
+                    Compartments[originCompartment].CurrentVolume +=
+                        Compartments[destinationCompartment].CurrentVolume -
+                        Compartments[destinationCompartment].Capacity;
+                    Compartments[destinationCompartment].CurrentVolume = Compartments[destinationCompartment].Capacity;
                     break;
                 }
                 if (Volume <= 0)
                 {
-                    Compartments[OriginCompartment].CurrentVolume += -1 * Volume;
-                    Compartments[DestinationCompartment].CurrentVolume -= -Volume;
+                    Compartments[originCompartment].CurrentVolume += -1 * Volume;
+                    Compartments[destinationCompartment].CurrentVolume -= -Volume;
                     break;
                 }
             }

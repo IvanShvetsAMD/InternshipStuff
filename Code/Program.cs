@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
@@ -9,6 +10,7 @@ using Domain;
 using Factories;
 using Infrastructure;
 using LoggerService;
+using System.Timers;
 
 namespace PresentationCode
 {
@@ -205,13 +207,16 @@ namespace PresentationCode
 
 
 
+            #region Decorator
+
             var tjf = TurbineEngineFactory.GeTurbineEngineFactory();
 
             var tj = new Turbofan();
 
             if (tjf.TryMakeTurbofan(4, 3, new Generator(),
-                new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped, out tj))
+                new List<Spool>(), 600, 500, 5, new List<Propellants> {Propellants.Jet_A},
+                new List<Oxidisers> {Oxidisers.GOX}, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped,
+                out tj))
             {
                 Console.WriteLine();
                 Console.WriteLine(tj);
@@ -221,19 +226,40 @@ namespace PresentationCode
                 Console.WriteLine();
                 Console.WriteLine("No engine could be created");
             }
-            
 
-            ReheatDecorator turbineEngineDecorator = new ReheatDecorator(tj);
-            turbineEngineDecorator.Decorate(new ReheatChamber(1.5));
-            turbineEngineDecorator.Reheat.Engage();
+
+            ReheatDecorator engineDecorator = new ReheatDecorator(tj);
+            engineDecorator.Decorate(new ReheatChamber(1.5));
+            engineDecorator.Reheat.Engage();
             Console.WriteLine("\n\n\n\n");
-            Console.WriteLine(turbineEngineDecorator);
+            Console.WriteLine(engineDecorator);
 
-            DumpAndBurnDecorator decorator2 = new DumpAndBurnDecorator(turbineEngineDecorator);
+            DumpAndBurnDecorator decorator2 = new DumpAndBurnDecorator(engineDecorator);
             decorator2.Decorate(new FuelDumper(2));
             decorator2.DumpandBurn.Engage();
             Console.WriteLine("\n\n\n\n");
             Console.WriteLine(decorator2);
+
+            #endregion
+
+            #region Proxy
+
+            Console.WriteLine("\n\n\n\n");
+            LighterThanAirAircraftProxy proxy = new LighterThanAirAircraftProxy(300);
+            Stopwatch performanceStopwatch = new Stopwatch();
+            performanceStopwatch.Start();
+            proxy.DumpBallast(100);
+            performanceStopwatch.Stop();
+            Console.WriteLine("Ballast dumping took aprox. {0} ticks", performanceStopwatch.ElapsedTicks);
+
+            Console.WriteLine("\n\n");
+            performanceStopwatch.Restart();
+            proxy.ShiftGas(0, 1, 50);
+            performanceStopwatch.Start();
+            Console.WriteLine("Creating a new object and shifting gas took aprox {0} ticks",
+                performanceStopwatch.ElapsedTicks);
+
+            #endregion
 
 
 
@@ -241,6 +267,8 @@ namespace PresentationCode
 
             log.Dispose();
         }
+
+        public static void Stop() { }
 
         [STAThread]
         private static void StartNewStaThread()

@@ -33,12 +33,12 @@ namespace Domain
         public ReheatChamber Reheat { get; private set; }
         public override void StartGenerator()
         {
-            TurbineEngineInstance.StartGenerator();
+            TurbineEngineInstance?.StartGenerator();
         }
 
         public override void StopGenerator()
         {
-            TurbineEngineInstance.StopGenerator();
+            TurbineEngineInstance?.StopGenerator();
         }
 
         public override void Decorate(ITurbineEngineComponent reheat)
@@ -67,12 +67,12 @@ namespace Domain
 
         public override void StartGenerator()
         {
-            TurbineEngineInstance.StartGenerator();
+            TurbineEngineInstance?.StartGenerator();
         }
 
         public override void StopGenerator()
         {
-            TurbineEngineInstance.StopGenerator();
+            TurbineEngineInstance?.StopGenerator();
         }
 
         public override void Decorate(ITurbineEngineComponent component)
