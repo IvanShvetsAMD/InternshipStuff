@@ -154,7 +154,7 @@ namespace Domain
             }
         }
 
-        public void ShiftGas(int originCompartment, int destinationCompartment, float Volume)
+        public void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
             if (originCompartment == destinationCompartment)
                 throw new Exception("No point in shifting gas - the source and the destination match.");
@@ -164,7 +164,7 @@ namespace Domain
             {
                 Compartments[originCompartment].CurrentVolume -= 1;
                 Compartments[destinationCompartment].CurrentVolume += 1;
-                Volume -= 1;
+                volume -= 1;
                 if (Compartments[destinationCompartment].CurrentVolume >=
                     Compartments[destinationCompartment].Capacity)
                 {
@@ -174,10 +174,10 @@ namespace Domain
                     Compartments[destinationCompartment].CurrentVolume = Compartments[destinationCompartment].Capacity;
                     break;
                 }
-                if (Volume <= 0)
+                if (volume <= 0)
                 {
-                    Compartments[originCompartment].CurrentVolume += -1 * Volume;
-                    Compartments[destinationCompartment].CurrentVolume -= -Volume;
+                    Compartments[originCompartment].CurrentVolume += -1 * volume;
+                    Compartments[destinationCompartment].CurrentVolume -= -volume;
                     break;
                 }
             }

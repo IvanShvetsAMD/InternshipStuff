@@ -27,13 +27,13 @@ namespace Domain
         {
             BallastMass = ballastmass;
         }
-        public void ShiftGas(int originCompartment, int destinationCompartment, float Volume)
+        public void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
             Console.WriteLine("The huge task of creating some lighter-that-air aircraft is underway");
             Thread.Sleep(4000);
             LighterThanAirAircraft aircraft = new LighterThanAirAircraft(BallastMass, "He", 400, new List<GasCompartment> {new GasCompartment(200, 200), new GasCompartment(200, 100)}, new List<Engine>(), 300, "Blimp", "StratoCruiser", 8000, 120, "00000488");
 
-            aircraft.ShiftGas(originCompartment, destinationCompartment, Volume);
+            aircraft.ShiftGas(originCompartment, destinationCompartment, volume);
             Console.WriteLine("Gas shifted");
         }
     }

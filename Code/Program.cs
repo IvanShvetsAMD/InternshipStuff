@@ -23,7 +23,7 @@ namespace PresentationCode
 
 
 
-            #region 
+            #region Side tasks (testing things)
 
             //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
             //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
@@ -102,7 +102,7 @@ namespace PresentationCode
                 Console.WriteLine(s);
             }
 
-            #region 
+            #region factory
 
             //var tjf = TurbineEngineFactory.GeTurbineEngineFactory();
 
@@ -142,7 +142,7 @@ namespace PresentationCode
             ServiceLocator.RegisterAll();
             HeavierThanAirAircraftFactory factory = ServiceLocator.Get<HeavierThanAirAircraftFactory>();
 
-            #region 
+            #region factories and cultures
 
             //RotorCraft rotorCraft = factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor",
             //    42, 73, "TEST manufacturer", 4242);
@@ -255,8 +255,7 @@ namespace PresentationCode
             performanceStopwatch.Restart();
             proxy.ShiftGas(0, 1, 50);
             performanceStopwatch.Start();
-            Console.WriteLine("Creating a new object and shifting gas took aprox {0} ticks",
-                performanceStopwatch.ElapsedTicks);
+            Console.WriteLine("Creating a new object and shifting gas took aprox {0} ticks", performanceStopwatch.ElapsedTicks);
 
             #endregion
 
