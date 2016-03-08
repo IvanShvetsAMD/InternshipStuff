@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    class GasCompartmentsNotFoundException : Exception
+    public class GasCompartmentsNotFoundException : Exception
     {
         public int OriginCompartment { get; set; }
         public int DestinationCompartment { get; set; }

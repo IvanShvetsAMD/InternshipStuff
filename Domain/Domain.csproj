@@ -47,8 +47,10 @@
     <Compile Include="Exceptions.cs" />
     <Compile Include="AviationAdministration.cs" />
     <Compile Include="GasCompartment.cs" />
+    <Compile Include="GasPumps.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="IAviationAdministration.cs" />
+    <Compile Include="IGasPump.cs" />
     <Compile Include="ILighterThanAir.cs" />
     <Compile Include="IPowered.cs" />
     <Compile Include="IVariableWingActions.cs" />

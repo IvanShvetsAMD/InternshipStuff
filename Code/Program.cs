@@ -26,65 +26,65 @@ namespace PresentationCode
             AviationAdministration FAA = AviationAdministration.GetInstance();
             NTSB NTSB = new NTSB();
 
-            
+
 
 
             #region Side tasks (testing things)
 
-            //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+            JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
+            JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
-            //var compartments = new List<GasCompartment>
-            //{
-            //    new GasCompartment(20, 15),
-            //    new GasCompartment(20, 10),
-            //    new GasCompartment(20, 15),
-            //    new GasCompartment(15, 10)
-            //};
+            var compartments = new List<GasCompartment>
+            {
+                new GasCompartment(20, 15),
+                new GasCompartment(20, 10),
+                new GasCompartment(20, 15),
+                new GasCompartment(15, 10)
+            };
 
-            //LighterThanAirAircraft baloon = new LighterThanAirAircraft(300, "He", 100000, compartments,
-            //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
-            //Console.WriteLine(baloon);
-            //Console.WriteLine("\n\nComparing gas compartments:");
+            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new GasPumpManager(), 300, "He", 100000, compartments,
+                new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
+            Console.WriteLine(baloon);
+            Console.WriteLine("\n\nComparing gas compartments:");
 
 
-            //Console.WriteLine("\n shifting gas");
-            //try
-            //{
-            //    baloon.ShiftGas(0, 1, 4.5f);
-            //    //baloon.ShiftGas(0, 0, 4.5f);
-            //    //baloon.ShiftGas(0, 4, -4.5f);
-            //}
-            //catch (GasCompartmentsNotFoundException e)
-            //{
-            //    Console.WriteLine("\n{0} (origin: {1}, destination: {2}).\n", e.Message, e.OriginCompartment,
-            //        e.DestinationCompartment);
-            //}
+            Console.WriteLine("\n shifting gas");
+            try
+            {
+                baloon.ShiftGas(0, 1, 4.5f);
+                //baloon.ShiftGas(0, 0, 4.5f);
+                //baloon.ShiftGas(0, 4, -4.5f);
+            }
+            catch (GasCompartmentsNotFoundException e)
+            {
+                Console.WriteLine("\n{0} (origin: {1}, destination: {2}).\n", e.Message, e.OriginCompartment,
+                    e.DestinationCompartment);
+            }
             //catch (Exception e)
             //{
             //    Console.WriteLine(e.Message);
             //    Debug.WriteLine(e.Message);
             //}
-            //finally
-            //{
-            //    Console.WriteLine("An attempt was made to shift lifting gas\n");
-            //}
-            //Console.WriteLine(baloon);
+            finally
+            {
+                Console.WriteLine("An attempt was made to shift lifting gas\n");
+            }
+            Console.WriteLine(baloon);
 
-            //Console.WriteLine();
-            //Console.WriteLine("Attemting to stop an engine");
-            //try
-            //{
-            //    baloon.StopEngine(baloon.Engines[0]);
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //    Console.WriteLine(e.InnerException?.Message ?? "no inner exception");
-            //}
+            Console.WriteLine();
+            Console.WriteLine("Attemting to stop an engine");
+            try
+            {
+                baloon.StopEngine(baloon.Engines[0]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException?.Message ?? "no inner exception");
+            }
 
             #endregion
 

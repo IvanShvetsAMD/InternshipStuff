@@ -160,6 +160,7 @@ namespace Domain
 
     public class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
     {
+        public ILiftingGasPumpModule GasManager { get; set; }
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
         public float GasVolume { get; private set; }
@@ -191,37 +192,14 @@ namespace Domain
 
         public void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
-            if (originCompartment == destinationCompartment)
-                throw new Exception("No point in shifting gas - the source and the destination match.");
-            if (originCompartment >= Compartments.Count || destinationCompartment >= Compartments.Count)
-                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
-            while (true)
-            {
-                Compartments[originCompartment].CurrentVolume -= 1;
-                Compartments[destinationCompartment].CurrentVolume += 1;
-                volume -= 1;
-                if (Compartments[destinationCompartment].CurrentVolume >=
-                    Compartments[destinationCompartment].Capacity)
-                {
-                    Compartments[originCompartment].CurrentVolume +=
-                        Compartments[destinationCompartment].CurrentVolume -
-                        Compartments[destinationCompartment].Capacity;
-                    Compartments[destinationCompartment].CurrentVolume = Compartments[destinationCompartment].Capacity;
-                    break;
-                }
-                if (volume <= 0)
-                {
-                    Compartments[originCompartment].CurrentVolume += -1 * volume;
-                    Compartments[destinationCompartment].CurrentVolume -= -volume;
-                    break;
-                }
-            }
+            GasManager.PumpGas(originCompartment, destinationCompartment, volume, Compartments);
         }
 
-        public LighterThanAirAircraft(uint ballastmass, string gastype, float gasvolume,
+        public LighterThanAirAircraft(ILiftingGasPumpModule gasManager, uint ballastmass, string gastype, float gasvolume,
             List<GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
+            GasManager = gasManager;
             BallastMass = ballastmass;
             GasType = gastype;
             GasVolume = gasvolume;
