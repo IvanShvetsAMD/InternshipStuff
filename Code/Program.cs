@@ -13,7 +13,7 @@ using LoggerService;
 
 namespace PresentationCode
 {
-    public delegate void LogChangedDelegate(LogEventArgs e);
+    public delegate void LogChangedDelegate(LogEventArgs logEventArgs);
     class Program
     {
         //[STAThread]
@@ -81,20 +81,6 @@ namespace PresentationCode
             //}
 
             #endregion
-
-
-
-
-
-            ////Turbofan tb = new Turbofan(3, false, true, 3,new Dictionary<Generator, double>(),  new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A }, new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0);
-            //Turbofan tb = new Turbofan(3, false, true, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
-            //    new List<Spool>(), 600, 500, 5, new List<Propellants> {Propellants.Jet_A},
-            //    new List<Oxidisers> {Oxidisers.GOX}, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0);
-
-            //tb.Gens.Add(new Generator(4, 4), 1);
-            //tb.Gens.Add(new Generator(12, 36), 3);
-
-            //Console.WriteLine(tb.Gens.ContainsKey(new Generator(4, 4)));
 
             String[] ox = Enum.GetNames(typeof(Oxidisers));
             foreach (var s in ox)
@@ -204,8 +190,6 @@ namespace PresentationCode
 
             #endregion
 
-
-
             #region Decorator
 
             var tjf = TurbineEngineFactory.GeTurbineEngineFactory();
@@ -273,10 +257,5 @@ namespace PresentationCode
         {
             Application.Run(LogForm.GetLogForm());
         }
-
-        //public static void TEST (IVariableWingActions object1)
-        //{
-        //    Console.WriteLine(object1.GetType().Name);
-        //}
     }
 }
