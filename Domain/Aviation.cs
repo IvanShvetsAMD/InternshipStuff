@@ -7,11 +7,24 @@ namespace Domain
 {
     public abstract class Aircraft
     {
+        private List<IAviationAdministration> aviationAdministrations;
+        private bool isOperational;
         public string Manufacturer { get; }
         public string Model { get; }
         public int MaxTakeoffWeight { get; private set; }
         public int Vne { get; private set; }
         public string SerialNumber { get; }
+
+        public bool IsOperational
+        {
+            get { return isOperational; }
+            set
+            {
+                isOperational = value;
+                if (value == false)
+                    NotifyOfCrash();
+            }
+        }
 
 
         public void ReleaseParkingBrake()
@@ -29,13 +42,35 @@ namespace Domain
             return String.Format("Manufacturer: {0}, model: {1}, maximum takeoff weight: {2}, Vne: {3}, Serial number: {4}", Manufacturer, Model, MaxTakeoffWeight, Vne, SerialNumber);
         }
 
+        public void Subscribe(IAviationAdministration administration)
+        {
+            if(!aviationAdministrations.Contains(administration))
+                aviationAdministrations.Add(administration);
+        }
+
+        public void Unsubscribe(IAviationAdministration administration)
+        {
+            if (aviationAdministrations.Contains(administration))
+                aviationAdministrations.Remove(administration);
+        }
+
+        public void NotifyOfCrash()
+        {
+            foreach (var aviationAdministration in aviationAdministrations)
+            {
+                aviationAdministration.GetNotifiedAboutCrash(this);
+            }
+        }
+
         public Aircraft(string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
         {
+            aviationAdministrations = new List<IAviationAdministration>();
             Manufacturer = manufacturer;
             Model = model;
             MaxTakeoffWeight = maxTOweight;
             Vne = vne;
             SerialNumber = serialnumber;
+            IsOperational = true;
         }
 
         protected Aircraft() { }
@@ -74,7 +109,7 @@ namespace Domain
             return engine.CurrentPower;
         }
 
-        public float GetTotalCurrentPower() => Engines.Sum((engine => engine.CurrentPower));
+        public float GetTotalCurrentPower() => Engines.Sum(engine => engine.CurrentPower);
         public void StartEngine(Engine engine)
         {
             try

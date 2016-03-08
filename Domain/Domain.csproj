@@ -45,8 +45,10 @@
     <Compile Include="Decorator.cs" />
     <Compile Include="Engines.cs" />
     <Compile Include="Exceptions.cs" />
+    <Compile Include="AviationAdministration.cs" />
     <Compile Include="GasCompartment.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="IAviationAdministration.cs" />
     <Compile Include="ILighterThanAir.cs" />
     <Compile Include="IPowered.cs" />
     <Compile Include="IVariableWingActions.cs" />
@@ -54,9 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spool.cs" />
     <Compile Include="Wings.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

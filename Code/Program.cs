@@ -19,8 +19,14 @@ namespace PresentationCode
         //[STAThread]
         static void Main()
         {
-            Logger log = Logger.GetLogger();
+            //Thread t = new Thread(new ThreadStart(StartNewStaThread));
+            //t.Start();
 
+            Logger log = Logger.GetLogger();
+            AviationAdministration FAA = AviationAdministration.GetInstance();
+            NTSB NTSB = new NTSB();
+
+            
 
 
             #region Side tasks (testing things)
@@ -130,11 +136,14 @@ namespace PresentationCode
 
             #region factories and cultures
 
-            //RotorCraft rotorCraft = factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor",
-            //    42, 73, "TEST manufacturer", 4242);
+            RotorCraft rotorCraft = factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor",
+                42, 73, "TEST manufacturer", 4242);
             //Console.WriteLine(rotorCraft);
-
-
+            FAA.RegisterAircraft(new List<AircraftRegistration>
+                {
+                    new AircraftRegistration(rotorCraft, true),
+                    new AircraftRegistration(rotorCraft, false)
+            });
 
             //Thread t = new Thread(new ThreadStart(StartNewStaThread));
             //t.Start();
@@ -190,68 +199,66 @@ namespace PresentationCode
 
             #endregion
 
-            #region Decorator
+            //#region Decorator
 
-            var tjf = TurbineEngineFactory.GeTurbineEngineFactory();
+            //var turbineEngineFactory = TurbineEngineFactory.GeTurbineEngineFactory();
 
-            var tj = new Turbofan();
+            //var turboFan = new Turbofan();
 
-            if (tjf.TryMakeTurbofan(4, 3, new Generator(),
-                new List<Spool>(), 600, 500, 5, new List<Propellants> {Propellants.Jet_A},
-                new List<Oxidisers> {Oxidisers.GOX}, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped,
-                out tj))
-            {
-                Console.WriteLine();
-                Console.WriteLine(tj);
-            }
-            else
-            {
-                Console.WriteLine();
-                Console.WriteLine("No engine could be created");
-            }
-
-
-            ReheatDecorator engineDecorator = new ReheatDecorator(tj);
-            engineDecorator.Decorate(new ReheatChamber(1.5));
-            engineDecorator.Reheat.Engage();
-            Console.WriteLine("\n\n\n\n");
-            Console.WriteLine(engineDecorator);
-
-            DumpAndBurnDecorator decorator2 = new DumpAndBurnDecorator(engineDecorator);
-            decorator2.Decorate(new FuelDumper(2));
-            decorator2.DumpandBurn.Engage();
-            Console.WriteLine("\n\n\n\n");
-            Console.WriteLine(decorator2);
-
-            #endregion
-
-            #region Proxy
-
-            Console.WriteLine("\n\n\n\n");
-            LighterThanAirAircraftProxy proxy = new LighterThanAirAircraftProxy(300);
-            Stopwatch performanceStopwatch = new Stopwatch();
-            performanceStopwatch.Start();
-            proxy.DumpBallast(100);
-            performanceStopwatch.Stop();
-            Console.WriteLine("Ballast dumping took aprox. {0} ticks", performanceStopwatch.ElapsedTicks);
-
-            Console.WriteLine("\n\n");
-            performanceStopwatch.Restart();
-            proxy.ShiftGas(0, 1, 50);
-            performanceStopwatch.Start();
-            Console.WriteLine("Creating a new object and shifting gas took aprox {0} ticks", performanceStopwatch.ElapsedTicks);
-
-            #endregion
+            //if (turbineEngineFactory.TryMakeTurbofan(4, 3, new Generator(),
+            //    new List<Spool>(), 600, 500, 5, new List<Propellants> {Propellants.Jet_A},
+            //    new List<Oxidisers> {Oxidisers.GOX}, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped,
+            //    out turboFan))
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine(turboFan);
+            //}
+            //else
+            //{
+            //    Console.WriteLine();
+            //    Console.WriteLine("No engine could be created");
+            //}
 
 
+            //ReheatDecorator engineDecorator = new ReheatDecorator(turboFan);
+            //engineDecorator.Decorate(new ReheatChamber(1.5));
+            //engineDecorator.Reheat.Engage();
+            //Console.WriteLine("\n\n\n\n");
+            //Console.WriteLine(engineDecorator);
 
+            //DumpAndBurnDecorator decorator2 = new DumpAndBurnDecorator(engineDecorator);
+            //decorator2.Decorate(new FuelDumper(2));
+            //decorator2.DumpandBurn.Engage();
+            //Console.WriteLine("\n\n\n\n");
+            //Console.WriteLine(decorator2);
+
+            //#endregion
+
+            //#region Proxy
+
+            //Console.WriteLine("\n\n\n\n");
+            //LighterThanAirAircraftProxy proxy = new LighterThanAirAircraftProxy(300);
+            //Stopwatch performanceStopwatch = new Stopwatch();
+            //performanceStopwatch.Start();
+            //proxy.DumpBallast(100);
+            //performanceStopwatch.Stop();
+            //Console.WriteLine("Ballast dumping took aprox. {0} ticks", performanceStopwatch.ElapsedTicks);
+
+            //Console.WriteLine("\n\n");
+            //performanceStopwatch.Restart();
+            //proxy.ShiftGas(0, 1, 50);
+            //performanceStopwatch.Start();
+            //Console.WriteLine("Creating a new object and shifting gas took aprox {0} ticks", performanceStopwatch.ElapsedTicks);
+
+            //#endregion
+
+
+            rotorCraft.IsOperational = false;
 
 
             log.Dispose();
         }
-
-        public static void Stop() { }
-
+        
         [STAThread]
         private static void StartNewStaThread()
         {
