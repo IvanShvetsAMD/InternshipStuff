@@ -45,7 +45,7 @@ namespace Domain
         {
             if (reheat is ReheatChamber)
             {
-                Reheat = (ReheatChamber)reheat;
+                Reheat = reheat as ReheatChamber;
                 Reheat.Disengage();
                 return;
             }

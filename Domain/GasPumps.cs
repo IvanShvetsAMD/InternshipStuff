@@ -8,30 +8,30 @@ namespace Domain
 {
     public class GasPumpManager : ILiftingGasPumpModule
     {
-        public void PumpGas(int originCompartment, int destinationCompartment, float volume, List<GasCompartment>  Compartments)
+        public void PumpGas(int originCompartment, int destinationCompartment, float volume, List<GasCompartment>  сompartments)
         {
             if (originCompartment == destinationCompartment)
                 throw new Exception("No point in shifting gas - the source and the destination match.");
-            if (originCompartment >= Compartments.Count || destinationCompartment >= Compartments.Count)
+            if (originCompartment >= сompartments.Count || destinationCompartment >= сompartments.Count)
                 throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
             while (true)
             {
-                Compartments[originCompartment].CurrentVolume -= 1;
-                Compartments[destinationCompartment].CurrentVolume += 1;
+                сompartments[originCompartment].CurrentVolume -= 1;
+                сompartments[destinationCompartment].CurrentVolume += 1;
                 volume -= 1;
-                if (Compartments[destinationCompartment].CurrentVolume >=
-                    Compartments[destinationCompartment].Capacity)
+                if (сompartments[destinationCompartment].CurrentVolume >=
+                    сompartments[destinationCompartment].Capacity)
                 {
-                    Compartments[originCompartment].CurrentVolume +=
-                        Compartments[destinationCompartment].CurrentVolume -
-                        Compartments[destinationCompartment].Capacity;
-                    Compartments[destinationCompartment].CurrentVolume = Compartments[destinationCompartment].Capacity;
+                    сompartments[originCompartment].CurrentVolume +=
+                        сompartments[destinationCompartment].CurrentVolume -
+                        сompartments[destinationCompartment].Capacity;
+                    сompartments[destinationCompartment].CurrentVolume = сompartments[destinationCompartment].Capacity;
                     break;
                 }
                 if (volume <= 0)
                 {
-                    Compartments[originCompartment].CurrentVolume += -1 * volume;
-                    Compartments[destinationCompartment].CurrentVolume -= -volume;
+                    сompartments[originCompartment].CurrentVolume += -1 * volume;
+                    сompartments[destinationCompartment].CurrentVolume -= -volume;
                     break;
                 }
             }

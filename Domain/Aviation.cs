@@ -39,7 +39,7 @@ namespace Domain
 
         public override string ToString()
         {
-            return String.Format("Manufacturer: {0}, model: {1}, maximum takeoff weight: {2}, Vne: {3}, Serial number: {4}", Manufacturer, Model, MaxTakeoffWeight, Vne, SerialNumber);
+            return $"Manufacturer: {Manufacturer}, model: {Model}, maximum takeoff weight: {MaxTakeoffWeight}, Vne: {Vne}, Serial number: {SerialNumber}";
         }
 
         public void Subscribe(IAviationAdministration administration)

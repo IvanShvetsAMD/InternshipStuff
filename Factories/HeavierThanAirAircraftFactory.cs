@@ -53,7 +53,7 @@ namespace Factories
                     case nameof(serialnumber):
                         serialnumber = "No serial number specified";
                         rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, numberofrotors,
-                            fuelcapacity, manufacturer, maxTOweight);
+                            fuelcapacity, manufacturer, maxTOweight: maxTOweight);
                         break;
                 }
             }
