@@ -10,8 +10,8 @@ namespace Domain
     public class AviationAdministration : IFAA
     {
         static readonly Lazy<AviationAdministration> LazyInstance = new Lazy<AviationAdministration>(() => new AviationAdministration(), true);
-        private List<AircraftRegistration> registeredAircraft;
-        private List<Tuple<string, List<Engine>>> registeredEngines;
+        private List<AircraftRegistration> registeredAircraft = new List<AircraftRegistration>();
+        private List<Tuple<string, List<Engine>>> registeredEngines = new List<Tuple<string, List<Engine>>>();
 
         public static AviationAdministration GetInstance() => LazyInstance.Value;
 
@@ -27,7 +27,7 @@ namespace Domain
             {
                 registrationEntry.HasCrashed = false;
             }
-            Console.WriteLine("Aircraft creash registered");
+            Console.WriteLine("Aircraft crash registered");
         }
 
         public void RegisterAircraft(PoweredAircraft aircraft, bool isOperational)
@@ -58,8 +58,7 @@ namespace Domain
 
         private AviationAdministration()
         {
-            registeredAircraft = new List<AircraftRegistration>();
-            registeredEngines = new List<Tuple<string, List<Engine>>>();
+            
         }
 
         //public AviationAdministration(List<AircraftRegistration> crafts, List<Tuple<string, List<Engine>>> engines)

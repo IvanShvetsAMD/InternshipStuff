@@ -46,7 +46,7 @@ namespace PresentationCode
             LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", 100000, compartments,
                 new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
             Console.WriteLine(baloon);
-            Console.WriteLine("\n\nComparing gas compartments:");
+            //Console.WriteLine("\n\nComparing gas compartments:");
 
 
             Console.WriteLine("\n shifting gas");
@@ -145,7 +145,9 @@ namespace PresentationCode
                     new AircraftRegistration(rotorCraft, false)
             });
 
-            //Thread t = new Thread(new ThreadStart(StartNewStaThread));
+            #region 
+
+//Thread t = new Thread(new ThreadStart(StartNewStaThread));
             //t.Start();
 
 
@@ -196,6 +198,9 @@ namespace PresentationCode
             //        Console.WriteLine(TimeZone.CurrentTimeZone.StandardName);
             //        break;
             //}
+
+            #endregion
+
 
             #endregion
 
@@ -257,7 +262,7 @@ namespace PresentationCode
 
             log.Dispose();
         }
-        
+
         [STAThread]
         private static void StartNewStaThread()
         {
