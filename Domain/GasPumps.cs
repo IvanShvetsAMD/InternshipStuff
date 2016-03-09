@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class GasPumpManager : ILiftingGasPumpModule
+    public abstract class GasPump : ILiftingGasPumpModule
     {
-        public void PumpGas(int originCompartment, int destinationCompartment, float volume, List<GasCompartment>  сompartments)
+        public void PumpGas(int originCompartment, int destinationCompartment, float volume, List<GasCompartment> сompartments)
         {
-            if (originCompartment == destinationCompartment)
-                throw new Exception("No point in shifting gas - the source and the destination match.");
-            if (originCompartment >= сompartments.Count || destinationCompartment >= сompartments.Count)
-                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
+            TakePrecautions(originCompartment, volume, сompartments);
+            MainPump(originCompartment, destinationCompartment, volume, сompartments);
+        }
+
+        protected abstract void TakePrecautions(int originCompartment, float volume, List<GasCompartment> сompartments);
+
+        public abstract void MainChecks(int originCompartment, int destinationCompartment, List<GasCompartment> сompartments);
+
+        public void MainPump(int originCompartment, int destinationCompartment, float volume, List<GasCompartment> сompartments)
+        {
+            MainChecks(originCompartment, destinationCompartment, сompartments);
+            TakePrecautions(originCompartment, volume, сompartments);
             while (true)
             {
                 сompartments[originCompartment].CurrentVolume -= 1;
@@ -38,11 +46,52 @@ namespace Domain
         }
     }
 
-    public class NonMovableGasManager : ILiftingGasPumpModule
+    public class GasPumpManager : GasPump
     {
-        public void PumpGas(int origin, int destination, float volume, List<GasCompartment> compartments)
+        protected override void TakePrecautions(int originCompartment, float volume, List<GasCompartment> сompartments){}
+
+        public override void MainChecks(int originCompartment, int destinationCompartment, List<GasCompartment> сompartments)
+        {
+            if (originCompartment == destinationCompartment)
+                throw new Exception("No point in shifting gas - the source and the destination match.");
+            if (originCompartment >= сompartments.Count || destinationCompartment >= сompartments.Count)
+                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
+        }
+    }
+
+    public class SafeGasPumpManager : GasPump
+    {
+        protected override void TakePrecautions(int originCompartment, float volume, List<GasCompartment> сompartments)
+        {
+            //safety check
+            if ((сompartments[originCompartment].CurrentVolume - volume) < (сompartments[originCompartment].Capacity / 20))
+                throw new GasCompartmentsNotFoundException("It is not safe to drain that much gas from one compartment");
+        }
+
+        public override void MainChecks(int originCompartment, int destinationCompartment, List<GasCompartment> сompartments)
+        {
+            if (originCompartment == destinationCompartment)
+                throw new Exception("No point in shifting gas - the source and the destination match.");
+            if (originCompartment >= сompartments.Count || destinationCompartment >= сompartments.Count)
+                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
+        }
+    }
+
+    public class NonMovableGasManager : GasPump
+    {
+        public new void PumpGas(int origin, int destination, float volume, List<GasCompartment> compartments)
         {
             Console.WriteLine("Gas cannot be shifted beacuse the gas compartments are sealed");
+        }
+
+        protected override void TakePrecautions(int originCompartment, float volume, List<GasCompartment> сompartments)
+        {
+            //none
+        }
+
+        public override void MainChecks(int originCompartment, int destinationCompartment, List<GasCompartment> сompartments)
+        {
+            //none
         }
     }
 }

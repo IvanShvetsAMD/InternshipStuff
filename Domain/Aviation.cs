@@ -160,7 +160,7 @@ namespace Domain
 
     public class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
     {
-        public ILiftingGasPumpModule GasManager { get; set; }
+        public ILiftingGasPumpModule GasManager { get; set; } = new SafeGasPumpManager();
         public uint BallastMass { get; private set; }
         public string GasType { get; private set; }
         public float GasVolume { get; private set; }

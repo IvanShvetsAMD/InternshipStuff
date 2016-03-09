@@ -122,7 +122,7 @@ namespace Factories
                         break;
                 }
             }
-            catch (ArgumentException argumentException)
+            catch (ArgumentException argumentException) when (argumentException.ParamName == nameof(numberofshafts))
             {
                 Console.WriteLine(argumentException.Message);
                 if (argumentException.ParamName == nameof(numberofshafts))

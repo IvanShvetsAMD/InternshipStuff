@@ -10,6 +10,7 @@ using Domain;
 using Factories;
 using Infrastructure;
 using LoggerService;
+using static System.String;
 
 namespace PresentationCode
 {
@@ -42,7 +43,7 @@ namespace PresentationCode
                 new GasCompartment(15, 10)
             };
 
-            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new GasPumpManager(), 300, "He", 100000, compartments,
+            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", 100000, compartments,
                 new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
             Console.WriteLine(baloon);
             Console.WriteLine("\n\nComparing gas compartments:");
@@ -51,20 +52,23 @@ namespace PresentationCode
             Console.WriteLine("\n shifting gas");
             try
             {
-                baloon.ShiftGas(0, 1, 4.5f);
+                baloon.ShiftGas(0, 1, 14.5f);
                 //baloon.ShiftGas(0, 0, 4.5f);
                 //baloon.ShiftGas(0, 4, -4.5f);
             }
+            catch (GasCompartmentsNotFoundException e) when (e.OriginCompartment + e.DestinationCompartment <= 0)
+            {
+                Console.WriteLine($"\n{e.Message}.\n", e.Message);
+            }
             catch (GasCompartmentsNotFoundException e)
             {
-                Console.WriteLine("\n{0} (origin: {1}, destination: {2}).\n", e.Message, e.OriginCompartment,
-                    e.DestinationCompartment);
+                Console.WriteLine($"\n{e.Message} (origin: {e.OriginCompartment}, destination: {e.DestinationCompartment}).\n");
             }
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //    Debug.WriteLine(e.Message);
-            //}
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Debug.WriteLine(e.Message);
+            }
             finally
             {
                 Console.WriteLine("An attempt was made to shift lifting gas\n");
@@ -73,6 +77,7 @@ namespace PresentationCode
 
             Console.WriteLine();
             Console.WriteLine("Attemting to stop an engine");
+
             try
             {
                 baloon.StopEngine(baloon.Engines[0]);
