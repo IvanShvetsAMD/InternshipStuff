@@ -6,7 +6,6 @@ using LoggerService;
 
 namespace Factories
 {
-
     public class HeavierThanAirAircraftFactory
     {
         private IAddEngines turbineEngineInstaller;
@@ -16,9 +15,8 @@ namespace Factories
             turbineEngineInstaller = engineInstaller;
         }
 
-
         public RotorCraft MakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor",
-                                                            int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
+                                         int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
         {
             if (string.IsNullOrWhiteSpace(serialnumber))
                 throw new ArgumentNullException(nameof(serialnumber), "No serial number provided");
@@ -29,8 +27,8 @@ namespace Factories
         }
 
         public RotorCraft TryMakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor",
-            int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker",
-            int maxTOweight = 1000)
+                                            int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker",
+                                            int maxTOweight = 1000)
         {
             RotorCraft rotorCraft = new RotorCraft();
 
@@ -64,10 +62,10 @@ namespace Factories
 
             rotorCraft = AddTurboshaftEngines(rotorCraft);
             Logger.GetLogger().AddToLog(new LogEventArgs(String.Format("new rotorcraft created (SN:{0})", rotorCraft.SerialNumber)));
-            
+
             rotorCraft.Subscribe(NTSB.GetInstance());
             AviationAdministration.GetInstance().RegisterAircraft(rotorCraft, rotorCraft.IsOperational);
-            
+
             return rotorCraft;
         }
 

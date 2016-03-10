@@ -192,7 +192,7 @@ namespace Domain
 
         public void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
-            GasManager.PumpGas(originCompartment, destinationCompartment, volume, Compartments);
+            GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments, volume: volume);
         }
 
         public LighterThanAirAircraft(ILiftingGasPumpModule gasManager, uint ballastmass, string gastype, float gasvolume,
