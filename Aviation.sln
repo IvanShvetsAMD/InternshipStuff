@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Aviation", "Aviation\Aviation.modelproj", "{FDA753CE-18F9-4F34-A915-DAD531969168}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationCode", "Code\PresentationCode.csproj", "{05511E5C-2E90-4A4F-AC89-1A4DF04B461D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationCodeRename", "Code\PresentationCodeRename.csproj", "{05511E5C-2E90-4A4F-AC89-1A4DF04B461D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{1B1A25DD-4D06-44BC-B119-25855403E340}"
 EndProject
