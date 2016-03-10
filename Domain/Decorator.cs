@@ -111,6 +111,7 @@ namespace Domain
         {
             MaxThrustMultiplier = maxmultiplier;
         }
+
         //public void EngageReheat()
         //{
         //    CurrentThrustMultiplier = MaxThrustMultiplier;
@@ -147,7 +148,7 @@ namespace Domain
 
         public override string ToString()
         {
-            return String.Format("Reheat is {0}", CurrentThrustMultiplier == MaxThrustMultiplier ? "engaged" : "disengaged");
+            return $"Reheat is {(CurrentThrustMultiplier == MaxThrustMultiplier ? "engaged" : "disengaged")}";
         }
     }
 
