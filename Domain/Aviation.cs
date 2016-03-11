@@ -242,7 +242,7 @@ namespace Domain
         public override string ToString()
         {
             StringBuilder final = new StringBuilder(base.ToString());
-            final.AppendFormat(", number of rotors: {0}, type opf rotor: {1}", NumberOfRotors, RotorType);
+            final.AppendFormat(", number of rotors: {0}, type of rotor: {1}", NumberOfRotors, RotorType);
             return final.ToString();
         }
     }

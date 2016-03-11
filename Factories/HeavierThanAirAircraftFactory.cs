@@ -51,7 +51,7 @@ namespace Factories
                     case nameof(serialnumber):
                         serialnumber = "No serial number specified";
                         rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, numberofrotors,
-                            fuelcapacity, manufacturer, maxTOweight: maxTOweight);
+                            fuelcapacity, manufacturer, maxTOweight);
                         break;
                 }
             }
@@ -61,10 +61,10 @@ namespace Factories
             }
 
             rotorCraft = AddTurboshaftEngines(rotorCraft);
-            Logger.GetLogger().AddToLog(new LogEventArgs(String.Format("new rotorcraft created (SN:{0})", rotorCraft.SerialNumber)));
+            //Logger.GetLogger().AddToLog(new LogEventArgs(String.Format("new rotorcraft created (SN:{0})", rotorCraft.SerialNumber)));
 
-            rotorCraft.Subscribe(NTSB.GetInstance());
-            AviationAdministration.GetInstance().RegisterAircraft(rotorCraft, rotorCraft.IsOperational);
+            //rotorCraft.Subscribe(NTSB.GetInstance());
+            //AviationAdministration.GetInstance().RegisterAircraft(rotorCraft, rotorCraft.IsOperational);
 
             return rotorCraft;
         }

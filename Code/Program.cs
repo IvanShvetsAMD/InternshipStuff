@@ -29,64 +29,64 @@ namespace PresentationCode
 
             #region Side tasks (testing things)
 
-            JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+            //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
+            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
-            var compartments = new List<GasCompartment>
-            {
-                new GasCompartment(20, 15),
-                new GasCompartment(20, 10),
-                new GasCompartment(20, 15),
-                new GasCompartment(15, 10)
-            };
+            //var compartments = new List<GasCompartment>
+            //{
+            //    new GasCompartment(20, 15),
+            //    new GasCompartment(20, 10),
+            //    new GasCompartment(20, 15),
+            //    new GasCompartment(15, 10)
+            //};
 
-            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", 100000, compartments,
-                new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
-            Console.WriteLine(baloon);
-            //Console.WriteLine("\n\nComparing gas compartments:");
+            //LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", 100000, compartments,
+            //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
+            //Console.WriteLine(baloon);
+            ////Console.WriteLine("\n\nComparing gas compartments:");
 
 
-            Console.WriteLine("\n shifting gas");
-            try
-            {
-                baloon.ShiftGas(0, 1, 14.5f);
-                //baloon.ShiftGas(0, 0, 4.5f);
-                //baloon.ShiftGas(0, 4, -4.5f);
-            }
-            catch (GasCompartmentsNotFoundException e) when (e.OriginCompartment == e.DestinationCompartment)
-            {
-                Console.WriteLine($"\n{e.Message}.\n", e.Message);
-            }
-            catch (GasCompartmentsNotFoundException e)
-            {
-                Console.WriteLine($"\n{e.Message} (origin: {e.OriginCompartment}, destination: {e.DestinationCompartment}).\n");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Debug.WriteLine(e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("An attempt was made to shift lifting gas\n");
-            }
-            Console.WriteLine(baloon);
+            //Console.WriteLine("\n shifting gas");
+            //try
+            //{
+            //    baloon.ShiftGas(0, 1, 14.5f);
+            //    //baloon.ShiftGas(0, 0, 4.5f);
+            //    //baloon.ShiftGas(0, 4, -4.5f);
+            //}
+            //catch (GasCompartmentsNotFoundException e) when (e.OriginCompartment == e.DestinationCompartment)
+            //{
+            //    Console.WriteLine($"\n{e.Message}.\n", e.Message);
+            //}
+            //catch (GasCompartmentsNotFoundException e)
+            //{
+            //    Console.WriteLine($"\n{e.Message} (origin: {e.OriginCompartment}, destination: {e.DestinationCompartment}).\n");
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //    Debug.WriteLine(e.Message);
+            //}
+            //finally
+            //{
+            //    Console.WriteLine("An attempt was made to shift lifting gas\n");
+            //}
+            //Console.WriteLine(baloon);
 
-            Console.WriteLine();
-            Console.WriteLine("Attemting to stop an engine");
+            //Console.WriteLine();
+            //Console.WriteLine("Attemting to stop an engine");
 
-            try
-            {
-                baloon.StopEngine(baloon.Engines[0]);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.InnerException?.Message ?? "no inner exception");
-            }
+            //try
+            //{
+            //    baloon.StopEngine(baloon.Engines[0]);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //    Console.WriteLine(e.InnerException?.Message ?? "no inner exception");
+            //}
 
             #endregion
 
@@ -112,7 +112,7 @@ namespace PresentationCode
 
             #region 
 
-//Thread t = new Thread(new ThreadStart(StartNewStaThread));
+            //Thread t = new Thread(new ThreadStart(StartNewStaThread));
             //t.Start();
 
 
@@ -176,8 +176,8 @@ namespace PresentationCode
             //var turboFan = new Turbofan();
 
             //if (turbineEngineFactory.TryMakeTurbofan(4, 3, new Generator(),
-            //    new List<Spool>(), 600, 500, 5, new List<Propellants> {Propellants.Jet_A},
-            //    new List<Oxidisers> {Oxidisers.GOX}, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped,
+            //    new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 88, 0, OnOff.Stopped,
             //    out turboFan))
             //{
             //    Console.WriteLine();
@@ -223,7 +223,7 @@ namespace PresentationCode
             #endregion
 
             rotorCraft.IsOperational = false;
-            
+            Console.WriteLine(rotorCraft);
 
             log.Dispose();
         }
