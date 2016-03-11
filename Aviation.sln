@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "Logger\Log
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.HeavierThanAirAircraftFactory", "Test.HeavierThanAirAircraftFactory\Test.HeavierThanAirAircraftFactory.csproj", "{55922741-6061-4462-84D0-FBDF63371664}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FA257211-E039-43AF-86AE-206421C829D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.GasPumps", "Test.GasPumps\Test.GasPumps.csproj", "{EEFE78BC-2078-4323-80D1-7E4703BC86B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,8 +67,16 @@ Global
 		{55922741-6061-4462-84D0-FBDF63371664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55922741-6061-4462-84D0-FBDF63371664}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55922741-6061-4462-84D0-FBDF63371664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEFE78BC-2078-4323-80D1-7E4703BC86B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEFE78BC-2078-4323-80D1-7E4703BC86B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEFE78BC-2078-4323-80D1-7E4703BC86B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEFE78BC-2078-4323-80D1-7E4703BC86B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{55922741-6061-4462-84D0-FBDF63371664} = {FA257211-E039-43AF-86AE-206421C829D9}
+		{EEFE78BC-2078-4323-80D1-7E4703BC86B9} = {FA257211-E039-43AF-86AE-206421C829D9}
 	EndGlobalSection
 EndGlobal

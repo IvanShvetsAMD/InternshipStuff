@@ -23,30 +23,12 @@ namespace Test.HeavierThanAirAircraftFactory
         [TestFixture]
         public class EngineDecoratorfixture : HeavierThanAirAircraftFactoryFixture
         {
-            private object[] testdata = new object[]
-            {
-                new object[] {"test SN", new List<RotorBlade> { new RotorBlade(true, 6, 34, "carbon fibre")} }
-            };
-
             private object[] testdata2 = new object[]
             {
                 new RotorCraft(2, new List<RotorBlade> {new RotorBlade(true, 6, 34, "carbon fibre")}, "singular",
                     new List<Engine>(), 56, "linx", "generic model", 12000, 0, "test SN")
 
             };
-
-            //[Test, TestCaseSource(nameof(testdata))]
-            //public void ItShouldCallAddTurboshaftEngines(string sn, List<RotorBlade> blades)
-            //{
-            //    RotorCraft tmp = heavierThanAirAircraftFactory.MakeRotorCraft(sn, blades, "singular", 2, 56, "linx", 12000);
-            //    engineaddition.Setup(dec => dec.AddTurboshaftEngines(It.IsAny<RotorCraft>())).Returns(() => tmp);
-
-
-
-            //    var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(sn, blades, "singular", 2, 56, "linx", 12000);
-
-            //    engineaddition.Verify(dec => dec.AddTurboshaftEngines(somecraft), Times.Once);
-            //}
 
             [Test, TestCaseSource(nameof(testdata2))]
             public void ItShouldCallAddTurboshaftEngines(RotorCraft rotorCraft)

@@ -29,24 +29,26 @@ namespace PresentationCode
 
             #region Side tasks (testing things)
 
-            //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+            JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
+            JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
-            //var compartments = new List<GasCompartment>
-            //{
-            //    new GasCompartment(20, 15),
-            //    new GasCompartment(20, 10),
-            //    new GasCompartment(20, 15),
-            //    new GasCompartment(15, 10)
-            //};
+            var compartments = new List<GasCompartment>
+            {
+                new GasCompartment(20, 15),
+                new GasCompartment(20, 10),
+                new GasCompartment(20, 15),
+                new GasCompartment(15, 10)
+            };
 
-            //LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", 100000, compartments,
-            //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
-            //Console.WriteLine(baloon);
+            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", compartments,
+                new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
+            Console.WriteLine(baloon);
             ////Console.WriteLine("\n\nComparing gas compartments:");
+             
+            baloon.ShiftGas(5,65,5);
 
 
             //Console.WriteLine("\n shifting gas");

@@ -10,7 +10,6 @@ namespace Domain
     {
         public void PumpGas(int originCompartment, int destinationCompartment, float volume, List<GasCompartment> сompartments)
         {
-            TakePrecautions(originCompartment, volume, сompartments);
             MainPump(originCompartment, destinationCompartment, volume, сompartments);
         }
 
@@ -53,8 +52,10 @@ namespace Domain
         public override void MainChecks(int originCompartment, int destinationCompartment, List<GasCompartment> сompartments)
         {
             if (originCompartment == destinationCompartment)
-                throw new Exception("No point in shifting gas - the source and the destination match.");
+                throw new ArgumentException("No point in shifting gas - the source and the destination match.");
             if (originCompartment >= сompartments.Count || destinationCompartment >= сompartments.Count)
+                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
+            if (originCompartment < 0 || destinationCompartment < 0)
                 throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
         }
     }
@@ -71,8 +72,10 @@ namespace Domain
         public override void MainChecks(int originCompartment, int destinationCompartment, List<GasCompartment> сompartments)
         {
             if (originCompartment == destinationCompartment)
-                throw new Exception("No point in shifting gas - the source and the destination match.");
+                throw new ArgumentException("No point in shifting gas - the source and the destination match.");
             if (originCompartment >= сompartments.Count || destinationCompartment >= сompartments.Count)
+                throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
+            if (originCompartment < 0 || destinationCompartment < 0)
                 throw new GasCompartmentsNotFoundException("One or both the compartments are not present in the airship.", originCompartment, destinationCompartment);
         }
     }

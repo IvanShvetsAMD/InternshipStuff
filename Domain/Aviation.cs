@@ -195,15 +195,15 @@ namespace Domain
             GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments, volume: volume);
         }
 
-        public LighterThanAirAircraft(ILiftingGasPumpModule gasManager, uint ballastmass, string gastype, float gasvolume,
-            List<GasCompartment> compartments, List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
+        public LighterThanAirAircraft(ILiftingGasPumpModule gasManager, uint ballastmass, string gastype, List<GasCompartment> compartments, 
+            List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             GasManager = gasManager;
             BallastMass = ballastmass;
             GasType = gastype;
-            GasVolume = gasvolume;
             Compartments = compartments;
+            GasVolume = Compartments?.Sum(chamber => chamber.CurrentVolume) ?? 0;
         }
     }
 
