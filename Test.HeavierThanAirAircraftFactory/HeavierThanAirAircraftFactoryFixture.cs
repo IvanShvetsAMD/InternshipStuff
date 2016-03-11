@@ -33,10 +33,7 @@ namespace Test.HeavierThanAirAircraftFactory
             [Test, TestCaseSource(nameof(testdata2))]
             public void ItShouldCallAddTurboshaftEngines(RotorCraft rotorCraft)
             {
-                engineaddition.Setup(dec => dec.AddTurboshaftEngines(It.IsAny<RotorCraft>())).Returns((RotorCraft rotorCraftarg) =>
-                {
-                    return rotorCraftarg;
-                });
+                engineaddition.Setup(dec => dec.AddTurboshaftEngines(It.IsAny<RotorCraft>())).Returns((RotorCraft rotorCraftarg) => rotorCraftarg);
 
                 var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades, "singular", 2, 56, "linx", 12000);
 

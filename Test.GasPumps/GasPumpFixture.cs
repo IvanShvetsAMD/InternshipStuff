@@ -12,23 +12,12 @@ namespace Test.GasPumps
     public abstract class LighterThanAirAircraftFixture
     {
         protected LighterThanAirAircraft lighterThanAirAircraft;
-        protected static object[] Testargs;
-        protected static int Maxindex;
 
         [SetUp]
         public void GasPumpFixtureSetUp()
         {
             lighterThanAirAircraft = new LighterThanAirAircraft(new GasPumpManager(), 200, "HE", new List<GasCompartment> { new GasCompartment(200, 180), new GasCompartment(200, 180) },
                                                                 new List<Engine>(), 56, "TEST", "TEST Model", 1000, 100, "TEST SN");
-            Maxindex = lighterThanAirAircraft.Compartments.Count;
-            Testargs = new object[]
-                    {
-                        new object[] {0, Maxindex},
-                        new object[] {Maxindex, 0},
-                        new object[] {-1, 0},
-                        new object[] {0, -1},
-                        new object[] {Maxindex, Maxindex}
-                    };
         }
 
         [TestFixture]
@@ -42,13 +31,6 @@ namespace Test.GasPumps
                 {
                     GasPumpFixtureSetUp();
                     lighterThanAirAircraft.GasManager = new GasPumpManager();
-                    Testargs = new object[]
-                    {
-                        new object[] {0, Maxindex},
-                        new object[] {Maxindex, 0},
-                        new object[] {-1, 0},
-                        new object[] {0, -1}
-                    };
                 }
 
                 [TestCase()]
@@ -93,7 +75,6 @@ namespace Test.GasPumps
                     Assert.Throws<ArgumentException>(() => lighterThanAirAircraft.ShiftGas(0, 0, 1));
                     WhenItContainsGasPumpManagerSetUp();
                 }
-
                 
                 [TestCase(0, 5)]
                 [TestCase(5, 0)]
