@@ -52,9 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{26a5bcce-ce10-4ba0-9124-833460dc5f7a}</Project>
       <Name>Domain</Name>
@@ -67,6 +64,9 @@
       <Project>{7a92f290-6ac4-4e13-b7c5-66438ae483bc}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

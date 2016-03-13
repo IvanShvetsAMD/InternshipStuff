@@ -43,8 +43,7 @@ namespace PresentationCode
                 new GasCompartment(15, 10)
             };
 
-            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", compartments,
-                new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
+            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", compartments, new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
             Console.WriteLine(baloon);
             ////Console.WriteLine("\n\nComparing gas compartments:");
              

@@ -405,6 +405,19 @@ namespace SideTasts
             Console.WriteLine(arg2);
             arg2 = assignment(arg2);
             Console.WriteLine(arg2);
+
+
+
+            Console.WriteLine("\n\n\n");
+            List<Action> list = new List<Action>();
+            foreach (var i in new int[] {1, 2, 3, 4, 5})
+            {
+                list.Add(() => Console.WriteLine(i));
+            }
+            foreach (var f in list)
+            {
+                f();
+            }
         }
 
         public static Func<Angle, Angle> AngleMiltiplierProvider()
