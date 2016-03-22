@@ -479,19 +479,6 @@ namespace SideTasts
                 delete.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
                 adapter.DeleteCommand = delete;
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
         public static Func<Angle, Angle> AngleMiltiplierProvider()
