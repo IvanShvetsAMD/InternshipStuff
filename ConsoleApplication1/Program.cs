@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -326,91 +329,101 @@ namespace SideTasts
 
             #endregion
 
+            #region 
 
-            stuff4.Add(new Generator(4, 4));
-            stuff4.Add(new ElectricParameters(1, 1));
-            Console.WriteLine("\nDistinct\n");
-            foreach (var source in stuff4.OfType<ElectricParameters>().Distinct())
-            {
-                Console.WriteLine(source);
-            }
+            //stuff4.Add(new Generator(4, 4));
+            //stuff4.Add(new ElectricParameters(1, 1));
+            //Console.WriteLine("\nDistinct\n");
+            //foreach (var source in stuff4.OfType<ElectricParameters>().Distinct())
+            //{
+            //    Console.WriteLine(source);
+            //}
 
-            Console.WriteLine("\nSelect\n");
-            foreach (var result in stuff4.OfType<Generator>().Select(obj => obj.OutputCurrent))
-            {
-                Console.WriteLine(result);
-            }
+            //Console.WriteLine("\nSelect\n");
+            //foreach (var result in stuff4.OfType<Generator>().Select(obj => obj.OutputCurrent))
+            //{
+            //    Console.WriteLine(result);
+            //}
 
-            Console.WriteLine("\nJoin\n");
-            foreach (var result in stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element, (stuff4element, stuff3element) => new { stuff3element.GetType().Name, stuff4element.GetType().FullName }))
-            {
-                Console.WriteLine(result);
-            }
-
-
-            Console.WriteLine("\nOrderByDescending and ThenByDescending\n");
-            foreach (var source in stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj => obj.GetType().Namespace))
-            {
-                Console.WriteLine(source + " " + source.GetType().Name);
-            }
-
-            Console.WriteLine("\nGroupBy\n");
-            var b2 = stuff4.GroupBy(obj => obj.GetType().Name);
-            foreach (var VARIABLE in b2)
-            {
-                Console.WriteLine(VARIABLE.Key);
-            }
+            //Console.WriteLine("\nJoin\n");
+            //foreach (
+            //    var result in
+            //        stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element,
+            //            (stuff4element, stuff3element) =>
+            //                new {stuff3element.GetType().Name, stuff4element.GetType().FullName}))
+            //{
+            //    Console.WriteLine(result);
+            //}
 
 
-            Console.WriteLine("\nConcat\n");
-            foreach (var source in stuff.Concat(stuff4))
-            {
-                Console.WriteLine(source);
-            }
+            //Console.WriteLine("\nOrderByDescending and ThenByDescending\n");
+            //foreach (
+            //    var source in
+            //        stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj => obj.GetType().Namespace)
+            //    )
+            //{
+            //    Console.WriteLine(source + " " + source.GetType().Name);
+            //}
 
-            stuff4.ForEach(obj => Console.WriteLine(obj));
-            Console.WriteLine("\nLast\n");
-            try
-            {
-                Console.WriteLine(stuff4.Concat(stuff3).Last(o => o.GetType().Name == "Angle"));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            List<int> ints = new List<int> { 1, 2, 3, 4, 5, 6 };
+            //Console.WriteLine("\nGroupBy\n");
+            //var b2 = stuff4.GroupBy(obj => obj.GetType().Name);
+            //foreach (var VARIABLE in b2)
+            //{
+            //    Console.WriteLine(VARIABLE.Key);
+            //}
 
 
-            bool hasFive = ints.Any(i => i == 5);
+            //Console.WriteLine("\nConcat\n");
+            //foreach (var source in stuff.Concat(stuff4))
+            //{
+            //    Console.WriteLine(source);
+            //}
+
+            //stuff4.ForEach(obj => Console.WriteLine(obj));
+            //Console.WriteLine("\nLast\n");
+            //try
+            //{
+            //    Console.WriteLine(stuff4.Concat(stuff3).Last(o => o.GetType().Name == "Angle"));
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
+
+            //List<int> ints = new List<int> {1, 2, 3, 4, 5, 6};
+
+
+            //bool hasFive = ints.Any(i => i == 5);
 
 
 
 
-            Console.WriteLine(stuff.Aggregate("\nAggregation of types: ", (current, obj) => current + "\n\t" + obj.GetType().FullName));
+            //Console.WriteLine(stuff.Aggregate("\nAggregation of types: ",
+            //    (current, obj) => current + "\n\t" + obj.GetType().FullName));
 
-            Console.WriteLine("\nSequence equal: {0}", stuff.SequenceEqual(stuff));
+            //Console.WriteLine("\nSequence equal: {0}", stuff.SequenceEqual(stuff));
 
-            Console.WriteLine("\nRepeating random angles\n");
-            foreach (var result in Enumerable.Repeat(new Angle(), 4))
-            {
-                Console.WriteLine(result);
-            }
+            //Console.WriteLine("\nRepeating random angles\n");
+            //foreach (var result in Enumerable.Repeat(new Angle(), 4))
+            //{
+            //    Console.WriteLine(result);
+            //}
 
 
-            Console.WriteLine("\nClosures\n");
-            Func<Angle, Angle> assignment = AngleMiltiplierProvider();
-            Angle arg = new Angle(100);
-            Angle arg2 = assignment(arg);
-            Console.WriteLine(arg2);
-            arg2 = assignment(arg2);
-            Console.WriteLine(arg2);
+            //Console.WriteLine("\nClosures\n");
+            //Func<Angle, Angle> assignment = AngleMiltiplierProvider();
+            //Angle arg = new Angle(100);
+            //Angle arg2 = assignment(arg);
+            //Console.WriteLine(arg2);
+            //arg2 = assignment(arg2);
+            //Console.WriteLine(arg2);
 
+            #endregion
 
 
             Console.WriteLine("\n\n\n");
             List<Action> list = new List<Action>();
-            foreach (var i in new int[] {1, 2, 3, 4, 5})
+            foreach (var i in new int[] { 1, 2, 3, 4, 5 })
             {
                 list.Add(() => Console.WriteLine(i));
             }
@@ -418,6 +431,67 @@ namespace SideTasts
             {
                 f();
             }
+
+
+            string connectionString = ConfigurationManager.ConnectionStrings["demoDB"].ConnectionString;
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                var sqlCommandText = "CREATE TABLE AircraftRegistry([EntryID] int IDENTITY(1, 1), [SerialNumber] int NOT NULL, [Registration] nvarchar(10), [RegistrationDate] date)";
+                using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                {
+                    sqlCommand.ExecuteNonQuery();
+                }
+
+                sqlCommandText =
+                    "CREATE TABLE Aircraft([SerialNumber] int IDENTITY(1, 1) NOT NULL,[Registration] nvarchar(10) NOT NULL,[Owner] nvarchar(50),[RegistrationDate]date,CONSTRAINT[Aircraft_PK] PRIMARY KEY([SerialNumber], [Registration]),CONSTRAINT[Aircraft_Registration_UNIQUE] UNIQUE(Registration))";
+                using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                {
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+
+            string sqlCommandText2 = "SELECT * FROM AircraftRegistry;";
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommandText2, connectionString);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                adapter.SelectCommand = new SqlCommand(sqlCommandText2, connection);
+                sqlCommandText2 = "SET IDENTITY_INSERT [AircraftRegistry] ON; INSERT INTO [AircraftRegistry]([SerialNumber],[Registration],[RegistrationDate])VALUES(@SerialNumber, @Registration, @RegistrationDate); SET IDENTITY_INSERT [AircraftRegistry] OFF;";
+                var insert = new SqlCommand(sqlCommandText2, connection);
+                insert.Parameters.Add("@SerialNumber", SqlDbType.Int, Int32.MaxValue, "SerialNumber");
+                insert.Parameters.Add("@Registration", SqlDbType.NVarChar, 2000, "Registration");
+                insert.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
+                adapter.InsertCommand = insert;
+
+
+                sqlCommandText2 = "UPDATE [dbo].[AircraftRegistry]SET[AircraftRegistry].[SerialNumber] = @SerialNUmber, [AircraftRegistry].[Registration] = @Registration, [AircraftRegistry].[RegistrationDate] = @[RegistrationDate];";
+                var update = new SqlCommand(sqlCommandText2, connection);
+                update.Parameters.Add("@SerialNumber", SqlDbType.Int, Int32.MaxValue, "SerialNumber");
+                update.Parameters.Add("@Registration", SqlDbType.NVarChar, 2000, "Registration");
+                update.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
+                adapter.UpdateCommand = update;
+
+
+                sqlCommandText2 = "DELETE FROM [dbo].[AircraftRegistry] WHERE[dbo].[AircraftRegistry].[RegistrationDate] < @[RegistrationDate];";
+                var delete = new SqlCommand(sqlCommandText2, connection);
+                delete.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
+                adapter.DeleteCommand = delete;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         public static Func<Angle, Angle> AngleMiltiplierProvider()
