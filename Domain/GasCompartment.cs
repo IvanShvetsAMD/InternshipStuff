@@ -6,7 +6,7 @@ namespace Domain
     public class GasCompartment
     {
         public virtual int Id { get; protected set; }
-        public virtual float Capacity { get; private set; }
+        public virtual float Capacity { get; protected set; }
         public virtual float CurrentVolume { get; set; }
 
         public override string ToString()

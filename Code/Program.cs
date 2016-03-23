@@ -11,6 +11,7 @@ using Factories;
 using Infrastructure;
 using LoggerService;
 using Repository.Implemetations;
+using Repository.Interfaces;
 using static System.String;
 
 namespace PresentationCode
@@ -30,26 +31,26 @@ namespace PresentationCode
 
             #region Side tasks (testing things)
 
-            JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-                new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+            //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
+            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
+            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
 
 
-            var compartments = new List<GasCompartment>
-            {
-                new GasCompartment(20, 15),
-                new GasCompartment(20, 10),
-                new GasCompartment(20, 15),
-                new GasCompartment(15, 10)
-            };
+            //var compartments = new List<GasCompartment>
+            //{
+            //    new GasCompartment(20, 15),
+            //    new GasCompartment(20, 10),
+            //    new GasCompartment(20, 15),
+            //    new GasCompartment(15, 10)
+            //};
 
-            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", compartments,
-                new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
-            Console.WriteLine(baloon);
-            ////Console.WriteLine("\n\nComparing gas compartments:");
+            //LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", compartments,
+            //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
+            //Console.WriteLine(baloon);
+            //////Console.WriteLine("\n\nComparing gas compartments:");
              
-            baloon.ShiftGas(5,65,5);
+            //baloon.ShiftGas(5,65,5);
 
 
             //Console.WriteLine("\n shifting gas");
@@ -104,14 +105,14 @@ namespace PresentationCode
 
             #region factories and cultures
 
-            RotorCraft rotorCraft = factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor",
-                42, 73, "TEST manufacturer", 4242);
-            //Console.WriteLine(rotorCraft);
-            FAA.RegisterAircraft(new List<AircraftRegistration>
-                {
-                    new AircraftRegistration(rotorCraft, true),
-                    new AircraftRegistration(rotorCraft, false)
-            });
+            //RotorCraft rotorCraft = factory.TryMakeRotorCraft("00000000", new List<RotorBlade>(), "standart TEST rotor",
+            //    42, 73, "TEST manufacturer", 4242);
+            ////Console.WriteLine(rotorCraft);
+            //FAA.RegisterAircraft(new List<AircraftRegistration>
+            //    {
+            //        new AircraftRegistration(rotorCraft, true),
+            //        new AircraftRegistration(rotorCraft, false)
+            //});
 
             #region 
 
@@ -225,18 +226,17 @@ namespace PresentationCode
 
             #endregion
 
-            rotorCraft.IsOperational = false;
-            Console.WriteLine(rotorCraft);
+            //rotorCraft.IsOperational = false;
+            //Console.WriteLine(rotorCraft);
             
             
-            GasCompartmentRepository = ServiceLocator.Get<I>();
-            var product = productFactory.CreateNewProduct("test", 10, new List<long> { 5 }, null);
-            productRepository.Save(product);
+            
+            var gasCompartmentRepository = ServiceLocator.Get<IGasCompartmentRepository>();
+
+            gasCompartmentRepository.Save(new GasCompartment(400, 380));
 
 
-
-
-
+            
             log.Dispose();
         }
 

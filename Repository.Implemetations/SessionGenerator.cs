@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain;
-using Domain.Mapping;
+﻿using Domain.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -34,8 +28,9 @@ namespace Repository.Implemetations
                .Database(MsSqlConfiguration.MsSql2012
                   .ConnectionString(
                      builder =>
-                        builder.Database("AviationDB")
+                        builder.Database("Aviation")
                            .Server(@"MDDSK40043\SQLEXPRESS")
+                           .Server(@"DESKTOP-CQKKU19\SQLEXPRESS")
                            .TrustedConnection()))
                .Mappings(cfg => CreateMappings(cfg))
                .ExposeConfiguration(
