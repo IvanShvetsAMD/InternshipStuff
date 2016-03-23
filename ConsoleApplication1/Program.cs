@@ -75,7 +75,7 @@ namespace SideTasts
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Heloo, World!");
+            Console.WriteLine("Helo, World!");
 
             #region 
 
@@ -241,91 +241,91 @@ namespace SideTasts
 
             #region
 
-            List<object> stuff = new List<object>
-            {
-                new Generator(4, 4),
-                new Angle(3, 4, 5),
-                new Generator(3, 8),
-                new Angle(400),
-                new Generator(220, 10),
-                new ElectricParameters(1, 1)
-            };
+            //List<object> stuff = new List<object>
+            //{
+            //    new Generator(4, 4),
+            //    new Angle(3, 4, 5),
+            //    new Generator(3, 8),
+            //    new Angle(400),
+            //    new Generator(220, 10),
+            //    new ElectricParameters(1, 1)
+            //};
 
-            List<object> stuff2 = new List<object>(stuff);
-            List<object> stuff3 = new List<object>(stuff);
-            List<object> stuff4 = new List<object>(stuff);
+            //List<object> stuff2 = new List<object>(stuff);
+            //List<object> stuff3 = new List<object>(stuff);
+            //List<object> stuff4 = new List<object>(stuff);
 
-            Console.WriteLine("Original collection:\n");
-            foreach (var obj in stuff)
-            {
-                Console.WriteLine(obj.GetType().Name);
-            }
+            //Console.WriteLine("Original collection:\n");
+            //foreach (var obj in stuff)
+            //{
+            //    Console.WriteLine(obj.GetType().Name);
+            //}
 
-            ArrangeDelegate arrangeDelegate = new ArrangeDelegate(RearrangeMethod1);
-            stuff = Rearrange(stuff, arrangeDelegate);
-            Console.WriteLine("\nAfter the first rearrangement(delegate)\n");
-            foreach (var obj in stuff)
-            {
-                Console.WriteLine(obj.GetType().Name);
-            }
+            //ArrangeDelegate arrangeDelegate = new ArrangeDelegate(RearrangeMethod1);
+            //stuff = Rearrange(stuff, arrangeDelegate);
+            //Console.WriteLine("\nAfter the first rearrangement(delegate)\n");
+            //foreach (var obj in stuff)
+            //{
+            //    Console.WriteLine(obj.GetType().Name);
+            //}
 
-            stuff2 = Rearrange(stuff2, delegate (object obj1, object obj2)
-            {
-                if (obj1 is Generator)
-                    return true;
-                if (obj1 is ElectricParameters && obj2 is Angle)
-                    return true;
-                if (obj1 is Angle)
-                    return false;
-                return false;
-            }
-            );
+            //stuff2 = Rearrange(stuff2, delegate (object obj1, object obj2)
+            //{
+            //    if (obj1 is Generator)
+            //        return true;
+            //    if (obj1 is ElectricParameters && obj2 is Angle)
+            //        return true;
+            //    if (obj1 is Angle)
+            //        return false;
+            //    return false;
+            //}
+            //);
 
-            Console.WriteLine("\nAfter second rearrangement (anonymous function)\n");
-            foreach (var obj in stuff2)
-            {
-                Console.WriteLine(obj.GetType().Name);
-            }
+            //Console.WriteLine("\nAfter second rearrangement (anonymous function)\n");
+            //foreach (var obj in stuff2)
+            //{
+            //    Console.WriteLine(obj.GetType().Name);
+            //}
 
 
-            stuff3 = Rearrange(stuff3, (obj1, obj2) =>
-            {
-                if (obj1 is Angle)
-                    return true;
-                if (obj1 is ElectricParameters && obj2 is Generator)
-                    return true;
-                if (obj1 is Generator)
-                    return false;
-                return false;
-            });
-            Console.WriteLine("\nafter N3\n");
-            foreach (var o in stuff3)
-            {
-                Console.WriteLine(o.GetType().Name);
-            }
+            //stuff3 = Rearrange(stuff3, (obj1, obj2) =>
+            //{
+            //    if (obj1 is Angle)
+            //        return true;
+            //    if (obj1 is ElectricParameters && obj2 is Generator)
+            //        return true;
+            //    if (obj1 is Generator)
+            //        return false;
+            //    return false;
+            //});
+            //Console.WriteLine("\nafter N3\n");
+            //foreach (var o in stuff3)
+            //{
+            //    Console.WriteLine(o.GetType().Name);
+            //}
 
-            Console.WriteLine("\nUsing an extension method:\n");
-            var b = stuff.Change((obj1, obj2) =>
-            {
-                if (obj1 is Angle)
-                    return true;
-                if (obj1 is ElectricParameters && obj2 is Generator)
-                    return true;
-                if (obj1 is Generator)
-                    return false;
-                return false;
-            });
+            //Console.WriteLine("\nUsing an extension method:\n");
+            //var b = stuff.Change((obj1, obj2) =>
+            //{
+            //    if (obj1 is Angle)
+            //        return true;
+            //    if (obj1 is ElectricParameters && obj2 is Generator)
+            //        return true;
+            //    if (obj1 is Generator)
+            //        return false;
+            //    return false;
+            //});
 
-            foreach (var o in b)
-            {
-                Console.WriteLine(o.GetType().Name);
-            }
+            //foreach (var o in b)
+            //{
+            //    Console.WriteLine(o.GetType().Name);
+            //}
 
-            Console.WriteLine("\nLINQ\n");
-            foreach (var o in Trylinq(stuff))
-            {
-                Console.WriteLine(o.GetType().Name);
-            }
+            //Console.WriteLine("\nLINQ\n");
+            //foreach (var o in Trylinq(stuff))
+            //{
+            //    Console.WriteLine(o.GetType().Name);
+            //}
 
             #endregion
 
@@ -373,11 +373,11 @@ namespace SideTasts
             //}
 
 
-            Console.WriteLine("\nConcat\n");
-            foreach (var source in stuff.Concat(stuff4))
-            {
-                Console.WriteLine(source);
-            }
+            //Console.WriteLine("\nConcat\n");
+            //foreach (var source in stuff.Concat(stuff4))
+            //{
+            //    Console.WriteLine(source);
+            //}
 
             //stuff4.ForEach(obj => Console.WriteLine(obj));
             //Console.WriteLine("\nLast\n");
@@ -435,6 +435,7 @@ namespace SideTasts
             {
                 f();
             }
+            Console.WriteLine("\n\n\n");
 
             #region 
 
@@ -493,22 +494,29 @@ namespace SideTasts
 
 
 
-            string connectionString = ConfigurationManager.ConnectionStrings["demoDB"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["ADO"].ConnectionString;
 
             using (var sqlConnection = new SqlConnection(connectionString))
             {
-                sqlConnection.Open();
-                var sqlCommandText = "CREATE TABLE AircraftRegistry([EntryID] int IDENTITY(1, 1), [SerialNumber] int NOT NULL, [Registration] nvarchar(10), [RegistrationDate] date)";
-                using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                try
                 {
-                    sqlCommand.ExecuteNonQuery();
-                }
+                    sqlConnection.Open();
+                    var sqlCommandText = "IF EXISTS(SELECT 1 FROM sys.Objects WHERE  Object_id = OBJECT_ID(N'dbo.AircraftRegistry') AND Type = N'U')BEGIN DROP TABLE[AircraftRegistry] END; CREATE TABLE AircraftRegistry([EntryID] int IDENTITY(1, 1), [SerialNumber] int NOT NULL, [Registration] nvarchar(10), [RegistrationDate] date);";
+                    using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                    }
 
-                sqlCommandText =
-                    "CREATE TABLE Aircraft([SerialNumber] int IDENTITY(1, 1) NOT NULL,[Registration] nvarchar(10) NOT NULL,[Owner] nvarchar(50),[RegistrationDate]date,CONSTRAINT[Aircraft_PK] PRIMARY KEY([SerialNumber], [Registration]),CONSTRAINT[Aircraft_Registration_UNIQUE] UNIQUE(Registration))";
-                using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                    sqlCommandText =
+                        "IF EXISTS(SELECT 1 FROM sys.Objects WHERE  Object_id = OBJECT_ID(N'dbo.Aircraft') AND Type = N'U')BEGIN DROP TABLE[Aircraft] END; CREATE TABLE Aircraft([SerialNumber] int IDENTITY(1, 1) NOT NULL,[Registration] nvarchar(10) NOT NULL,[Owner] nvarchar(50),[RegistrationDate]date,CONSTRAINT[Aircraft_PK] PRIMARY KEY([SerialNumber], [Registration]),CONSTRAINT[Aircraft_Registration_UNIQUE] UNIQUE(Registration))";
+                    using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
                 {
-                    sqlCommand.ExecuteNonQuery();
+                    Console.WriteLine(e);
                 }
             }
 
@@ -517,8 +525,10 @@ namespace SideTasts
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+
                 adapter.SelectCommand = new SqlCommand(sqlCommandText2, connection);
-                sqlCommandText2 = "SET IDENTITY_INSERT [AircraftRegistry] ON; INSERT INTO [AircraftRegistry]([SerialNumber],[Registration],[RegistrationDate])VALUES(@SerialNumber, @Registration, @RegistrationDate); SET IDENTITY_INSERT [AircraftRegistry] OFF;";
+                sqlCommandText2 = "INSERT INTO [AircraftRegistry]([SerialNumber],[Registration],[RegistrationDate])VALUES(@SerialNumber, @Registration, @RegistrationDate); SET IDENTITY_INSERT [AircraftRegistry] OFF;";
                 var insert = new SqlCommand(sqlCommandText2, connection);
                 insert.Parameters.Add("@SerialNumber", SqlDbType.Int, Int32.MaxValue, "SerialNumber");
                 insert.Parameters.Add("@Registration", SqlDbType.NVarChar, 2000, "Registration");
@@ -526,7 +536,7 @@ namespace SideTasts
                 adapter.InsertCommand = insert;
 
 
-                sqlCommandText2 = "UPDATE [dbo].[AircraftRegistry]SET[AircraftRegistry].[SerialNumber] = @SerialNUmber, [AircraftRegistry].[Registration] = @Registration, [AircraftRegistry].[RegistrationDate] = @[RegistrationDate];";
+                sqlCommandText2 = "UPDATE [dbo].[AircraftRegistry] SET[AircraftRegistry].[SerialNumber] = @SerialNUmber, [AircraftRegistry].[Registration] = @Registration, [AircraftRegistry].[RegistrationDate] = @RegistrationDate";
                 var update = new SqlCommand(sqlCommandText2, connection);
                 update.Parameters.Add("@SerialNumber", SqlDbType.Int, Int32.MaxValue, "SerialNumber");
                 update.Parameters.Add("@Registration", SqlDbType.NVarChar, 2000, "Registration");
@@ -534,12 +544,110 @@ namespace SideTasts
                 adapter.UpdateCommand = update;
 
 
-                sqlCommandText2 = "DELETE FROM [dbo].[AircraftRegistry] WHERE[dbo].[AircraftRegistry].[RegistrationDate] < @[RegistrationDate];";
+                sqlCommandText2 = "DELETE FROM [dbo].[AircraftRegistry] WHERE[dbo].[AircraftRegistry].[SerialNumber] = @SerialNumber AND [dbo].[AircraftRegistry].[Registration] = @Registration AND [dbo].[AircraftRegistry].[RegistrationDate] = @RegistrationDate; ";
                 var delete = new SqlCommand(sqlCommandText2, connection);
+                delete.Parameters.Add("@SerialNumber", SqlDbType.Int, 1000, "SerialNumber");
+                delete.Parameters.Add("@Registration", SqlDbType.NVarChar, 1000, "Registration");
                 delete.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
                 adapter.DeleteCommand = delete;
+
+
+                //DataTable Aircraft = new DataTable("Aircraft");
+                //Aircraft.Columns.Add("Registration", typeof (string));
+                //Aircraft.Columns.Add("Owner", typeof (string));
+                //Aircraft.Columns.Add("RegistrationDate", typeof (DateTime));
+
+                //DataRow row = Aircraft.NewRow();
+                //row["Registration"] = "B-HXJ";
+                //row["Owner"] = "Cathay Pacific";
+                //row["RegistrationDate"] = "1998-07-28";
+
+                //Aircraft.Rows.Add(row);
+
+                DataTable AircraftRegistry = new DataTable("AircraftRegistry");
+                DataSet dataSet = new DataSet();
+
+                //AircraftRegistry.Columns.Add("EntryID", typeof(int));
+                AircraftRegistry.Columns.Add("SerialNumber", typeof(int));
+                AircraftRegistry.Columns.Add("Registration", typeof(string));
+                AircraftRegistry.Columns.Add("RegistrationDate", typeof(DateTime));
+
+
+                //INSERT
+                DataRow regRow = AircraftRegistry.NewRow();
+                //regRow["EntryID"] = 8;
+                regRow["SerialNumber"] = 8;
+                regRow["Registration"] = "B-HXJ";
+                regRow["RegistrationDate"] = "1998-07-28";
+
+                AircraftRegistry.Rows.Add(regRow);
+
+                DataRow regRow2 = AircraftRegistry.NewRow();
+                regRow2["SerialNumber"] = 9;
+                regRow2["Registration"] = "UR-82060";
+                regRow2["RegistrationDate"] = "1998-05-01";
+
+                AircraftRegistry.Rows.Add(regRow2);
+
+                DataRow regRow3 = AircraftRegistry.NewRow();
+                regRow3["SerialNumber"] = 10;
+                regRow3["Registration"] = "A7-ALA";
+                regRow3["RegistrationDate"] = "2013-12-18";
+
+                AircraftRegistry.Rows.Add(regRow3);
+
+                DataRow regRow4 = AircraftRegistry.NewRow();
+                regRow4["SerialNumber"] = 9999;
+                regRow4["Registration"] = "FAKE";
+                regRow4["RegistrationDate"] = DBNull.Value;
+
+                AircraftRegistry.Rows.Add(regRow4);
+
+                adapter.Update(AircraftRegistry);
+
+                //SELECT
+                adapter.Fill(dataSet, "AircraftRegistry");
+                ShowResults(dataSet);
+
+                //UPDATE
+                DataRow changedRow = dataSet.Tables["AircraftRegistry"].Select("SerialNumber = 10").First();
+                changedRow["RegistrationDate"] = "2014-12-18";
+
+                adapter.Update(AircraftRegistry);
+                ShowResults(dataSet);
+
+                for (int i = 0; i < dataSet.Tables["AircraftRegistry"].Rows.Count; i++)
+                {
+                    DataRow dr = dataSet.Tables["AircraftRegistry"].Rows[i];
+                    if ((int)dataSet.Tables["AircraftRegistry"].Rows[i]["SerialNumber"] > 11)
+                        dr.Delete();
+                }
+
+                adapter.Update(AircraftRegistry);
+
+                adapter.DeleteCommand.Parameters["@SerialNumber"].Value = regRow4["SerialNumber"];
+                adapter.DeleteCommand.Parameters["@Registration"].Value = regRow4["Registration"];
+                adapter.DeleteCommand.Parameters["@RegistrationDate"].Value = regRow4["RegistrationDate"];
+                var a = adapter.DeleteCommand.ExecuteNonQuery();
+                ShowResults(dataSet);
+
             }
 
+        }
+
+        private static void ShowResults(DataSet dataSet)
+        {
+            var table = dataSet.Tables["AircraftRegistry"];
+            Console.WriteLine("\nDispalying results:");
+            foreach (DataRow innerrow in table.Rows)
+            {
+                if (innerrow.RowState != DataRowState.Deleted)
+                {
+                    Console.WriteLine("EntryID: {0}, Serial number: {1}, Registration: {2}, Registration date: {3}",
+                        innerrow?["EntryID"] ?? "NULL", innerrow?["SerialNumber"], innerrow?["Registration"],
+                        innerrow?["RegistrationDate"] ?? "NULL");
+                }
+            }
         }
 
         public static Func<Angle, Angle> AngleMiltiplierProvider()
