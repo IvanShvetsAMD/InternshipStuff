@@ -544,11 +544,9 @@ namespace SideTasts
                 adapter.UpdateCommand = update;
 
 
-                sqlCommandText2 = "DELETE FROM [dbo].[AircraftRegistry] WHERE[dbo].[AircraftRegistry].[SerialNumber] = @SerialNumber AND [dbo].[AircraftRegistry].[Registration] = @Registration AND [dbo].[AircraftRegistry].[RegistrationDate] = @RegistrationDate; ";
+                sqlCommandText2 = "DELETE FROM [dbo].[AircraftRegistry] WHERE[dbo].[AircraftRegistry].[SerialNumber] = @SerialNumber;";
                 var delete = new SqlCommand(sqlCommandText2, connection);
                 delete.Parameters.Add("@SerialNumber", SqlDbType.Int, 1000, "SerialNumber");
-                delete.Parameters.Add("@Registration", SqlDbType.NVarChar, 1000, "Registration");
-                delete.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
                 adapter.DeleteCommand = delete;
 
 
@@ -613,26 +611,22 @@ namespace SideTasts
                 DataRow changedRow = dataSet.Tables["AircraftRegistry"].Select("SerialNumber = 10").First();
                 changedRow["RegistrationDate"] = "2014-12-18";
 
-                adapter.Update(AircraftRegistry);
+                //adapter.Update(AircraftRegistry);
                 ShowResults(dataSet);
-
-                for (int i = 0; i < dataSet.Tables["AircraftRegistry"].Rows.Count; i++)
+                
+                for (int i = 0; i < AircraftRegistry.Rows.Count; i++)
                 {
-                    DataRow dr = dataSet.Tables["AircraftRegistry"].Rows[i];
-                    if ((int)dataSet.Tables["AircraftRegistry"].Rows[i]["SerialNumber"] > 11)
+                    DataRow dr = AircraftRegistry.Rows[i];
+                    if ((int)dr["SerialNumber"] > 11)
                         dr.Delete();
                 }
 
                 adapter.Update(AircraftRegistry);
+                dataSet.Tables["AircraftRegistry"].Clear();
+                adapter.Fill(dataSet, "AircraftRegistry");
 
-                adapter.DeleteCommand.Parameters["@SerialNumber"].Value = regRow4["SerialNumber"];
-                adapter.DeleteCommand.Parameters["@Registration"].Value = regRow4["Registration"];
-                adapter.DeleteCommand.Parameters["@RegistrationDate"].Value = regRow4["RegistrationDate"];
-                var a = adapter.DeleteCommand.ExecuteNonQuery();
                 ShowResults(dataSet);
-
             }
-
         }
 
         private static void ShowResults(DataSet dataSet)
