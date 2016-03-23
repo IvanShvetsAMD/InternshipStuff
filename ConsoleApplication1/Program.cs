@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -326,40 +329,49 @@ namespace SideTasts
 
             #endregion
 
+            #region 
 
-            stuff4.Add(new Generator(4, 4));
-            stuff4.Add(new ElectricParameters(1, 1));
-            Console.WriteLine("\nDistinct\n");
-            foreach (var source in stuff4.OfType<ElectricParameters>().Distinct())
-            {
-                Console.WriteLine(source);
-            }
+            //stuff4.Add(new Generator(4, 4));
+            //stuff4.Add(new ElectricParameters(1, 1));
+            //Console.WriteLine("\nDistinct\n");
+            //foreach (var source in stuff4.OfType<ElectricParameters>().Distinct())
+            //{
+            //    Console.WriteLine(source);
+            //}
 
-            Console.WriteLine("\nSelect\n");
-            foreach (var result in stuff4.OfType<Generator>().Select(obj => obj.OutputCurrent))
-            {
-                Console.WriteLine(result);
-            }
+            //Console.WriteLine("\nSelect\n");
+            //foreach (var result in stuff4.OfType<Generator>().Select(obj => obj.OutputCurrent))
+            //{
+            //    Console.WriteLine(result);
+            //}
 
-            Console.WriteLine("\nJoin\n");
-            foreach (var result in stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element, (stuff4element, stuff3element) => new { stuff3element.GetType().Name, stuff4element.GetType().FullName }))
-            {
-                Console.WriteLine(result);
-            }
+            //Console.WriteLine("\nJoin\n");
+            //foreach (
+            //    var result in
+            //        stuff4.Join(stuff3, stuff4element => stuff4element, stuff3element => stuff3element,
+            //            (stuff4element, stuff3element) =>
+            //                new {stuff3element.GetType().Name, stuff4element.GetType().FullName}))
+            //{
+            //    Console.WriteLine(result);
+            //}
 
 
-            Console.WriteLine("\nOrderByDescending and ThenByDescending\n");
-            foreach (var source in stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj => obj.GetType().Namespace))
-            {
-                Console.WriteLine(source + " " + source.GetType().Name);
-            }
+            //Console.WriteLine("\nOrderByDescending and ThenByDescending\n");
+            //foreach (
+            //    var source in
+            //        stuff4.OrderByDescending(obj => obj.GetType().Name).ThenByDescending(obj => obj.GetType().Namespace)
+            //    )
+            //{
+            //    Console.WriteLine(source + " " + source.GetType().Name);
+            //}
 
-            Console.WriteLine("\nGroupBy\n");
-            var b2 = stuff4.GroupBy(obj => obj.GetType().Name);
-            foreach (var VARIABLE in b2)
-            {
-                Console.WriteLine(VARIABLE.Key);
-            }
+            //Console.WriteLine("\nGroupBy\n");
+            //var b2 = stuff4.GroupBy(obj => obj.GetType().Name);
+            //foreach (var VARIABLE in b2)
+            //{
+            //    Console.WriteLine(VARIABLE.Key);
+            //}
+
 
             Console.WriteLine("\nConcat\n");
             foreach (var source in stuff.Concat(stuff4))
@@ -367,21 +379,21 @@ namespace SideTasts
                 Console.WriteLine(source);
             }
 
-            stuff4.ForEach(obj => Console.WriteLine(obj));
-            Console.WriteLine("\nLast\n");
-            try
-            {
-                Console.WriteLine(stuff4.Concat(stuff3).Last(o => o.GetType().Name == "Angle"));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //stuff4.ForEach(obj => Console.WriteLine(obj));
+            //Console.WriteLine("\nLast\n");
+            //try
+            //{
+            //    Console.WriteLine(stuff4.Concat(stuff3).Last(o => o.GetType().Name == "Angle"));
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
 
-            List<int> ints = new List<int> { 1, 2, 3, 4, 5, 6 };
+            //List<int> ints = new List<int> {1, 2, 3, 4, 5, 6};
 
 
-            bool hasFive = ints.Any(i => i == 5);
+            //bool hasFive = ints.Any(i => i == 5);
 
             DateTime dt = new DateTime();
             dt = DateTime.Now;
@@ -390,25 +402,27 @@ namespace SideTasts
             dto = DateTimeOffset.Now;
 
 
-            Console.WriteLine(stuff.Aggregate("\nAggregation of types: ", (current, obj) => current + "\n\t" + obj.GetType().FullName));
+            //Console.WriteLine(stuff.Aggregate("\nAggregation of types: ",
+            //    (current, obj) => current + "\n\t" + obj.GetType().FullName));
 
-            Console.WriteLine("\nSequence equal: {0}", stuff.SequenceEqual(stuff));
+            //Console.WriteLine("\nSequence equal: {0}", stuff.SequenceEqual(stuff));
 
-            Console.WriteLine("\nRepeating random angles\n");
-            foreach (var result in Enumerable.Repeat(new Angle(), 4))
-            {
-                Console.WriteLine(result);
-            }
+            //Console.WriteLine("\nRepeating random angles\n");
+            //foreach (var result in Enumerable.Repeat(new Angle(), 4))
+            //{
+            //    Console.WriteLine(result);
+            //}
 
 
-            Console.WriteLine("\nClosures\n");
-            Func<Angle, Angle> assignment = AngleMiltiplierProvider();
-            Angle arg = new Angle(100);
-            Angle arg2 = assignment(arg);
-            Console.WriteLine(arg2);
-            arg2 = assignment(arg2);
-            Console.WriteLine(arg2);
+            //Console.WriteLine("\nClosures\n");
+            //Func<Angle, Angle> assignment = AngleMiltiplierProvider();
+            //Angle arg = new Angle(100);
+            //Angle arg2 = assignment(arg);
+            //Console.WriteLine(arg2);
+            //arg2 = assignment(arg2);
+            //Console.WriteLine(arg2);
 
+            #endregion
 
 
             Console.WriteLine("\n\n\n");
@@ -425,54 +439,6 @@ namespace SideTasts
             {
                 f();
             }
-
-            Person magnus = new Person { Name = "Hedlund, Magnus" };
-            Person terry = new Person { Name = "Adams, Terry" };
-            Person charlotte = new Person { Name = "Weiss, Charlotte" };
-
-            Pet barley = new Pet { Name = "Barley", Owner = terry };
-            Pet boots = new Pet { Name = "Boots", Owner = terry };
-            Pet whiskers = new Pet { Name = "Whiskers", Owner = charlotte };
-            Pet daisy = new Pet { Name = "Daisy", Owner = magnus };
-            List<Person> people = new List<Person> { magnus, terry, charlotte };
-            List<Pet> pets = new List<Pet> { barley, boots, whiskers, daisy };
-            var query =
-                people.Join(pets,
-                            person => person,
-                            pet => pet.Owner,
-                            (person, pet) =>
-                                new { OwnerName = person.Name, Pet = pet.Name });
-
-            foreach (var VARIABLE in query)
-            {
-                Console.WriteLine(VARIABLE);
-            }
-            Console.WriteLine("\n\n");
-
-            foreach (var result in people.GroupJoin(pets, person => person, pet => pet.Owner, (person, pet) => new {OwnerName = person.Name, PetsList = pet}))
-            {
-                Console.WriteLine(result);
-            }
-
-            var query2 = people.GroupJoin(pets, person => person, pet => pet.Owner,
-                (person, pet) => new {OwnerName = person.Name, PetsList = pet});
-        //    foreach (var VARIABLE in query2)
-        //    {
-        //        Console.WriteLine(VARIABLE.OwnerName);
-        //        foreach (var VARIABLE2 in VARIABLE.PetsList)
-        //        {
-        //            Console.WriteLine(VARIABLE2.Name + VARIABLE.PetsList.ToList().ForEach(x =>
-        //            {
-        //                Console.WriteLine(x.Name);
-        //            }).ToString());
-        //        }
-        //    }
-
-            query2.ToList().ForEach(x =>
-            {
-                Console.WriteLine(x.OwnerName);
-                x.PetsList.ToList().ForEach(x2 => { Console.WriteLine(x2.Name); });
-            });
         }
 
         public static Func<Angle, Angle> AngleMiltiplierProvider()
