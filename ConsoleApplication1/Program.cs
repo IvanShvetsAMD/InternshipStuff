@@ -431,14 +431,115 @@ namespace SideTasts
             {
                 list.Add(() => Console.WriteLine(i));
             }
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    list.Add(() => { Console.WriteLine(i); });
-            //}
             foreach (var f in list)
             {
                 f();
             }
+
+            #region 
+
+            //Person magnus = new Person {Name = "Hedlund, Magnus"};
+            //Person terry = new Person {Name = "Adams, Terry"};
+            //Person charlotte = new Person {Name = "Weiss, Charlotte"};
+
+            //Pet barley = new Pet {Name = "Barley", Owner = terry};
+            //Pet boots = new Pet {Name = "Boots", Owner = terry};
+            //Pet whiskers = new Pet {Name = "Whiskers", Owner = charlotte};
+            //Pet daisy = new Pet {Name = "Daisy", Owner = magnus};
+            //List<Person> people = new List<Person> {magnus, terry, charlotte};
+            //List<Pet> pets = new List<Pet> {barley, boots, whiskers, daisy};
+            //var query =
+            //    people.Join(pets,
+            //        person => person,
+            //        pet => pet.Owner,
+            //        (person, pet) =>
+            //            new {OwnerName = person.Name, Pet = pet.Name});
+
+            //foreach (var VARIABLE in query)
+            //{
+            //    Console.WriteLine(VARIABLE);
+            //}
+            //Console.WriteLine("\n\n");
+
+            //foreach (
+            //    var result in
+            //        people.GroupJoin(pets, person => person, pet => pet.Owner,
+            //            (person, pet) => new {OwnerName = person.Name, PetsList = pet}))
+            //{
+            //    Console.WriteLine(result);
+            //}
+
+            //var query2 = people.GroupJoin(pets, person => person, pet => pet.Owner,
+            //    (person, pet) => new {OwnerName = person.Name, PetsList = pet});
+            ////    foreach (var VARIABLE in query2)
+            ////    {
+            ////        Console.WriteLine(VARIABLE.OwnerName);
+            ////        foreach (var VARIABLE2 in VARIABLE.PetsList)
+            ////        {
+            ////            Console.WriteLine(VARIABLE2.Name + VARIABLE.PetsList.ToList().ForEach(x =>
+            ////            {
+            ////                Console.WriteLine(x.Name);
+            ////            }).ToString());
+            ////        }
+            ////    }
+
+            //query2.ToList().ForEach(x =>
+            //{
+            //    Console.WriteLine(x.OwnerName);
+            //    x.PetsList.ToList().ForEach(x2 => { Console.WriteLine(x2.Name); });
+            //});
+
+            #endregion
+
+
+
+            string connectionString = ConfigurationManager.ConnectionStrings["demoDB"].ConnectionString;
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                var sqlCommandText = "CREATE TABLE AircraftRegistry([EntryID] int IDENTITY(1, 1), [SerialNumber] int NOT NULL, [Registration] nvarchar(10), [RegistrationDate] date)";
+                using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                {
+                    sqlCommand.ExecuteNonQuery();
+                }
+
+                sqlCommandText =
+                    "CREATE TABLE Aircraft([SerialNumber] int IDENTITY(1, 1) NOT NULL,[Registration] nvarchar(10) NOT NULL,[Owner] nvarchar(50),[RegistrationDate]date,CONSTRAINT[Aircraft_PK] PRIMARY KEY([SerialNumber], [Registration]),CONSTRAINT[Aircraft_Registration_UNIQUE] UNIQUE(Registration))";
+                using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                {
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+
+            string sqlCommandText2 = "SELECT * FROM AircraftRegistry;";
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommandText2, connectionString);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                adapter.SelectCommand = new SqlCommand(sqlCommandText2, connection);
+                sqlCommandText2 = "SET IDENTITY_INSERT [AircraftRegistry] ON; INSERT INTO [AircraftRegistry]([SerialNumber],[Registration],[RegistrationDate])VALUES(@SerialNumber, @Registration, @RegistrationDate); SET IDENTITY_INSERT [AircraftRegistry] OFF;";
+                var insert = new SqlCommand(sqlCommandText2, connection);
+                insert.Parameters.Add("@SerialNumber", SqlDbType.Int, Int32.MaxValue, "SerialNumber");
+                insert.Parameters.Add("@Registration", SqlDbType.NVarChar, 2000, "Registration");
+                insert.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
+                adapter.InsertCommand = insert;
+
+
+                sqlCommandText2 = "UPDATE [dbo].[AircraftRegistry]SET[AircraftRegistry].[SerialNumber] = @SerialNUmber, [AircraftRegistry].[Registration] = @Registration, [AircraftRegistry].[RegistrationDate] = @[RegistrationDate];";
+                var update = new SqlCommand(sqlCommandText2, connection);
+                update.Parameters.Add("@SerialNumber", SqlDbType.Int, Int32.MaxValue, "SerialNumber");
+                update.Parameters.Add("@Registration", SqlDbType.NVarChar, 2000, "Registration");
+                update.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
+                adapter.UpdateCommand = update;
+
+
+                sqlCommandText2 = "DELETE FROM [dbo].[AircraftRegistry] WHERE[dbo].[AircraftRegistry].[RegistrationDate] < @[RegistrationDate];";
+                var delete = new SqlCommand(sqlCommandText2, connection);
+                delete.Parameters.Add("@RegistrationDate", SqlDbType.Date, 1000, "RegistrationDate");
+                adapter.DeleteCommand = delete;
+            }
+
         }
 
         public static Func<Angle, Angle> AngleMiltiplierProvider()
