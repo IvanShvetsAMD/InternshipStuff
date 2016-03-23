@@ -361,7 +361,6 @@ namespace SideTasts
                 Console.WriteLine(VARIABLE.Key);
             }
 
-
             Console.WriteLine("\nConcat\n");
             foreach (var source in stuff.Concat(stuff4))
             {
@@ -384,7 +383,11 @@ namespace SideTasts
 
             bool hasFive = ints.Any(i => i == 5);
 
+            DateTime dt = new DateTime();
+            dt = DateTime.Now;
 
+            DateTimeOffset dto = new DateTimeOffset();
+            dto = DateTimeOffset.Now;
 
 
             Console.WriteLine(stuff.Aggregate("\nAggregation of types: ", (current, obj) => current + "\n\t" + obj.GetType().FullName));
@@ -410,14 +413,66 @@ namespace SideTasts
 
             Console.WriteLine("\n\n\n");
             List<Action> list = new List<Action>();
-            foreach (var i in new int[] {1, 2, 3, 4, 5})
+            foreach (var i in new int[] { 1, 2, 3, 4, 5 })
             {
                 list.Add(() => Console.WriteLine(i));
             }
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    list.Add(() => { Console.WriteLine(i); });
+            //}
             foreach (var f in list)
             {
                 f();
             }
+
+            Person magnus = new Person { Name = "Hedlund, Magnus" };
+            Person terry = new Person { Name = "Adams, Terry" };
+            Person charlotte = new Person { Name = "Weiss, Charlotte" };
+
+            Pet barley = new Pet { Name = "Barley", Owner = terry };
+            Pet boots = new Pet { Name = "Boots", Owner = terry };
+            Pet whiskers = new Pet { Name = "Whiskers", Owner = charlotte };
+            Pet daisy = new Pet { Name = "Daisy", Owner = magnus };
+            List<Person> people = new List<Person> { magnus, terry, charlotte };
+            List<Pet> pets = new List<Pet> { barley, boots, whiskers, daisy };
+            var query =
+                people.Join(pets,
+                            person => person,
+                            pet => pet.Owner,
+                            (person, pet) =>
+                                new { OwnerName = person.Name, Pet = pet.Name });
+
+            foreach (var VARIABLE in query)
+            {
+                Console.WriteLine(VARIABLE);
+            }
+            Console.WriteLine("\n\n");
+
+            foreach (var result in people.GroupJoin(pets, person => person, pet => pet.Owner, (person, pet) => new {OwnerName = person.Name, PetsList = pet}))
+            {
+                Console.WriteLine(result);
+            }
+
+            var query2 = people.GroupJoin(pets, person => person, pet => pet.Owner,
+                (person, pet) => new {OwnerName = person.Name, PetsList = pet});
+        //    foreach (var VARIABLE in query2)
+        //    {
+        //        Console.WriteLine(VARIABLE.OwnerName);
+        //        foreach (var VARIABLE2 in VARIABLE.PetsList)
+        //        {
+        //            Console.WriteLine(VARIABLE2.Name + VARIABLE.PetsList.ToList().ForEach(x =>
+        //            {
+        //                Console.WriteLine(x.Name);
+        //            }).ToString());
+        //        }
+        //    }
+
+            query2.ToList().ForEach(x =>
+            {
+                Console.WriteLine(x.OwnerName);
+                x.PetsList.ToList().ForEach(x2 => { Console.WriteLine(x2.Name); });
+            });
         }
 
         public static Func<Angle, Angle> AngleMiltiplierProvider()
@@ -444,5 +499,16 @@ namespace SideTasts
             final.AddRange(subquery);
             return final;
         }
+    }
+
+    class Person
+    {
+        public string Name { get; set; }
+    }
+
+    class Pet
+    {
+        public string Name { get; set; }
+        public Person Owner { get; set; }
     }
 }
