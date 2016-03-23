@@ -25,6 +25,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FA257211
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.GasPumps", "Test.GasPumps\Test.GasPumps.csproj", "{EEFE78BC-2078-4323-80D1-7E4703BC86B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Interfaces", "Repository.Interfaces\Repository.Interfaces.csproj", "{F5F0D5E7-198A-4A2D-AA97-337462642AC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Implemetations", "Repository.Implemetations\Repository.Implemetations.csproj", "{0D4EC24B-872C-4719-BA7B-32E1E3F2E339}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Mapping", "Domain.Mapping\Domain.Mapping.csproj", "{FA7090D1-17FE-4AFD-8D53-E320C141BCB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +77,18 @@ Global
 		{EEFE78BC-2078-4323-80D1-7E4703BC86B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEFE78BC-2078-4323-80D1-7E4703BC86B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEFE78BC-2078-4323-80D1-7E4703BC86B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5F0D5E7-198A-4A2D-AA97-337462642AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5F0D5E7-198A-4A2D-AA97-337462642AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F0D5E7-198A-4A2D-AA97-337462642AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5F0D5E7-198A-4A2D-AA97-337462642AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D4EC24B-872C-4719-BA7B-32E1E3F2E339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D4EC24B-872C-4719-BA7B-32E1E3F2E339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D4EC24B-872C-4719-BA7B-32E1E3F2E339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D4EC24B-872C-4719-BA7B-32E1E3F2E339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7090D1-17FE-4AFD-8D53-E320C141BCB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7090D1-17FE-4AFD-8D53-E320C141BCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7090D1-17FE-4AFD-8D53-E320C141BCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7090D1-17FE-4AFD-8D53-E320C141BCB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

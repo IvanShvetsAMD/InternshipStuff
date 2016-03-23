@@ -1,6 +1,8 @@
 ﻿using ActionImplementations;
 using Interfaces;
 using Ninject;
+using Repository.Implemetations;
+using Repository.Interfaces;
 
 namespace Infrastructure
 {
@@ -11,6 +13,7 @@ namespace Infrastructure
         public static void RegisterAll()
         {
             Kernel.Bind<IAddEngines>().To<TurbineEngineInstaller>();
+            Kernel.Bind<IGasCompartmentRepository>().To<GasCompartmentRepository>();
         }
 
         public static T Get<T>()

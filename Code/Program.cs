@@ -10,6 +10,7 @@ using Domain;
 using Factories;
 using Infrastructure;
 using LoggerService;
+using Repository.Implemetations;
 using static System.String;
 
 namespace PresentationCode
@@ -226,6 +227,15 @@ namespace PresentationCode
 
             rotorCraft.IsOperational = false;
             Console.WriteLine(rotorCraft);
+            
+            
+            GasCompartmentRepository = ServiceLocator.Get<I>();
+            var product = productFactory.CreateNewProduct("test", 10, new List<long> { 5 }, null);
+            productRepository.Save(product);
+
+
+
+
 
             log.Dispose();
         }
