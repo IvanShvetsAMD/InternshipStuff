@@ -4,8 +4,20 @@ namespace Domain
 {
     public class GasCompartment : Entity
     {
-        public virtual float Capacity { get; protected set; }
-        public virtual float CurrentVolume { get; set; }
+        private float _currentVolume;
+        private float _capacity;
+
+        public virtual float Capacity
+        {
+            get { return _capacity; }
+            protected set { _capacity = value; }
+        }
+
+        public virtual float CurrentVolume
+        {
+            get { return _currentVolume; }
+            set { _currentVolume = value; }
+        }
 
         public override string ToString()
         {
