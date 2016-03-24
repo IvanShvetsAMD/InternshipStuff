@@ -30,7 +30,7 @@ namespace Repository.Implemetations
                      builder =>
                         builder.Database("Aviation")
                            .Server(@"MDDSK40043\SQLEXPRESS")
-                           .Server(@"DESKTOP-CQKKU19\SQLEXPRESS")
+                           //.Server(@"DESKTOP-CQKKU19\SQLEXPRESS")
                            .TrustedConnection()))
                .Mappings(cfg => CreateMappings(cfg))
                .ExposeConfiguration(
