@@ -101,7 +101,7 @@ namespace PresentationCode
             }
 
             ServiceLocator.RegisterAll();
-            HeavierThanAirAircraftFactory factory = ServiceLocator.Get<HeavierThanAirAircraftFactory>();
+            //HeavierThanAirAircraftFactory factory = ServiceLocator.Get<HeavierThanAirAircraftFactory>();
 
             #region factories and cultures
 
