@@ -5,8 +5,20 @@ namespace Domain
 {
     public class Generator : Entity
     {
-        public virtual float OutputCurrent { get; protected set; }
-        public virtual float OutputVoltage { get; protected set; }
+        private float _outputCurrent;
+        private float _outputVoltage;
+
+        public virtual float OutputCurrent
+        {
+            get { return _outputCurrent; }
+            protected set { _outputCurrent = value; }
+        }
+
+        public virtual float OutputVoltage
+        {
+            get { return _outputVoltage; }
+            protected set { _outputVoltage = value; }
+        }
 
         public virtual void GenerateCurrent() {
             Console.WriteLine("Generating current");
@@ -16,8 +28,8 @@ namespace Domain
 
         public Generator(float c, float v)
         {
-            OutputCurrent = c;
-            OutputVoltage = v;
+            _outputCurrent = c;
+            _outputVoltage = v;
         }
 
         public override string ToString()

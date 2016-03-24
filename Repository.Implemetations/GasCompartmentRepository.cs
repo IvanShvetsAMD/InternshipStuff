@@ -9,7 +9,7 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    public class GasCompartmentRepository : IGasCompartmentRepository
+    internal class GasCompartmentRepository : IGasCompartmentRepository
     {
         public void Save(GasCompartment entity)
         {
