@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GasCompartmentRepository.cs" />
+    <Compile Include="GeneratorRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionGenerator.cs" />
   </ItemGroup>

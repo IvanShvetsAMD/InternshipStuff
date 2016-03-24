@@ -14,6 +14,7 @@ namespace Infrastructure
         {
             Kernel.Bind<IAddEngines>().To<TurbineEngineInstaller>();
             Kernel.Bind<IGasCompartmentRepository>().To<GasCompartmentRepository>();
+            Kernel.Bind<IGeneratorRepository>().To<GeneratorRepository>();
         }
 
         public static T Get<T>()

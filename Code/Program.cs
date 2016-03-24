@@ -236,7 +236,12 @@ namespace PresentationCode
             gasCompartmentRepository.Save(new GasCompartment(400, 380));
 
 
-            
+            var generatorRepository = ServiceLocator.Get<IGeneratorRepository>();
+            generatorRepository.Save(new Generator(88, 88));
+
+
+
+
             log.Dispose();
         }
 

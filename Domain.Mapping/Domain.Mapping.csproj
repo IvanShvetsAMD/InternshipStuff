@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Entity.cs" />
     <Compile Include="GasCompartmentMap.cs" />
+    <Compile Include="GeneratorMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

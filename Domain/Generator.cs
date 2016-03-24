@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Domain
 {
-    public class Generator
+    public class Generator : Entity
     {
-        public float OutputCurrent { get; private set; }
-        public float OutputVoltage { get; private set; }
+        public virtual float OutputCurrent { get; protected set; }
+        public virtual float OutputVoltage { get; protected set; }
 
-        public void GenerateCurrent() {
+        public virtual void GenerateCurrent() {
             Console.WriteLine("Generating current");
         }
 

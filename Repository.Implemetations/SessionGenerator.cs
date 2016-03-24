@@ -6,7 +6,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Repository.Implemetations
 {
-    class SessionGenerator
+    internal class SessionGenerator
     {
         public static SessionGenerator Instance
         {
