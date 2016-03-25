@@ -1,2 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">SOLUTION</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">SOLUTION</s:String>
+	
+	<s:String x:Key="/Default/Environment/ContinuousTesting/PersistentDataLocation/@EntryValue">C:\Users\ivan.svet\AppData\Local\Temp\JetBrains\ContinuousTesting\c9e60b3c-9eda-4e35-82ba-95fb26d182ea</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\ivan.svet\AppData\Local\Temp\ssm.Bipucyp.tmp</s:String>
+	
+	</wpf:ResourceDictionary>

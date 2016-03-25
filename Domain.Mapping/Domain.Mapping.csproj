@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BladeMap.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="GasCompartmentMap.cs" />
     <Compile Include="GeneratorMap.cs" />

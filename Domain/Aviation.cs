@@ -249,7 +249,7 @@ namespace Domain
 
     public class FixedWingAircraft : HeavierThanAirAircraft
     {
-        public List<Wing> Wings { get; private set; }
+        public List<Wing> Wings { get; set; }
         public int? CruiseSpeed { get; }
         public int? StallSpeed { get; }
 

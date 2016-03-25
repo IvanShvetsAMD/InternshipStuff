@@ -9,18 +9,30 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal class GasCompartmentRepository : IGasCompartmentRepository
+    internal class GasCompartmentRepository : Repository<GasCompartment>, IGasCompartmentRepository
     {
-        public void Save(GasCompartment entity)
+        public void AddGas(float delta, long id)
         {
             using (ITransaction transaction = _session.BeginTransaction())
             {
-                _session.SaveOrUpdate(entity);
+                var gasCompartment = _session.Load<GasCompartment>(id);
+
+                gasCompartment.AddGas(delta);
 
                 transaction.Commit();
             }
         }
 
-        protected readonly ISession _session = SessionGenerator.Instance.GetSession();
+        public void RemoveGas(float delta, long id)
+        {
+            using (ITransaction transaction = _session.BeginTransaction())
+            {
+                var gasCompartment = _session.Load<GasCompartment>(id);
+
+                gasCompartment.RemoveGas(delta);
+
+                transaction.Commit();
+            }
+        }
     }
 }

@@ -8,8 +8,9 @@ using Domain;
 
 namespace Repository.Interfaces
 {
-    public interface IGasCompartmentRepository
+    public interface IGasCompartmentRepository : IRepository<GasCompartment>
     {
-        void Save(GasCompartment entity);
+        void AddGas(float delta, long id);
+        void RemoveGas(float delta, long id);
     }
 }

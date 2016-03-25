@@ -7,8 +7,9 @@ using Domain;
 
 namespace Repository.Interfaces
 {
-    public interface IGeneratorRepository
+    public interface IGeneratorRepository : IRepository<Generator>
     {
-        void Save(Generator entity);
+        void IncreaseCurrent(float delta, long id);
+        void IncreaseVoltage(float delta, long id);
     }
 }

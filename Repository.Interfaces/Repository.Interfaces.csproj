@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="IGasCompartmentRepository.cs" />
     <Compile Include="IGeneratorRepository.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

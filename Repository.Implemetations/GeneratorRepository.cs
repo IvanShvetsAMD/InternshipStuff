@@ -9,18 +9,27 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal class GeneratorRepository : IGeneratorRepository
+    internal class GeneratorRepository : Repository<Generator>, IGeneratorRepository
     {
-        public void Save(Generator entity)
+        public void IncreaseCurrent(float delta, long id)
         {
             using (ITransaction transaction = _session.BeginTransaction())
             {
-                _session.SaveOrUpdate(entity);
-
+                var generator = _session.Load<Generator>(id);
+                generator.IncreaseCurrent(delta);
                 transaction.Commit();
             }
         }
 
-        protected readonly ISession _session = SessionGenerator.Instance.GetSession();
+
+        public void IncreaseVoltage (float delta, long id)
+        {
+            using (ITransaction transaction = _session.BeginTransaction())
+            {
+                var generator = _session.Load<Generator>(id);
+                generator.IncreaseVoltage(delta);
+                transaction.Commit();
+            }
+        }
     }
 }

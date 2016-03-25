@@ -20,6 +20,16 @@ namespace Domain
             protected set { _outputVoltage = value; }
         }
 
+        public virtual void IncreaseCurrent(float delta)
+        {
+            _outputCurrent += delta;
+        }
+
+        public virtual void IncreaseVoltage(float delta)
+        {
+            _outputVoltage += delta;
+        }
+
         public virtual void GenerateCurrent() {
             Console.WriteLine("Generating current");
         }

@@ -29,8 +29,34 @@ namespace Domain
 
         public GasCompartment(float capacity, float currentvolume)
         {
-            Capacity = capacity;
-            CurrentVolume = currentvolume;
+            _capacity = capacity;
+            _currentVolume = currentvolume;
+        }
+
+        public virtual void AddGas(float delta)
+        {
+            if (delta >= 0)
+            {
+                if (_currentVolume + delta >= _capacity)
+                    _currentVolume = _capacity;
+                else
+                {
+                    _currentVolume += delta;
+                }
+            }
+        }
+
+        public virtual void RemoveGas(float delta)
+        {
+            if (delta >= 0)
+            {
+                if (_currentVolume - delta <= 0)
+                    _currentVolume = 0;
+                else
+                {
+                    _currentVolume -= delta;
+                }
+            }
         }
     }
 }
