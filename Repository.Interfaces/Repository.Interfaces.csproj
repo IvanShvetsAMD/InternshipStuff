@@ -40,9 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBladeRepository.cs" />
     <Compile Include="IGasCompartmentRepository.cs" />
     <Compile Include="IGeneratorRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRotorBladeRepository.cs" />
+    <Compile Include="ITurbineBladeRepository.cs" />
+    <Compile Include="IVariableGeometryWingRepository.cs" />
+    <Compile Include="IWingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

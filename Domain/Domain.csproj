@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aviation.cs" />
-    <Compile Include="Blades.cs" />
+    <Compile Include="Blade.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Decorator.cs" />
     <Compile Include="Engines.cs" />
@@ -58,7 +58,10 @@
     <Compile Include="IVariableWingActions.cs" />
     <Compile Include="LighterThanAirAircraftProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RotorBlade.cs" />
     <Compile Include="Spool.cs" />
+    <Compile Include="TurbineBlade.cs" />
+    <Compile Include="VariableGeometryWing.cs" />
     <Compile Include="Wings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
