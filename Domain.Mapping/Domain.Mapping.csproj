@@ -54,16 +54,26 @@
   <ItemGroup>
     <Compile Include="AircraftMap.cs" />
     <Compile Include="BladeMap.cs" />
+    <Compile Include="EngineMap.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="FixedWingAircraftMap.cs" />
     <Compile Include="GasCompartmentMap.cs" />
     <Compile Include="GeneratorMap.cs" />
+    <Compile Include="JetEngineMap.cs" />
     <Compile Include="LighterThanAirAircraftMap.cs" />
+    <Compile Include="PistonEngineMa.cs" />
     <Compile Include="PoweredAircraftMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RamjetMap.cs" />
+    <Compile Include="RocketEngineMap.cs" />
     <Compile Include="RotorBladeMap.cs" />
     <Compile Include="RotorCraftRepository.cs" />
+    <Compile Include="SolidFuelRocketEngineMap.cs" />
     <Compile Include="TurbineBladeMap.cs" />
+    <Compile Include="TurbineEngineMap.cs" />
+    <Compile Include="TurbofanMap.cs" />
+    <Compile Include="TurbojetMap.cs" />
+    <Compile Include="TurboShaftMap.cs" />
     <Compile Include="VariableGeometryWingMap.cs" />
     <Compile Include="WingMap.cs" />
   </ItemGroup>
