@@ -40,11 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAircraftRepository.cs" />
     <Compile Include="IBladeRepository.cs" />
+    <Compile Include="IFixedWingRepository.cs" />
     <Compile Include="IGasCompartmentRepository.cs" />
     <Compile Include="IGeneratorRepository.cs" />
+    <Compile Include="ILighterThanAirAircraftRepository.cs" />
+    <Compile Include="IPoweredAircraftRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRotorBladeRepository.cs" />
+    <Compile Include="IRotorCraftRepository.cs" />
     <Compile Include="ITurbineBladeRepository.cs" />
     <Compile Include="IVariableGeometryWingRepository.cs" />
     <Compile Include="IWingRepository.cs" />

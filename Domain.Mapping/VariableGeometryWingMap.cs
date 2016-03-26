@@ -10,7 +10,6 @@ namespace Domain.Mapping
     {
         public VariableGeometryWingMap()
         {
-            Id(x => x.Id);
             Map(x => x.MaxBackSweepAngle).Not.Nullable();
             Map(x => x.MaxForwardSweepAngle).Not.Nullable();
         }

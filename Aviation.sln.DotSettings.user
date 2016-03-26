@@ -2,6 +2,8 @@
 	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">SOLUTION</s:String>
 	
 	<s:String x:Key="/Default/Environment/ContinuousTesting/PersistentDataLocation/@EntryValue">C:\Users\ivan.svet\AppData\Local\Temp\JetBrains\ContinuousTesting\c9e60b3c-9eda-4e35-82ba-95fb26d182ea</s:String>
-	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\ivan.svet\AppData\Local\Temp\ssm.Bipucyp.tmp</s:String>
+	<s:String x:Key="/Default/Environment/ContinuousTesting/SnapshotLocation/@EntryValue">C:\Users\VANO-PC\AppData\Local\Temp\ssm.Nebigox.tmp</s:String>
+	
+	
 	
 	</wpf:ResourceDictionary>

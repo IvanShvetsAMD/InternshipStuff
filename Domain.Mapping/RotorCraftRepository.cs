@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Mapping
 {
-    public class RotorBladeMap : EntityMap<RotorBlade>
+    public class RotorCraftMap : EntityMap<RotorCraft>
     {
-        public RotorBladeMap()
+        public RotorCraftMap()
         {
-            Map(x => x.HasSupersonicTip).Not.Nullable();
+            Map(x => x.RotorType).Not.Nullable();
         }
     }
 }

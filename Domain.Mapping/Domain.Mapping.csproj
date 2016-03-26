@@ -52,12 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AircraftMap.cs" />
     <Compile Include="BladeMap.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="FixedWingAircraftMap.cs" />
     <Compile Include="GasCompartmentMap.cs" />
     <Compile Include="GeneratorMap.cs" />
+    <Compile Include="LighterThanAirAircraftMap.cs" />
+    <Compile Include="PoweredAircraftMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RotorBladeMap.cs" />
+    <Compile Include="RotorCraftRepository.cs" />
     <Compile Include="TurbineBladeMap.cs" />
     <Compile Include="VariableGeometryWingMap.cs" />
     <Compile Include="WingMap.cs" />

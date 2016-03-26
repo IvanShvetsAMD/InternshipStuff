@@ -11,7 +11,6 @@ namespace Domain.Mapping
     {
         public TurbineBladeMap()
         {
-            Id(x => x.Id);
             Map(x => x.HasCoolingChannels).Not.Nullable();
             Map(x => x.MaxTemp).Not.Nullable();
         }
