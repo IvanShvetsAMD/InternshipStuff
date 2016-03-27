@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,41 @@ namespace Domain
 {
     public class JetEngine : Engine
     {
-        public int EGT { get; protected set; }
-        public int Isp { get; protected set; }
-        public int NumberOfCycles { get; protected set; }
-        public List<Propellants> Propellants { get; protected set; }
-        public List<Oxidisers> Oxidisers { get; protected set; }
+        private int _egt;
+        private int _isp;
+        private int _numberOfCycles;
+        private IList<Propellants> _propellants;
+        private IList<Oxidisers> _oxidisers;
+
+        public virtual int EGT
+        {
+            get { return _egt; }
+            protected set { _egt = value; }
+        }
+
+        public virtual int Isp
+        {
+            get { return _isp; }
+            protected set { _isp = value; }
+        }
+
+        public virtual int NumberOfCycles
+        {
+            get { return _numberOfCycles; }
+            protected set { _numberOfCycles = value; }
+        }
+
+        public virtual IList<Propellants> Propellants
+        {
+            get { return _propellants; }
+            protected set { _propellants = value; }
+        }
+
+        public virtual IList<Oxidisers> Oxidisers
+        {
+            get { return _oxidisers; }
+            protected set { _oxidisers = value; }
+        }
 
         public void DecreaseFuelFlow()
         {
@@ -47,7 +78,7 @@ namespace Domain
             final.AppendFormat("\n{0}", base.ToString());
             return final.ToString();
         }
-
+        
         public JetEngine()
         {
 
@@ -58,12 +89,11 @@ namespace Domain
             float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
             : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
-            EGT = egt;
-            Isp = isp;
-            NumberOfCycles = numberofcycles;
-            Propellants = propellants;
-            Oxidisers = oxidisers;
+            _egt = egt;
+            _isp = isp;
+            _numberOfCycles = numberofcycles;
+            _propellants = propellants;
+            _oxidisers = oxidisers;
         }
-
     }
 }

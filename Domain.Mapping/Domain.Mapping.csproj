@@ -59,6 +59,7 @@
     <Compile Include="FixedWingAircraftMap.cs" />
     <Compile Include="GasCompartmentMap.cs" />
     <Compile Include="GeneratorMap.cs" />
+    <Compile Include="HeavierThanAirAircraftMap.cs" />
     <Compile Include="JetEngineMap.cs" />
     <Compile Include="LighterThanAirAircraftMap.cs" />
     <Compile Include="PistonEngineMa.cs" />
@@ -67,8 +68,9 @@
     <Compile Include="RamjetMap.cs" />
     <Compile Include="RocketEngineMap.cs" />
     <Compile Include="RotorBladeMap.cs" />
-    <Compile Include="RotorCraftRepository.cs" />
+    <Compile Include="RotorCraftMap.cs" />
     <Compile Include="SolidFuelRocketEngineMap.cs" />
+    <Compile Include="SpoolMap.cs" />
     <Compile Include="TurbineBladeMap.cs" />
     <Compile Include="TurbineEngineMap.cs" />
     <Compile Include="TurbofanMap.cs" />

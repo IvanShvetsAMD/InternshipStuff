@@ -4,7 +4,12 @@ namespace Domain
 {
     public class Turbojet : TurbineEngine
     {
-        public string Precoolant { get; }
+        private readonly string _precoolant;
+
+        public virtual string Precoolant
+        {
+            get { return _precoolant; }
+        }
 
         public void InjectCoolant()
         {
@@ -32,7 +37,7 @@ namespace Domain
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
                 model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
-            Precoolant = precoolant ?? "none";
+            _precoolant = precoolant ?? "none";
         }
     }
 }

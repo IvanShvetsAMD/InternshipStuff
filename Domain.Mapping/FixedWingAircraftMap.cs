@@ -12,6 +12,7 @@ namespace Domain.Mapping
         {
             Map(x => x.CruiseSpeed).Not.Nullable();
             Map(x => x.StallSpeed).Not.Nullable();
+            HasMany(x => x.Wings);
         }
     }
 }

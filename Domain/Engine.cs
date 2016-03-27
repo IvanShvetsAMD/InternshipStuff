@@ -5,15 +5,64 @@ namespace Domain
 {
     public abstract class Engine : Entity
     {
-        public string Manufacturer { get; }
-        public string Model { get; }
-        public virtual float CurrentPower { get; protected set; }
-        public string SerialNumber { get; }
-        public virtual float MaxPower { get; protected set; }
-        public float OperatingTime { get; private set; }
-        public string ParentAircraftID { get; private set; }
-        public float FuelFlow { get; set; }
-        public OnOff OnOffStatus { get; set; }
+        private readonly string _manufacturer;
+        private readonly string _model;
+        private float _currentPower;
+        private readonly string _serialNumber;
+        private float _maxPower;
+        private readonly float _operatingTime;
+        private readonly string _parentAircraftId;
+        private float _fuelFlow;
+        private OnOff _onOffStatus;
+
+        public virtual string Manufacturer
+        {
+            get { return _manufacturer; }
+        }
+
+        public virtual string Model
+        {
+            get { return _model; }
+        }
+
+        public virtual float CurrentPower
+        {
+            get { return _currentPower; }
+            protected set { _currentPower = value; }
+        }
+
+        public string SerialNumber
+        {
+            get { return _serialNumber; }
+        }
+
+        public virtual float MaxPower
+        {
+            get { return _maxPower; }
+            protected set { _maxPower = value; }
+        }
+
+        public virtual float OperatingTime
+        {
+            get { return _operatingTime; }
+        }
+
+        public virtual string ParentAircraftID
+        {
+            get { return _parentAircraftId; }
+        }
+
+        public virtual float FuelFlow
+        {
+            get { return _fuelFlow; }
+            set { _fuelFlow = value; }
+        }
+
+        public virtual OnOff OnOffStatus
+        {
+            get { return _onOffStatus; }
+            set { _onOffStatus = value; }
+        }
 
         public override string ToString()
         {
@@ -89,15 +138,15 @@ namespace Domain
         public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime,
             string parentaircraftID, float fuelflow, OnOff stat)
         {
-            Manufacturer = manufacturer;
-            Model = model;
-            CurrentPower = 0;
-            MaxPower = maxpower;
-            SerialNumber = serialnumber;
-            OperatingTime = operatingtime;
-            ParentAircraftID = parentaircraftID;
-            FuelFlow = fuelflow;
-            OnOffStatus = stat;
+            _manufacturer = manufacturer;
+            _model = model;
+            _currentPower = 0;
+            _maxPower = maxpower;
+            _serialNumber = serialnumber;
+            _operatingTime = operatingtime;
+            _parentAircraftId = parentaircraftID;
+            _fuelFlow = fuelflow;
+            _onOffStatus = stat;
         }
 
         public class EngineComparer : IEqualityComparer<Engine>

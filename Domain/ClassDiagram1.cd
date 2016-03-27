@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Domain.Aircraft" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkAAEAAAQIAAAAGBkAEAAAAAAECCAAAQBgAAAAAQBA=</HashCode>
+      <FileName>Aircraft.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.AviationAdministration" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAABAAAAAAIAIQAgAAgBAA=</HashCode>
+      <FileName>AviationAdministration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Domain.NTSB" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAABAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>AviationAdministration.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Domain.AircraftRegistration" Collapsed="true">
+    <Position X="36" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>AviationAdministration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Blade" Collapsed="true">
+    <Position X="14.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAIAAAAAAkAAAAJAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Blade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.TurbineEngineDecorator" Collapsed="true">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Decorator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Domain.ReheatDecorator" Collapsed="true">
+    <Position X="10.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAEBAAAAAAAAAAAAAAAAAIAAAAgAAA=</HashCode>
+      <FileName>Decorator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.DumpAndBurnDecorator" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAABAEBAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Decorator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.ReheatChamber" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEBAAAQAgAAAABAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Decorator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Domain.FuelDumper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAEAAAAQggAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Decorator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Domain.Engine" Collapsed="true">
+    <Position X="23.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACgABEAAASQAAAAEAiCEAAIAQAkAAAAgMEgAAAATAIA=</HashCode>
+      <FileName>Engine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Entity" Collapsed="true">
+    <Position X="17.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAIAiA=</HashCode>
+      <FileName>Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.GasCompartmentsNotFoundException" Collapsed="true">
+    <Position X="37.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.FixedWingAircraft" Collapsed="true">
+    <Position X="2" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAABAEAAAABAggAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>FixedWingAircraft.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.GasCompartment" Collapsed="true">
+    <Position X="11" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAIAkAAAAAAQCAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>GasCompartment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.GasCompartmentComparer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAEAAAAAAAAA=</HashCode>
+      <FileName>GasCompartmentComparer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Domain.GasPump" Collapsed="true">
+    <Position X="3" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAQAAIAAAA=</HashCode>
+      <FileName>GasPumps.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Domain.GasPumpManager" Collapsed="true">
+    <Position X="3" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GasPumps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.SafeGasPumpManager" Collapsed="true">
+    <Position X="5.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GasPumps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.NonMovableGasManager" Collapsed="true">
+    <Position X="0.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GasPumps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Generator" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAECAAAAAAAAQAAABAAAAAAAQAAAIQ=</HashCode>
+      <FileName>Generator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.GeneratorComparer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAEAAAAAAAAA=</HashCode>
+      <FileName>Generator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Domain.HeavierThanAirAircraft" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HeavierThanAirAircraft.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.JetEngine" Collapsed="true">
+    <Position X="22.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQIAAAAAAEAEAAEAAAAAAAAACBAAkAAQACAAAAABAA=</HashCode>
+      <FileName>JetEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.LighterThanAirAircraft" Collapsed="true">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAEQUACBAABABAAAAAAACAAAAgAAAA=</HashCode>
+      <FileName>LighterThanAirAircraft.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Domain.LighterThanAirAircraftProxy" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAgAAAA=</HashCode>
+      <FileName>LighterThanAirAircraftProxy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Domain.PistonEngine" Collapsed="true">
+    <Position X="29" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAAAAAEAAAAAgAAAAAAAAAAAEIAAACECAA=</HashCode>
+      <FileName>PistonEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.PoweredAircraft" Collapsed="true">
+    <Position X="4.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIBJAAAQAAAAAEAAIAAAAAAEAAQBAAEAAAAAAIAAQ=</HashCode>
+      <FileName>PoweredAircraft.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Domain.Ramjet" Collapsed="true">
+    <Position X="24.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAQAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Ramjet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.RocketEngine" Collapsed="true">
+    <Position X="26.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAEAAAAAAAAAAAAAAAKAAAAAAAAAAQ=</HashCode>
+      <FileName>RocketEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.RotorBlade" Collapsed="true">
+    <Position X="13.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RotorBlade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.RotorCraft" Collapsed="true">
+    <Position X="4.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAECAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>RotorCraft.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.SolidFuelRocketEngine" Collapsed="true">
+    <Position X="26.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>SolidFuelRocketEngine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Spool" Collapsed="true">
+    <Position X="33.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAgQAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Spool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.TurbineBlade" Collapsed="true">
+    <Position X="15.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAIAAAAgAEAAAAAAAAAAAA=</HashCode>
+      <FileName>TurbineBlade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.TurbineEngine" Collapsed="true">
+    <Position X="20" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABQABAEBAAAAIAAAEAAAECACAAAAAAgBAA=</HashCode>
+      <FileName>TurbineEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Domain.Turbofan" Collapsed="true">
+    <Position X="17.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAIAAAAAAEAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Turbofan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Turbojet" Collapsed="true">
+    <Position X="20" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAQAQAAAEAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Turbojet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Turboshaft" Collapsed="true">
+    <Position X="22.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAEQAAAAAEAAQAAAgAAAAABAAAEAAAAAAAACA=</HashCode>
+      <FileName>Turboshaft.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.VariableGeometryWing" Collapsed="true">
+    <Position X="31.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAEAAAAAAAAAAAACAAABBAgAAABAAAA=</HashCode>
+      <FileName>VariableGeometryWing.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Domain.Wing" Collapsed="true">
+    <Position X="31.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAgAAAAACBAAAAQBAAAAAAAAAAAAA=</HashCode>
+      <FileName>Wings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Domain.ITurbineEngine" Collapsed="true">
+    <Position X="39.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Decorator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.ITurbineEngineComponent" Collapsed="true">
+    <Position X="36" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Decorator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.IAviationAdministration" Collapsed="true">
+    <Position X="8.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IAviationAdministration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.IFAA" Collapsed="true">
+    <Position X="8.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>IAviationAdministration.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.ILiftingGasPumpModule" Collapsed="true">
+    <Position X="36" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IGasPump.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.ILighterThanAir" Collapsed="true">
+    <Position X="37.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>ILighterThanAir.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.IEnginePowerManagement" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAQAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>IPowered.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.IEngineStartStop" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>IPowered.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.IPowered" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPowered.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Domain.IVariableWingActions" Collapsed="true">
+    <Position X="37.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAABAAAAABAAAA=</HashCode>
+      <FileName>IVariableWingActions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Domain.OnOff" Collapsed="true">
+    <Position X="36" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Engines.Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Domain.Propellants" Collapsed="true">
+    <Position X="39.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABAEAAAAAAQAAAAAQgACCAAAAACAAAAAAAAAABAAA=</HashCode>
+      <FileName>Engines.Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Domain.Oxidisers" Collapsed="true">
+    <Position X="37.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAgAAAAAAAAAAAAAAAAAAAAAACABAAAAAAA=</HashCode>
+      <FileName>Engines.Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

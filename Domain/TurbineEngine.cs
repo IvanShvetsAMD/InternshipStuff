@@ -5,10 +5,31 @@ namespace Domain
 {
     public class TurbineEngine : JetEngine, ITurbineEngine
     {
-        public bool HasReverse { get; private set; }
-        public uint NumberOfShafts { get; private set; }
-        public Generator Generator { get; set; }
-        public List<Spool> Spools { get; private set; }
+        private readonly bool _hasReverse;
+        private readonly uint _numberOfShafts;
+        private Generator _generator;
+        private readonly IList<Spool> _spools;
+
+        public virtual bool HasReverse
+        {
+            get { return _hasReverse; }
+        }
+
+        public virtual uint NumberOfShafts
+        {
+            get { return _numberOfShafts; }
+        }
+
+        public virtual Generator Generator
+        {
+            get { return _generator; }
+            set { _generator = value; }
+        }
+
+        public virtual IList<Spool> Spools
+        {
+            get { return _spools; }
+        }
 
 
         public void StartGenerator() => Generator.GenerateCurrent();
@@ -41,10 +62,10 @@ namespace Domain
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
                 operatingtime, parentaircraftID, fuelflow, stat)
         {
-            HasReverse = hasreverse;
-            NumberOfShafts = numberofshafts;
-            Spools = spools;
-            Generator = gen;
+            _hasReverse = hasreverse;
+            _numberOfShafts = numberofshafts;
+            _spools = spools;
+            _generator = gen;
         }
 
         protected TurbineEngine()

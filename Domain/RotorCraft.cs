@@ -5,9 +5,18 @@ namespace Domain
 {
     public class RotorCraft : HeavierThanAirAircraft
     {
+        private readonly IList<RotorBlade> _rotorBlades;
+        private readonly string _rotorType;
         //public int NumberOfRotors { get; private set; }
-        public List<RotorBlade> RotorBlades { get; private set; }
-        public string RotorType { get; private set; }
+        public virtual IList<RotorBlade> RotorBlades
+        {
+            get { return _rotorBlades; }
+        }
+
+        public virtual string RotorType
+        {
+            get { return _rotorType; }
+        }
 
         void EjectRotorBlades() => RotorBlades.Clear();
 
@@ -18,14 +27,14 @@ namespace Domain
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
             //NumberOfRotors = numberofrotors;
-            RotorBlades = rotorblades;
-            RotorType = rotortype;
+            _rotorBlades = rotorblades;
+            _rotorType = rotortype;
         }
 
         public override string ToString()
         {
             StringBuilder final = new StringBuilder(base.ToString());
-            final.AppendFormat(", number of rotors: {0}, type of rotor: {1}", /*NumberOfRotors,*/ RotorType);
+            final.AppendFormat(", number of rotors: {0}, type of rotor: {1}", /*NumberOfRotors,*/RotorBlades.Count, RotorType);
             return final.ToString();
         }
     }

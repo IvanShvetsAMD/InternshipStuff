@@ -4,8 +4,12 @@ namespace Domain
 {
     public class Turbofan : TurbineEngine
     {
-        public float BypassRatio { get; private set; }
-        public bool IsGeared { get; private set; }
+        private readonly float _bypassRatio;
+        private readonly bool _isGeared;
+
+        public virtual float BypassRatio => _bypassRatio;
+
+        public virtual bool IsGeared => _isGeared;
 
         public override string ToString()
         {
@@ -22,8 +26,8 @@ namespace Domain
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
                 model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
-            BypassRatio = bypassratio;
-            IsGeared = isgeared;
+            _bypassRatio = bypassratio;
+            _isGeared = isgeared;
         }
 
         public Turbofan()

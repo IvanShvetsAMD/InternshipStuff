@@ -18,7 +18,7 @@ namespace Domain
         public void GetNotifiedAboutEngineChange(PoweredAircraft aircraft)
         {
             registeredEngines.RemoveAll(tuple => tuple.Item1 == aircraft.SerialNumber);
-            registeredEngines.Add(new Tuple<string, List<Engine>>(aircraft.SerialNumber, aircraft.Engines));
+            registeredEngines.Add(new Tuple<string, List<Engine>>(aircraft.SerialNumber, aircraft.Engines.ToList()));
         }
 
         public void GetNotifiedAboutCrash(Aircraft aircraft)
@@ -33,7 +33,7 @@ namespace Domain
         public void RegisterAircraft(PoweredAircraft aircraft, bool isOperational)
         {
             registeredAircraft.Add(new AircraftRegistration(aircraft, isOperational));
-            registeredEngines.Add(new Tuple<string, List<Engine>>(aircraft.SerialNumber, aircraft.Engines));
+            registeredEngines.Add(new Tuple<string, List<Engine>>(aircraft.SerialNumber, aircraft.Engines.ToList()));
         }
 
         public void RegisterAircraft(List<AircraftRegistration> registry)
@@ -41,7 +41,7 @@ namespace Domain
             registeredAircraft.AddRange(registry);
             foreach (var aircraftRegistration in registry)
             {
-                registeredEngines.Add(new Tuple<string, List<Engine>>(aircraftRegistration.Aircraft.SerialNumber, aircraftRegistration.Aircraft.Engines));
+                registeredEngines.Add(new Tuple<string, List<Engine>>(aircraftRegistration.Aircraft.SerialNumber, aircraftRegistration.Aircraft.Engines.ToList()));
             }
         }
 
@@ -53,7 +53,7 @@ namespace Domain
                 return;
             }
             registeredEngines.RemoveAll(tuple => tuple.Item1 == aircraft.SerialNumber);
-            registeredEngines.Add(new Tuple<string, List<Engine>>(aircraft.SerialNumber, aircraft.Engines));
+            registeredEngines.Add(new Tuple<string, List<Engine>>(aircraft.SerialNumber, aircraft.Engines.ToList()));
         }
 
         private AviationAdministration()

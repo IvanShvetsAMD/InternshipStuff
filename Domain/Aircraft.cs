@@ -5,13 +5,23 @@ namespace Domain
 {
     public abstract class Aircraft : Entity
     {
-        private List<IAviationAdministration> aviationAdministrations;
+        private IList<IAviationAdministration> aviationAdministrations;
         private bool isOperational;
-        public string Manufacturer { get; }
-        public string Model { get; }
-        public int MaxTakeoffWeight { get; private set; }
-        public int Vne { get; private set; }
-        public string SerialNumber { get; }
+        private readonly string _manufacturer;
+        private readonly string _model;
+        private readonly int _maxTakeoffWeight;
+        private readonly int _vne;
+        private readonly string _serialNumber;
+
+        public virtual string Manufacturer => _manufacturer;
+
+        public virtual string Model => _model;
+
+        public virtual int MaxTakeoffWeight => _maxTakeoffWeight;
+
+        public virtual int Vne => _vne;
+
+        public virtual string SerialNumber => _serialNumber;
 
         public bool IsOperational
         {
@@ -22,6 +32,12 @@ namespace Domain
                 if (value == false)
                     NotifyOfCrash();
             }
+        }
+
+        public IList<IAviationAdministration> AviationAdministrations
+        {
+            get { return aviationAdministrations; }
+            set { aviationAdministrations = value; }
         }
 
 
@@ -63,12 +79,12 @@ namespace Domain
         public Aircraft(string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
         {
             aviationAdministrations = new List<IAviationAdministration>();
-            Manufacturer = manufacturer;
-            Model = model;
-            MaxTakeoffWeight = maxTOweight;
-            Vne = vne;
-            SerialNumber = serialnumber;
-            IsOperational = true;
+            _manufacturer = manufacturer;
+            _model = model;
+            _maxTakeoffWeight = maxTOweight;
+            _vne = vne;
+            _serialNumber = serialnumber;
+            isOperational = true;
         }
 
         protected Aircraft() { }

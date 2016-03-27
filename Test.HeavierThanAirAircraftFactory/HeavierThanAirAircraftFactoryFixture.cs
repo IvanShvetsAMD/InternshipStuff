@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Domain;
 using Factories;
 using Interfaces;
@@ -35,7 +36,7 @@ namespace Test.HeavierThanAirAircraftFactory
             {
                 engineaddition.Setup(dec => dec.AddTurboshaftEngines(It.IsAny<RotorCraft>())).Returns((RotorCraft rotorCraftarg) => rotorCraftarg);
 
-                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades, "singular", /*2,*/ 56, "linx", 12000);
+                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades.ToList(), "singular", /*2,*/ 56, "linx", 12000);
 
                 engineaddition.Verify(dec => dec.AddTurboshaftEngines(somecraft), Times.Once);
             }
@@ -44,7 +45,7 @@ namespace Test.HeavierThanAirAircraftFactory
             public void ItShouldReturnExpectedValue(RotorCraft rotorCraft)
             {
                 engineaddition.Setup(dec => dec.AddTurboshaftEngines(It.IsAny<RotorCraft>())).Returns(() => rotorCraft);
-                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades, "singular", /*2,*/ 56, "linx", 12000);
+                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades.ToList(), "singular", /*2,*/ 56, "linx", 12000);
 
                 Assert.AreEqual(rotorCraft.ToString(), somecraft.ToString());
             }

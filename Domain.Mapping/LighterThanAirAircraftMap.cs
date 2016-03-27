@@ -12,6 +12,7 @@ namespace Domain.Mapping
         {
             Map(x => x.BallastMass).Not.Nullable();
             Map(x => x.GasType).Not.Nullable();
+            HasMany(x => x.Compartments);
         }
     }
 }

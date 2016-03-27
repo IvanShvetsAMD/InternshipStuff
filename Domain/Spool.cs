@@ -1,16 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
-    public class Spool
+    public class Spool : Entity
     {
-        protected List<TurbineBlade> Blades { get; private set; }
-        protected string Type { get; }
+        private readonly IList<TurbineBlade> _blades;
+        private readonly string _type;
+
+        public virtual IList<TurbineBlade> Blades
+        {
+            get { return _blades; }
+        }
+
+        public virtual string Type
+        {
+            get { return _type; }
+        }
 
         public Spool(List<TurbineBlade> blades, string type )
         {
-            Blades = blades;
-            Type = type;
+            _blades = blades;
+            _type = type;
+        }
+
+        [Obsolete]
+        public Spool()
+        {
+            
         }
     }
 }

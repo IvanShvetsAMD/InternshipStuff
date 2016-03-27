@@ -58,6 +58,7 @@
     <Compile Include="FixedWingRepository.cs" />
     <Compile Include="GasCompartmentRepository.cs" />
     <Compile Include="GeneratorRepository.cs" />
+    <Compile Include="HeavierThanAirAircraftRepository.cs" />
     <Compile Include="JetEngineRepository.cs" />
     <Compile Include="LighterThanAircraftrepository.cs" />
     <Compile Include="PistonEngineRepository.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="RotorCraftRepository.cs" />
     <Compile Include="SessionGenerator.cs" />
     <Compile Include="SolidFuelRocketEngineRepository.cs" />
+    <Compile Include="SpoolRepository.cs" />
     <Compile Include="TurbineBladeRepository.cs" />
     <Compile Include="TurbineEngineRepository.cs" />
     <Compile Include="TurboFanRepository.cs" />

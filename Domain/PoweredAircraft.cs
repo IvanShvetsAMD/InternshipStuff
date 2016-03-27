@@ -6,8 +6,18 @@ namespace Domain
 {
     public class PoweredAircraft : Aircraft, IPowered
     {
-        public List<Engine> Engines { get; private set; }
-        public int FuelCapacity { get; private set; }
+        private readonly IList<Engine> _engines;
+        private readonly int _fuelCapacity;
+
+        public virtual IList<Engine> Engines
+        {
+            get { return _engines; }
+        }
+
+        public virtual int FuelCapacity
+        {
+            get { return _fuelCapacity; }
+        }
 
         public float GetCurrentPower(int engineNumber) => Engines[engineNumber].CurrentPower;
 
@@ -64,12 +74,12 @@ namespace Domain
                 throw;
             }
         }
-
+        
         public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            Engines = engines;
-            FuelCapacity = fuelcapacity;
+            _engines = engines;
+            _fuelCapacity = fuelcapacity;
         }
 
         protected PoweredAircraft() { }

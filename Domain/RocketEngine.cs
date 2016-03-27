@@ -4,13 +4,28 @@ namespace Domain
 {
     public class RocketEngine : JetEngine
     {
-        public bool IsReignitable { get; private set; }
-        public string NozzleBellType { get; private set; }
+        private readonly bool _isReignitable;
+        private readonly string _nozzleBellType;
+
+        public virtual bool IsReignitable
+        {
+            get { return _isReignitable; }
+        }
+
+        public virtual string NozzleBellType
+        {
+            get { return _nozzleBellType; }
+        }
 
         public override string ToString()
         {
             return base.ToString() + "Nozzle bell type: " + NozzleBellType +
                    (IsReignitable ? ", Engine is reignitable" : ", Engine is not regnitable");
+        }
+
+        public RocketEngine()
+        {
+            
         }
 
         public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
@@ -21,8 +36,8 @@ namespace Domain
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
                 operatingtime, parentaircraftID, fuelflow, stat)
         {
-            IsReignitable = isreignitable;
-            NozzleBellType = nozzlebelltype;
+            _isReignitable = isreignitable;
+            _nozzleBellType = nozzlebelltype;
         }
     }
 }

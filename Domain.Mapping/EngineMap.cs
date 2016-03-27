@@ -15,6 +15,7 @@ namespace Domain.Mapping
             Map(x => x.Manufacturer).Not.Nullable();
             Map(x => x.Model).Not.Nullable();
             Map(x => x.OperatingTime).Not.Nullable();
+            Map(x => x.OnOffStatus).CustomType<OnOff>().Not.Nullable();
         }
     }
 }

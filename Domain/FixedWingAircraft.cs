@@ -5,17 +5,33 @@ namespace Domain
 {
     public class FixedWingAircraft : HeavierThanAirAircraft
     {
-        public List<Wing> Wings { get; set; }
-        public int? CruiseSpeed { get; }
-        public int? StallSpeed { get; }
+        private IList<Wing> _wings;
+        private readonly int? _cruiseSpeed;
+        private readonly int? _stallSpeed;
+
+        public virtual IList<Wing> Wings
+        {
+            get { return _wings; }
+            set { _wings = value; }
+        }
+
+        public virtual int? CruiseSpeed
+        {
+            get { return _cruiseSpeed; }
+        }
+
+        public virtual int? StallSpeed
+        {
+            get { return _stallSpeed; }
+        }
 
         public FixedWingAircraft(List<Wing> wings, int cruisespeed, int stallspeed, List<Engine> engines,
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            Wings = wings;
-            CruiseSpeed = cruisespeed;
-            StallSpeed = stallspeed;
+            _wings = wings;
+            _cruiseSpeed = cruisespeed;
+            _stallSpeed = stallspeed;
         }
 
         public override string ToString()

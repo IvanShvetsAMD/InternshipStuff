@@ -4,9 +4,25 @@ namespace Domain
 {
     public class PistonEngine : Engine
     {
-        public uint NumberOfPistons { get; private set; }
-        public float Volume { get; private set; }
-        public int Mixture { get; private set; }
+        private readonly uint _numberOfPistons;
+        private readonly float _volume;
+        private int _mixture;
+
+        public virtual uint NumberOfPistons
+        {
+            get { return _numberOfPistons; }
+        }
+
+        public virtual float Volume
+        {
+            get { return _volume; }
+        }
+
+        public virtual int Mixture
+        {
+            get { return _mixture; }
+            private set { _mixture = value; }
+        }
 
         public void IncreaseMixture() => Mixture += 10;
         public void LeanMixture() => Mixture -= 10;
@@ -22,8 +38,8 @@ namespace Domain
             string parentaircraftID, float fuelflow, OnOff stat)
             : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
-            NumberOfPistons = numberofpistons;
-            Volume = volume;
+            _numberOfPistons = numberofpistons;
+            _volume = volume;
             Mixture = 0;
         }
     }

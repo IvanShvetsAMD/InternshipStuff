@@ -6,11 +6,33 @@ namespace Domain
 {
     public class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
     {
-        public ILiftingGasPumpModule GasManager { get; set; } = new SafeGasPumpManager();
-        public uint BallastMass { get; private set; }
-        public string GasType { get; private set; }
+        private ILiftingGasPumpModule _gasManager = new SafeGasPumpManager();
+        private uint _ballastMass;
+        private readonly string _gasType;
+        private readonly IList<GasCompartment> _compartments;
+
+        public virtual ILiftingGasPumpModule GasManager
+        {
+            get { return _gasManager; }
+            set { _gasManager = value; }
+        }
+
+        public virtual uint BallastMass
+        {
+            get { return _ballastMass; }
+            private set { _ballastMass = value; }
+        }
+
+        public virtual string GasType
+        {
+            get { return _gasType; }
+        }
+
         //public float GasVolume { get; private set; }
-        public List<GasCompartment> Compartments { get; }
+        public virtual IList<GasCompartment> Compartments
+        {
+            get { return _compartments; }
+        }
 
         public override string ToString()
         {
@@ -41,14 +63,19 @@ namespace Domain
             GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments, volume: volume);
         }
 
+        public LighterThanAirAircraft()
+        {
+            
+        }
+
         public LighterThanAirAircraft(ILiftingGasPumpModule gasManager, uint ballastmass, string gastype, List<GasCompartment> compartments, 
             List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            GasManager = gasManager;
-            BallastMass = ballastmass;
-            GasType = gastype;
-            Compartments = compartments;
+            _gasManager = gasManager;
+            _ballastMass = ballastmass;
+            _gasType = gastype;
+            _compartments = compartments;
             //GasVolume = Compartments?.Sum(chamber => chamber.CurrentVolume) ?? 0;
         }
     }

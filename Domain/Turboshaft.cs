@@ -2,10 +2,14 @@
 
 namespace Domain
 {
-    public sealed class Turboshaft : TurbineEngine
+    public class Turboshaft : TurbineEngine
     {
-        public float GearingRatio { get; private set; }
-        public float MaxTorque { get; private set; }
+        private readonly float _gearingRatio;
+        private readonly float _maxTorque;
+
+        public virtual float GearingRatio => _gearingRatio;
+
+        public virtual float MaxTorque => _maxTorque;
 
         public void IncreaseGearingRatio()
         {
@@ -44,8 +48,8 @@ namespace Domain
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
                 model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
         {
-            GearingRatio = gearingratio;
-            MaxTorque = maxtorque;
+            _gearingRatio = gearingratio;
+            _maxTorque = maxtorque;
         }
     }
 }
