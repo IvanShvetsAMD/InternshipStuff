@@ -11,6 +11,7 @@ namespace Domain.Mapping
         public RotorBladeMap()
         {
             Map(x => x.HasSupersonicTip).Not.Nullable();
+            References(x => x.ParentRotorCraft).Nullable();
         }
     }
 }

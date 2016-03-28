@@ -13,6 +13,7 @@ namespace Domain.Mapping
         {
             Map(x => x.HasCoolingChannels).Not.Nullable();
             Map(x => x.MaxTemp).Not.Nullable();
+            References(x => x.ParentSpool).Nullable();
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Domain.Mapping
             Map(x => x.HasReverse).Not.Nullable();
             Map(x => x.NumberOfShafts).Not.Nullable();
             HasMany(x => x.Spools);
+            HasOne(x => x.Generator);
         }
     }
 }

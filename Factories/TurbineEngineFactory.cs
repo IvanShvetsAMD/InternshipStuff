@@ -18,7 +18,7 @@ namespace Factories
         public Turbofan MakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                     int numberofcycles, List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model,
                                     string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, bool isgeared = false,
-                                    bool hasreverse = true, string parentvehicleID = null)
+                                    bool hasreverse = true, Aircraft parentvehicle = null)
         {
             //return new Turbofan(3, false, true, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
             //                    new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
@@ -30,20 +30,20 @@ namespace Factories
             Debug.WriteLine("Creating a new turbofan ({0})", serialnumber);
             return new Turbofan(bypassratio, isgeared, hasreverse, numberofshafts, gen, spools, egt, isp,
                 numberofcycles, fueList, oxidisers,
-                manuf, model, serialnumber, maxpower, operatingtime, parentvehicleID, fuelflow, stat);
+                manuf, model, serialnumber, maxpower, operatingtime, parentvehicle, fuelflow, stat);
         }
 
         public bool TryMakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                     int numberofcycles, List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model,
                                     string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, out Turbofan incomingTurbofan, bool isgeared = false,
-                                    bool hasreverse = true, string parentvehicleID = null)
+                                    bool hasreverse = true, Aircraft parentvehicle = null)
         {
             try
             {
                 Turbofan turbofan = MakeTurbofan(bypassratio, numberofshafts, gen, spools, egt, isp,
                     numberofcycles, fueList,
                     oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared, hasreverse,
-                    parentvehicleID);
+                    parentvehicle);
 
                 incomingTurbofan = turbofan;
                 return true;
@@ -72,7 +72,7 @@ namespace Factories
         public Turbofan TryMakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                         int numberofcycles, List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model,
                                         string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, bool isgeared = false,
-                                        bool hasreverse = true, string parentvehicleID = null)
+                                        bool hasreverse = true, Aircraft parentvehicle = null)
         {
             Turbofan turbofan = new Turbofan();
 
@@ -81,7 +81,7 @@ namespace Factories
                 turbofan = MakeTurbofan(bypassratio, numberofshafts, gen, spools, egt, isp,
                     numberofcycles, fueList,
                     oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared, hasreverse,
-                    parentvehicleID);
+                    parentvehicle);
             }
             catch (ArgumentNullException argumentNullException)
             {
@@ -94,7 +94,7 @@ namespace Factories
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
                             hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(serialnumber):
                         serialnumber = "no serial number specified";
@@ -102,7 +102,7 @@ namespace Factories
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
                             hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(fueList):
                         fueList = new List<Propellants>();
@@ -110,7 +110,7 @@ namespace Factories
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
                             hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(oxidisers):
                         oxidisers = new List<Oxidisers>();
@@ -118,7 +118,7 @@ namespace Factories
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
                             hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                 }
             }
@@ -132,7 +132,7 @@ namespace Factories
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, isgeared,
                             hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                 }
             }
             catch (Exception e)
@@ -145,7 +145,7 @@ namespace Factories
         public Turboshaft MakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts, Generator gen,
                                         List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
                                         List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
-                                        float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
+                                        float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
         {
             GeneralConditionsChecker(numberofshafts, spools, fueList, oxidisers, serialnumber);
 
@@ -154,7 +154,7 @@ namespace Factories
 
             return new Turboshaft(gearingR, maxtorque, hasreverse, numberofshafts, gen, spools, egt, isp,
                 numberofcycles, fueList,
-                oxidisers, manuf, model, serialnumber, maxpower, operatingtime, parentvehicleID, fuelflow, stat);
+                oxidisers, manuf, model, serialnumber, maxpower, operatingtime, parentvehicle, fuelflow, stat);
 
         }
 
@@ -198,7 +198,7 @@ namespace Factories
         public Turboshaft TryMakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts, Generator gen,
                                             List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
                                             List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
-                                            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
+                                            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
         {
             Turboshaft turboshaft = new Turboshaft();
 
@@ -207,7 +207,7 @@ namespace Factories
                 turboshaft = MakeTurboshaft(gearingR, maxtorque, numberofshafts, gen, spools, egt, isp,
                     numberofcycles, fueList,
                     oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                    parentvehicleID);
+                    parentvehicle);
                 return turboshaft;
             }
             catch (ArgumentNullException argumentNullException)
@@ -220,28 +220,28 @@ namespace Factories
                         turboshaft = TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(serialnumber):
                         serialnumber = "no serial number specified";
                         turboshaft = TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(fueList):
                         fueList = new List<Propellants>();
                         turboshaft = TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(oxidisers):
                         oxidisers = new List<Oxidisers>();
                         turboshaft = TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                 }
             }
@@ -255,14 +255,14 @@ namespace Factories
                         turboshaft = TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(maxtorque):
                         maxtorque = 1;
                         turboshaft = TryMakeTurboshaft(gearingR, maxtorque, numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                 }
             }
@@ -290,25 +290,25 @@ namespace Factories
 
         public Turbojet MakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles,
                                      List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
-                                     float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
+                                     float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
         {
             GeneralConditionsChecker(numberofshafts, spools, fueList, oxidisers, serialnumber);
 
             return new Turbojet(hasreverse, numberofshafts, gen, spools, egt, isp,
                 numberofcycles, fueList,
-                oxidisers, manuf, model, serialnumber, maxpower, operatingtime, parentvehicleID, fuelflow, stat);
+                oxidisers, manuf, model, serialnumber, maxpower, operatingtime, parentvehicle, fuelflow, stat);
         }
 
         public bool TryMakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
                                     List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower, float operatingtime,
-                                    float fuelflow, OnOff stat, out Turbojet incomingTurbojet, bool hasreverse = true, string parentvehicleID = null)
+                                    float fuelflow, OnOff stat, out Turbojet incomingTurbojet, bool hasreverse = true, Aircraft parentvehicle = null)
         {
             try
             {
                 Turbojet turbojet = MakeTurbojet(numberofshafts, gen, spools, egt, isp,
                     numberofcycles, fueList,
                     oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                    parentvehicleID);
+                    parentvehicle);
                 incomingTurbojet = turbojet;
                 return true;
             }
@@ -336,7 +336,7 @@ namespace Factories
             int egt, int isp, int numberofcycles,
             List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model, string serialnumber,
             float maxpower,
-            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
+            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
         {
             Turbojet turbojet = new Turbojet();
 
@@ -345,7 +345,7 @@ namespace Factories
                 turbojet = MakeTurbojet(numberofshafts, gen, spools, egt, isp,
                     numberofcycles, fueList,
                     oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                    parentvehicleID);
+                    parentvehicle);
             }
             catch (ArgumentNullException argumentNullException)
             {
@@ -357,28 +357,28 @@ namespace Factories
                         turbojet = TryMakeTurbojet(numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(serialnumber):
                         serialnumber = "no serial number specified";
                         turbojet = TryMakeTurbojet(numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(fueList):
                         fueList = new List<Propellants>();
                         turbojet = TryMakeTurbojet(numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                     case nameof(oxidisers):
                         oxidisers = new List<Oxidisers>();
                         turbojet = TryMakeTurbojet(numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                         break;
                 }
             }
@@ -391,7 +391,7 @@ namespace Factories
                     turbojet = TryMakeTurbojet(numberofshafts, gen, spools, egt, isp,
                             numberofcycles, fueList,
                             oxidisers, manuf, model, serialnumber, maxpower, operatingtime, fuelflow, stat, hasreverse,
-                            parentvehicleID);
+                            parentvehicle);
                 }
             }
             catch (Exception e)

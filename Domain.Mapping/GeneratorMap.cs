@@ -13,6 +13,7 @@ namespace Domain.Mapping
             Id(x => x.Id).Column("GeneratorID");
             Map(x => x.OutputCurrent).Not.Nullable();
             Map(x => x.OutputVoltage).Not.Nullable();
+            References(x => x.ParentEngine).Nullable();
         }
     }
 }

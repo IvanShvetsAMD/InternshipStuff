@@ -16,6 +16,7 @@ namespace Domain.Mapping
             Map(x => x.Model).Not.Nullable();
             Map(x => x.OperatingTime).Not.Nullable();
             Map(x => x.OnOffStatus).CustomType<OnOff>().Not.Nullable();
+            References(x => x.ParentAircraft).Nullable();
         }
     }
 }

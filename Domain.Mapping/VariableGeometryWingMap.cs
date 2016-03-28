@@ -16,6 +16,7 @@ namespace Domain.Mapping
             Map(x => x.WingAngle).Not.Nullable();
             Map(x => x.MaxBackSweepAngle).Not.Nullable();
             Map(x => x.MaxForwardSweepAngle).Not.Nullable();
+            References(x => x.ParentfFixedWingAircraft).Nullable();
         }
     }
 }

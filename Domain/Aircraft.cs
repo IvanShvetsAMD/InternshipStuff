@@ -5,7 +5,7 @@ namespace Domain
 {
     public abstract class Aircraft : Entity
     {
-        private IList<IAviationAdministration> aviationAdministrations;
+        //private IList<IAviationAdministration> aviationAdministrations;
         private bool isOperational;
         private readonly string _manufacturer;
         private readonly string _model;
@@ -29,16 +29,16 @@ namespace Domain
             set
             {
                 isOperational = value;
-                if (value == false)
-                    NotifyOfCrash();
+                //if (value == false)
+                //    NotifyOfCrash();
             }
         }
 
-        public IList<IAviationAdministration> AviationAdministrations
-        {
-            get { return aviationAdministrations; }
-            set { aviationAdministrations = value; }
-        }
+        //public IList<IAviationAdministration> AviationAdministrations
+        //{
+        //    get { return aviationAdministrations; }
+        //    set { aviationAdministrations = value; }
+        //}
 
 
         public void ReleaseParkingBrake()
@@ -56,29 +56,29 @@ namespace Domain
             return $"Manufacturer: {Manufacturer}, model: {Model}, maximum takeoff weight: {MaxTakeoffWeight}, Vne: {Vne}, Serial number: {SerialNumber}";
         }
 
-        public void Subscribe(IAviationAdministration administration)
-        {
-            if(!aviationAdministrations.Contains(administration))
-                aviationAdministrations.Add(administration);
-        }
+        //public void Subscribe(IAviationAdministration administration)
+        //{
+        //    if(!aviationAdministrations.Contains(administration))
+        //        aviationAdministrations.Add(administration);
+        //}
 
-        public void Unsubscribe(IAviationAdministration administration)
-        {
-            if (aviationAdministrations.Contains(administration))
-                aviationAdministrations.Remove(administration);
-        }
+        //public void Unsubscribe(IAviationAdministration administration)
+        //{
+        //    if (aviationAdministrations.Contains(administration))
+        //        aviationAdministrations.Remove(administration);
+        //}
 
-        public void NotifyOfCrash()
-        {
-            foreach (var aviationAdministration in aviationAdministrations)
-            {
-                aviationAdministration.GetNotifiedAboutCrash(this);
-            }
-        }
+        //public void NotifyOfCrash()
+        //{
+        //    foreach (var aviationAdministration in aviationAdministrations)
+        //    {
+        //        aviationAdministration.GetNotifiedAboutCrash(this);
+        //    }
+        //}
 
         public Aircraft(string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
         {
-            aviationAdministrations = new List<IAviationAdministration>();
+            //aviationAdministrations = new List<IAviationAdministration>();
             _manufacturer = manufacturer;
             _model = model;
             _maxTakeoffWeight = maxTOweight;

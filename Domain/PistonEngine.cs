@@ -35,8 +35,8 @@ namespace Domain
 
         public PistonEngine(uint numberofpistons, float volume, string manufacturer,
             string model, string serialnumber, float maxpower, float operatingtime,
-            string parentaircraftID, float fuelflow, OnOff stat)
-            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            Aircraft parentaircraft, float fuelflow, OnOff stat)
+            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _numberOfPistons = numberofpistons;
             _volume = volume;

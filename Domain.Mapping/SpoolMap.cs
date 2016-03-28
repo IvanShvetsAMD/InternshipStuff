@@ -13,6 +13,7 @@ namespace Domain.Mapping
             Id(x => x.Id);
             Map(x => x.Type).Not.Nullable();
             HasMany(x => x.Blades);
+            References(x => x.ParentEngine).Nullable();
         }
     }
 }

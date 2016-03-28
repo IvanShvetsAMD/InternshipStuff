@@ -17,7 +17,7 @@ namespace Domain.Mapping
             Map(x => x.Model).Not.Nullable();
             Map(x => x.MaxTakeoffWeight).Not.Nullable();
             Map(x => x.Vne).Not.Nullable();
-            HasMany(x => x.AviationAdministrations);
+            //HasMany(x => x.AviationAdministrations);
         }
     }
 }

@@ -86,8 +86,8 @@ namespace Domain
 
         public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
+            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _egt = egt;
             _isp = isp;

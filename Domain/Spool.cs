@@ -7,6 +7,7 @@ namespace Domain
     {
         private readonly IList<TurbineBlade> _blades;
         private readonly string _type;
+        private TurbineEngine _parentEngine;
 
         public virtual IList<TurbineBlade> Blades
         {
@@ -18,16 +19,23 @@ namespace Domain
             get { return _type; }
         }
 
-        public Spool(List<TurbineBlade> blades, string type )
+        public virtual TurbineEngine ParentEngine
+        {
+            get { return _parentEngine; }
+            protected set { _parentEngine = value; }
+        }
+
+        public Spool(List<TurbineBlade> blades, string type, TurbineEngine parentEngine = null)
         {
             _blades = blades;
             _type = type;
+            _parentEngine = parentEngine;
         }
 
         [Obsolete]
-        public Spool()
+        public Spool(TurbineEngine parentEngine)
         {
-            
+            ParentEngine = parentEngine;
         }
     }
 }

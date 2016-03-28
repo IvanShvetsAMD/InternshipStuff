@@ -10,8 +10,20 @@ namespace Domain
     public class AviationAdministration : IFAA
     {
         static readonly Lazy<AviationAdministration> LazyInstance = new Lazy<AviationAdministration>(() => new AviationAdministration(), true);
-        private List<AircraftRegistration> registeredAircraft = new List<AircraftRegistration>();
-        private List<Tuple<string, List<Engine>>> registeredEngines = new List<Tuple<string, List<Engine>>>();
+        private List<AircraftRegistration> registeredAircraft;// = new List<AircraftRegistration>();
+        private List<Tuple<string, List<Engine>>> registeredEngines;// = new List<Tuple<string, List<Engine>>>();
+
+        public virtual IList<AircraftRegistration> RegisteredAircraft
+        {
+            get { return registeredAircraft; }
+            set { registeredAircraft = value.ToList(); }
+        }
+
+        public virtual IList<Tuple<string, List<Engine>>> RegisteredEngines
+        {
+            get { return registeredEngines; }
+            set { registeredEngines = value.ToList(); }
+        }
 
         public static AviationAdministration GetInstance() => LazyInstance.Value;
 
@@ -38,10 +50,10 @@ namespace Domain
 
         public void RegisterAircraft(List<AircraftRegistration> registry)
         {
-            registeredAircraft.AddRange(registry);
+            RegisteredAircraft.ToList().AddRange(registry);
             foreach (var aircraftRegistration in registry)
             {
-                registeredEngines.Add(new Tuple<string, List<Engine>>(aircraftRegistration.Aircraft.SerialNumber, aircraftRegistration.Aircraft.Engines.ToList()));
+                RegisteredEngines.Add(new Tuple<string, List<Engine>>(aircraftRegistration.Aircraft.SerialNumber, aircraftRegistration.Aircraft.Engines.ToList()));
             }
         }
 
@@ -58,7 +70,8 @@ namespace Domain
 
         private AviationAdministration()
         {
-            
+            registeredAircraft = new List<AircraftRegistration>();
+            registeredEngines = new List<Tuple<string, List<Engine>>>();
         }
 
         //public AviationAdministration(List<AircraftRegistration> crafts, List<Tuple<string, List<Engine>>> engines)

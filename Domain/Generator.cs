@@ -7,6 +7,7 @@ namespace Domain
     {
         private float _outputCurrent;
         private float _outputVoltage;
+        private TurbineEngine _parentEngine;
 
         public virtual float OutputCurrent
         {
@@ -18,6 +19,12 @@ namespace Domain
         {
             get { return _outputVoltage; }
             protected set { _outputVoltage = value; }
+        }
+
+        public virtual TurbineEngine ParentEngine
+        {
+            get { return _parentEngine; }
+            protected set { _parentEngine = value; }
         }
 
         public virtual void IncreaseCurrent(float delta)
@@ -36,10 +43,11 @@ namespace Domain
 
         public Generator() { }
 
-        public Generator(float c, float v)
+        public Generator(float c, float v, TurbineEngine engine = null)
         {
             _outputCurrent = c;
             _outputVoltage = v;
+            _parentEngine = engine;
         }
 
         public override string ToString()

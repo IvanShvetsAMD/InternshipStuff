@@ -10,15 +10,9 @@ namespace Domain
         private Generator _generator;
         private readonly IList<Spool> _spools;
 
-        public virtual bool HasReverse
-        {
-            get { return _hasReverse; }
-        }
+        public virtual bool HasReverse => _hasReverse;
 
-        public virtual uint NumberOfShafts
-        {
-            get { return _numberOfShafts; }
-        }
+        public virtual uint NumberOfShafts => _numberOfShafts;
 
         public virtual Generator Generator
         {
@@ -26,10 +20,7 @@ namespace Domain
             set { _generator = value; }
         }
 
-        public virtual IList<Spool> Spools
-        {
-            get { return _spools; }
-        }
+        public virtual IList<Spool> Spools => _spools;
 
 
         public void StartGenerator() => Generator.GenerateCurrent();
@@ -57,10 +48,10 @@ namespace Domain
         public TurbineEngine(bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
             int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
-                operatingtime, parentaircraftID, fuelflow, stat)
+                operatingtime, parentaircraft, fuelflow, stat)
         {
             _hasReverse = hasreverse;
             _numberOfShafts = numberofshafts;
