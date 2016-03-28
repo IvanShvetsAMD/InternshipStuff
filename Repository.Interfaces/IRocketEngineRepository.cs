@@ -7,7 +7,7 @@ using Domain;
 
 namespace Repository.Interfaces
 {
-    public interface IRocketRepository : IRepository<RocketEngine>
+    public interface IRocketEngineRepository : IRepository<RocketEngine>
     {
     }
 }

@@ -43,7 +43,7 @@ namespace Repository.Implemetations
 
         private static void CreateMappings(MappingConfiguration mappingConfiguration)
         {
-            var assembly = typeof(GasCompartmentMap).Assembly;
+            var assembly = typeof(EntityMap<>).Assembly;
 
             mappingConfiguration.FluentMappings.AddFromAssembly(assembly);
             mappingConfiguration.HbmMappings.AddFromAssembly(assembly);

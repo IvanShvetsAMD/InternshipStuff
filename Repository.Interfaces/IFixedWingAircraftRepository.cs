@@ -7,7 +7,7 @@ using Domain;
 
 namespace Repository.Interfaces
 {
-    public interface IFixedWingRepository : IRepository<FixedWingAircraft>
+    public interface IFixedWingAircraftRepository : IRepository<FixedWingAircraft>
     {
     }
 }

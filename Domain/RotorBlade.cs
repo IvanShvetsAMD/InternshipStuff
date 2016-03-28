@@ -16,6 +16,11 @@
             protected set { _parentRotorCraft = value; }
         }
 
+        protected RotorBlade()
+        {
+            
+        }
+
         public RotorBlade(bool hassupersonictip, int length, int chord, string materialType, RotorCraft parentRotorCraft = null) : base(length, chord, materialType)
         {
             _hasSupersonicTip = hassupersonictip;

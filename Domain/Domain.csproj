@@ -77,7 +77,10 @@
     <Compile Include="Turbojet.cs" />
     <Compile Include="Turboshaft.cs" />
     <Compile Include="VariableGeometryWing.cs" />
-    <Compile Include="Wings.cs" />
+    <Compile Include="Wing.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

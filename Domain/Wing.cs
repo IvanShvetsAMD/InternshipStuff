@@ -32,6 +32,11 @@ namespace Domain
             protected set { _parentfFixedWingAircraft = value; }
         }
 
+        protected Wing()
+        {
+            
+        }
+
         public Wing(int fuelcapacity, float rootThickness, FixedWingAircraft parentfFixedWingAircraft = null)
         {
             _fuelCapacity = fuelcapacity;

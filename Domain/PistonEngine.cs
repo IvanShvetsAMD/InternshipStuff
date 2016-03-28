@@ -21,16 +21,21 @@ namespace Domain
         public virtual int Mixture
         {
             get { return _mixture; }
-            private set { _mixture = value; }
+            protected set { _mixture = value; }
         }
 
-        public void IncreaseMixture() => Mixture += 10;
-        public void LeanMixture() => Mixture -= 10;
+        public virtual void IncreaseMixture() => Mixture += 10;
+        public virtual void LeanMixture() => Mixture -= 10;
 
         public override string ToString()
         {
             return String.Format("Type: piston engine, number of pistons: {0}, volume: {1}, mixture: {2}, {3}",
                 NumberOfPistons, Volume, Mixture, base.ToString());
+        }
+
+        protected PistonEngine()
+        {
+            
         }
 
         public PistonEngine(uint numberofpistons, float volume, string manufacturer,
@@ -40,7 +45,7 @@ namespace Domain
         {
             _numberOfPistons = numberofpistons;
             _volume = volume;
-            Mixture = 0;
+            _mixture = 0;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -11,21 +12,21 @@ namespace Domain
 
         public virtual float MaxTorque => _maxTorque;
 
-        public void IncreaseGearingRatio()
+        public virtual void IncreaseGearingRatio()
         {
         }
 
-        public void DecreaseGearingratio()
+        public virtual void DecreaseGearingratio()
         {
         }
 
-        public sealed override void IncreasePower()
+        public virtual void IncreasePower()
         {
             //check for torque limits
             base.IncreasePower();
         }
 
-        public override void DecreasePower()
+        public virtual void DecreasePower()
         {
             base.DecreasePower();
         }

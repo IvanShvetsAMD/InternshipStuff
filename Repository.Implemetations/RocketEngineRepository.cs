@@ -8,7 +8,7 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal class RocketEngineRepository : Repository<RocketEngine>, IRocketRepository
+    internal class RocketEngineRepository : Repository<RocketEngine>, IRocketEngineRepository
     {
     }
 }

@@ -20,7 +20,7 @@ namespace Domain
         public virtual uint BallastMass
         {
             get { return _ballastMass; }
-            private set { _ballastMass = value; }
+            protected set { _ballastMass = value; }
         }
 
         public virtual string GasType
@@ -46,7 +46,7 @@ namespace Domain
             return final.ToString();
         }
 
-        public void DumpBallast(uint mass)
+        public virtual void DumpBallast(uint mass)
         {
             if (BallastMass > mass)
             {
@@ -58,7 +58,7 @@ namespace Domain
             }
         }
 
-        public void ShiftGas(int originCompartment, int destinationCompartment, float volume)
+        public virtual void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
             GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments, volume: volume);
         }

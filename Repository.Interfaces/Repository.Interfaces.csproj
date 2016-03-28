@@ -43,7 +43,7 @@
     <Compile Include="IAircraftRepository.cs" />
     <Compile Include="IBladeRepository.cs" />
     <Compile Include="IEngineRepository.cs" />
-    <Compile Include="IFixedWingRepository.cs" />
+    <Compile Include="IFixedWingAircraftRepository.cs" />
     <Compile Include="IGasCompartmentRepository.cs" />
     <Compile Include="IGeneratorRepository.cs" />
     <Compile Include="IHeavierThanAirAircraftRepository.cs" />
@@ -53,7 +53,7 @@
     <Compile Include="IPoweredAircraftRepository.cs" />
     <Compile Include="IRamjetRepository.cs" />
     <Compile Include="IRepository.cs" />
-    <Compile Include="IRocketRepository.cs" />
+    <Compile Include="IRocketEngineRepository.cs" />
     <Compile Include="IRotorBladeRepository.cs" />
     <Compile Include="IRotorCraftRepository.cs" />
     <Compile Include="ISolidFuelRocketEngineRepository.cs" />

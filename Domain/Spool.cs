@@ -33,9 +33,9 @@ namespace Domain
         }
 
         [Obsolete]
-        public Spool(TurbineEngine parentEngine)
+        public Spool()
         {
-            ParentEngine = parentEngine;
+            
         }
     }
 }

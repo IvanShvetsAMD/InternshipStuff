@@ -32,7 +32,7 @@ namespace Domain
             protected set { _currentPower = value; }
         }
 
-        public string SerialNumber
+        public virtual string SerialNumber
         {
             get { return _serialNumber; }
         }
@@ -74,12 +74,12 @@ namespace Domain
                     OnOffStatus);
         }
 
-        public void Cooldown()
+        public virtual void Cooldown()
         {
             Console.WriteLine("Cooling down started");
         }
 
-        public void Start()
+        public virtual void Start()
         {
             if (OnOffStatus == OnOff.Running)
                 throw new InvalidOperationException("The engine is already running.");
@@ -89,7 +89,7 @@ namespace Domain
             OnOffStatus = OnOff.Running;
         }
 
-        public void Stop()
+        public virtual void Stop()
         {
             if (OnOffStatus == OnOff.Stopped)
                 throw new InvalidOperationException("\nThe engine was already stopped or wasn't even started.");
@@ -126,7 +126,7 @@ namespace Domain
             }
         }
 
-        public void WarmUp()
+        public virtual void WarmUp()
         {
             Console.WriteLine("Warming up engine core for 1 minute. Monitor temps afterward.");
         }

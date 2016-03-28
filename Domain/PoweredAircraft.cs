@@ -19,7 +19,7 @@ namespace Domain
             get { return _fuelCapacity; }
         }
 
-        public float GetCurrentPower(int engineNumber) => Engines[engineNumber].CurrentPower;
+        public virtual float GetCurrentPower(int engineNumber) => Engines[engineNumber].CurrentPower;
 
         public override string ToString()
         {
@@ -31,23 +31,23 @@ namespace Domain
             return FinalString;
         }
 
-        public void DecreasePower(Engine engine)
+        public virtual void DecreasePower(Engine engine)
         {
             engine.DecreasePower();
         }
 
-        public void IncreasePower(Engine engine)
+        public virtual void IncreasePower(Engine engine)
         {
             engine.IncreasePower();
         }
 
-        public float GetCurrentPower(Engine engine)
+        public virtual float GetCurrentPower(Engine engine)
         {
             return engine.CurrentPower;
         }
 
-        public float GetTotalCurrentPower() => Engines.Sum(engine => engine.CurrentPower);
-        public void StartEngine(Engine engine)
+        public virtual float GetTotalCurrentPower() => Engines.Sum(engine => engine.CurrentPower);
+        public virtual void StartEngine(Engine engine)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Domain
             }
         }
 
-        public void StopEngine(Engine engine)
+        public virtual void StopEngine(Engine engine)
         {
             try
             {
@@ -84,12 +84,12 @@ namespace Domain
 
         protected PoweredAircraft() { }
 
-        public void MaxPower(Engine engine)
+        public virtual void MaxPower(Engine engine)
         {
             throw new NotImplementedException();
         }
 
-        public void IdlePower(Engine engine)
+        public virtual void IdlePower(Engine engine)
         {
             throw new NotImplementedException();
         }

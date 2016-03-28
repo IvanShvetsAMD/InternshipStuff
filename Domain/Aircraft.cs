@@ -23,7 +23,7 @@ namespace Domain
 
         public virtual string SerialNumber => _serialNumber;
 
-        public bool IsOperational
+        public virtual bool IsOperational
         {
             get { return isOperational; }
             set
@@ -41,12 +41,12 @@ namespace Domain
         //}
 
 
-        public void ReleaseParkingBrake()
+        public virtual void ReleaseParkingBrake()
         {
             Console.WriteLine("Parking brake released.");
         }
 
-        public void SetParkingBrake()
+        public virtual void SetParkingBrake()
         {
             Console.WriteLine("Parking brake set.");
         }

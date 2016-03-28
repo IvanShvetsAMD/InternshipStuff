@@ -55,7 +55,7 @@
     <Compile Include="AircraftRepository.cs" />
     <Compile Include="BladeRepository.cs" />
     <Compile Include="EngineRepository.cs" />
-    <Compile Include="FixedWingRepository.cs" />
+    <Compile Include="FixedWingAircraftRepository.cs" />
     <Compile Include="GasCompartmentRepository.cs" />
     <Compile Include="GeneratorRepository.cs" />
     <Compile Include="HeavierThanAirAircraftRepository.cs" />
