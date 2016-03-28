@@ -10,9 +10,10 @@ namespace Domain.Mapping
     {
         public LighterThanAirAircraftMap()
         {
+            Id(x => x.Id).Column("AircraftId");
             Map(x => x.BallastMass).Not.Nullable();
             Map(x => x.GasType).Not.Nullable();
-            HasMany(x => x.Compartments);
+            HasMany(x => x.Compartments).Cascade.SaveUpdate();
         }
     }
 }

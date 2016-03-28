@@ -60,9 +60,11 @@
     <Compile Include="GeneratorRepository.cs" />
     <Compile Include="HeavierThanAirAircraftRepository.cs" />
     <Compile Include="JetEngineRepository.cs" />
-    <Compile Include="LighterThanAircraftrepository.cs" />
+    <Compile Include="LighterThanAirAircraftRepository.cs" />
+    <Compile Include="OxidiserRepository.cs" />
     <Compile Include="PistonEngineRepository.cs" />
     <Compile Include="PoweredAircraftRepository.cs" />
+    <Compile Include="PropellantRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RamjetRepository.cs" />
     <Compile Include="Repository.cs" />

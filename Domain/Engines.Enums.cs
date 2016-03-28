@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Domain
@@ -16,7 +15,7 @@ namespace Domain
         Stopped = 3
     }
 
-    public enum Propellants
+    public enum PropellantsEnum
     {
         [Description("Jet_A")]
         Jet_A = 0,
@@ -40,7 +39,7 @@ namespace Domain
         Fluorine = 9
     }
 
-    public enum Oxidisers
+    public enum OxidisersEnum
     {
         [Description("GOX")]
         GOX = 0,

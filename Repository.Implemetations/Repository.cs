@@ -1,12 +1,15 @@
 ﻿using System;
 using Domain;
 using NHibernate;
+using NHibernate.SqlCommand;
 using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
     internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
+        protected readonly ISession _session = SessionGenerator.Instance.GetSession();
+
         public void Save(TEntity entity)
         {
             using (ITransaction transaction = _session.BeginTransaction())
@@ -17,6 +20,17 @@ namespace Repository.Implemetations
             }
         }
 
-        protected readonly ISession _session = SessionGenerator.Instance.GetSession();
+        public TEntity LoadEntity<TEntity>(long ID) where TEntity : Entity
+        {
+            TEntity entity;
+            using (ITransaction transaction = _session.BeginTransaction())
+            {
+                entity = _session.Load<TEntity>(ID);
+
+                transaction.Commit();
+
+                return entity;
+            }
+        }
     }
 }

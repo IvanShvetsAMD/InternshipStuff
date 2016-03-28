@@ -22,7 +22,7 @@ namespace Domain
         }
 
         public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
-            List<Propellants> propellants, List<Oxidisers> oxidisers, string manufacturer, string model,
+            List<Propellant> propellants, List<Oxidiser> oxidisers, string manufacturer, string model,
             string serialnumber,
             float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers,

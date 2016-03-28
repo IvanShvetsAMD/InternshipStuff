@@ -18,8 +18,8 @@ namespace Domain
         }
 
         public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Generator gen,
-            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(

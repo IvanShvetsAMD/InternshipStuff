@@ -9,8 +9,8 @@ namespace Domain
 {
     public class LighterThanAirAircraftProxy : ILighterThanAir
     {
-        public uint BallastMass { get; private set; }
-        public void DumpBallast(uint mass)
+        public int BallastMass { get; private set; }
+        public void DumpBallast(int mass)
         {
             if (BallastMass > mass)
             {
@@ -23,7 +23,7 @@ namespace Domain
             Console.WriteLine("Ballast dumped ({0} units)", mass);
         }
 
-        public LighterThanAirAircraftProxy(uint ballastmass)
+        public LighterThanAirAircraftProxy(int ballastmass)
         {
             BallastMass = ballastmass;
         }

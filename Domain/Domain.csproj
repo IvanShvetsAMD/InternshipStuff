@@ -62,8 +62,10 @@
     <Compile Include="JetEngine.cs" />
     <Compile Include="LighterThanAirAircraft.cs" />
     <Compile Include="LighterThanAirAircraftProxy.cs" />
+    <Compile Include="Oxidiser.cs" />
     <Compile Include="PistonEngine.cs" />
     <Compile Include="PoweredAircraft.cs" />
+    <Compile Include="Propellant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ramjet.cs" />
     <Compile Include="RocketEngine.cs" />

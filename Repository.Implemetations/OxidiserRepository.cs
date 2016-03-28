@@ -8,7 +8,7 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal class LighterThanAircraftrepository: Repository<LighterThanAirAircraft>, ILighterThanAirAircraftRepository
+    internal class OxidiserRepository : Repository<Oxidiser>, IOxidiserRepository
     {
     }
 }

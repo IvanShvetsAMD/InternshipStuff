@@ -33,7 +33,7 @@ namespace Infrastructure
             //aircraft
             Kernel.Bind<IAircraftRepository>().To<AircraftRepository>();
             Kernel.Bind<IPoweredAircraftRepository>().To<PoweredAircraftRepository>();
-            Kernel.Bind<ILighterThanAirAircraftRepository>().To<ILighterThanAirAircraftRepository>();
+            Kernel.Bind<ILighterThanAirAircraftRepository>().To<LighterThanAirAircraftRepository>();
             Kernel.Bind<IHeavierThanAirAircraftRepository>().To<HeavierThanAirAircraftRepository>();
             Kernel.Bind<IRotorCraftRepository>().To<RotorCraftRepository>();
             Kernel.Bind<IFixedWingAircraftRepository>().To<FixedWingAircraftRepository>();

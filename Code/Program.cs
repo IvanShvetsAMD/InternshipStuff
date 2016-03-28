@@ -31,26 +31,26 @@ namespace PresentationCode
 
             #region Side tasks (testing things)
 
-            //JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, "88", 0, OnOff.Stopped);
-            //JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellants> { Propellants.Jet_A },
-            //    new List<Oxidisers> { Oxidisers.GOX }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, "88", 0, OnOff.Running);
+            JetEngine jet1 = new JetEngine(600, 500, 5, new List<Propellant> { new Propellant(PropellantsEnum.Jet_A) },
+                new List<Oxidiser> { new Oxidiser(OxidisersEnum.GOX) }, "Rolls-Royce", "RB-201", "100000008", 27000, 12, null, 0, OnOff.Stopped);
+            JetEngine jet2 = new JetEngine(600, 500, 5, new List<Propellant> { new Propellant(PropellantsEnum.Jet_A) },
+                new List<Oxidiser> { new Oxidiser(OxidisersEnum.GOX) }, "Rolls-Royce", "RB-201", "888888888", 27000, 12, null, 0, OnOff.Running);
 
 
-            //var compartments = new List<GasCompartment>
-            //{
-            //    new GasCompartment(20, 15),
-            //    new GasCompartment(20, 10),
-            //    new GasCompartment(20, 15),
-            //    new GasCompartment(15, 10)
-            //};
+            var compartments = new List<GasCompartment>
+            {
+                new GasCompartment(20, 15),
+                new GasCompartment(20, 10),
+                new GasCompartment(20, 15),
+                new GasCompartment(15, 10)
+            };
 
-            //LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", compartments,
-            //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
-            //Console.WriteLine(baloon);
-            //////Console.WriteLine("\n\nComparing gas compartments:");
-             
-            //baloon.ShiftGas(5,65,5);
+            LighterThanAirAircraft baloon = new LighterThanAirAircraft(new SafeGasPumpManager(), 300, "He", compartments,
+                new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
+            Console.WriteLine(baloon);
+            ////Console.WriteLine("\n\nComparing gas compartments:");
+
+            //baloon.ShiftGas(5, 65, 5);
 
 
             //Console.WriteLine("\n shifting gas");
@@ -94,7 +94,7 @@ namespace PresentationCode
 
             #endregion
 
-            String[] ox = Enum.GetNames(typeof(Oxidisers));
+            String[] ox = Enum.GetNames(typeof(OxidisersEnum));
             foreach (var s in ox)
             {
                 Console.WriteLine(s);
@@ -228,20 +228,24 @@ namespace PresentationCode
 
             //rotorCraft.IsOperational = false;
             //Console.WriteLine(rotorCraft);
-            
-            
-            
+
+
+
+            var lighterThanAirAircraftRepository = ServiceLocator.Get<ILighterThanAirAircraftRepository>();
+
+            lighterThanAirAircraftRepository.Save(baloon);
+
             var gasCompartmentRepository = ServiceLocator.Get<IGasCompartmentRepository>();
 
-            gasCompartmentRepository.Save(new GasCompartment(400, 380));
+            gasCompartmentRepository.Save(new GasCompartment(7373, 4242, null));
 
 
-            var generatorRepository = ServiceLocator.Get<IGeneratorRepository>();
-            generatorRepository.Save(new Generator(88, 88));
+           // var generatorRepository = ServiceLocator.Get<IGeneratorRepository>();
+            //generatorRepository.Save(new Generator(88, 88, new TurbineEngine()));
 
+            LighterThanAirAircraft testload = lighterThanAirAircraftRepository.LoadEntity<LighterThanAirAircraft>(1);
 
-
-
+            Console.WriteLine(testload);
             log.Dispose();
         }
 

@@ -11,7 +11,7 @@ namespace Domain.Mapping
         public PoweredAircraftMap()
         {
             Map(x => x.FuelCapacity).Not.Nullable();
-            HasMany(x => x.Engines);
+            HasMany(x => x.Engines).Cascade.SaveUpdate();
         }
     }
 }

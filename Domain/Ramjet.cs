@@ -27,8 +27,8 @@ namespace Domain
             
         }
 
-        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(

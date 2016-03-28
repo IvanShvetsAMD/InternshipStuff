@@ -62,8 +62,10 @@
     <Compile Include="HeavierThanAirAircraftMap.cs" />
     <Compile Include="JetEngineMap.cs" />
     <Compile Include="LighterThanAirAircraftMap.cs" />
-    <Compile Include="PistonEngineMa.cs" />
+    <Compile Include="OxidiserMap.cs" />
+    <Compile Include="PistonEngineMap.cs" />
     <Compile Include="PoweredAircraftMap.cs" />
+    <Compile Include="PropellantMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RamjetMap.cs" />
     <Compile Include="RocketEngineMap.cs" />

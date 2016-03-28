@@ -41,8 +41,8 @@ namespace Domain
         }
 
         public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Generator gen,
-            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(

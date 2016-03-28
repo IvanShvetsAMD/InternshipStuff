@@ -10,8 +10,8 @@ namespace Domain
         private int _egt;
         private int _isp;
         private int _numberOfCycles;
-        private IList<Propellants> _propellants;
-        private IList<Oxidisers> _oxidisers;
+        private IList<Propellant> _propellants;
+        private IList<Oxidiser> _oxidisers;
 
         public virtual int EGT
         {
@@ -31,13 +31,13 @@ namespace Domain
             protected set { _numberOfCycles = value; }
         }
 
-        public virtual IList<Propellants> Propellants
+        public virtual IList<Propellant> Propellants
         {
             get { return _propellants; }
             protected set { _propellants = value; }
         }
 
-        public virtual IList<Oxidisers> Oxidisers
+        public virtual IList<Oxidiser> Oxidisers
         {
             get { return _oxidisers; }
             protected set { _oxidisers = value; }
@@ -70,10 +70,10 @@ namespace Domain
 
             foreach (var propellant in Propellants)
             {
-                final.AppendFormat("\n\t{0}", propellant);
+                final.AppendFormat("\n\t{0}", propellant.Name);
             }
 
-            final.Append(Oxidisers.Aggregate(final + "\noxidisers list:", (current, value) => current + ("\n\t" + value)));
+            final.Append(Oxidisers.Aggregate(final + "\noxidisers list:", (current, value) => current + ("\n\t" + value.Name)));
 
             final.AppendFormat("\n{0}", base.ToString());
             return final.ToString();
@@ -84,7 +84,7 @@ namespace Domain
 
         }
 
-        public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public JetEngine(int egt, int isp, int numberofcycles, List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
             float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
