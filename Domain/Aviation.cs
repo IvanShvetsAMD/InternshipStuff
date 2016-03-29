@@ -290,7 +290,7 @@ namespace Domain
     public class RotorCraft : HeavierThanAirAircraft
     {
         private readonly int _numberOfRotors;
-        private readonly IList<RotorBlade> _rotorBlades;
+        private readonly List<RotorBlade> _rotorBlades;
         private readonly string _rotorType;
 
         public virtual int NumberOfRotors

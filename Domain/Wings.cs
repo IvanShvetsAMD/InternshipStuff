@@ -6,6 +6,8 @@
         private readonly float _rootThickness;
         private float _wingAngle;
 
+
+
         public virtual int FuelCapacity
         {
             get { return _fuelCapacity; }

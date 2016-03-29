@@ -53,7 +53,7 @@ namespace Domain.Mapping
         {
             Map(x => x.CruiseSpeed).Not.Nullable();
             Map(x => x.StallSpeed).Not.Nullable();
-            Map(x => x.Wings).Not.Nullable();
+            //Map(x => x.Wings).Not.Nullable();
         }
     }
 

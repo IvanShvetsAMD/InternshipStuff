@@ -242,7 +242,7 @@ namespace PresentationCode
             var wingRepository = ServiceLocator.Get<IWingRepository>();
             wingRepository.Save(new Wing(42, 73));
 
-            //VariableGeometryWing
+            ////VariableGeometryWing
             var VGWRepository = ServiceLocator.Get<IVariableGeometryWingRepository>();
             VGWRepository.Save(new VariableGeometryWing(42, 73, 42, 73));
 
@@ -300,7 +300,7 @@ namespace PresentationCode
 
             //heavier than air aircraft
             var heavierThanAirAircraftRepository = ServiceLocator.Get<IHeavierThanAirAircraftRepository>();
-            heavierThanAirAircraftRepository.Save(new HeavierThanAirAircraft(null, 42, "42", "73", 42, 73, "42"));
+            heavierThanAirAircraftRepository.Save(new HeavierThanAirAircraft(new List<Engine>(), 42, "42", "73", 42, 73, "42"));
 
             //fixed wing aircraft
             var fixedWingAricraftRepository = ServiceLocator.Get<IFixedWingAircraftRepository>();
