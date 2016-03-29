@@ -7,6 +7,7 @@ namespace Domain
     {
         private float _capacity;
         private float _currentVolume;
+        private LighterThanAirAircraft _parentAircraft;
 
         public virtual float Capacity
         {
@@ -20,6 +21,12 @@ namespace Domain
             set { _currentVolume = value; }
         }
 
+        public virtual LighterThanAirAircraft ParentAircraft
+        {
+            get { return _parentAircraft; }
+            set { _parentAircraft = value; }
+        }
+
         public override string ToString()
         {
             return String.Format("capacity: {0}, current volume: {1}", Capacity, CurrentVolume);
@@ -30,6 +37,7 @@ namespace Domain
 
         public GasCompartment(float capacity, float currentvolume)
         {
+            _parentAircraft = null;
             _capacity = capacity;
             _currentVolume = currentvolume;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Domain
         private readonly string _serialNumber;
         private float _maxPower;
         private readonly float _operatingTime;
-        private readonly string _parentAircraftId;
+        private readonly PoweredAircraft _parentAircraft;
         private float _fuelFlow;
         private OnOff _onOffStatus;
 
@@ -31,7 +32,7 @@ namespace Domain
         public virtual float CurrentPower
         {
             get { return _currentPower; }
-            protected set { _currentPower = value; }
+            set { _currentPower = value; }
         }
 
         public virtual string SerialNumber
@@ -50,9 +51,9 @@ namespace Domain
             get { return _operatingTime; }
         }
 
-        public virtual string ParentAircraftId
+        public virtual PoweredAircraft ParentAircraft
         {
-            get { return _parentAircraftId; }
+            get { return _parentAircraft; }
         }
 
         public virtual float FuelFlow
@@ -72,7 +73,7 @@ namespace Domain
             return
                 String.Format(
                     ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximum power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}, Status: {8}",
-                    Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraftId, FuelFlow,
+                    Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraft.Id, FuelFlow,
                     OnOffStatus);
         }
 
@@ -139,7 +140,7 @@ namespace Domain
         }
 
         public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime,
-            string parentaircraftID, float fuelflow, OnOff stat)
+            PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
         {
             _manufacturer = manufacturer;
             _model = model;
@@ -147,7 +148,7 @@ namespace Domain
             _maxPower = maxpower;
             _serialNumber = serialnumber;
             _operatingTime = operatingtime;
-            _parentAircraftId = parentaircraftID;
+            _parentAircraft = parentaircraft;
             _fuelFlow = fuelflow;
             _onOffStatus = stat;
         }
@@ -164,12 +165,6 @@ namespace Domain
                 return obj.GetHashCode();
             }
         }
-    }
-
-    public enum OnOff
-    {
-        Running,
-        Stopped
     }
 
     public class PistonEngine : Engine
@@ -210,8 +205,8 @@ namespace Domain
 
         public PistonEngine(int numberofpistons, float volume, string manufacturer,
             string model, string serialnumber, float maxpower, float operatingtime,
-            string parentaircraftID, float fuelflow, OnOff stat)
-            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
+            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _numberOfPistons = numberofpistons;
             _volume = volume;
@@ -219,26 +214,150 @@ namespace Domain
         }
     }
 
-    public enum Propellants
+    public enum OnOff
     {
-        Jet_A,
-        Jet_B,
-        EthylAlcohol,
-        RP_1,
-        LH2,
-        Hydrazine,
-        MonoMethylHydrazine,
-        UnSymmetricalDimethylHydrazine,
-        Lithium,
-        Fluorine
+        [Description("Starting")]
+        Starting = 0,
+        [Description("Running")]
+        Running = 1,
+        [Description("ShuttingDown")]
+        ShuttingDown = 2,
+        [Description("Stopped")]
+        Stopped = 3
     }
 
-    public enum Oxidisers
+    public enum PropellantsEnum
     {
-        GOX,
-        LOX,
-        DinitrogenTetroxide,
-        High_TestPeroxide
+        [Description("Jet_A")]
+        Jet_A = 0,
+        [Description("Jet_B")]
+        Jet_B = 1,
+        [Description("EtylAclohol")]
+        EthylAlcohol = 2,
+        [Description("RP_1")]
+        RP_1 = 3,
+        [Description("LH2")]
+        LH2 = 4,
+        [Description("Hydrazine")]
+        Hydrazine = 5,
+        [Description("MonoMethylHydrazine")]
+        MonoMethylHydrazine = 6,
+        [Description("UnSymmetricalDimethylHydrazine")]
+        UnSymmetricalDimethylHydrazine = 7,
+        [Description("Lithium")]
+        Lithium = 8,
+        [Description("Fluorine")]
+        Fluorine = 9
+    }
+
+    public class Propellant : Entity
+    {
+        private int _intValue;
+        private string _name;
+        private JetEngine _parentEngine;
+
+        public virtual int IntValue
+        {
+            get { return _intValue; }
+            protected set { _intValue = value; }
+        }
+
+        public virtual String Name
+        {
+            get { return _name; }
+            protected set { _name = value; }
+        }
+
+        public virtual PropellantsEnum PropellantEnum
+        {
+            get { return (PropellantsEnum)IntValue; }
+        }
+
+        public virtual JetEngine ParentEngine
+        {
+            get { return _parentEngine; }
+            set { _parentEngine = value; }
+        }
+
+        public Propellant()
+        {
+
+        }
+
+        public Propellant(PropellantsEnum pr)
+        {
+            _parentEngine = null;
+            _intValue = (int)pr;
+            _name = pr.ToString();
+        }
+
+        public Propellant(int value, string name)
+        {
+            _parentEngine = null;
+            _intValue = value;
+            _name = name;
+        }
+    }
+
+    public class Oxidiser : Entity
+    {
+        private int _intValue;
+        private string _name;
+        private JetEngine _parentEngine;
+
+        public virtual int IntValue
+        {
+            get { return _intValue; }
+            protected set { _intValue = value; }
+        }
+
+        public virtual String Name
+        {
+            get { return _name; }
+            protected set { _name = value; }
+        }
+
+        public virtual OxidisersEnum PropellantEnum
+        {
+            get { return (OxidisersEnum)IntValue; }
+        }
+
+        public virtual JetEngine ParentEngine
+        {
+            get { return _parentEngine; }
+            set { _parentEngine = value; }
+        }
+
+        public Oxidiser()
+        {
+
+        }
+
+        public Oxidiser(OxidisersEnum ox)
+        {
+            _parentEngine = null;
+            _intValue = (int)ox;
+            _name = ox.ToString();
+        }
+
+        public Oxidiser(int value, string name)
+        {
+            _parentEngine = null;
+            _intValue = value;
+            _name = name;
+        }
+    }
+
+    public enum OxidisersEnum
+    {
+        [Description("GOX")]
+        GOX = 0,
+        [Description("LOX")]
+        LOX = 1,
+        [Description("DinitrogenTetroxide")]
+        DinitrogenTetroxide = 2,
+        [Description("High_TestPeroxide")]
+        High_TestPeroxide = 3
     }
 
     public class JetEngine : Engine
@@ -246,6 +365,8 @@ namespace Domain
         private readonly int _egt;
         private readonly int _isp;
         private int _numberOfCycles;
+        private List<Propellant> _propellants;
+        private List<Oxidiser> _oxidisers;
 
         public virtual int EGT
         {
@@ -263,8 +384,17 @@ namespace Domain
             set { _numberOfCycles = value; }
         }
 
-        //protected virtual List<Propellants> Propellants { get; private set; }
-        //protected virtual List<Oxidisers> Oxidisers { get; private set; }
+        public virtual IList<Propellant> Propellants
+        {
+            get { return _propellants; }
+            protected set { _propellants = value.ToList(); }
+        }
+
+        public virtual IList<Oxidiser> Oxidisers
+        {
+            get { return _oxidisers; }
+            protected set { _oxidisers = value.ToList(); }
+        }
 
         public virtual void DecreaseFuelFlow()
         {
@@ -296,16 +426,16 @@ namespace Domain
 
         }
 
-        public JetEngine(int egt, int isp, int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public JetEngine(int egt, int isp, int numberofcycles, List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
-            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
+            : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _egt = egt;
             _isp = isp;
             _numberOfCycles = numberofcycles;
-            //Propellants = propellants;
-            //Oxidisers = oxidisers;
+            _propellants = propellants;
+            _oxidisers = oxidisers;
         }
 
     }
@@ -334,13 +464,13 @@ namespace Domain
             
         }
 
-        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
-                operatingtime, parentaircraftID, fuelflow, stat)
+                operatingtime, parentaircraft, fuelflow, stat)
         {
             _hasSupersonicCombustion = hassupersoniccombustion;
         }
@@ -374,12 +504,12 @@ namespace Domain
         }
 
         public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
-            List<Propellants> propellants, List<Oxidisers> oxidisers,
+            List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
-                operatingtime, parentaircraftID, fuelflow, stat)
+                operatingtime, parentaircraft, fuelflow, stat)
         {
             _isReignitable = isreignitable;
             _nozzleBellType = nozzlebelltype;
@@ -397,7 +527,7 @@ namespace Domain
         public override float CurrentPower
         {
             get { return MaxPower; }
-            protected set { CurrentPower = MaxPower; }
+            set { CurrentPower = MaxPower; }
         }
 
         private float _maxPower;
@@ -418,11 +548,11 @@ namespace Domain
         }
 
         public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
-            List<Propellants> propellants, List<Oxidisers> oxidisers, string manufacturer, string model,
+            List<Propellant> propellants, List<Oxidiser> oxidisers, string manufacturer, string model,
             string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers,
-                manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+                manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _maxPower = maxpower;
             _currentPower = 0;
@@ -434,6 +564,7 @@ namespace Domain
         private readonly bool _hasReverse;
         private readonly int _numberOfShafts;
         private Generator _generator;
+        private IList<Spool> _spools;
 
         public virtual bool HasReverse
         {
@@ -451,7 +582,11 @@ namespace Domain
             set { _generator = value; }
         }
 
-        //protected virtual IList<Spool> Spools { get; private set; }
+        public virtual IList<Spool> Spools
+        {
+            get { return _spools; }
+            protected set { _spools = value; }
+        }
 
 
         public virtual void StartGenerator() => Generator.GenerateCurrent();
@@ -477,12 +612,12 @@ namespace Domain
         }
 
         public TurbineEngine(bool hasreverse, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
-            int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+            int numberofcycles, List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
-                operatingtime, parentaircraftID, fuelflow, stat)
+                operatingtime, parentaircraft, fuelflow, stat)
         {
             _hasReverse = hasreverse;
             _numberOfShafts = numberofshafts;
@@ -518,13 +653,13 @@ namespace Domain
         }
 
         public Turbofan(float bypassratio, bool isgeared, bool hasreverse, int numberofshafts, Generator gen,
-            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
-                model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+                model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _bypassRatio = bypassratio;
             _isGeared = isgeared;
@@ -579,13 +714,13 @@ namespace Domain
         }
 
         public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, int numberofshafts, Generator gen,
-            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
-                model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+                model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _gearingRatio = gearingratio;
             _maxTorque = maxtorque;
@@ -614,13 +749,13 @@ namespace Domain
         }
 
         public Turbojet(bool hasreverse, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
-            int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+            int numberofcycles, List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat,
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat,
             string precoolant = null)
             : base(
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
-                model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+                model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             Precoolant = precoolant ?? "none";
         }

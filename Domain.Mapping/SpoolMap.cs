@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Mapping
 {
-    public class GeneratorMap : EntityMap<Generator>
+    public class SpoolMap : EntityMap<Spool>
     {
-        public GeneratorMap()
+        public SpoolMap()
         {
-            Map(x => x.OutputCurrent).Not.Nullable();
-            Map(x => x.OutputVoltage).Not.Nullable();
+            Map(x => x.Type).Not.Nullable();
+            HasMany(x => x.Blades);
             References(x => x.ParentEngine);
         }
     }

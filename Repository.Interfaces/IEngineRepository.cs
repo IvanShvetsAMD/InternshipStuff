@@ -46,4 +46,12 @@ namespace Repository.Interfaces
     public interface ITurboshaftRepository : IRepository<Turboshaft>
     {
     }
+
+    public interface IPropellantRepository : IRepository<Propellant>
+    {
+    }
+
+    public interface IOxidiserRepository : IRepository<Oxidiser>
+    {
+    }
 }

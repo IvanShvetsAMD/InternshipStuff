@@ -53,11 +53,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AircraftMap.cs" />
+    <Compile Include="BladeMap.cs" />
+    <Compile Include="ConstraintConventions\HasManyConvention.cs" />
+    <Compile Include="ConstraintConventions\HasOneConvention.cs" />
+    <Compile Include="ConstraintConventions\JoinedSubclassConvention.cs" />
+    <Compile Include="ConstraintConventions\PrimaryKeyConvention.cs" />
+    <Compile Include="ConstraintConventions\ReferencesConvention.cs" />
     <Compile Include="EngineMap.cs" />
     <Compile Include="EntityMap.cs" />
     <Compile Include="GasCompartmentMap.cs" />
     <Compile Include="GeneratorMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpoolMap.cs" />
     <Compile Include="VariableGeometryWingMap.cs" />
     <Compile Include="WingMap.cs" />
   </ItemGroup>

@@ -47,4 +47,12 @@ namespace Repository.Implemetations
     internal class TurboshaftRepository : Repository<Turboshaft>, ITurboshaftRepository
     {
     }
+
+    internal class PropellantRepository : Repository<Propellant>, IPropellantRepository
+    {
+    }
+
+    internal class OxidiserRepository : Repository<Oxidiser>, IOxidiserRepository
+    {
+    }
 }

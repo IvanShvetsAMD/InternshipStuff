@@ -20,7 +20,7 @@ namespace Domain.Mapping
             Map(x => x.OnOffStatus).Not.Nullable();
             Map(x => x.OperatingTime).Not.Nullable();
             Map(x => x.SerialNumber).Not.Nullable();
-            Map(x => x.ParentAircraftId).Not.Nullable();
+            References(x => x.ParentAircraft);
         }
     }
 
@@ -41,6 +41,28 @@ namespace Domain.Mapping
             Map(x => x.NumberOfCycles).Not.Nullable();
             Map(x => x.EGT).Not.Nullable();
             Map(x => x.Isp).Not.Nullable();
+            HasMany(x => x.Propellants);
+            HasMany(x => x.Oxidisers);
+        }
+    }
+
+    public class PropellantMap : EntityMap<Propellant>
+    {
+        public PropellantMap()
+        {
+            Map(x => x.IntValue).Not.Nullable();
+            Map(x => x.Name).Not.Nullable();
+            References(x => x.ParentEngine);
+        }
+    }
+
+    public class OxidiserMap : EntityMap<Oxidiser>
+    {
+        public OxidiserMap()
+        {
+            Map(x => x.IntValue).Not.Nullable();
+            Map(x => x.Name).Not.Nullable();
+            References(x => x.ParentEngine);
         }
     }
 
@@ -66,9 +88,10 @@ namespace Domain.Mapping
     {
         public TurbineEngineMap()
         {
-            //Map(x => x.Generator).Not.Nullable();
             Map(x => x.HasReverse).Not.Nullable();
             Map(x => x.NumberOfShafts).Not.Nullable();
+            HasMany(x => x.Spools);
+            HasOne(x => x.Generator);
         }
     }
 
@@ -105,5 +128,4 @@ namespace Domain.Mapping
             Map(x => x.Precoolant).Not.Nullable();
         }
     }
-
 }

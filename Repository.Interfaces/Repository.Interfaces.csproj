@@ -41,10 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAircraftRepository.cs" />
+    <Compile Include="IBladeRepository.cs" />
     <Compile Include="IEngineRepository.cs" />
     <Compile Include="IGasCompartmentRepository.cs" />
     <Compile Include="IGeneratorRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="ISpoolRepository.cs" />
     <Compile Include="IVariableGeometryWingRepository.cs" />
     <Compile Include="IWingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

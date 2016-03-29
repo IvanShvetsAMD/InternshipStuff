@@ -1,4 +1,5 @@
-﻿using ActionImplementations;
+﻿using System.Runtime.InteropServices;
+using ActionImplementations;
 using Interfaces;
 using Ninject;
 using Repository.Implemetations;
@@ -17,6 +18,8 @@ namespace Infrastructure
             //misc
             Kernel.Bind<IGasCompartmentRepository>().To<GasCompartmentRepository>();
             Kernel.Bind<IGeneratorRepository>().To<GeneratorRepository>();
+            Kernel.Bind<IPropellantRepository>().To<PropellantRepository>();
+            Kernel.Bind<IOxidiserRepository>().To<OxidiserRepository>();
 
             //wings
             Kernel.Bind<IWingRepository>().To<WingRepository>();
@@ -41,6 +44,14 @@ namespace Infrastructure
             Kernel.Bind<IHeavierThanAirAircraftRepository>().To<HeavierThanAirAircraftRepository>();
             Kernel.Bind<IFixedWingAircraftRepository>().To<FixedWingAircraftRepository>();
             Kernel.Bind<IRotorCraftRepository>().To<RotorCraftRepository>();
+
+            //blades
+            Kernel.Bind<IBladeRepository>().To<BladeRepository>();
+            Kernel.Bind<ITurbineBladeRepository>().To<TurbineBladeRepository>();
+            Kernel.Bind<IRotorBladeRepository>().To<RotorBladeRepository>();
+
+            //spool
+            Kernel.Bind<ISpoolRepository>().To<SpoolRepository>();
 
         }
 

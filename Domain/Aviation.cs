@@ -7,7 +7,7 @@ namespace Domain
 {
     public abstract class Aircraft : Entity
     {
-        //private List<IAviationAdministration> aviationAdministrations;
+        private List<IAviationAdministration> aviationAdministrations;
         private bool isOperational;
         private readonly string _manufacturer;
         private readonly string _model;
@@ -46,8 +46,8 @@ namespace Domain
             set
             {
                 isOperational = value;
-                //if (value == false)
-                   // NotifyOfCrash();
+                if (value == false)
+                   NotifyOfCrash();
             }
         }
 
@@ -67,29 +67,29 @@ namespace Domain
             return $"Manufacturer: {Manufacturer}, model: {Model}, maximum takeoff weight: {MaxTakeoffWeight}, Vne: {Vne}, Serial number: {SerialNumber}";
         }
 
-        //public void Subscribe(IAviationAdministration administration)
-        //{
-        //    if(!aviationAdministrations.Contains(administration))
-        //        aviationAdministrations.Add(administration);
-        //}
+        public virtual void Subscribe(IAviationAdministration administration)
+        {
+            if (!aviationAdministrations.Contains(administration))
+                aviationAdministrations.Add(administration);
+        }
 
-        //public void Unsubscribe(IAviationAdministration administration)
-        //{
-        //    if (aviationAdministrations.Contains(administration))
-        //        aviationAdministrations.Remove(administration);
-        //}
+        public virtual void Unsubscribe(IAviationAdministration administration)
+        {
+            if (aviationAdministrations.Contains(administration))
+                aviationAdministrations.Remove(administration);
+        }
 
-        //public void NotifyOfCrash()
-        //{
-        //    foreach (var aviationAdministration in aviationAdministrations)
-        //    {
-        //        aviationAdministration.GetNotifiedAboutCrash(this);
-        //    }
-        //}
+        public virtual void NotifyOfCrash()
+        {
+            foreach (var aviationAdministration in aviationAdministrations)
+            {
+                aviationAdministration.GetNotifiedAboutCrash(this);
+            }
+        }
 
         public Aircraft(string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
         {
-            //aviationAdministrations = new List<IAviationAdministration>();
+            aviationAdministrations = new List<IAviationAdministration>();
             _manufacturer = manufacturer;
             _model = model;
             _maxTakeoffWeight = maxTOweight;
@@ -106,10 +106,10 @@ namespace Domain
 
     public class PoweredAircraft : Aircraft, IPowered
     {
-        private readonly IList<Engine> _engines;
+        private readonly List<Engine> _engines;
         private readonly int _fuelCapacity;
 
-        public virtual List<Engine> Engines
+        public virtual IList<Engine> Engines
         {
             get { return _engines.ToList(); }
         }
@@ -186,12 +186,18 @@ namespace Domain
 
         public virtual void MaxPower(Engine engine)
         {
-            throw new NotImplementedException();
+            if (Engines.Contains(engine, new Engine.EngineComparer()))
+            {
+                Engines.Where(v => v.SerialNumber == engine.SerialNumber).Select(v => v).First().CurrentPower = engine.MaxPower;
+            }
         }
 
         public virtual void IdlePower(Engine engine)
         {
-            throw new NotImplementedException();
+            if (Engines.Contains(engine, new Engine.EngineComparer()))
+            {
+                Engines.Where(v => v.SerialNumber == engine.SerialNumber).Select(v => v).First().CurrentPower = 1;
+            }
         }
     }
 
@@ -225,7 +231,7 @@ namespace Domain
             get { return _gasVolume; }
         }
 
-        public virtual List<GasCompartment> Compartments
+        public virtual IList<GasCompartment> Compartments
         {
             get { return _compartments.ToList(); }
         }
@@ -256,7 +262,7 @@ namespace Domain
 
         public virtual void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
-            GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments, volume: volume);
+            GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments.ToList(), volume: volume);
         }
 
         public LighterThanAirAircraft()
@@ -335,7 +341,7 @@ namespace Domain
         private readonly int? _cruiseSpeed;
         private readonly int? _stallSpeed;
 
-        public virtual List<Wing> Wings
+        public virtual IList<Wing> Wings
         {
             get { return _wings.ToList(); }
         }

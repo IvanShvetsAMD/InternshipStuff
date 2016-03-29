@@ -5,8 +5,7 @@
         private readonly int _fuelCapacity;
         private readonly float _rootThickness;
         private float _wingAngle;
-
-
+        private FixedWingAircraft _parentAircraft;
 
         public virtual int FuelCapacity
         {
@@ -23,7 +22,13 @@
             get { return _wingAngle; }
             protected set { _wingAngle = value; }
         }
-        
+
+        public virtual FixedWingAircraft ParentAircraft
+        {
+            get { return _parentAircraft; }
+            set { _parentAircraft = value; }
+        }
+
         public Wing()
         {
             
@@ -31,6 +36,7 @@
 
         public Wing(int fuelcapacity, float rootThickness)
         {
+            _parentAircraft = null;
             _fuelCapacity = fuelcapacity;
             _rootThickness = rootThickness;
         }

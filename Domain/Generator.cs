@@ -7,6 +7,7 @@ namespace Domain
     {
         private readonly float _outputCurrent;
         private readonly float _outputVoltage;
+        private TurbineEngine _parentEngine;
 
         public virtual float OutputCurrent
         {
@@ -18,6 +19,12 @@ namespace Domain
             get { return _outputVoltage; }
         }
 
+        public virtual TurbineEngine ParentEngine
+        {
+            get { return _parentEngine; }
+            set { _parentEngine = value; }
+        }
+
         public virtual void GenerateCurrent() {
             Console.WriteLine("Generating current");
         }
@@ -26,6 +33,7 @@ namespace Domain
 
         public Generator(float c, float v)
         {
+            _parentEngine = null;
             _outputCurrent = c;
             _outputVoltage = v;
         }
