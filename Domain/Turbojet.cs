@@ -11,11 +11,11 @@ namespace Domain
             get { return _precoolant; }
         }
 
-        public void InjectCoolant()
+        public virtual void InjectCoolant()
         {
         }
 
-        public void StopCoolant()
+        public virtual void StopCoolant()
         {
         }
 

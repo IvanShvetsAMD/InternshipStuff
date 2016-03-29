@@ -11,15 +11,15 @@ namespace Domain
 
         public virtual float MaxTorque => _maxTorque;
 
-        public void IncreaseGearingRatio()
+        public virtual void IncreaseGearingRatio()
         {
         }
 
-        public void DecreaseGearingratio()
+        public virtual void DecreaseGearingratio()
         {
         }
 
-        public sealed override void IncreasePower()
+        public override void IncreasePower()
         {
             //check for torque limits
             base.IncreasePower();

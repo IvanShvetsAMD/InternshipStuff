@@ -32,18 +32,18 @@ namespace Domain
         }
 
 
-        public void StartGenerator() => Generator.GenerateCurrent();
+        public virtual void StartGenerator() => Generator.GenerateCurrent();
 
-        public void StopGenerator()
+        public virtual void StopGenerator()
         {
         }
 
-        public void Decorate(ITurbineEngineComponent component = null)
+        public virtual void Decorate(ITurbineEngineComponent component = null)
         {
             Console.WriteLine("Customising Engine (TurbineEngine.Decorate)");
         }
 
-        public void Decorate()
+        public virtual void Decorate()
         {
             Console.WriteLine("TurbineEngine.Decorate");
         }

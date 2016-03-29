@@ -43,11 +43,11 @@ namespace Domain
             protected set { _oxidisers = value; }
         }
 
-        public void DecreaseFuelFlow()
+        public virtual void DecreaseFuelFlow()
         {
         }
 
-        public void IncreaseFuelFlow()
+        public virtual void IncreaseFuelFlow()
         {
         }
 

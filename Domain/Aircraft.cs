@@ -23,7 +23,7 @@ namespace Domain
 
         public virtual string SerialNumber => _serialNumber;
 
-        public bool IsOperational
+        public virtual bool IsOperational
         {
             get { return isOperational; }
             set
@@ -34,19 +34,19 @@ namespace Domain
             }
         }
 
-        public IList<IAviationAdministration> AviationAdministrations
+        public virtual IList<IAviationAdministration> AviationAdministrations
         {
             get { return aviationAdministrations; }
             set { aviationAdministrations = value; }
         }
 
 
-        public void ReleaseParkingBrake()
+        public virtual void ReleaseParkingBrake()
         {
             Console.WriteLine("Parking brake released.");
         }
 
-        public void SetParkingBrake()
+        public virtual void SetParkingBrake()
         {
             Console.WriteLine("Parking brake set.");
         }
@@ -56,19 +56,19 @@ namespace Domain
             return $"Manufacturer: {Manufacturer}, model: {Model}, maximum takeoff weight: {MaxTakeoffWeight}, Vne: {Vne}, Serial number: {SerialNumber}";
         }
 
-        public void Subscribe(IAviationAdministration administration)
+        public virtual void Subscribe(IAviationAdministration administration)
         {
             if(!aviationAdministrations.Contains(administration))
                 aviationAdministrations.Add(administration);
         }
 
-        public void Unsubscribe(IAviationAdministration administration)
+        public virtual void Unsubscribe(IAviationAdministration administration)
         {
             if (aviationAdministrations.Contains(administration))
                 aviationAdministrations.Remove(administration);
         }
 
-        public void NotifyOfCrash()
+        public virtual void NotifyOfCrash()
         {
             foreach (var aviationAdministration in aviationAdministrations)
             {

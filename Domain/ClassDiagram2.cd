@@ -231,7 +231,7 @@
   <Class Name="Domain.RotorCraft" Collapsed="true">
     <Position X="4.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAECAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAECAAAABAAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>RotorCraft.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -9,6 +9,11 @@
             get { return _hasSupersonicTip; }
         }
 
+        public RotorBlade()
+        {
+            
+        }
+
         public RotorBlade(bool hassupersonictip, int length, int chord, string materialType) : base(length, chord, materialType)
         {
             _hasSupersonicTip = hassupersonictip;

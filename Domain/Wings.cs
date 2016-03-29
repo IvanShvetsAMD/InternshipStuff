@@ -22,6 +22,11 @@
             protected set { _wingAngle = value; }
         }
 
+        public Wing()
+        {
+            
+        }
+
         public Wing(int fuelcapacity, float rootThickness)
         {
             _fuelCapacity = fuelcapacity;

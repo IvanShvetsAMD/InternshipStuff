@@ -4,16 +4,21 @@ namespace Domain
 {
     public class SolidFuelRocketEngine : RocketEngine
     {
-        public sealed override float MaxPower
+        public override float MaxPower
         {
             get { return MaxPower; }
             protected set { }
         }
 
-        public sealed override float CurrentPower
+        public override float CurrentPower
         {
             get { return MaxPower; }
             protected set { CurrentPower = MaxPower; }
+        }
+
+        public SolidFuelRocketEngine()
+        {
+            
         }
 
         public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,

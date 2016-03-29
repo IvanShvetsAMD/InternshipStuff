@@ -18,7 +18,7 @@ namespace Domain
             get { return _rotorType; }
         }
 
-        void EjectRotorBlades() => RotorBlades.Clear();
+        protected virtual void EjectRotorBlades() => RotorBlades.Clear();
 
         public RotorCraft() { }
 

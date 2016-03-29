@@ -31,6 +31,11 @@
 
         public virtual void SweepMaxForward() => WingAngle = MaxForwardSweepAngle;
 
+        public VariableGeometryWing()
+        {
+            
+        }
+
         public VariableGeometryWing(float maxsweepBackAngle, float maxsweepforwardangle, int fuelcapacity, float rootThickness):base(fuelcapacity, rootThickness)
         {
             _maxForwardSweepAngle = maxsweepforwardangle;

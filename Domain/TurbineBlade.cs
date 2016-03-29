@@ -15,6 +15,11 @@ namespace Domain
             get { return _hasCoolingChannels; }
         }
 
+        public TurbineBlade()
+        {
+            
+        }
+
         public TurbineBlade(int maxtemp, bool hascoolingchannels, int length, int chord, string materialType):base(length, chord, materialType)
         {
             _maxTemp = maxtemp;

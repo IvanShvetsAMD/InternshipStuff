@@ -5,9 +5,15 @@ namespace Domain
 {
     public class Ramjet : JetEngine
     {
-        public bool HasSupersonicCombustion { get; private set; }
+        private bool _hasSupersonicCombustion;
 
-        public float CheckPressure()
+        public virtual bool HasSupersonicCombustion
+        {
+            get { return _hasSupersonicCombustion; }
+            protected set { _hasSupersonicCombustion = value; }
+        }
+
+        public virtual float CheckPressure()
         {
             throw new NotImplementedException();
         }
@@ -15,6 +21,11 @@ namespace Domain
         public override string ToString()
         {
             return base.ToString() + "Type: " + (HasSupersonicCombustion ? "Scramjet" : "Ramjet");
+        }
+
+        public Ramjet()
+        {
+            
         }
 
         public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants,
@@ -25,7 +36,7 @@ namespace Domain
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
                 operatingtime, parentaircraftID, fuelflow, stat)
         {
-            HasSupersonicCombustion = hassupersoniccombustion;
+            _hasSupersonicCombustion = hassupersoniccombustion;
         }
 
     }
