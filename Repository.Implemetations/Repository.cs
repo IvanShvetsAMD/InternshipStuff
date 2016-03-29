@@ -1,12 +1,10 @@
-﻿using System;
-using Domain;
+﻿using Domain;
 using NHibernate;
-using NHibernate.SqlCommand;
 using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
         protected readonly ISession _session = SessionGenerator.Instance.GetSession();
 

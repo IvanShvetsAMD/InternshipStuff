@@ -10,7 +10,7 @@ namespace Repository.Interfaces
 {
     public interface IGasCompartmentRepository : IRepository<GasCompartment>
     {
-        void AddGas(float delta, long id);
-        void RemoveGas(float delta, long id);
+        //void AddGas(float delta, long id);
+        //void RemoveGas(float delta, long id);
     }
 }

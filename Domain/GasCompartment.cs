@@ -6,7 +6,7 @@ namespace Domain
     {
         private float _currentVolume;
         private float _capacity;
-        private LighterThanAirAircraft _parentAircraft;
+        //private LighterThanAirAircraft _parentAircraft;
 
         public virtual float Capacity
         {
@@ -20,11 +20,11 @@ namespace Domain
             set { _currentVolume = value; }
         }
 
-        public virtual LighterThanAirAircraft ParentAircraft
-        {
-            get { return _parentAircraft; }
-            protected set { _parentAircraft = value; }
-        }
+        //public virtual LighterThanAirAircraft ParentAircraft
+        //{
+        //    get { return _parentAircraft; }
+        //    protected set { _parentAircraft = value; }
+        //}
 
         public override string ToString()
         {
@@ -37,11 +37,11 @@ namespace Domain
             
         }
 
-        public GasCompartment(float capacity, float currentvolume, LighterThanAirAircraft parentAircraft = null)
+        public GasCompartment(float capacity, float currentvolume /*,LighterThanAirAircraft parentAircraft = null*/)
         {
             _capacity = capacity;
             _currentVolume = currentvolume;
-            _parentAircraft = parentAircraft;
+            //_parentAircraft = parentAircraft;
         }
 
         public virtual void AddGas(float delta)

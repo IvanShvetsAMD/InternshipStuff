@@ -11,28 +11,28 @@ namespace Repository.Implemetations
 {
     internal class GasCompartmentRepository : Repository<GasCompartment>, IGasCompartmentRepository
     {
-        public void AddGas(float delta, long id)
-        {
-            using (ITransaction transaction = _session.BeginTransaction())
-            {
-                var gasCompartment = _session.Load<GasCompartment>(id);
+        //public void AddGas(float delta, long id)
+        //{
+        //    using (ITransaction transaction = _session.BeginTransaction())
+        //    {
+        //        var gasCompartment = _session.Load<GasCompartment>(id);
 
-                gasCompartment.AddGas(delta);
+        //        gasCompartment.AddGas(delta);
 
-                transaction.Commit();
-            }
-        }
+        //        transaction.Commit();
+        //    }
+        //}
 
-        public void RemoveGas(float delta, long id)
-        {
-            using (ITransaction transaction = _session.BeginTransaction())
-            {
-                var gasCompartment = _session.Load<GasCompartment>(id);
+        //public void RemoveGas(float delta, long id)
+        //{
+        //    using (ITransaction transaction = _session.BeginTransaction())
+        //    {
+        //        var gasCompartment = _session.Load<GasCompartment>(id);
 
-                gasCompartment.RemoveGas(delta);
+        //        gasCompartment.RemoveGas(delta);
 
-                transaction.Commit();
-            }
-        }
+        //        transaction.Commit();
+        //    }
+        //}
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Mapping;
+﻿using Domain;
+using Domain.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -6,7 +7,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Repository.Implemetations
 {
-    internal class SessionGenerator
+    class SessionGenerator
     {
         public static SessionGenerator Instance
         {
@@ -17,7 +18,7 @@ namespace Repository.Implemetations
         {
             return SessionFactory.OpenSession();
         }
-        
+
         private static readonly SessionGenerator _sessionGenerator = new SessionGenerator();
 
         private static readonly ISessionFactory SessionFactory = CreateSessionFactory();
@@ -28,7 +29,7 @@ namespace Repository.Implemetations
                .Database(MsSqlConfiguration.MsSql2012
                   .ConnectionString(
                      builder =>
-                        builder.Database("Aviation")
+                        builder.Database("Aviation2")
                            .Server(@"MDDSK40043\SQLEXPRESS")
                            //.Server(@"DESKTOP-CQKKU19\SQLEXPRESS")
                            .TrustedConnection()))
@@ -43,7 +44,7 @@ namespace Repository.Implemetations
 
         private static void CreateMappings(MappingConfiguration mappingConfiguration)
         {
-            var assembly = typeof(EntityMap<>).Assembly;
+            var assembly = typeof(EntityMap<Entity>).Assembly;
 
             mappingConfiguration.FluentMappings.AddFromAssembly(assembly);
             mappingConfiguration.HbmMappings.AddFromAssembly(assembly);

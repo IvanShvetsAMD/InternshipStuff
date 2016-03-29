@@ -55,7 +55,7 @@
     <Compile Include="AircraftMap.cs" />
     <Compile Include="BladeMap.cs" />
     <Compile Include="EngineMap.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="EntityMap.cs" />
     <Compile Include="FixedWingAircraftMap.cs" />
     <Compile Include="GasCompartmentMap.cs" />
     <Compile Include="GeneratorMap.cs" />

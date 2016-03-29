@@ -10,6 +10,7 @@ namespace Domain.Mapping
     {
         public GeneratorMap()
         {
+            Table("GasCompartment");
             Id(x => x.Id).Column("GeneratorID");
             Map(x => x.OutputCurrent).Not.Nullable();
             Map(x => x.OutputVoltage).Not.Nullable();
