@@ -3,11 +3,22 @@ using System.Collections.Generic;
 
 namespace Domain
 {
-    public class GasCompartment
+    public class GasCompartment : Entity
     {
-        public virtual int Id { get; protected set; }
-        public virtual float Capacity { get; protected set; }
-        public virtual float CurrentVolume { get; set; }
+        private float _capacity;
+        private float _currentVolume;
+
+        public virtual float Capacity
+        {
+            get { return _capacity; }
+            protected set { _capacity = value; }
+        }
+
+        public virtual float CurrentVolume
+        {
+            get { return _currentVolume; }
+            set { _currentVolume = value; }
+        }
 
         public override string ToString()
         {
@@ -19,8 +30,8 @@ namespace Domain
 
         public GasCompartment(float capacity, float currentvolume)
         {
-            Capacity = capacity;
-            CurrentVolume = currentvolume;
+            _capacity = capacity;
+            _currentVolume = currentvolume;
         }
     }
 

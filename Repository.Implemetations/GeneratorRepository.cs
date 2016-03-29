@@ -8,8 +8,7 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    public class GasCompartmentRepository : Repository<GasCompartment>,  IGasCompartmentRepository
+    internal class GeneratorRepository : Repository<Generator>, IGeneratorRepository
     {
-        
     }
 }

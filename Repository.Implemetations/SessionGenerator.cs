@@ -1,4 +1,5 @@
-﻿using Domain.Mapping;
+﻿using Domain;
+using Domain.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -43,7 +44,7 @@ namespace Repository.Implemetations
 
         private static void CreateMappings(MappingConfiguration mappingConfiguration)
         {
-            var assembly = typeof(GasCompartmentMap).Assembly;
+            var assembly = typeof(EntityMap<Entity>).Assembly;
 
             mappingConfiguration.FluentMappings.AddFromAssembly(assembly);
             mappingConfiguration.HbmMappings.AddFromAssembly(assembly);

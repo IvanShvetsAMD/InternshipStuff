@@ -15,7 +15,7 @@ namespace Factories
 
         public static TurbineEngineFactory GeTurbineEngineFactory() => LazyInstance.Value;
 
-        public Turbofan MakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+        public Turbofan MakeTurbofan(float bypassratio, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                     int numberofcycles, List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model,
                                     string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, bool isgeared = false,
                                     bool hasreverse = true, string parentvehicleID = null)
@@ -33,7 +33,7 @@ namespace Factories
                 manuf, model, serialnumber, maxpower, operatingtime, parentvehicleID, fuelflow, stat);
         }
 
-        public bool TryMakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+        public bool TryMakeTurbofan(float bypassratio, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                     int numberofcycles, List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model,
                                     string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, out Turbofan incomingTurbofan, bool isgeared = false,
                                     bool hasreverse = true, string parentvehicleID = null)
@@ -69,7 +69,7 @@ namespace Factories
         }
 
 
-        public Turbofan TryMakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+        public Turbofan TryMakeTurbofan(float bypassratio, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                         int numberofcycles, List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model,
                                         string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, bool isgeared = false,
                                         bool hasreverse = true, string parentvehicleID = null)
@@ -142,7 +142,7 @@ namespace Factories
             return turbofan;
         }
 
-        public Turboshaft MakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts, Generator gen,
+        public Turboshaft MakeTurboshaft(float gearingR, float maxtorque, int numberofshafts, Generator gen,
                                         List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
                                         List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
                                         float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
@@ -195,7 +195,7 @@ namespace Factories
         //}
 
 
-        public Turboshaft TryMakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts, Generator gen,
+        public Turboshaft TryMakeTurboshaft(float gearingR, float maxtorque, int numberofshafts, Generator gen,
                                             List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
                                             List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
                                             float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
@@ -272,7 +272,7 @@ namespace Factories
             }
             return turboshaft;
         }
-        private void GeneralConditionsChecker(uint numberofshafts, List<Spool> spools, List<Propellants> fueList, List<Oxidisers> oxidisers, string serialnumber)
+        private void GeneralConditionsChecker(int numberofshafts, List<Spool> spools, List<Propellants> fueList, List<Oxidisers> oxidisers, string serialnumber)
         {
             if (numberofshafts < 1)
                 throw new ArgumentException("There could be no turbofan with less than one shaft", nameof(numberofshafts));
@@ -288,7 +288,7 @@ namespace Factories
                 throw new ArgumentNullException(nameof(serialnumber), "No serial number provided");
         }
 
-        public Turbojet MakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles,
+        public Turbojet MakeTurbojet(int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles,
                                      List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower,
                                      float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, string parentvehicleID = null)
         {
@@ -299,7 +299,7 @@ namespace Factories
                 oxidisers, manuf, model, serialnumber, maxpower, operatingtime, parentvehicleID, fuelflow, stat);
         }
 
-        public bool TryMakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
+        public bool TryMakeTurbojet(int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> fueList,
                                     List<Oxidisers> oxidisers, string manuf, string model, string serialnumber, float maxpower, float operatingtime,
                                     float fuelflow, OnOff stat, out Turbojet incomingTurbojet, bool hasreverse = true, string parentvehicleID = null)
         {
@@ -332,7 +332,7 @@ namespace Factories
             }
         }
 
-        public Turbojet TryMakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools,
+        public Turbojet TryMakeTurbojet(int numberofshafts, Generator gen, List<Spool> spools,
             int egt, int isp, int numberofcycles,
             List<Propellants> fueList, List<Oxidisers> oxidisers, string manuf, string model, string serialnumber,
             float maxpower,

@@ -44,6 +44,7 @@
     <Compile Include="Blades.cs" />
     <Compile Include="Decorator.cs" />
     <Compile Include="Engines.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="AviationAdministration.cs" />
     <Compile Include="GasCompartment.cs" />

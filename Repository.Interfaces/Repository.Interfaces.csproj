@@ -40,7 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEngineRepository.cs" />
     <Compile Include="IGasCompartmentRepository.cs" />
+    <Compile Include="IGeneratorRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IVariableGeometryWingRepository.cs" />
+    <Compile Include="IWingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
