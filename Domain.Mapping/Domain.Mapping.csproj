@@ -77,6 +77,16 @@
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBScripts\NONDeterminism.sql" />
+    <Content Include="DBScripts\SQLQuery1.sql" />
+    <Content Include="DBScripts\SQLQuery2.sql" />
+    <Content Include="DBScripts\SQLQuery3.sql" />
+    <Content Include="DBScripts\SQLQuery4.sql" />
+    <Content Include="DBScripts\SQLQueryMAIN.sql" />
+    <Content Include="DBScripts\SQLQueryProc.sql" />
+    <Content Include="DBScripts\TableDropper%28engage multiple times%29.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
