@@ -286,6 +286,30 @@ namespace PresentationCode
             var turbojetRepository = ServiceLocator.Get<ITurbojetRepository>();
             turbojetRepository.Save(new Turbojet(true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, "73", 42, OnOff.Stopped));
 
+            //aircraft
+            var aircraftRepository = ServiceLocator.Get<IAircraftRepository>();
+            //it's an abstarct class
+
+            //powered aircraft
+            var poweredAircraftRepository = ServiceLocator.Get<IPoweredAircraftRepository>();
+            poweredAircraftRepository.Save(new PoweredAircraft(null, 42, "42", "73", 42, 73, "42"));
+
+            //lighter than air aircraft
+            var lighterThanAirAircraftRepository = ServiceLocator.Get<ILighterThanAirAircraftRepository>();
+            lighterThanAirAircraftRepository.Save(new LighterThanAirAircraft(null, 42, "He", new List<GasCompartment>(), null, 73, "42", "73", 42, 73, "42"));
+
+            //heavier than air aircraft
+            var heavierThanAirAircraftRepository = ServiceLocator.Get<IHeavierThanAirAircraftRepository>();
+            heavierThanAirAircraftRepository.Save(new HeavierThanAirAircraft(null, 42, "42", "73", 42, 73, "42"));
+
+            //fixed wing aircraft
+            var fixedWingAricraftRepository = ServiceLocator.Get<IFixedWingAircraftRepository>();
+            fixedWingAricraftRepository.Save(new FixedWingAircraft(new List<Wing>(), 42, 73, null, 42, "42", "73", 42, 73, "42"));
+
+            //rotorcraft
+            var rotorcraftRepository = ServiceLocator.Get<IRotorCraftRepository>();
+            rotorcraftRepository.Save(new RotorCraft(42, new List<RotorBlade>(), "73", new List<Engine>(), 42, "42", "73", 42, 73, "42"));
+
             log.Dispose();
         }
 

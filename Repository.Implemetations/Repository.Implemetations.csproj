@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AircraftRepository.cs" />
     <Compile Include="EngineRepository.cs" />
     <Compile Include="GasCompartmentRepository.cs" />
     <Compile Include="GeneratorRepository.cs" />

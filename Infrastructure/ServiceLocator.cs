@@ -33,6 +33,15 @@ namespace Infrastructure
             Kernel.Bind<ITurbofanRepository>().To<TurbofanRepository>();
             Kernel.Bind<ITurbojetRepository>().To<TurbojetRepository>();
             Kernel.Bind<ITurboshaftRepository>().To<TurboshaftRepository>();
+
+            //airplanes
+            Kernel.Bind<IAircraftRepository>().To<AircraftRepository>();
+            Kernel.Bind<IPoweredAircraftRepository>().To<PoweredAircraftRepository>();
+            Kernel.Bind<ILighterThanAirAircraftRepository>().To<LighterThanAirAircraftRepository>();
+            Kernel.Bind<IHeavierThanAirAircraftRepository>().To<HeavierThanAirAircraftRepository>();
+            Kernel.Bind<IFixedWingAircraftRepository>().To<FixedWingAircraftRepository>();
+            Kernel.Bind<IRotorCraftRepository>().To<RotorCraftRepository>();
+
         }
 
         public static T Get<T>()

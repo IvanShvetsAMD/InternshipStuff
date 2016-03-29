@@ -5,34 +5,59 @@ using System.Text;
 
 namespace Domain
 {
-    public abstract class Aircraft
+    public abstract class Aircraft : Entity
     {
-        private List<IAviationAdministration> aviationAdministrations;
+        //private List<IAviationAdministration> aviationAdministrations;
         private bool isOperational;
-        public string Manufacturer { get; }
-        public string Model { get; }
-        public int MaxTakeoffWeight { get; private set; }
-        public int Vne { get; private set; }
-        public string SerialNumber { get; }
+        private readonly string _manufacturer;
+        private readonly string _model;
+        private readonly int _maxTakeoffWeight;
+        private readonly int _vne;
+        private readonly string _serialNumber;
 
-        public bool IsOperational
+        public virtual string Manufacturer
+        {
+            get { return _manufacturer; }
+        }
+
+        public virtual string Model
+        {
+            get { return _model; }
+        }
+
+        public virtual int MaxTakeoffWeight
+        {
+            get { return _maxTakeoffWeight; }
+        }
+
+        public virtual int Vne
+        {
+            get { return _vne; }
+        }
+
+        public virtual string SerialNumber
+        {
+            get { return _serialNumber; }
+        }
+
+        public virtual bool IsOperational
         {
             get { return isOperational; }
             set
             {
                 isOperational = value;
-                if (value == false)
-                    NotifyOfCrash();
+                //if (value == false)
+                   // NotifyOfCrash();
             }
         }
 
 
-        public void ReleaseParkingBrake()
+        public virtual void ReleaseParkingBrake()
         {
             Console.WriteLine("Parking brake released.");
         }
 
-        public void SetParkingBrake()
+        public virtual void SetParkingBrake()
         {
             Console.WriteLine("Parking brake set.");
         }
@@ -42,47 +67,59 @@ namespace Domain
             return $"Manufacturer: {Manufacturer}, model: {Model}, maximum takeoff weight: {MaxTakeoffWeight}, Vne: {Vne}, Serial number: {SerialNumber}";
         }
 
-        public void Subscribe(IAviationAdministration administration)
-        {
-            if(!aviationAdministrations.Contains(administration))
-                aviationAdministrations.Add(administration);
-        }
+        //public void Subscribe(IAviationAdministration administration)
+        //{
+        //    if(!aviationAdministrations.Contains(administration))
+        //        aviationAdministrations.Add(administration);
+        //}
 
-        public void Unsubscribe(IAviationAdministration administration)
-        {
-            if (aviationAdministrations.Contains(administration))
-                aviationAdministrations.Remove(administration);
-        }
+        //public void Unsubscribe(IAviationAdministration administration)
+        //{
+        //    if (aviationAdministrations.Contains(administration))
+        //        aviationAdministrations.Remove(administration);
+        //}
 
-        public void NotifyOfCrash()
-        {
-            foreach (var aviationAdministration in aviationAdministrations)
-            {
-                aviationAdministration.GetNotifiedAboutCrash(this);
-            }
-        }
+        //public void NotifyOfCrash()
+        //{
+        //    foreach (var aviationAdministration in aviationAdministrations)
+        //    {
+        //        aviationAdministration.GetNotifiedAboutCrash(this);
+        //    }
+        //}
 
         public Aircraft(string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
         {
-            aviationAdministrations = new List<IAviationAdministration>();
-            Manufacturer = manufacturer;
-            Model = model;
-            MaxTakeoffWeight = maxTOweight;
-            Vne = vne;
-            SerialNumber = serialnumber;
-            IsOperational = true;
+            //aviationAdministrations = new List<IAviationAdministration>();
+            _manufacturer = manufacturer;
+            _model = model;
+            _maxTakeoffWeight = maxTOweight;
+            _vne = vne;
+            _serialNumber = serialnumber;
+            isOperational = true;
         }
 
-        protected Aircraft() { }
-
+        protected Aircraft()
+        {
+            
+        }
     }
 
     public class PoweredAircraft : Aircraft, IPowered
     {
-        public List<Engine> Engines { get; private set; }
-        public int FuelCapacity { get; private set; }
+        private readonly IList<Engine> _engines;
+        private readonly int _fuelCapacity;
 
-        public float GetCurrentPower(int engineNumber) => Engines[engineNumber].CurrentPower;
+        public virtual List<Engine> Engines
+        {
+            get { return _engines.ToList(); }
+        }
+
+        public virtual int FuelCapacity
+        {
+            get { return _fuelCapacity; }
+        }
+
+        public virtual float GetCurrentPower(int engineNumber) => Engines[engineNumber].CurrentPower;
 
         public override string ToString()
         {
@@ -94,23 +131,23 @@ namespace Domain
             return FinalString;
         }
 
-        public void DecreasePower(Engine engine)
+        public virtual void DecreasePower(Engine engine)
         {
             engine.DecreasePower();
         }
 
-        public void IncreasePower(Engine engine)
+        public virtual void IncreasePower(Engine engine)
         {
             engine.IncreasePower();
         }
 
-        public float GetCurrentPower(Engine engine)
+        public virtual float GetCurrentPower(Engine engine)
         {
             return engine.CurrentPower;
         }
 
-        public float GetTotalCurrentPower() => Engines.Sum(engine => engine.CurrentPower);
-        public void StartEngine(Engine engine)
+        public virtual float GetTotalCurrentPower() => Engines.Sum(engine => engine.CurrentPower);
+        public virtual void StartEngine(Engine engine)
         {
             try
             {
@@ -123,7 +160,7 @@ namespace Domain
             }
         }
 
-        public void StopEngine(Engine engine)
+        public virtual void StopEngine(Engine engine)
         {
             try
             {
@@ -141,18 +178,18 @@ namespace Domain
         public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            Engines = engines;
-            FuelCapacity = fuelcapacity;
+            _engines = engines;
+            _fuelCapacity = fuelcapacity;
         }
 
         protected PoweredAircraft() { }
 
-        public void MaxPower(Engine engine)
+        public virtual void MaxPower(Engine engine)
         {
             throw new NotImplementedException();
         }
 
-        public void IdlePower(Engine engine)
+        public virtual void IdlePower(Engine engine)
         {
             throw new NotImplementedException();
         }
@@ -160,11 +197,38 @@ namespace Domain
 
     public class LighterThanAirAircraft : PoweredAircraft, ILighterThanAir
     {
-        public ILiftingGasPumpModule GasManager { get; set; } = new SafeGasPumpManager();
-        public uint BallastMass { get; private set; }
-        public string GasType { get; private set; }
-        public float GasVolume { get; private set; }
-        public List<GasCompartment> Compartments { get; }
+        private ILiftingGasPumpModule _gasManager = new SafeGasPumpManager();
+        private int _ballastMass;
+        private readonly string _gasType;
+        private readonly float _gasVolume;
+        private readonly IList<GasCompartment> _compartments;
+
+        public virtual ILiftingGasPumpModule GasManager
+        {
+            get { return _gasManager; }
+            set { _gasManager = value; }
+        }
+
+        public virtual int BallastMass
+        {
+            get { return _ballastMass; }
+            protected set { _ballastMass = value; }
+        }
+
+        public virtual string GasType
+        {
+            get { return _gasType; }
+        }
+
+        public virtual float GasVolume
+        {
+            get { return _gasVolume; }
+        }
+
+        public virtual List<GasCompartment> Compartments
+        {
+            get { return _compartments.ToList(); }
+        }
 
         public override string ToString()
         {
@@ -178,7 +242,7 @@ namespace Domain
             return final.ToString();
         }
 
-        public void DumpBallast(uint mass)
+        public virtual void DumpBallast(int mass)
         {
             if (BallastMass > mass)
             {
@@ -190,27 +254,30 @@ namespace Domain
             }
         }
 
-        public void ShiftGas(int originCompartment, int destinationCompartment, float volume)
+        public virtual void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
             GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments, volume: volume);
         }
 
-        public LighterThanAirAircraft(ILiftingGasPumpModule gasManager, uint ballastmass, string gastype, List<GasCompartment> compartments, 
+        public LighterThanAirAircraft()
+        {
+            
+        }
+
+        public LighterThanAirAircraft(ILiftingGasPumpModule gasManager, int ballastmass, string gastype, List<GasCompartment> compartments, 
             List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            GasManager = gasManager;
-            BallastMass = ballastmass;
-            GasType = gastype;
-            Compartments = compartments;
-            GasVolume = Compartments?.Sum(chamber => chamber.CurrentVolume) ?? 0;
+            _gasManager = gasManager;
+            _ballastMass = ballastmass;
+            _gasType = gastype;
+            _compartments = compartments;
+            _gasVolume = Compartments?.Sum(chamber => chamber.CurrentVolume) ?? 0;
         }
     }
 
     public class HeavierThanAirAircraft : PoweredAircraft
     {
-
-
         public HeavierThanAirAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
@@ -222,11 +289,26 @@ namespace Domain
 
     public class RotorCraft : HeavierThanAirAircraft
     {
-        public int NumberOfRotors { get; private set; }
-        public List<RotorBlade> RotorBlades { get; private set; }
-        public string RotorType { get; private set; }
+        private readonly int _numberOfRotors;
+        private readonly IList<RotorBlade> _rotorBlades;
+        private readonly string _rotorType;
 
-        void EjectRotorBlades() => RotorBlades.Clear();
+        public virtual int NumberOfRotors
+        {
+            get { return _numberOfRotors; }
+        }
+
+        public virtual IList<RotorBlade> RotorBlades
+        {
+            get { return _rotorBlades; }
+        }
+
+        public virtual string RotorType
+        {
+            get { return _rotorType; }
+        }
+
+        protected virtual void EjectRotorBlades() => RotorBlades.Clear();
 
         public RotorCraft() { }
 
@@ -234,9 +316,9 @@ namespace Domain
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            NumberOfRotors = numberofrotors;
-            RotorBlades = rotorblades;
-            RotorType = rotortype;
+            _numberOfRotors = numberofrotors;
+            _rotorBlades = rotorblades;
+            _rotorType = rotortype;
         }
 
         public override string ToString()
@@ -249,17 +331,37 @@ namespace Domain
 
     public class FixedWingAircraft : HeavierThanAirAircraft
     {
-        public List<Wing> Wings { get; private set; }
-        public int? CruiseSpeed { get; }
-        public int? StallSpeed { get; }
+        private readonly IList<Wing> _wings;
+        private readonly int? _cruiseSpeed;
+        private readonly int? _stallSpeed;
+
+        public virtual List<Wing> Wings
+        {
+            get { return _wings.ToList(); }
+        }
+
+        public virtual int? CruiseSpeed
+        {
+            get { return _cruiseSpeed; }
+        }
+
+        public virtual int? StallSpeed
+        {
+            get { return _stallSpeed; }
+        }
+
+        public FixedWingAircraft()
+        {
+            
+        }
 
         public FixedWingAircraft(List<Wing> wings, int cruisespeed, int stallspeed, List<Engine> engines,
             int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(engines, fuelcapacity, manufacturer, model, maxTOweight, vne, serialnumber)
         {
-            Wings = wings;
-            CruiseSpeed = cruisespeed;
-            StallSpeed = stallspeed;
+            _wings = wings;
+            _cruiseSpeed = cruisespeed;
+            _stallSpeed = stallspeed;
         }
 
         public override string ToString()
