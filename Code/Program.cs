@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain;
 using Factories;
-using HibernatingRhinos.Profiler.Appender.NHibernate;
+//using HibernatingRhinos.Profiler.Appender.NHibernate;
 using Infrastructure;
 using LoggerService;
-using Repository.Implemetations;
 using Repository.Interfaces;
-using static System.String;
 
 namespace PresentationCode
 {
@@ -230,7 +223,7 @@ namespace PresentationCode
             //rotorCraft.IsOperational = false;
             //Console.WriteLine(rotorCraft);
 
-            NHibernateProfiler.Initialize();
+            //NHibernateProfiler.Initialize();
 
 
             //gas compartment
