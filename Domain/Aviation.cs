@@ -127,9 +127,16 @@ namespace Domain
         public override string ToString()
         {
             string FinalString = base.ToString() + String.Format(" fuel capacity: {0}\n Engines:", FuelCapacity);
-            for (int i = 0; i < Engines.Count; i++)
+            if (Engines != null)
             {
-                FinalString += String.Format("\n\tEngine number: {0}, {1}", i, Engines[i]);
+                for (int i = 0; i < Engines.Count; i++)
+                {
+                    FinalString += String.Format("\n\tEngine number: {0}, {1}", i, Engines[i]);
+                }
+            }
+            else
+            {
+                FinalString += "\nNo engines installed\n";
             }
             return FinalString;
         }

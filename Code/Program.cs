@@ -300,39 +300,39 @@ namespace PresentationCode
 
             //piston engine
             var pistonEngineRepository = ServiceLocator.Get<IPistonEngineRepository>();
-            pistonEngineRepository.Save(new PistonEngine(42, 73, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            pistonEngineRepository.Save(new PistonEngine(42, 73, "42", "73", "42", 73, 42, null, 73, OnOff.Stopped));
 
             //jet engine
             var jetEngineRepository = ServiceLocator.Get<IJetEngineRepository>();
-            jetEngineRepository.Save(new JetEngine(42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            jetEngineRepository.Save(new JetEngine(42, 73, 42, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
             //rocket engine
             var rocketEngineRepository = ServiceLocator.Get<IRocketEngineRepository>();
-            rocketEngineRepository.Save(new RocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            rocketEngineRepository.Save(new RocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
             //solid fuel rocket engine
             var solidFuelRocketEngineRepository = ServiceLocator.Get<ISolidFuelRocketEngineRepository>();
-            solidFuelRocketEngineRepository.Save(new SolidFuelRocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            solidFuelRocketEngineRepository.Save(new SolidFuelRocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, null, 73, OnOff.Stopped ));
 
             //turbine engine
             var turbineEngineRepository = ServiceLocator.Get<ITurbineEngineRepository>();
-            turbineEngineRepository.Save(new TurbineEngine(true, 42, null, null, 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            turbineEngineRepository.Save(new TurbineEngine(true, 42, null, null, 42, 73, 42, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
             //ramjet
             var ramjetRepository = ServiceLocator.Get<IRamjetRepository>();
-            ramjetRepository.Save(new Ramjet(true, 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ramjetRepository.Save(new Ramjet(true, 42, 73, 42, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
             //turbofan
             var turbofanRepository = ServiceLocator.Get<ITurbofanRepository>();
-            turbofanRepository.Save(new Turbofan(42, true, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            turbofanRepository.Save(new Turbofan(42, true, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
             //turboshaft
             var turboshaftRepository = ServiceLocator.Get<ITurboshaftRepository>();
-            turboshaftRepository.Save(new Turboshaft(42, 73, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            turboshaftRepository.Save(new Turboshaft(42, 73, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
             //turbojet
             var turbojetRepository = ServiceLocator.Get<ITurbojetRepository>();
-            turbojetRepository.Save(new Turbojet(true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            turbojetRepository.Save(new Turbojet(true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
             
 
