@@ -29,5 +29,6 @@ namespace Repository.Interfaces
 
     public interface IFixedWingAircraftRepository : IRepository<FixedWingAircraft>
     {
+        FixedWingAircraft LoadAircaftById(long Id);
     }
 }

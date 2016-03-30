@@ -6,28 +6,53 @@ namespace Repository.Implemetations
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        protected readonly ISession _session = SessionGenerator.Instance.GetSession();
+        protected ISession session = SessionGenerator.Instance.GetSession();
+
+        //protected IStatelessSession _session2 = SessionGenerator.Instance.GetStatelessSession;
+
+        //protected SessionSingleton SesssionSingletonSession = SessionSingleton.GetSessionSingleton();
+
+        //public Repository()
+        //{
+        //    _session = SesssionSingletonSession.GetSession;
+        //}
 
         public void Save(TEntity entity)
         {
-            using (ITransaction transaction = _session.BeginTransaction())
+            //using (var session = SessionGenerator.Instance.GetSession())
             {
-                _session.SaveOrUpdate(entity);
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    
+                    session.SaveOrUpdate(entity);
 
-                transaction.Commit();
+                    transaction.Commit();
+                }
             }
         }
 
         public TEntity LoadEntity<TEntity>(long ID) where TEntity : Entity
         {
             TEntity entity;
-            using (ITransaction transaction = _session.BeginTransaction())
+            
+            //using (var session = SessionGenerator.Instance.GetSession())
             {
-                entity = _session.Load<TEntity>(ID);
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    entity = session.Load<TEntity>(ID);
+                    transaction.Commit();
 
+                    return entity;
+                }
+            }
+        }
+
+        public void Delete(TEntity entity)
+        {
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                session.Delete(entity);
                 transaction.Commit();
-
-                return entity;
             }
         }
     }

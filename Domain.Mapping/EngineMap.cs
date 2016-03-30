@@ -91,9 +91,8 @@ namespace Domain.Mapping
         {
             Map(x => x.HasReverse).Not.Nullable();
             Map(x => x.NumberOfShafts).Not.Nullable();
-            HasMany(x => x.Spools).Cascade.SaveUpdate().Inverse();
+            HasMany(x => x.Spools).Cascade.All().Inverse();
             HasOne(x => x.Generator).Cascade.SaveUpdate();
-
         }
     }
 

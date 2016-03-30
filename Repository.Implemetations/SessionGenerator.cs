@@ -20,7 +20,7 @@ namespace Repository.Implemetations
         {
             return SessionFactory.OpenSession();
         }
-        
+
         private static readonly SessionGenerator _sessionGenerator = new SessionGenerator();
 
         private static readonly ISessionFactory SessionFactory = CreateSessionFactory();

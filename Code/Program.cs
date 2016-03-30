@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Domain;
 using Factories;
+using HibernatingRhinos.Profiler.Appender.NHibernate;
 using Infrastructure;
 using LoggerService;
 using Repository.Implemetations;
@@ -229,6 +230,8 @@ namespace PresentationCode
             //rotorCraft.IsOperational = false;
             //Console.WriteLine(rotorCraft);
 
+            NHibernateProfiler.Initialize();
+
 
             //gas compartment
             var gasCompartmentRepository = ServiceLocator.Get<IGasCompartmentRepository>();
@@ -292,7 +295,7 @@ namespace PresentationCode
 
             //spool
             var spoolRepository = ServiceLocator.Get<ISpoolRepository>();
-            spoolRepository.Save(new Spool(null, "42"));
+            spoolRepository.Save(new Spool(new List<TurbineBlade>(), "42"));
 
             //engine
             var engineRepository = ServiceLocator.Get<IEngineRepository>();
@@ -336,6 +339,19 @@ namespace PresentationCode
 
             
 
+
+            //testing double session use
+            var testSpool = turbojetRepository.LoadEntity<Spool>(159159);
+
+            var testTurbojet = turbojetRepository.LoadEntity<Turbojet>(120128);
+
+            testSpool.ParentEngine = testTurbojet;
+
+            testTurbojet.Spools.Add(testSpool);
+
+            turbojetRepository.Save(testTurbojet);
+
+            //turbojetRepository.Delete(testTurbojet);
 
             log.Dispose();
         }

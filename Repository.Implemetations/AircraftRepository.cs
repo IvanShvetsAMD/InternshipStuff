@@ -26,6 +26,10 @@ namespace Repository.Implemetations
 
     internal class FixedWingAircraftRepository : Repository<FixedWingAircraft>, IFixedWingAircraftRepository
     {
+        public FixedWingAircraft LoadAircaftById(long Id)
+        {
+            return LoadEntity<FixedWingAircraft>(Id);
+        }
     }
 
     internal class RotorCraftRepository : Repository<RotorCraft>, IRotorCraftRepository

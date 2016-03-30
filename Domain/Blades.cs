@@ -55,7 +55,7 @@
         public virtual Spool ParentSpool
         {
             get { return _parentSpool; }
-            protected set { _parentSpool = value; }
+            set { _parentSpool = value; }
         }
 
         public TurbineBlade()

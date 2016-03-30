@@ -11,7 +11,7 @@ namespace Domain.Mapping
         public SpoolMap()
         {
             Map(x => x.Type).Not.Nullable();
-            HasMany(x => x.Blades);
+            HasMany(x => x.Blades).Cascade.All().Inverse();
             References(x => x.ParentEngine);
         }
     }
