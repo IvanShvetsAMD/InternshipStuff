@@ -42,8 +42,8 @@ namespace Domain.Mapping
             Map(x => x.NumberOfCycles).Not.Nullable();
             Map(x => x.EGT).Not.Nullable();
             Map(x => x.Isp).Not.Nullable();
-            HasMany(x => x.Propellants);
-            HasMany(x => x.Oxidisers);
+            HasMany(x => x.Propellants).Cascade.SaveUpdate().Inverse();
+            HasMany(x => x.Oxidisers).Cascade.SaveUpdate().Inverse();
         }
     }
 
@@ -91,8 +91,9 @@ namespace Domain.Mapping
         {
             Map(x => x.HasReverse).Not.Nullable();
             Map(x => x.NumberOfShafts).Not.Nullable();
-            HasMany(x => x.Spools);
-            HasOne(x => x.Generator);
+            HasMany(x => x.Spools).Cascade.SaveUpdate().Inverse();
+            HasOne(x => x.Generator).Cascade.SaveUpdate();
+
         }
     }
 

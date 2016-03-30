@@ -27,7 +27,7 @@ namespace Domain.Mapping
         public PoweredAircraftMap()
         {
             Map(x => x.FuelCapacity).Not.Nullable();
-            HasMany(x => x.Engines);
+            HasMany(x => x.Engines).Cascade.SaveUpdate().Inverse();
         }
     }
 
@@ -38,7 +38,7 @@ namespace Domain.Mapping
             Map(x => x.BallastMass).Not.Nullable();
             Map(x => x.GasType).Not.Nullable();
             Map(x => x.GasVolume).Not.Nullable();
-            HasMany(x => x.Compartments);
+            HasMany(x => x.Compartments).Cascade.SaveUpdate().Inverse();
         }
     }
 
@@ -56,7 +56,7 @@ namespace Domain.Mapping
         {
             Map(x => x.CruiseSpeed).Not.Nullable();
             Map(x => x.StallSpeed).Not.Nullable();
-            HasMany(x => x.Wings);
+            HasMany(x => x.Wings).Cascade.SaveUpdate().Inverse();
         }
     }
 
@@ -66,7 +66,7 @@ namespace Domain.Mapping
         {
             Map(x => x.NumberOfRotors).Not.Nullable();
             Map(x => x.RotorType).Not.Nullable();
-            HasMany(x => x.RotorBlades);
+            HasMany(x => x.RotorBlades).Cascade.SaveUpdate().Inverse();
         }
     }
 }
