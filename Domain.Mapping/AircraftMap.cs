@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate.Mapping;
 using NHibernate.Mapping;
 
 namespace Domain.Mapping
@@ -21,7 +22,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class PoweredAircraftMap : EntityMap<PoweredAircraft>
+    public class PoweredAircraftMap : SubclassMap<PoweredAircraft>
     {
         public PoweredAircraftMap()
         {
@@ -30,7 +31,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class LighterThanAirAricraftMap : EntityMap<LighterThanAirAircraft>
+    public class LighterThanAirAricraftMap : SubclassMap<LighterThanAirAircraft>
     {
         public LighterThanAirAricraftMap()
         {
@@ -41,7 +42,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class HeavierThanAirAircraftMap : EntityMap<HeavierThanAirAircraft>
+    public class HeavierThanAirAircraftMap : SubclassMap<HeavierThanAirAircraft>
     {
         public HeavierThanAirAircraftMap()
         {
@@ -49,7 +50,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class FixedWingAircraftMap : EntityMap<FixedWingAircraft>
+    public class FixedWingAircraftMap : SubclassMap<FixedWingAircraft>
     {
         public FixedWingAircraftMap()
         {
@@ -59,7 +60,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class RotorcraftMap : EntityMap<RotorCraft>
+    public class RotorcraftMap : SubclassMap<RotorCraft>
     {
         public RotorcraftMap()
         {

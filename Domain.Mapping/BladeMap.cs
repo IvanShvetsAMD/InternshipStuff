@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate.Mapping;
 
 namespace Domain.Mapping
 {
@@ -16,7 +17,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class TurbineBladeMap : EntityMap<TurbineBlade>
+    public class TurbineBladeMap : SubclassMap<TurbineBlade>
     {
         public TurbineBladeMap()
         {
@@ -25,7 +26,7 @@ namespace Domain.Mapping
             References(x => x.ParentSpool);
         }
     }
-    public class RotorBladeMap : EntityMap<RotorBlade>
+    public class RotorBladeMap : SubclassMap<RotorBlade>
     {
         public RotorBladeMap()
         {

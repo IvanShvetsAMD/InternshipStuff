@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate.Mapping;
 
 namespace Domain.Mapping
 {
-    public class VariableGeometryWingMap : EntityMap<VariableGeometryWing>
+    public class VariableGeometryWingMap : SubclassMap<VariableGeometryWing>
     {
         public VariableGeometryWingMap()
         {

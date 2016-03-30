@@ -106,7 +106,7 @@ namespace Domain
 
     public class PoweredAircraft : Aircraft, IPowered
     {
-        private readonly List<Engine> _engines;
+        private readonly List<Engine> _engines = new List<Engine>();
         private readonly int _fuelCapacity;
 
         public virtual IList<Engine> Engines

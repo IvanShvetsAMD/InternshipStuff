@@ -228,8 +228,8 @@ namespace PresentationCode
 
             //rotorCraft.IsOperational = false;
             //Console.WriteLine(rotorCraft);
-            
-            
+
+
             //gas compartment
             var gasCompartmentRepository = ServiceLocator.Get<IGasCompartmentRepository>();
             gasCompartmentRepository.Save(new GasCompartment(400, 380));
@@ -254,85 +254,85 @@ namespace PresentationCode
             var pistonEngineRepository = ServiceLocator.Get<IPistonEngineRepository>();
             pistonEngineRepository.Save(new PistonEngine(42, 73, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //jet engine
-            var jetEngineRepository = ServiceLocator.Get<IJetEngineRepository>();
-            jetEngineRepository.Save(new JetEngine(42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////jet engine
+            //var jetEngineRepository = ServiceLocator.Get<IJetEngineRepository>();
+            //jetEngineRepository.Save(new JetEngine(42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //rocket engine
-            var rocketEngineRepository = ServiceLocator.Get<IRocketEngineRepository>();
-            rocketEngineRepository.Save(new RocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////rocket engine
+            //var rocketEngineRepository = ServiceLocator.Get<IRocketEngineRepository>();
+            //rocketEngineRepository.Save(new RocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //solid fuel rocket engine
-            var solidFuelRocketEngineRepository = ServiceLocator.Get<ISolidFuelRocketEngineRepository>();
-            solidFuelRocketEngineRepository.Save(new SolidFuelRocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////solid fuel rocket engine
+            //var solidFuelRocketEngineRepository = ServiceLocator.Get<ISolidFuelRocketEngineRepository>();
+            //solidFuelRocketEngineRepository.Save(new SolidFuelRocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //turbine engine
-            var turbineEngineRepository = ServiceLocator.Get<ITurbineEngineRepository>();
-            turbineEngineRepository.Save(new TurbineEngine(true, 42, null, null, 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////turbine engine
+            //var turbineEngineRepository = ServiceLocator.Get<ITurbineEngineRepository>();
+            //turbineEngineRepository.Save(new TurbineEngine(true, 42, null, null, 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //ramjet
-            var ramjetRepository = ServiceLocator.Get<IRamjetRepository>();
-            ramjetRepository.Save(new Ramjet(true, 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////ramjet
+            //var ramjetRepository = ServiceLocator.Get<IRamjetRepository>();
+            //ramjetRepository.Save(new Ramjet(true, 42, 73, 42, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //turbofan
-            var turbofanRepository = ServiceLocator.Get<ITurbofanRepository>();
-            turbofanRepository.Save(new Turbofan(42, true, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////turbofan
+            //var turbofanRepository = ServiceLocator.Get<ITurbofanRepository>();
+            //turbofanRepository.Save(new Turbofan(42, true, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //turboshaft
-            var turboshaftRepository = ServiceLocator.Get<ITurboshaftRepository>();
-            turboshaftRepository.Save(new Turboshaft(42, 73, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////turboshaft
+            //var turboshaftRepository = ServiceLocator.Get<ITurboshaftRepository>();
+            //turboshaftRepository.Save(new Turboshaft(42, 73, true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //turbojet
-            var turbojetRepository = ServiceLocator.Get<ITurbojetRepository>();
-            turbojetRepository.Save(new Turbojet(true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
+            ////turbojet
+            //var turbojetRepository = ServiceLocator.Get<ITurbojetRepository>();
+            //turbojetRepository.Save(new Turbojet(true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, new FixedWingAircraft(), 42, OnOff.Stopped));
 
-            //aircraft
-            var aircraftRepository = ServiceLocator.Get<IAircraftRepository>();
-            //it's an abstarct class
+            ////aircraft
+            //var aircraftRepository = ServiceLocator.Get<IAircraftRepository>();
+            ////it's an abstarct class
 
-            //powered aircraft
-            var poweredAircraftRepository = ServiceLocator.Get<IPoweredAircraftRepository>();
-            poweredAircraftRepository.Save(new PoweredAircraft(new List<Engine>(), 42, "42", "73", 42, 73, "42"));
+            ////powered aircraft
+            //var poweredAircraftRepository = ServiceLocator.Get<IPoweredAircraftRepository>();
+            //poweredAircraftRepository.Save(new PoweredAircraft(new List<Engine>(), 42, "42", "73", 42, 73, "42"));
 
-            //lighter than air aircraft
-            var lighterThanAirAircraftRepository = ServiceLocator.Get<ILighterThanAirAircraftRepository>();
-            lighterThanAirAircraftRepository.Save(new LighterThanAirAircraft(null, 42, "He", new List<GasCompartment>(), null, 73, "42", "73", 42, 73, "42"));
+            ////lighter than air aircraft
+            //var lighterThanAirAircraftRepository = ServiceLocator.Get<ILighterThanAirAircraftRepository>();
+            //lighterThanAirAircraftRepository.Save(new LighterThanAirAircraft(null, 42, "He", new List<GasCompartment>(), new List<Engine>(), 73, "42", "73", 42, 73, "42"));
 
-            //heavier than air aircraft
-            var heavierThanAirAircraftRepository = ServiceLocator.Get<IHeavierThanAirAircraftRepository>();
-            heavierThanAirAircraftRepository.Save(new HeavierThanAirAircraft(new List<Engine>(), 42, "42", "73", 42, 73, "42"));
+            ////heavier than air aircraft
+            //var heavierThanAirAircraftRepository = ServiceLocator.Get<IHeavierThanAirAircraftRepository>();
+            //heavierThanAirAircraftRepository.Save(new HeavierThanAirAircraft(new List<Engine>(), 42, "42", "73", 42, 73, "42"));
 
-            //fixed wing aircraft
-            var fixedWingAricraftRepository = ServiceLocator.Get<IFixedWingAircraftRepository>();
-            fixedWingAricraftRepository.Save(new FixedWingAircraft(new List<Wing>(), 42, 73, null, 42, "42", "73", 42, 73, "42"));
+            ////fixed wing aircraft
+            //var fixedWingAricraftRepository = ServiceLocator.Get<IFixedWingAircraftRepository>();
+            //fixedWingAricraftRepository.Save(new FixedWingAircraft(new List<Wing>(), 42, 73, new List<Engine>(), 42, "42", "73", 42, 73, "42"));
 
-            //rotorcraft
-            var rotorcraftRepository = ServiceLocator.Get<IRotorCraftRepository>();
-            rotorcraftRepository.Save(new RotorCraft(42, new List<RotorBlade>(), "73", new List<Engine>(), 42, "42", "73", 42, 73, "42"));
+            ////rotorcraft
+            //var rotorcraftRepository = ServiceLocator.Get<IRotorCraftRepository>();
+            //rotorcraftRepository.Save(new RotorCraft(42, new List<RotorBlade>(), "73", new List<Engine>(), 42, "42", "73", 42, 73, "42"));
 
-            //propellant
-            var propellantRepository = ServiceLocator.Get<IPropellantRepository>();
-            propellantRepository.Save(new Propellant(PropellantsEnum.MonoMethylHydrazine));
+            ////propellant
+            //var propellantRepository = ServiceLocator.Get<IPropellantRepository>();
+            //propellantRepository.Save(new Propellant(PropellantsEnum.MonoMethylHydrazine));
 
-            //oxidiser
-            var oxidiserRepository = ServiceLocator.Get<IOxidiserRepository>();
-            oxidiserRepository.Save(new Oxidiser(OxidisersEnum.DinitrogenTetroxide));
+            ////oxidiser
+            //var oxidiserRepository = ServiceLocator.Get<IOxidiserRepository>();
+            //oxidiserRepository.Save(new Oxidiser(OxidisersEnum.DinitrogenTetroxide));
 
-            //blade
-            var bladeRepository = ServiceLocator.Get<IBladeRepository>();
-            //it's an abstract class
+            ////blade
+            //var bladeRepository = ServiceLocator.Get<IBladeRepository>();
+            ////it's an abstract class
 
-            //turbine blade
-            var turbineBladeRepository = ServiceLocator.Get<ITurbineBladeRepository>();
-            turbineBladeRepository.Save(new TurbineBlade(42, true, 42, 73, "42"));
+            ////turbine blade
+            //var turbineBladeRepository = ServiceLocator.Get<ITurbineBladeRepository>();
+            //turbineBladeRepository.Save(new TurbineBlade(42, true, 42, 73, "42"));
 
-            //rotor blade
-            var rotorBladeRepository = ServiceLocator.Get<IRotorBladeRepository>();
-            rotorBladeRepository.Save(new RotorBlade(true, 42, 73, "42"));
+            ////rotor blade
+            //var rotorBladeRepository = ServiceLocator.Get<IRotorBladeRepository>();
+            //rotorBladeRepository.Save(new RotorBlade(true, 42, 73, "42"));
 
-            //spool
-            var spoolRepository = ServiceLocator.Get<ISpoolRepository>();
-            spoolRepository.Save(new Spool(null, "42"));
+            ////spool
+            //var spoolRepository = ServiceLocator.Get<ISpoolRepository>();
+            //spoolRepository.Save(new Spool(null, "42"));
 
 
             log.Dispose();

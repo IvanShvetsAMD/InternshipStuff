@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate.Mapping;
 using NHibernate.Mapping;
 
 namespace Domain.Mapping
@@ -24,7 +25,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class PistonEngineMap : EntityMap<PistonEngine>
+    public class PistonEngineMap : SubclassMap<PistonEngine>
     {
         public PistonEngineMap()
         {
@@ -34,7 +35,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class JetEngineMap : EntityMap<JetEngine>
+    public class JetEngineMap : SubclassMap<JetEngine>
     {
         public JetEngineMap()
         {
@@ -66,7 +67,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class RocketEngineMap : EntityMap<RocketEngine>
+    public class RocketEngineMap : SubclassMap<RocketEngine>
     {
         public RocketEngineMap()
         {
@@ -75,7 +76,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class SolidFuelRocketEngineMap : EntityMap<SolidFuelRocketEngine>
+    public class SolidFuelRocketEngineMap : SubclassMap<SolidFuelRocketEngine>
     {
         public SolidFuelRocketEngineMap()
         {
@@ -84,7 +85,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class TurbineEngineMap : EntityMap<TurbineEngine>
+    public class TurbineEngineMap : SubclassMap<TurbineEngine>
     {
         public TurbineEngineMap()
         {
@@ -95,7 +96,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class RamjetRepository : EntityMap<Ramjet>
+    public class RamjetRepository : SubclassMap<Ramjet>
     {
         public RamjetRepository()
         {
@@ -103,7 +104,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class TurbofanMap : EntityMap<Turbofan>
+    public class TurbofanMap : SubclassMap<Turbofan>
     {
         public TurbofanMap()
         {
@@ -112,7 +113,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class TurboshaftMap : EntityMap<Turboshaft>
+    public class TurboshaftMap : SubclassMap<Turboshaft>
     {
         public TurboshaftMap()
         {
@@ -121,7 +122,7 @@ namespace Domain.Mapping
         }
     }
 
-    public class TurbojetMap : EntityMap<Turbojet>
+    public class TurbojetMap : SubclassMap<Turbojet>
     {
         public TurbojetMap()
         {
