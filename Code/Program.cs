@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Domain;
 using Domain.Dto;
 using Factories;
-//using HibernatingRhinos.Profiler.Appender.NHibernate;
+using HibernatingRhinos.Profiler.Appender.NHibernate;
 using Infrastructure;
 using LoggerService;
 using Repository.Interfaces;
@@ -226,7 +226,7 @@ namespace PresentationCode
             //rotorCraft.IsOperational = false;
             //Console.WriteLine(rotorCraft);
 
-            //NHibernateProfiler.Initialize();
+            NHibernateProfiler.Initialize();
 
 
             //gas compartment
@@ -392,19 +392,32 @@ namespace PresentationCode
                 turbineBladeRepository.Save(turbineBlade);
             }
 
+            for (int i = 200; i < 500; i += 50)
+            {
+                gasCompartmentRepository.Save(new GasCompartment(i, (float)(i - (i * 0.5))));
+            }
+
 
 
             //SQLQuery2
             //selecting all turbineblades not made out of W, but are an alloy or can withstand temperatures in excess of 1400 C
-            IList<TurbineBladeAndSpoolTypeInfoDto> results = turbineBladeRepository.GetTurbineBladeAndSpoolTypeInfoDtos();
+            IList<TurbineBladeAndSpoolTypeInfoDto> results2 = turbineBladeRepository.GetTurbineBladeAndSpoolTypeInfoDtos();
 
-            foreach (var turbineBladeAndSpoolTypeInfoDto in results)
+            foreach (var turbineBladeAndSpoolTypeInfoDto in results2)
             {
                 Console.WriteLine(turbineBladeAndSpoolTypeInfoDto.MaterialType);
             }
 
 
+            //SQLQuery3
+            //gets the number of compartments whose capacity is greater than 300 units of volume and their actual capacity 
+            List<GasCompatrmentsCountAndCapacityDto> results3 =
+                gasCompartmentRepository.GetCompartmetnsCountWithLowerCapacityThan(300);
 
+            foreach (var gasCompatrmentsCountAndCapacityDto in results3)
+            {
+                Console.WriteLine($"Capacity: {gasCompatrmentsCountAndCapacityDto.Capacity}, Count: {gasCompatrmentsCountAndCapacityDto.Count}");
+            }
 
             log.Dispose();
         }
