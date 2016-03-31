@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Domain;
+using Domain.Dto;
 using Factories;
 //using HibernatingRhinos.Profiler.Appender.NHibernate;
 using Infrastructure;
@@ -280,8 +283,8 @@ namespace PresentationCode
 
             //turbine blade
             var turbineBladeRepository = ServiceLocator.Get<ITurbineBladeRepository>();
-            turbineBladeRepository.Save(new TurbineBlade(42, true, 42, 73, "42"));
-
+            turbineBladeRepository.Save(new TurbineBlade(1000, true, 18, 12, "High temp alloy"));
+            
             //rotor blade
             var rotorBladeRepository = ServiceLocator.Get<IRotorBladeRepository>();
             rotorBladeRepository.Save(new RotorBlade(true, 42, 73, "42"));
@@ -330,21 +333,78 @@ namespace PresentationCode
             var turbojetRepository = ServiceLocator.Get<ITurbojetRepository>();
             turbojetRepository.Save(new Turbojet(true, 42, null, null, 73, 42, 73, null, null, "42", "73", "42", 73, 42, null, 42, OnOff.Stopped));
 
+
+
+
+            ////testing double session use
+            //var testSpool = turbojetRepository.LoadEntity<Spool>(159159);
+
+            //var testTurbojet = turbojetRepository.LoadEntity<Turbojet>(120128);
+
+            //testSpool.ParentEngine = testTurbojet;
+
+            //testTurbojet.Spools.Add(testSpool);
+
+            //turbojetRepository.Save(testTurbojet);
+
+            ////turbojetRepository.Delete(testTurbojet);
+
+            List<Spool> spools = new List<Spool>();
+            spools.Add(new Spool(null, "Fan"));
+            spools.Add(new Spool(null, "IP spool"));
+            spools.Add(new Spool(null, "LP spool"));
+            spools.Add(new Spool(null, "HP spool"));
+
+            List<TurbineBlade> blades = new List<TurbineBlade>();
+            for (int i = 0; i < 10; i++)
+            {
+                TurbineBlade tb = new TurbineBlade(1500, true, 12, 8, "Ti");
+                blades.Add(tb);
+                blades.Add(new TurbineBlade(1000, false, 18, 12, "High temp alloy"));
+                blades.Add(new TurbineBlade(1350, true, 12, 8, "Ceramic plated alloy"));
+                blades.Add(new TurbineBlade(1275, false, 12, 8, "W (tungsten) alloy"));
+            }
+
             
 
+            spools[0] = new Spool(blades.Where(x => x.MaterialType == "High temp alloy").ToList(), spools[0].Type);
+            spools[1] = new Spool(blades.Where(x => x.MaterialType == "W (tungsten) alloy").ToList(), spools[1].Type);
+            spools[2] = new Spool(blades.Where(x => x.MaterialType == "Ceramic plated alloy").ToList(), spools[2].Type);
+            spools[3] = new Spool(blades.Where(x => x.MaterialType == "Ti").ToList(), spools[3].Type);
 
-            //testing double session use
-            var testSpool = turbojetRepository.LoadEntity<Spool>(159159);
 
-            var testTurbojet = turbojetRepository.LoadEntity<Turbojet>(120128);
+            foreach (var spool in spools)
+            {
+                foreach (var turbineBlade in spool.Blades)
+                {
+                    turbineBlade.ParentSpool = spool;
+                }
+            }
 
-            testSpool.ParentEngine = testTurbojet;
+            
+            foreach (var spool in spools)
+            {
+                spoolRepository.Save(spool);
+            }
 
-            testTurbojet.Spools.Add(testSpool);
+            foreach (var turbineBlade in blades)
+            {
+                turbineBladeRepository.Save(turbineBlade);
+            }
 
-            turbojetRepository.Save(testTurbojet);
 
-            //turbojetRepository.Delete(testTurbojet);
+
+            //SQLQuery2
+            //selecting all turbineblades not made out of W, but are an alloy or can withstand temperatures in excess of 1400 C
+            IList<TurbineBladeAndSpoolTypeInfoDto> results = turbineBladeRepository.GetTurbineBladeAndSpoolTypeInfoDtos();
+
+            foreach (var turbineBladeAndSpoolTypeInfoDto in results)
+            {
+                Console.WriteLine(turbineBladeAndSpoolTypeInfoDto.MaterialType);
+            }
+
+
+
 
             log.Dispose();
         }

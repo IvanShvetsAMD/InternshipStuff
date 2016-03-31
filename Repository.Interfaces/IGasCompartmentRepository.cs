@@ -11,5 +11,7 @@ namespace Repository.Interfaces
     public interface IGasCompartmentRepository : IRepository<GasCompartment>
     {
         void Save(GasCompartment entity);
+
+
     }
 }

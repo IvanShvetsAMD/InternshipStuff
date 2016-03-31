@@ -43,6 +43,7 @@
     <Compile Include="Aviation.cs" />
     <Compile Include="Blades.cs" />
     <Compile Include="Decorator.cs" />
+    <Compile Include="Dto\TurbineBladeAndSpoolTypeInfoDto.cs" />
     <Compile Include="Engines.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Exceptions.cs" />
