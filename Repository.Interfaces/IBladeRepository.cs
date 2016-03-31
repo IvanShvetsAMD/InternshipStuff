@@ -16,6 +16,8 @@ namespace Repository.Interfaces
     {
         IList<TurbineBladeAndSpoolTypeInfoDto> GetTurbineBladeAndSpoolTypeInfoDtos();
 
+        List<TurbineBladeCountDifferentiateOnCoolingChannelsDto> GetNumberOfBladesWithOrWitjoutCooling();
+
     }
 
     public interface IRotorBladeRepository : IRepository<RotorBlade>

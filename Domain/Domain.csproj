@@ -45,6 +45,7 @@
     <Compile Include="Decorator.cs" />
     <Compile Include="Dto\GasCompatrmentsCountAndCapacityDto.cs" />
     <Compile Include="Dto\TurbineBladeAndSpoolTypeInfoDto.cs" />
+    <Compile Include="Dto\TurbineBladeCountDifferentiateOnCoolingChannelsDto.cs" />
     <Compile Include="Engines.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Exceptions.cs" />

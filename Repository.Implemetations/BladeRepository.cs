@@ -58,6 +58,26 @@ namespace Repository.Implemetations
                 return results;
             }
         }
+
+        public List<TurbineBladeCountDifferentiateOnCoolingChannelsDto> GetNumberOfBladesWithOrWitjoutCooling()
+        {
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                List<TurbineBladeCountDifferentiateOnCoolingChannelsDto> results;
+                TurbineBladeCountDifferentiateOnCoolingChannelsDto DTO = null;
+                TurbineBlade turbineBladeAlias = null;
+
+                results = session.QueryOver<TurbineBlade>(() => turbineBladeAlias)
+                    .SelectList(selectionList => selectionList
+                        .SelectGroup(() => turbineBladeAlias.HasCoolingChannels).WithAlias(() => DTO.HasCoolingChannels)
+                        .SelectCount(() => turbineBladeAlias.HasCoolingChannels).WithAlias(() => DTO.Count))
+                    .TransformUsing(Transformers.AliasToBean<TurbineBladeCountDifferentiateOnCoolingChannelsDto>())
+                    .List<TurbineBladeCountDifferentiateOnCoolingChannelsDto>().ToList();
+
+                transaction.Commit();
+                return results;
+            }
+        }
     }
 
     internal class RotorBladeRepository : Repository<RotorBlade>, IRotorBladeRepository

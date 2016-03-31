@@ -22,14 +22,6 @@ namespace Repository.Implemetations
                 GasCompartment gasCompartmentAlias = null;
                 GasCompatrmentsCountAndCapacityDto DTO = null;
 
-                //results = session.QueryOver<GasCompartment>(() => gasCompartmentAlias)
-                //    .Where(x => x.Capacity < capacity)
-                //    .SelectList(list => list
-                //        .SelectGroup(() => gasCompartmentAlias.Capacity).WithAlias(() => DTO.Capacity)
-                //        .SelectCount(() => gasCompartmentAlias.Capacity).WithAlias(() => DTO.Count))
-                //    .TransformUsing(Transformers.AliasToBean<GasCompatrmentsCountAndCapacityDto>())
-                //    .List<GasCompatrmentsCountAndCapacityDto>().ToList();
-
                 results = session.QueryOver<GasCompartment>(() => gasCompartmentAlias)
                     .SelectList(list => list
                         .SelectGroup(() => gasCompartmentAlias.Capacity).WithAlias(() => DTO.Capacity)

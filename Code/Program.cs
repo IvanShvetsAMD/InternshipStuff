@@ -411,12 +411,23 @@ namespace PresentationCode
 
             //SQLQuery3
             //gets the number of compartments whose capacity is greater than 300 units of volume and their actual capacity 
-            List<GasCompatrmentsCountAndCapacityDto> results3 =
+            List<GasCompatrmentsCountAndCapacityDto> results3_1 =
                 gasCompartmentRepository.GetCompartmetnsCountWithLowerCapacityThan(300);
 
-            foreach (var gasCompatrmentsCountAndCapacityDto in results3)
+            foreach (var gasCompatrmentsCountAndCapacityDto in results3_1)
             {
                 Console.WriteLine($"Capacity: {gasCompatrmentsCountAndCapacityDto.Capacity}, Count: {gasCompatrmentsCountAndCapacityDto.Count}");
+            }
+
+            //SQLQuery3
+            //returns the number of blades that have cooling channels and the number that don't
+            List<TurbineBladeCountDifferentiateOnCoolingChannelsDto> results3_2 =
+                turbineBladeRepository.GetNumberOfBladesWithOrWitjoutCooling();
+
+            Console.WriteLine("\n\n");
+            foreach (var turbineBladeCountDifferentiateOnCoolingChannelsDto in results3_2)
+            {
+                Console.WriteLine($"Count: {turbineBladeCountDifferentiateOnCoolingChannelsDto.Count}, HasCoolingChannels: {turbineBladeCountDifferentiateOnCoolingChannelsDto.HasCoolingChannels}");
             }
 
             log.Dispose();
