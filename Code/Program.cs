@@ -229,6 +229,10 @@ namespace PresentationCode
             NHibernateProfiler.Initialize();
 
 
+            //aircraft registry
+            var aircraftRegistryRepository = ServiceLocator.Get<IAircraftRegistryRepository>();
+            aircraftRegistryRepository.Save(new AircraftRegistry("ER-AXV", false, new DateTime(2003, 9, 22), "622"));
+
             //gas compartment
             var gasCompartmentRepository = ServiceLocator.Get<IGasCompartmentRepository>();
             gasCompartmentRepository.Save(new GasCompartment(400, 380));
@@ -251,23 +255,23 @@ namespace PresentationCode
 
             //powered aircraft
             var poweredAircraftRepository = ServiceLocator.Get<IPoweredAircraftRepository>();
-            poweredAircraftRepository.Save(new PoweredAircraft(null, 42, "42", "73", 42, 73, "42"));
+            poweredAircraftRepository.Save(new PoweredAircraft(null, 42, "42", "73", 42, 73, "622"));
 
             //lighter than air aircraft
             var lighterThanAirAircraftRepository = ServiceLocator.Get<ILighterThanAirAircraftRepository>();
-            lighterThanAirAircraftRepository.Save(new LighterThanAirAircraft(null, 42, "He", new List<GasCompartment>(), new List<Engine>(), 73, "42", "73", 42, 73, "42"));
+            lighterThanAirAircraftRepository.Save(new LighterThanAirAircraft(null, 42, "He", new List<GasCompartment>(), new List<Engine>(), 73, "42", "73", 42, 73, "741"));
 
             //heavier than air aircraft
             var heavierThanAirAircraftRepository = ServiceLocator.Get<IHeavierThanAirAircraftRepository>();
-            heavierThanAirAircraftRepository.Save(new HeavierThanAirAircraft(new List<Engine>(), 42, "42", "73", 42, 73, "42"));
+            heavierThanAirAircraftRepository.Save(new HeavierThanAirAircraft(new List<Engine>(), 42, "42", "73", 42, 73, "2849"));
 
             //fixed wing aircraft
             var fixedWingAricraftRepository = ServiceLocator.Get<IFixedWingAircraftRepository>();
-            fixedWingAricraftRepository.Save(new FixedWingAircraft(new List<Wing>(), 42, 73, new List<Engine>(), 42, "42", "73", 42, 73, "42"));
+            fixedWingAricraftRepository.Save(new FixedWingAircraft(new List<Wing>(), 42, 73, new List<Engine>(), 42, "42", "73", 42, 73, "666"));
 
             //rotorcraft
             var rotorcraftRepository = ServiceLocator.Get<IRotorCraftRepository>();
-            rotorcraftRepository.Save(new RotorCraft(42, new List<RotorBlade>(), "73", new List<Engine>(), 42, "42", "73", 42, 73, "42"));
+            rotorcraftRepository.Save(new RotorCraft(42, new List<RotorBlade>(), "73", new List<Engine>(), 42, "42", "73", 42, 73, "19000130"));
 
             //propellant
             var propellantRepository = ServiceLocator.Get<IPropellantRepository>();
@@ -397,6 +401,10 @@ namespace PresentationCode
                 gasCompartmentRepository.Save(new GasCompartment(i, (float)(i - (i * 0.5))));
             }
 
+            aircraftRegistryRepository.Save(new AircraftRegistry("ER-AXP", false, new DateTime(2011, 11, 3), "741"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("ER-AXL", false, new DateTime(2015, 6, 5), "2849"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("SX-BHT", false, new DateTime(2014, 5, 31), "666"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("ER-ECC", false, new DateTime(2013, 3, 29), "19000130"));
 
 
             //SQLQuery2
@@ -428,6 +436,26 @@ namespace PresentationCode
             foreach (var turbineBladeCountDifferentiateOnCoolingChannelsDto in results3_2)
             {
                 Console.WriteLine($"Count: {turbineBladeCountDifferentiateOnCoolingChannelsDto.Count}, HasCoolingChannels: {turbineBladeCountDifferentiateOnCoolingChannelsDto.HasCoolingChannels}");
+            }
+
+            //SQLQuery4
+            //gets all the aircraft info and the number of times it was registered in the registry
+            List<AicraftInfoAndNumberOfTimesRegisteredDto> results4_1 =
+                aircraftRegistryRepository.GetAicraftInfoAndNumberOfTimesRegistered();
+
+            foreach (var aicraftInfoAndNumberOfTimesRegisteredDto in results4_1)
+            {
+                Console.WriteLine($"Serial number: {aicraftInfoAndNumberOfTimesRegisteredDto.SerialNumber}, NumberOfTimesRegistered: {aicraftInfoAndNumberOfTimesRegisteredDto.Count}");
+            }
+
+            //SQLQuery4
+
+            List<AicraftInfoAndDateOfRegistrationDto> results4_2 =
+                aircraftRegistryRepository.GetAicraftInfoAndDateOfRegistrationDtos();
+
+            foreach (var aicraftInfoAndNumberOfTimesRegisteredDto in results4_2)
+            {
+                Console.WriteLine($"Serial number: {aicraftInfoAndNumberOfTimesRegisteredDto.SerialNumber}, NumberOfTimesRegistered: {aicraftInfoAndNumberOfTimesRegisteredDto.SecondLatestRegistration}");
             }
 
             log.Dispose();

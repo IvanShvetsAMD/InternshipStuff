@@ -20,6 +20,7 @@ namespace Infrastructure
             Kernel.Bind<IGeneratorRepository>().To<GeneratorRepository>();
             Kernel.Bind<IPropellantRepository>().To<PropellantRepository>();
             Kernel.Bind<IOxidiserRepository>().To<OxidiserRepository>();
+            Kernel.Bind<IAircraftRegistryRepository>().To<AircraftRegistryRepository>();
 
             //wings
             Kernel.Bind<IWingRepository>().To<WingRepository>();

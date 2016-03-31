@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AircraftMap.cs" />
+    <Compile Include="AircraftRegistryMap.cs" />
     <Compile Include="BladeMap.cs" />
     <Compile Include="ConstraintConventions\HasManyConvention.cs" />
     <Compile Include="ConstraintConventions\HasOneConvention.cs" />
