@@ -18,6 +18,8 @@ namespace Repository.Interfaces
 
         List<TurbineBladeCountDifferentiateOnCoolingChannelsDto> GetNumberOfBladesWithOrWitjoutCooling();
 
+        List<long> GetTubineBladesWithMaxTempInAVGorMAX();
+
     }
 
     public interface IRotorBladeRepository : IRepository<RotorBlade>

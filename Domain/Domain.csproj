@@ -43,6 +43,7 @@
     <Compile Include="Aviation.cs" />
     <Compile Include="Blades.cs" />
     <Compile Include="Decorator.cs" />
+    <Compile Include="Dto\AicraftInfoAndIfRegisteredBool.cs" />
     <Compile Include="Dto\AicraftInfoAndNumberOfTimesRegisteredDto.cs" />
     <Compile Include="Dto\AicraftInfoDateOfRegistrationDto.cs" />
     <Compile Include="Dto\GasCompatrmentsCountAndCapacityDto.cs" />

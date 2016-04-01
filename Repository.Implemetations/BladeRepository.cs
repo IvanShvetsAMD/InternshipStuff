@@ -78,6 +78,39 @@ namespace Repository.Implemetations
                 return results;
             }
         }
+
+        public List<long> GetTubineBladesWithMaxTempInAVGorMAX()
+        {
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                List<long> results = null;
+                TurbineBlade turbineBladeAlias = null;
+
+                QueryOver<TurbineBlade> subqueryAVG =
+                    QueryOver.Of<TurbineBlade>()
+                        .SelectList(list => list.SelectMax(tb => tb.MaxTemp));
+
+                QueryOver<TurbineBlade> subqueryMAX =
+                    QueryOver.Of<TurbineBlade>()
+                        .SelectList(list => list.SelectMax(tb => tb.MaxTemp));
+
+                QueryOver<TurbineBlade> subqueryAVGMAX =
+                    QueryOver.Of<TurbineBlade>(() => turbineBladeAlias)
+                        .Select(Projections.Avg(Projections.Property(() => turbineBladeAlias.MaxTemp)))
+                        .Select(Projections.Max(Projections.Property(() => turbineBladeAlias.MaxTemp)));
+
+                results = session.QueryOver<TurbineBlade>(() => turbineBladeAlias)
+                    //.Where(() => turbineBladeAlias.MaxTemp.IsIn(new object[] {subqueryMAX, subqueryAVG}))
+                    .WithSubquery
+                    .WhereProperty(() => turbineBladeAlias.MaxTemp).In(subqueryAVGMAX)
+                    .Select(tb => tb.Id)
+                    .List<long>().ToList();
+
+
+                transaction.Commit();
+                return results;
+            }
+        }
     }
 
     internal class RotorBladeRepository : Repository<RotorBlade>, IRotorBladeRepository

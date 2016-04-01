@@ -14,5 +14,7 @@ namespace Repository.Interfaces
         //void Save(GasCompartment entity);
 
         List<GasCompatrmentsCountAndCapacityDto> GetCompartmetnsCountWithLowerCapacityThan(int capacity);
+
+        List<long> GetCompartmentsWithLessThanDoubleTheAverageVolume();
     }
 }

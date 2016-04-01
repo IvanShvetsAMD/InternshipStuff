@@ -35,5 +35,26 @@ namespace Repository.Implemetations
                 return results;
             }
         }
+
+        public List<long> GetCompartmentsWithLessThanDoubleTheAverageVolume()
+        {
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                List<long> results = null;
+                GasCompartment gasCompartmentAlias = null;
+                GasCompartment gasCompartmentAlias2 = null;
+                
+                results = session.QueryOver<GasCompartment>(() => gasCompartmentAlias)
+                    .WithSubquery
+                    .WhereProperty(() => gasCompartmentAlias.CurrentVolume)
+                    .Gt(QueryOver.Of<GasCompartment>().SelectList(list => list.SelectAvg(gc2 => gc2.CurrentVolume)))
+                    .Select(gc => gc.Id)
+                    .List<long>().ToList();
+
+
+                transaction.Commit();
+                return results;
+            }
+        }
     }
 }

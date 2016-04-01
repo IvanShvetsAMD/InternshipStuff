@@ -12,6 +12,12 @@ namespace Repository.Interfaces
     {
         List<AicraftInfoAndNumberOfTimesRegisteredDto> GetAicraftInfoAndNumberOfTimesRegistered();
 
-        List<AicraftInfoAndDateOfRegistrationDto> GetAicraftInfoAndDateOfRegistrationDtos();
+        List<AicraftInfoAndDateOfRegistrationDto> GetAicraftInfoAndDateOfPenultimateRegistrationDtos(int years);
+
+        List<AicraftInfoAndDateOfRegistrationDto> GetAicraftInfoAndLastDateOfRegistrationDtos(int years);
+
+        List<AicraftInfoAndIfRegisteredBoolDto> GetAicraftInfoAndIfRegisteredBoolDto();
+
+        List<AicraftInfoAndDateOfRegistrationDto> GetAircraftregisteredInTwoSpecificyears(int yearOne, int yearTwo);
     }
 }

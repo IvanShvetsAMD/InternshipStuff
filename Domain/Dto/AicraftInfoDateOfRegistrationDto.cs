@@ -10,7 +10,7 @@ namespace Domain.Dto
         public int MaxTakeoffWeight { get; set; }
         public int Vne { get; set; }
         public string SerialNumber { get; set; }
-        public DateTime SecondLatestRegistration { get; set; }
+        public DateTime RegistryDate { get; set; }
 
         public AicraftInfoAndDateOfRegistrationDto()
         {
@@ -25,7 +25,7 @@ namespace Domain.Dto
             MaxTakeoffWeight = maxTakeoffWeight;
             Vne = vne;
             SerialNumber = serialNumber;
-            SecondLatestRegistration = count;
+            RegistryDate = count;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace PresentationCode
             //    new List<Engine> { jet1, jet2 }, 100, "baloon Inc.", "Model-baloon", 700, 40, "88");
             //Console.WriteLine(baloon);
             //////Console.WriteLine("\n\nComparing gas compartments:");
-             
+
             //baloon.ShiftGas(5,65,5);
 
 
@@ -231,11 +231,11 @@ namespace PresentationCode
 
             //aircraft registry
             var aircraftRegistryRepository = ServiceLocator.Get<IAircraftRegistryRepository>();
-            aircraftRegistryRepository.Save(new AircraftRegistry("ER-AXV", false, new DateTime(2003, 9, 22), "622"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("VH-HYR", false, new DateTime(1996, 10, 10), "622"));
 
             //gas compartment
             var gasCompartmentRepository = ServiceLocator.Get<IGasCompartmentRepository>();
-            gasCompartmentRepository.Save(new GasCompartment(400, 380));
+            gasCompartmentRepository.Save(new GasCompartment(4000, 3800));
 
             //generator
             var generatorRepository = ServiceLocator.Get<IGeneratorRepository>();
@@ -256,6 +256,7 @@ namespace PresentationCode
             //powered aircraft
             var poweredAircraftRepository = ServiceLocator.Get<IPoweredAircraftRepository>();
             poweredAircraftRepository.Save(new PoweredAircraft(null, 42, "42", "73", 42, 73, "622"));
+            poweredAircraftRepository.Save(new PoweredAircraft(null, 42, "42", "73", 42, 73, "888"));
 
             //lighter than air aircraft
             var lighterThanAirAircraftRepository = ServiceLocator.Get<ILighterThanAirAircraftRepository>();
@@ -288,7 +289,7 @@ namespace PresentationCode
             //turbine blade
             var turbineBladeRepository = ServiceLocator.Get<ITurbineBladeRepository>();
             turbineBladeRepository.Save(new TurbineBlade(1000, true, 18, 12, "High temp alloy"));
-            
+
             //rotor blade
             var rotorBladeRepository = ServiceLocator.Get<IRotorBladeRepository>();
             rotorBladeRepository.Save(new RotorBlade(true, 42, 73, "42"));
@@ -315,7 +316,7 @@ namespace PresentationCode
 
             //solid fuel rocket engine
             var solidFuelRocketEngineRepository = ServiceLocator.Get<ISolidFuelRocketEngineRepository>();
-            solidFuelRocketEngineRepository.Save(new SolidFuelRocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, null, 73, OnOff.Stopped ));
+            solidFuelRocketEngineRepository.Save(new SolidFuelRocketEngine(true, "42", 42, 73, 42, null, null, "42", "73", "42", 73, 42, null, 73, OnOff.Stopped));
 
             //turbine engine
             var turbineEngineRepository = ServiceLocator.Get<ITurbineEngineRepository>();
@@ -369,7 +370,7 @@ namespace PresentationCode
                 blades.Add(new TurbineBlade(1275, false, 12, 8, "W (tungsten) alloy"));
             }
 
-            
+
 
             spools[0] = new Spool(blades.Where(x => x.MaterialType == "High temp alloy").ToList(), spools[0].Type);
             spools[1] = new Spool(blades.Where(x => x.MaterialType == "W (tungsten) alloy").ToList(), spools[1].Type);
@@ -385,7 +386,7 @@ namespace PresentationCode
                 }
             }
 
-            
+
             foreach (var spool in spools)
             {
                 spoolRepository.Save(spool);
@@ -396,14 +397,19 @@ namespace PresentationCode
                 turbineBladeRepository.Save(turbineBlade);
             }
 
-            for (int i = 200; i < 500; i += 50)
+            for (int i = 200; i < 1000; i += 50)
             {
                 gasCompartmentRepository.Save(new GasCompartment(i, (float)(i - (i * 0.5))));
             }
 
+            aircraftRegistryRepository.Save(new AircraftRegistry("ER-AXV", false, new DateTime(2003, 9, 22), "622"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("N452TA", false, new DateTime(1997, 11, 28), "741"));
             aircraftRegistryRepository.Save(new AircraftRegistry("ER-AXP", false, new DateTime(2011, 11, 3), "741"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("B-6156", false, new DateTime(2006, 8, 3), "2849"));
             aircraftRegistryRepository.Save(new AircraftRegistry("ER-AXL", false, new DateTime(2015, 6, 5), "2849"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("D-ASSY", false, new DateTime(1997, 3, 26), "666"));
             aircraftRegistryRepository.Save(new AircraftRegistry("SX-BHT", false, new DateTime(2014, 5, 31), "666"));
+            aircraftRegistryRepository.Save(new AircraftRegistry("F-OSUD", false, new DateTime(2007, 12, 4), "19000130"));
             aircraftRegistryRepository.Save(new AircraftRegistry("ER-ECC", false, new DateTime(2013, 3, 29), "19000130"));
 
 
@@ -449,13 +455,62 @@ namespace PresentationCode
             }
 
             //SQLQuery4
-
+            //gets all aircraft,that have been reregistered more than a year ago
             List<AicraftInfoAndDateOfRegistrationDto> results4_2 =
-                aircraftRegistryRepository.GetAicraftInfoAndDateOfRegistrationDtos();
+                aircraftRegistryRepository.GetAicraftInfoAndDateOfPenultimateRegistrationDtos(1);
 
-            foreach (var aicraftInfoAndNumberOfTimesRegisteredDto in results4_2)
+            foreach (var aicraftInfoAndDateOfRegistrationDto in results4_2)
             {
-                Console.WriteLine($"Serial number: {aicraftInfoAndNumberOfTimesRegisteredDto.SerialNumber}, NumberOfTimesRegistered: {aicraftInfoAndNumberOfTimesRegisteredDto.SecondLatestRegistration}");
+                Console.WriteLine($"Serial number: {aicraftInfoAndDateOfRegistrationDto.SerialNumber}, penultimate registration date: {aicraftInfoAndDateOfRegistrationDto.RegistryDate.Date}");
+
+            }
+
+            //SQLQuery4
+            //returns gas compartments' IDs whose volume is greater than the average volume
+            List<long> result4_3 = gasCompartmentRepository.GetCompartmentsWithLessThanDoubleTheAverageVolume();
+
+            foreach (var l in result4_3)
+            {
+                Console.WriteLine($"CompartmentID: {l}");
+            }
+
+            //SQLQuery4
+            //gets turbine blades IDs whose max temp is either the overall maximum or the overall average
+            List<long> results4_4 = turbineBladeRepository.GetTubineBladesWithMaxTempInAVGorMAX();
+
+            foreach (var l in results4_4)
+            {
+                Console.WriteLine($"Turbine blade ID: {l}");
+            }
+
+            //SQLQuery4
+            List<AicraftInfoAndDateOfRegistrationDto> results4_5 =
+                aircraftRegistryRepository.GetAicraftInfoAndLastDateOfRegistrationDtos(5);
+
+            foreach (var aicraftInfoAndDateOfRegistrationDto in results4_5)
+            {
+                Console.WriteLine($"Serial number: {aicraftInfoAndDateOfRegistrationDto.SerialNumber}, NumberOfTimesRegistered: {aicraftInfoAndDateOfRegistrationDto.RegistryDate.Date}");
+            }
+
+            //SQLQuery4
+
+            //List<AicraftInfoAndIfRegisteredBoolDto> results4_6 =
+            //    aircraftRegistryRepository.GetAicraftInfoAndIfRegisteredBoolDto();
+
+
+            //foreach (var aicraftInfoAndIfRegisteredBoolDto in results4_6)
+            //{
+            //    Console.WriteLine($"SerialNumber: {aicraftInfoAndIfRegisteredBoolDto.SerialNumber}, is registered: {aicraftInfoAndIfRegisteredBoolDto.IsRegistered}");
+            //}
+
+
+
+            //SQLQuery4
+            List<AicraftInfoAndDateOfRegistrationDto> results4_7 = aircraftRegistryRepository.GetAircraftregisteredInTwoSpecificyears(2003, 1997);
+
+            foreach (var VARIABLE in results4_7)
+            {
+                Console.WriteLine($"Serial number: {VARIABLE.SerialNumber}, registration year: {VARIABLE.RegistryDate.Year}");
             }
 
             log.Dispose();
