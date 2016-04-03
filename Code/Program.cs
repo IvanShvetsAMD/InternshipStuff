@@ -489,29 +489,29 @@ namespace PresentationCode
 
             foreach (var aicraftInfoAndDateOfRegistrationDto in results4_5)
             {
-                Console.WriteLine($"Serial number: {aicraftInfoAndDateOfRegistrationDto.SerialNumber}, NumberOfTimesRegistered: {aicraftInfoAndDateOfRegistrationDto.RegistryDate.Date}");
+                Console.WriteLine($"Serial number: {aicraftInfoAndDateOfRegistrationDto.SerialNumber}, Registration date: {aicraftInfoAndDateOfRegistrationDto.RegistryDate.Date}");
             }
 
             //SQLQuery4
-
-            //List<AicraftInfoAndIfRegisteredBoolDto> results4_6 =
-            //    aircraftRegistryRepository.GetAicraftInfoAndIfRegisteredBoolDto();
-
-
-            //foreach (var aicraftInfoAndIfRegisteredBoolDto in results4_6)
-            //{
-            //    Console.WriteLine($"SerialNumber: {aicraftInfoAndIfRegisteredBoolDto.SerialNumber}, is registered: {aicraftInfoAndIfRegisteredBoolDto.IsRegistered}");
-            //}
+            //Gets info about aircraft and whether it was registered
+            List<AicraftInfoAndIfRegisteredBoolDto> results4_6 =
+                aircraftRegistryRepository.GetAicraftInfoAndIfRegisteredBoolDto();
 
 
-
-            //SQLQuery4
-            List<AicraftInfoAndDateOfRegistrationDto> results4_7 = aircraftRegistryRepository.GetAircraftregisteredInTwoSpecificyears(2003, 1997);
-
-            foreach (var VARIABLE in results4_7)
+            foreach (var aicraftInfoAndIfRegisteredBoolDto in results4_6)
             {
-                Console.WriteLine($"Serial number: {VARIABLE.SerialNumber}, registration year: {VARIABLE.RegistryDate.Year}");
+                Console.WriteLine($"SerialNumber: {aicraftInfoAndIfRegisteredBoolDto.SerialNumber}, is registered: {aicraftInfoAndIfRegisteredBoolDto.IsRegistered}");
             }
+
+
+
+            //SQLQuery4
+            //List<string> results4_7 = aircraftRegistryRepository.GetAircraftRegisteredInTwoSpecificYears(2003, 1997);
+
+            //foreach (var VARIABLE in results4_7)
+            //{
+            //    Console.WriteLine($"Serial number: {VARIABLE}");
+            //}
 
             log.Dispose();
         }

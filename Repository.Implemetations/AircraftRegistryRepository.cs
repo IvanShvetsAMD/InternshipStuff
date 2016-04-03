@@ -159,26 +159,37 @@ namespace Repository.Implemetations
                             );
 
 
-                //results = session.QueryOver<Aircraft>(() => aircraftAlias)
-                //    .WithSubquery
-                //    .WhereProperty(() => aircraftAlias.SerialNumber)
-                //    .NotIn(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
-                //        .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
-                //        .Select(Projections.Property(() => aircraftAlias.SerialNumber)))
-                //    .SelectList(selectionList => selectionList
-                //        .Select(() => aircraftAlias.IsOperational).WithAlias(() => DTO.IsOperational)
-                //        .Select(() => aircraftAlias.SerialNumber).WithAlias(() => DTO.SerialNumber)
-                //        .Select(() => aircraftAlias.Vne).WithAlias(() => DTO.Vne)
-                //        .Select(() => aircraftAlias.Manufacturer).WithAlias(() => DTO.Manufacturer)
-                //        .Select(() => aircraftAlias.Model).WithAlias(() => DTO.Model)
-                //        .Select(() => aircraftAlias.MaxTakeoffWeight).WithAlias(() => DTO.MaxTakeoffWeight)
-                //        .Select().WithAlias(() => DTO.IsRegistered))
-                //    .TransformUsing(Transformers.AliasToBean<AicraftInfoAndIfRegisteredBoolDto>())
-                //    .List<AicraftInfoAndIfRegisteredBoolDto>().ToList();
+                results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                    .WithSubquery
+                    .WhereExists(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                        .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                        .Select(Projections.Property(() => aircraftRegistryAlias.SerialNumber)))
+                    .SelectList(selectionList => selectionList
+                        .Select(() => aircraftAlias.IsOperational).WithAlias(() => DTO.IsOperational)
+                        .Select(() => aircraftAlias.SerialNumber).WithAlias(() => DTO.SerialNumber)
+                        .Select(() => aircraftAlias.Vne).WithAlias(() => DTO.Vne)
+                        .Select(() => aircraftAlias.Manufacturer).WithAlias(() => DTO.Manufacturer)
+                        .Select(() => aircraftAlias.Model).WithAlias(() => DTO.Model)
+                        .Select(() => aircraftAlias.MaxTakeoffWeight).WithAlias(() => DTO.MaxTakeoffWeight)
+                        .Select(() => true).WithAlias(() => DTO.IsRegistered))
+                    .TransformUsing(Transformers.AliasToBean<AicraftInfoAndIfRegisteredBoolDto>())
+                    .List<AicraftInfoAndIfRegisteredBoolDto>().ToList();
 
-                
-                       
-
+                results.AddRange(session.QueryOver<Aircraft>(() => aircraftAlias)
+                    .WithSubquery
+                    .WhereNotExists(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                        .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                        .Select(Projections.Property(() => aircraftRegistryAlias.SerialNumber)))
+                    .SelectList(selectionList => selectionList
+                        .Select(() => aircraftAlias.IsOperational).WithAlias(() => DTO.IsOperational)
+                        .Select(() => aircraftAlias.SerialNumber).WithAlias(() => DTO.SerialNumber)
+                        .Select(() => aircraftAlias.Vne).WithAlias(() => DTO.Vne)
+                        .Select(() => aircraftAlias.Manufacturer).WithAlias(() => DTO.Manufacturer)
+                        .Select(() => aircraftAlias.Model).WithAlias(() => DTO.Model)
+                        .Select(() => aircraftAlias.MaxTakeoffWeight).WithAlias(() => DTO.MaxTakeoffWeight)
+                        .Select(() => false).WithAlias(() => DTO.IsRegistered))
+                    .TransformUsing(Transformers.AliasToBean<AicraftInfoAndIfRegisteredBoolDto>())
+                    .List<AicraftInfoAndIfRegisteredBoolDto>().ToList());
 
 
 
@@ -187,39 +198,46 @@ namespace Repository.Implemetations
             }
         }
 
-        public List<AicraftInfoAndDateOfRegistrationDto> GetAircraftregisteredInTwoSpecificyears(int yearOne, int yearTwo)
+        public List<string> GetAircraftRegisteredInTwoSpecificYears(int yearOne, int yearTwo)
         {
             using (ITransaction transaction = session.BeginTransaction())
             {
-                List<AicraftInfoAndDateOfRegistrationDto> results = null;
+                List<string> results = null;
                 Aircraft aircraftAlias = null;
                 AircraftRegistry aircraftRegistryAlias = null;
 
                 AicraftInfoAndDateOfRegistrationDto DTO = null;
 
 
-                results = session.QueryOver<Aircraft>(() => aircraftAlias)
-                    .WithSubquery
-                    .WhereValue(yearOne).Eq(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
-                        .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber))
-                    .SelectList(selectionList => selectionList
-                        .Select(() => aircraftAlias.IsOperational).WithAlias(() => DTO.IsOperational)
-                        .Select(() => aircraftAlias.SerialNumber).WithAlias(() => DTO.SerialNumber)
-                        .Select(() => aircraftAlias.Vne).WithAlias(() => DTO.Vne)
-                        .Select(() => aircraftAlias.Manufacturer).WithAlias(() => DTO.Manufacturer)
-                        .Select(() => aircraftAlias.Model).WithAlias(() => DTO.Model)
-                        .Select(() => aircraftAlias.MaxTakeoffWeight).WithAlias(() => DTO.MaxTakeoffWeight)
-                        .SelectSubQuery(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
-                            .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
-                            .Select(Projections.Property(() => aircraftRegistryAlias.RegistrationDate)))
-                        .WithAlias(() => DTO.RegistryDate))
-                    .TransformUsing(Transformers.AliasToBean<AicraftInfoAndDateOfRegistrationDto>())
-                    .List<AicraftInfoAndDateOfRegistrationDto>().ToList();
-                    
-                    
+                //results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                //    .WithSubquery
+                //    .WhereValue(yearOne).Eq(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                //        .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                //        .Select(Projections.Property(() => aircraftRegistryAlias.RegistrationDate)))
+                //    .SelectList(selectionList => selectionList
+                //        .Select(() => aircraftAlias.IsOperational).WithAlias(() => DTO.IsOperational)
+                //        .Select(() => aircraftAlias.SerialNumber).WithAlias(() => DTO.SerialNumber)
+                //        .Select(() => aircraftAlias.Vne).WithAlias(() => DTO.Vne)
+                //        .Select(() => aircraftAlias.Manufacturer).WithAlias(() => DTO.Manufacturer)
+                //        .Select(() => aircraftAlias.Model).WithAlias(() => DTO.Model)
+                //        .Select(() => aircraftAlias.MaxTakeoffWeight).WithAlias(() => DTO.MaxTakeoffWeight)
+                //        .SelectSubQuery(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                //            .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                //            .Select(Projections.Property(() => aircraftRegistryAlias.RegistrationDate)))
+                //        .WithAlias(() => DTO.RegistryDate))
+                //    .TransformUsing(Transformers.AliasToBean<AicraftInfoAndDateOfRegistrationDto>())
+                //    .List<AicraftInfoAndDateOfRegistrationDto>().ToList();
 
 
-                
+                //results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                //    .SelectList(list => list
+                //    .SelectGroup(() => aircraftAlias.SerialNumber))
+                //    .Where()
+                //    .List<string>().ToList();
+
+
+
+
                 transaction.Commit();
                 return results;
             }
