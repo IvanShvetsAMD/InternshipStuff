@@ -412,7 +412,7 @@ namespace PresentationCode
             aircraftRegistryRepository.Save(new AircraftRegistry("F-OSUD", false, new DateTime(2007, 12, 4), "19000130"));
             aircraftRegistryRepository.Save(new AircraftRegistry("ER-ECC", false, new DateTime(2013, 3, 29), "19000130"));
 
-
+            Console.WriteLine("\nselecting all turbineblades not made out of W, but are an alloy or can withstand temperatures in excess of 1400 C");
             //SQLQuery2
             //selecting all turbineblades not made out of W, but are an alloy or can withstand temperatures in excess of 1400 C
             IList<TurbineBladeAndSpoolTypeInfoDto> results2 = turbineBladeRepository.GetTurbineBladeAndSpoolTypeInfoDtos();
@@ -422,7 +422,7 @@ namespace PresentationCode
                 Console.WriteLine(turbineBladeAndSpoolTypeInfoDto.MaterialType);
             }
 
-
+            Console.WriteLine("\ngets the number of compartments whose capacity is greater than 300 units of volume and their actual capacity ");
             //SQLQuery3
             //gets the number of compartments whose capacity is greater than 300 units of volume and their actual capacity 
             List<GasCompatrmentsCountAndCapacityDto> results3_1 =
@@ -433,17 +433,18 @@ namespace PresentationCode
                 Console.WriteLine($"Capacity: {gasCompatrmentsCountAndCapacityDto.Capacity}, Count: {gasCompatrmentsCountAndCapacityDto.Count}");
             }
 
+            Console.WriteLine("\nreturns the number of blades that have cooling channels and the number that don't");
             //SQLQuery3
             //returns the number of blades that have cooling channels and the number that don't
             List<TurbineBladeCountDifferentiateOnCoolingChannelsDto> results3_2 =
                 turbineBladeRepository.GetNumberOfBladesWithOrWitjoutCooling();
 
-            Console.WriteLine("\n\n");
             foreach (var turbineBladeCountDifferentiateOnCoolingChannelsDto in results3_2)
             {
                 Console.WriteLine($"Count: {turbineBladeCountDifferentiateOnCoolingChannelsDto.Count}, HasCoolingChannels: {turbineBladeCountDifferentiateOnCoolingChannelsDto.HasCoolingChannels}");
             }
 
+            Console.WriteLine("\ngets all the aircraft info and the number of times it was registered in the registry");
             //SQLQuery4
             //gets all the aircraft info and the number of times it was registered in the registry
             List<AicraftInfoAndNumberOfTimesRegisteredDto> results4_1 =
@@ -454,6 +455,7 @@ namespace PresentationCode
                 Console.WriteLine($"Serial number: {aicraftInfoAndNumberOfTimesRegisteredDto.SerialNumber}, NumberOfTimesRegistered: {aicraftInfoAndNumberOfTimesRegisteredDto.Count}");
             }
 
+            Console.WriteLine("\ngets all aircraft,that have been reregistered more than a year ago");
             //SQLQuery4
             //gets all aircraft,that have been reregistered more than a year ago
             List<AicraftInfoAndDateOfRegistrationDto> results4_2 =
@@ -465,6 +467,7 @@ namespace PresentationCode
 
             }
 
+            Console.WriteLine("\nreturns gas compartments' IDs whose volume is greater than the average volume");
             //SQLQuery4
             //returns gas compartments' IDs whose volume is greater than the average volume
             List<long> result4_3 = gasCompartmentRepository.GetCompartmentsWithLessThanDoubleTheAverageVolume();
@@ -474,8 +477,9 @@ namespace PresentationCode
                 Console.WriteLine($"CompartmentID: {l}");
             }
 
+            Console.WriteLine("\ngets turbine blades IDs whose max temp is either the overall maximum or the overall average");
             //SQLQuery4
-            //gets turbine blades IDs whose max temp is either the overall maximum or the overall average
+            //gets turbine blade IDs whose max temp is either the overall maximum or the overall average
             List<long> results4_4 = turbineBladeRepository.GetTubineBladesWithMaxTempInAVGorMAX();
 
             foreach (var l in results4_4)
@@ -483,7 +487,9 @@ namespace PresentationCode
                 Console.WriteLine($"Turbine blade ID: {l}");
             }
 
+            Console.WriteLine("\nreturns all aircraft whose latest regsitration is more that 5 years old");
             //SQLQuery4
+            //returns all aircraft whose latest regsitration is more that 5 years old
             List<AicraftInfoAndDateOfRegistrationDto> results4_5 =
                 aircraftRegistryRepository.GetAicraftInfoAndLastDateOfRegistrationDtos(5);
 
@@ -492,6 +498,7 @@ namespace PresentationCode
                 Console.WriteLine($"Serial number: {aicraftInfoAndDateOfRegistrationDto.SerialNumber}, Registration date: {aicraftInfoAndDateOfRegistrationDto.RegistryDate.Date}");
             }
 
+            Console.WriteLine("\nGets info about aircraft and whether it was registered");
             //SQLQuery4
             //Gets info about aircraft and whether it was registered
             List<AicraftInfoAndIfRegisteredBoolDto> results4_6 =
@@ -502,7 +509,6 @@ namespace PresentationCode
             {
                 Console.WriteLine($"SerialNumber: {aicraftInfoAndIfRegisteredBoolDto.SerialNumber}, is registered: {aicraftInfoAndIfRegisteredBoolDto.IsRegistered}");
             }
-
 
 
             //SQLQuery4
