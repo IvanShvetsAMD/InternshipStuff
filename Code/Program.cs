@@ -512,12 +512,12 @@ namespace PresentationCode
 
 
             //SQLQuery4
-            //List<string> results4_7 = aircraftRegistryRepository.GetAircraftRegisteredInTwoSpecificYears(2003, 1997);
+            List<string> results4_7 = aircraftRegistryRepository.GetAircraftRegisteredInTwoSpecificYears(2003, 1997);
 
-            //foreach (var VARIABLE in results4_7)
-            //{
-            //    Console.WriteLine($"Serial number: {VARIABLE}");
-            //}
+            foreach (var VARIABLE in results4_7)
+            {
+                Console.WriteLine($"Serial number: {VARIABLE}");
+            }
 
             log.Dispose();
         }

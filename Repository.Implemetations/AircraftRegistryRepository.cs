@@ -235,7 +235,29 @@ namespace Repository.Implemetations
                 //    .Where()
                 //    .List<string>().ToList();
 
+                DetachedCriteria dCriteria = DetachedCriteria.For<AircraftRegistry>("aircraftRegistryAlias")
+                    .SetProjection(Projections.Property("aircraftRegistryAlias.SerialNumber"))
+                    .Add(new OrExpression(new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearTwo, 1, 1), new DateTime(yearTwo, 12, 31)), 
+                                          new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearOne, 1, 1), new DateTime(yearOne, 12, 31))));
 
+                var iCriteria = session.CreateCriteria<AircraftRegistry>()
+                    .SetProjection(Projections.Property("aircraftRegistryAlias.SerialNumber"))
+                    .Add(new OrExpression(new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearTwo, 1, 1), new DateTime(yearTwo, 12, 31)),
+                                          new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearOne, 1, 1), new DateTime(yearOne, 12, 31))));
+
+
+                
+
+                results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                    .SelectList(selectionList => selectionList
+                        .Select(Projections.Conditional(Restrictions.Between(Projections.SubQuery(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                                                                                                .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                                                                                                .Select(Projections.Property(() => aircraftRegistryAlias.RegistrationDate))),
+                                                                       new DateTime(yearOne, 1, 1),
+                                                                       new DateTime(yearOne, 12, 31)),
+                                                   Projections.Property(() => aircraftAlias.SerialNumber),
+                                                   Projections.Constant("nope"))))
+                    .List<string>().ToList();
 
 
                 transaction.Commit();
