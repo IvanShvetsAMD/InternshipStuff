@@ -246,18 +246,76 @@ namespace Repository.Implemetations
                                           new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearOne, 1, 1), new DateTime(yearOne, 12, 31))));
 
 
-                
+
+
+                //results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                //    .SelectList(selectionList => selectionList
+                //        .Select(Projections.Conditional(Restrictions.Between(Projections.SubQuery(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                //                                                                                .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                //                                                                                .Select(Projections.Property(() => aircraftRegistryAlias.RegistrationDate))),
+                //                                                       new DateTime(yearOne, 1, 1),
+                //                                                       new DateTime(yearOne, 12, 31)),
+                //                                   Projections.Property(() => aircraftAlias.SerialNumber),
+                //                                   Projections.Constant("nope"))))
+                //    .List<string>().ToList();
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                //    .WithSubquery
+                //    .WhereExists(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                //                                    .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                //                                    .Where(new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearOne, 1, 1), new DateTime(yearOne, 12, 31)))
+                //                                    .Select(Projections.Property(() => aircraftRegistryAlias.SerialNumber)))
+                //    .Select(Projections.Property(()=> aircraftAlias.SerialNumber))
+                //    .List<string>().ToList();
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                //    .WithSubquery
+                //    .WhereExists(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                //                                    .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                //                                    .Where(new OrExpression(new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearOne, 1, 1), new DateTime(yearOne, 12, 31)),
+                //                                                            new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearTwo, 1, 1), new DateTime(yearTwo, 12, 31))))
+                //                                    .Select(Projections.Property(() => aircraftRegistryAlias.SerialNumber)))
+                //    .Select(Projections.Property(() => aircraftAlias.SerialNumber))
+                //    .List<string>().ToList();
+
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                //Conjunction conj = new Conjunction();
+                //conj.Add(
+                //    Subqueries.WhereProperty<Aircraft>(x => x.SerialNumber)
+                //        .Eq(Subqueries.WhereExists());
+
+
+                //conj.Add(Subqueries.WhereProperty<Aircraft>(x => x.SerialNumber)
+                //        .Eq(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                //            .Where(new BetweenExpression(
+                //                        Projections.Property(() => aircraftRegistryAlias.RegistrationDate),
+                //                        new DateTime(yearOne, 1, 1), new DateTime(yearOne, 12, 31)))
+                //                    .Select(Projections.Property(() => aircraftRegistryAlias.SerialNumber))));
+
+
+                //results = session.QueryOver<Aircraft>(() => aircraftAlias)
+                //    .Where(conj)
+                //    .Select(Projections.Property(() => aircraftAlias.SerialNumber))
+                //    .List<string>().ToList();
+
+
 
                 results = session.QueryOver<Aircraft>(() => aircraftAlias)
-                    .SelectList(selectionList => selectionList
-                        .Select(Projections.Conditional(Restrictions.Between(Projections.SubQuery(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
-                                                                                                .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
-                                                                                                .Select(Projections.Property(() => aircraftRegistryAlias.RegistrationDate))),
-                                                                       new DateTime(yearOne, 1, 1),
-                                                                       new DateTime(yearOne, 12, 31)),
-                                                   Projections.Property(() => aircraftAlias.SerialNumber),
-                                                   Projections.Constant("nope"))))
+                    .Where(new AndExpression(Subqueries.WhereExists(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                                                    .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                                                    .Where(new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearOne, 1, 1), new DateTime(yearOne, 12, 31)))
+                                                    .Select(Projections.Property(() => aircraftRegistryAlias.SerialNumber))),
+                                             Subqueries.WhereExists(QueryOver.Of<AircraftRegistry>(() => aircraftRegistryAlias)
+                                                    .Where(ar => aircraftRegistryAlias.SerialNumber == aircraftAlias.SerialNumber)
+                                                    .Where(new BetweenExpression(Projections.Property(() => aircraftRegistryAlias.RegistrationDate), new DateTime(yearTwo, 1, 1), new DateTime(yearTwo, 12, 31)))
+                                                    .Select(Projections.Property(() => aircraftRegistryAlias.SerialNumber)))))
+                    .Select(Projections.Property(() => aircraftAlias.SerialNumber))
                     .List<string>().ToList();
+
+
 
 
                 transaction.Commit();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -512,7 +513,8 @@ namespace PresentationCode
 
 
             //SQLQuery4
-            List<string> results4_7 = aircraftRegistryRepository.GetAircraftRegisteredInTwoSpecificYears(2003, 1997);
+            //returns aircraft, that have been registred in two scpecified years
+            List<string> results4_7 = aircraftRegistryRepository.GetAircraftRegisteredInTwoSpecificYears(2003, 1996);
 
             foreach (var VARIABLE in results4_7)
             {
