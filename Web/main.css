@@ -6,6 +6,31 @@ body{
     background-color:lemonchiffon; 
 }
 
-#p3{
-    margin-left: 30px;
+.p3{
+    margin-left: 80px;
+    //text-indent: 50px;
 }
+
+table{
+    padding: 50px; 
+    border: 1px solid black;
+    //border-collapse: collapse;
+}
+
+
+th, td{
+    text-align-last: left;
+    padding-right: 100;
+    border: 
+}
+
+#medium{
+    font-size: 18;
+}
+
+#small{
+    font-size: 14;
+}
+
+
+//style="transform: scaleX(-1);"

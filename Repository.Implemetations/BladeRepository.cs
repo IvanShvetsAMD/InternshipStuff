@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain;
 using Domain.Dto;
+using FluentNHibernate.Utils;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Transform;
