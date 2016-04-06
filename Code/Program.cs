@@ -420,7 +420,7 @@ namespace PresentationCode
 
             foreach (var turbineBladeAndSpoolTypeInfoDto in results2)
             {
-                Console.WriteLine(turbineBladeAndSpoolTypeInfoDto.MaterialType);
+                Console.WriteLine($"SerialNumber: {turbineBladeAndSpoolTypeInfoDto.TubineBladeID}, Material type: {turbineBladeAndSpoolTypeInfoDto.MaterialType}, Max. temp.:{turbineBladeAndSpoolTypeInfoDto.MaxTemp}");
             }
 
             Console.WriteLine("\ngets the number of compartments whose capacity is greater than 300 units of volume and their actual capacity ");
@@ -512,6 +512,7 @@ namespace PresentationCode
             }
 
 
+            Console.WriteLine("\nreturns aircraft, that have been registred in two scpecified years");
             //SQLQuery4
             //returns aircraft, that have been registred in two scpecified years
             List<string> results4_7 = aircraftRegistryRepository.GetAircraftRegisteredInTwoSpecificYears(2003, 1996);
