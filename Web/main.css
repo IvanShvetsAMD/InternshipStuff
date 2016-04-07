@@ -20,8 +20,7 @@ table{
 
 th, td{
     text-align-last: left;
-    padding-right: 100;
-    border: 
+    padding-right: 100;    
 }
 
 #medium{
@@ -30,6 +29,10 @@ th, td{
 
 #small{
     font-size: 14;
+}
+
+button{
+    background-color: aliceblue;
 }
 
 
