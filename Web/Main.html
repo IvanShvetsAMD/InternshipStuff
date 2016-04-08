@@ -2,7 +2,7 @@
     <head>
         <title>First PAGE</title>
         <link type="text/css" href="main.css" rel="stylesheet"/>
-        <script src="main.js"></script>
+        <script src="main.js" defer></script>
     </head>
     <body id="88">
         <div>
@@ -92,10 +92,10 @@
             </div>            
         </div>
         <div>
-            <button  onmouseout="Dehighlight(this)" onmouseover="Highlight(this)" onmousedown="SkewBody()">
+            <button class="button" onmouseout="Dehighlight(this)" onmouseover="Highlight(this)" onmousedown="SkewBody()">
                 SKEW
             </button>
-            <button onmouseout="Dehighlight(this)" onmouseover="Highlight(this)" onmousedown="Run_Button_Run(this)">
+            <button class="buttonMove" onmouseout="Dehighlight(this)" onmouseover="Highlight(this)" onmousedown="Run_Button_Run(this)">
                 Try it
             </button>
         </div>

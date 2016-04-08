@@ -1,5 +1,10 @@
-function TableRowOnClick(SN){
-    window.open("AirplaneDetailsPage.html");
+function TableRowOnClick(elem){
+    var str = elem.innerHTML;
+    
+    if (str == "666")
+        window.open("AirplaneDetailsPage.html");
+    else 
+        alert("No info about such aircraft is available.");
 }
 
 function Highlight(elem) {

@@ -35,5 +35,8 @@ button{
     background-color: aliceblue;
 }
 
+.buttonMove:active{
+    margin-left:80px;
+}
 
 //style="transform: scaleX(-1);"

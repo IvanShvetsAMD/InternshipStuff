@@ -7,10 +7,8 @@ function SkewBody() {
     //alert("hello");
 }
 
-function Run_Button_Run() {
-    //var button = document.getElementById(ID);
-    //button.location.hei
-    //ID.location.width *= 2;
+function Run_Button_Run(elem) {
+    
 }
 
 function Highlight(elem) {
