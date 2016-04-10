@@ -24,12 +24,7 @@
         {
             
         }
-
-        public Blade()
-        {
-            
-        }
-
+        
         public Blade(int bladeLength, int bladeChord, string bladeMaterialType)
         {
             length = bladeLength;
