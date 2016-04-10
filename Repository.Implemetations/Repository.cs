@@ -1,22 +1,46 @@
-﻿using System;
-using Domain;
+﻿using Domain;
 using NHibernate;
 using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
+        protected ISession session = SessionGenerator.Instance.GetSession();
+
         public void Save(TEntity entity)
         {
-            using (ITransaction transaction = _session.BeginTransaction())
             {
-                _session.SaveOrUpdate(entity);
+                using (ITransaction transaction = session.BeginTransaction())
+                {
 
-                transaction.Commit();
+                    session.SaveOrUpdate(entity);
+
+                    transaction.Commit();
+                }
             }
         }
 
-        protected readonly ISession _session = SessionGenerator.Instance.GetSession();
+        public TEntity LoadEntity<TEntity>(long ID) where TEntity : Entity
+        {
+            TEntity entity;
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                entity = session.Load<TEntity>(ID);
+                transaction.Commit();
+
+                return entity;
+            }
+
+        }
+
+        public void Delete(TEntity entity)
+        {
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                session.Delete(entity);
+                transaction.Commit();
+            }
+        }
     }
 }

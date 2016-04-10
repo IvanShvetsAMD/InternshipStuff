@@ -9,5 +9,6 @@ namespace Repository.Interfaces
 {
     public interface IWingRepository : IRepository<Wing>
     {
+
     }
 }

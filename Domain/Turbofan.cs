@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Domain
 {
@@ -7,9 +7,15 @@ namespace Domain
         private readonly float _bypassRatio;
         private readonly bool _isGeared;
 
-        public virtual float BypassRatio => _bypassRatio;
+        public virtual float BypassRatio
+        {
+            get { return _bypassRatio; }
+        }
 
-        public virtual bool IsGeared => _isGeared;
+        public virtual bool IsGeared
+        {
+            get { return _isGeared; }
+        }
 
         public override string ToString()
         {
@@ -17,14 +23,14 @@ namespace Domain
                 IsGeared ? "has a geared fan" : "has a direct drive fan");
         }
 
-        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, uint numberofshafts, Generator gen,
-            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+        public Turbofan(float bypassratio, bool isgeared, bool hasreverse, int numberofshafts, Generator gen,
+            List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
-                model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+                model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _bypassRatio = bypassratio;
             _isGeared = isgeared;

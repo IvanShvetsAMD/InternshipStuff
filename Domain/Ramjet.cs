@@ -1,16 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Domain
 {
     public class Ramjet : JetEngine
     {
-        private bool _hasSupersonicCombustion;
+        private readonly bool _hasSupersonicCombustion;
 
         public virtual bool HasSupersonicCombustion
         {
             get { return _hasSupersonicCombustion; }
-            protected set { _hasSupersonicCombustion = value; }
         }
 
         public virtual float CheckPressure()
@@ -28,13 +27,13 @@ namespace Domain
             
         }
 
-        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellants> propellants,
-            List<Oxidisers> oxidisers,
+        public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellant> propellants,
+            List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
-                operatingtime, parentaircraftID, fuelflow, stat)
+                operatingtime, parentaircraft, fuelflow, stat)
         {
             _hasSupersonicCombustion = hassupersoniccombustion;
         }

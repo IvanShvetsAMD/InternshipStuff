@@ -5,9 +5,15 @@
         private readonly float _maxBackSweepAngle;
         private readonly float _maxForwardSweepAngle;
 
-        public virtual float MaxBackSweepAngle => _maxBackSweepAngle;
+        public virtual float MaxBackSweepAngle
+        {
+            get { return _maxBackSweepAngle; }
+        }
 
-        public virtual float MaxForwardSweepAngle => _maxForwardSweepAngle;
+        public virtual float MaxForwardSweepAngle
+        {
+            get { return _maxForwardSweepAngle; }
+        }
 
         public virtual void DecreaseAngle(float SweepToAngle)
         {

@@ -8,7 +8,7 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal class VariableGeometryWingRepository : Repository<VariableGeometryWing>, IVariableGeometryWingRepository
+    internal class VariableGeometryWingRepository: Repository<VariableGeometryWing>, IVariableGeometryWingRepository
     {
     }
 }

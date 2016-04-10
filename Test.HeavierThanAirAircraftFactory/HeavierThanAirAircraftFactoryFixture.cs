@@ -22,11 +22,11 @@ namespace Test.HeavierThanAirAircraftFactory
         }
 
         [TestFixture]
-        public class EngineDecoratorFixture : HeavierThanAirAircraftFactoryFixture
+        public class EngineDecoratorfixture : HeavierThanAirAircraftFactoryFixture
         {
             private object[] testdata2 = new object[]
             {
-                new RotorCraft(/*2,*/ new List<RotorBlade> {new RotorBlade(true, 6, 34, "carbon fibre")}, "singular",
+                new RotorCraft(2, new List<RotorBlade> {new RotorBlade(true, 6, 34, "carbon fibre")}, "singular",
                     new List<Engine>(), 56, "linx", "generic model", 12000, 0, "test SN")
 
             };
@@ -36,7 +36,7 @@ namespace Test.HeavierThanAirAircraftFactory
             {
                 engineaddition.Setup(dec => dec.AddTurboshaftEngines(It.IsAny<RotorCraft>())).Returns((RotorCraft rotorCraftarg) => rotorCraftarg);
 
-                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades.ToList(), "singular", /*2,*/ 56, "linx", 12000);
+                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades.ToList(), "singular", 2, 56, "linx", 12000);
 
                 engineaddition.Verify(dec => dec.AddTurboshaftEngines(somecraft), Times.Once);
             }
@@ -45,7 +45,7 @@ namespace Test.HeavierThanAirAircraftFactory
             public void ItShouldReturnExpectedValue(RotorCraft rotorCraft)
             {
                 engineaddition.Setup(dec => dec.AddTurboshaftEngines(It.IsAny<RotorCraft>())).Returns(() => rotorCraft);
-                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades.ToList(), "singular", /*2,*/ 56, "linx", 12000);
+                var somecraft = heavierThanAirAircraftFactory.TryMakeRotorCraft(rotorCraft.SerialNumber, rotorCraft.RotorBlades.ToList(), "singular", 2, 56, "linx", 12000);
 
                 Assert.AreEqual(rotorCraft.ToString(), somecraft.ToString());
             }

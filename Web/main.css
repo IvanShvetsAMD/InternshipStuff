@@ -1,0 +1,42 @@
+body{
+    background-color:azure
+}
+
+#p1,#p3   { 
+    background-color:lemonchiffon; 
+}
+
+.p3{
+    margin-left: 80px;
+    //text-indent: 50px;
+}
+
+table{
+    padding: 50px; 
+    border: 1px solid black;
+    //border-collapse: collapse;
+}
+
+
+th, td{
+    text-align-last: left;
+    padding-right: 100;    
+}
+
+#medium{
+    font-size: 18;
+}
+
+#small{
+    font-size: 14;
+}
+
+button{
+    background-color: aliceblue;
+}
+
+.buttonMove:active{
+    margin-left:80px;
+}
+
+//style="transform: scaleX(-1);"

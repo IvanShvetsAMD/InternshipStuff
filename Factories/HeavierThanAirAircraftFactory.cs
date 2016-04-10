@@ -63,7 +63,7 @@ namespace Factories
             rotorCraft = AddTurboshaftEngines(rotorCraft);
             Logger.GetLogger().AddToLog(new LogEventArgs(String.Format("new rotorcraft created (SN:{0})", rotorCraft.SerialNumber)));
 
-            rotorCraft.Subscribe(NTSB.GetInstance());
+            //rotorCraft.Subscribe(NTSB.GetInstance());
             AviationAdministration.GetInstance().RegisterAircraft(rotorCraft, rotorCraft.IsOperational);
 
             return rotorCraft;

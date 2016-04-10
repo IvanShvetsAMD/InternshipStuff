@@ -9,7 +9,5 @@ namespace Repository.Interfaces
 {
     public interface IGeneratorRepository : IRepository<Generator>
     {
-        void IncreaseCurrent(float delta, long id);
-        void IncreaseVoltage(float delta, long id);
     }
 }

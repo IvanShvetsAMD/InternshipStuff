@@ -4,12 +4,7 @@ namespace Domain
 {
     public class Turbojet : TurbineEngine
     {
-        private readonly string _precoolant;
-
-        public virtual string Precoolant
-        {
-            get { return _precoolant; }
-        }
+        public virtual string Precoolant { get; }
 
         public virtual void InjectCoolant()
         {
@@ -28,16 +23,16 @@ namespace Domain
         {
         }
 
-        public Turbojet(bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
-            int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public Turbojet(bool hasreverse, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+            int numberofcycles, List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat,
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat,
             string precoolant = null)
             : base(
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
-                model, serialnumber, maxpower, operatingtime, parentaircraftID, fuelflow, stat)
+                model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
-            _precoolant = precoolant ?? "none";
+            Precoolant = precoolant ?? "none";
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Domain
 {
     public abstract class Aircraft : Entity
     {
-        private IList<IAviationAdministration> aviationAdministrations;
+        private List<IAviationAdministration> aviationAdministrations;
         private bool isOperational;
         private readonly string _manufacturer;
         private readonly string _model;
@@ -13,15 +13,30 @@ namespace Domain
         private readonly int _vne;
         private readonly string _serialNumber;
 
-        public virtual string Manufacturer => _manufacturer;
+        public virtual string Manufacturer
+        {
+            get { return _manufacturer; }
+        }
 
-        public virtual string Model => _model;
+        public virtual string Model
+        {
+            get { return _model; }
+        }
 
-        public virtual int MaxTakeoffWeight => _maxTakeoffWeight;
+        public virtual int MaxTakeoffWeight
+        {
+            get { return _maxTakeoffWeight; }
+        }
 
-        public virtual int Vne => _vne;
+        public virtual int Vne
+        {
+            get { return _vne; }
+        }
 
-        public virtual string SerialNumber => _serialNumber;
+        public virtual string SerialNumber
+        {
+            get { return _serialNumber; }
+        }
 
         public virtual bool IsOperational
         {
@@ -30,14 +45,8 @@ namespace Domain
             {
                 isOperational = value;
                 if (value == false)
-                    NotifyOfCrash();
+                   NotifyOfCrash();
             }
-        }
-
-        public virtual IList<IAviationAdministration> AviationAdministrations
-        {
-            get { return aviationAdministrations; }
-            set { aviationAdministrations = value; }
         }
 
 
@@ -58,7 +67,7 @@ namespace Domain
 
         public virtual void Subscribe(IAviationAdministration administration)
         {
-            if(!aviationAdministrations.Contains(administration))
+            if (!aviationAdministrations.Contains(administration))
                 aviationAdministrations.Add(administration);
         }
 
@@ -87,6 +96,9 @@ namespace Domain
             isOperational = true;
         }
 
-        protected Aircraft() { }
+        protected Aircraft()
+        {
+            
+        }
     }
 }

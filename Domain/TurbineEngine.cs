@@ -6,16 +6,16 @@ namespace Domain
     public class TurbineEngine : JetEngine, ITurbineEngine
     {
         private readonly bool _hasReverse;
-        private readonly uint _numberOfShafts;
+        private readonly int _numberOfShafts;
         private Generator _generator;
-        private readonly IList<Spool> _spools;
+        private IList<Spool> _spools;
 
         public virtual bool HasReverse
         {
             get { return _hasReverse; }
         }
 
-        public virtual uint NumberOfShafts
+        public virtual int NumberOfShafts
         {
             get { return _numberOfShafts; }
         }
@@ -29,6 +29,7 @@ namespace Domain
         public virtual IList<Spool> Spools
         {
             get { return _spools; }
+            protected set { _spools = value; }
         }
 
 
@@ -54,17 +55,17 @@ namespace Domain
                 HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
         }
 
-        public TurbineEngine(bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
-            int numberofcycles, List<Propellants> propellants, List<Oxidisers> oxidisers,
+        public TurbineEngine(bool hasreverse, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+            int numberofcycles, List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, string parentaircraftID, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
-                operatingtime, parentaircraftID, fuelflow, stat)
+                operatingtime, parentaircraft, fuelflow, stat)
         {
             _hasReverse = hasreverse;
             _numberOfShafts = numberofshafts;
-            _spools = spools;
+            //Spools = spools;
             _generator = gen;
         }
 

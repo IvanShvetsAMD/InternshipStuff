@@ -10,4 +10,48 @@ namespace Repository.Interfaces
     public interface IEngineRepository : IRepository<Engine>
     {
     }
+
+    public interface IPistonEngineRepository : IRepository<PistonEngine>
+    {
+    }
+
+    public interface IJetEngineRepository : IRepository<JetEngine>
+    {
+    }
+
+    public interface IRocketEngineRepository : IRepository<RocketEngine>
+    {
+    }
+
+    public interface ISolidFuelRocketEngineRepository : IRepository<SolidFuelRocketEngine>
+    {
+    }
+
+    public interface IRamjetRepository : IRepository<Ramjet>
+    {
+    }
+
+    public interface ITurbineEngineRepository : IRepository<TurbineEngine>
+    {
+    }
+
+    public interface ITurbofanRepository : IRepository<Turbofan>
+    {
+    }
+
+    public interface ITurbojetRepository : IRepository<Turbojet>
+    {
+    }
+
+    public interface ITurboshaftRepository : IRepository<Turboshaft>
+    {
+    }
+
+    public interface IPropellantRepository : IRepository<Propellant>
+    {
+    }
+
+    public interface IOxidiserRepository : IRepository<Oxidiser>
+    {
+    }
 }

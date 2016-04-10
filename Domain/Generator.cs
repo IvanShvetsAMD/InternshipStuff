@@ -5,29 +5,24 @@ namespace Domain
 {
     public class Generator : Entity
     {
-        private float _outputCurrent;
-        private float _outputVoltage;
+        private readonly float _outputCurrent;
+        private readonly float _outputVoltage;
+        private TurbineEngine _parentEngine;
 
         public virtual float OutputCurrent
         {
             get { return _outputCurrent; }
-            protected set { _outputCurrent = value; }
         }
 
         public virtual float OutputVoltage
         {
             get { return _outputVoltage; }
-            protected set { _outputVoltage = value; }
         }
 
-        public virtual void IncreaseCurrent(float delta)
+        public virtual TurbineEngine ParentEngine
         {
-            _outputCurrent += delta;
-        }
-
-        public virtual void IncreaseVoltage(float delta)
-        {
-            _outputVoltage += delta;
+            get { return _parentEngine; }
+            set { _parentEngine = value; }
         }
 
         public virtual void GenerateCurrent() {
@@ -38,6 +33,7 @@ namespace Domain
 
         public Generator(float c, float v)
         {
+            _parentEngine = null;
             _outputCurrent = c;
             _outputVoltage = v;
         }
