@@ -1,34 +1,22 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Domain
 {
     public class SolidFuelRocketEngine : RocketEngine
     {
-        //public new virtual float MaxPower
-        //{
-        //    get { return MaxPower; }
-        //    //protected set { }
-        //}
-
-        public override float CurrentPower
+        public virtual float MaxPower
         {
             get { return MaxPower; }
-            set { CurrentPower = MaxPower; }
+            protected set { }
         }
 
-        private float _maxPower;
-        private float _currentPower;
-
-        public override float MaxPower
+        public virtual float CurrentPower
         {
-            get
-            {
-                return _maxPower;
-            }
-            protected set {}
+            get { return MaxPower; }
+            protected set { CurrentPower = MaxPower; }
         }
 
-        public SolidFuelRocketEngine()
+        protected SolidFuelRocketEngine()
         {
             
         }
@@ -36,12 +24,12 @@ namespace Domain
         public SolidFuelRocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
             List<Propellant> propellants, List<Oxidiser> oxidisers, string manufacturer, string model,
             string serialnumber,
-            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(isreignitable, nozzlebelltype, egt, isp, numberofcycles, propellants, oxidisers,
                 manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
-            _maxPower = maxpower;
-            _currentPower = 0;
+            MaxPower = maxpower;
+            CurrentPower = CurrentPower;
         }
     }
 }

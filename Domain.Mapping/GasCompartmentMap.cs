@@ -11,11 +11,10 @@ namespace Domain.Mapping
     {
         public GasCompartmentMap()
         {
-            Table("GasCompartment");
             Id(x => x.Id).Column("GasCompartmentID");
             Map(x => x.Capacity).Not.Nullable();
             Map(x => x.CurrentVolume).Not.Nullable();
-            References(x => x.ParentAircraft);
+            //References(x => x.ParentAircraft).Nullable();
         }
     }
 }

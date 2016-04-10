@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Domain.Mapping
 {
-    public class GeneratorMap : EntityMap<Generator>
+    class GeneratorMap : EntityMap<Generator>
     {
         public GeneratorMap()
         {
+            Table("GasCompartment");
+            Id(x => x.Id).Column("GeneratorID");
             Map(x => x.OutputCurrent).Not.Nullable();
             Map(x => x.OutputVoltage).Not.Nullable();
-            References(x => x.ParentEngine);
+            References(x => x.ParentEngine).Nullable();
         }
     }
 }

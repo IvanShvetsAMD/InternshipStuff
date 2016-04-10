@@ -1,9 +1,7 @@
 ﻿using Domain;
 using Domain.Mapping;
-using Domain.Mapping.ConstraintConventions;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using FluentNHibernate.Conventions.Helpers.Builders;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 
@@ -31,7 +29,7 @@ namespace Repository.Implemetations
                .Database(MsSqlConfiguration.MsSql2012
                   .ConnectionString(
                      builder =>
-                        builder.Database("Aviation")
+                        builder.Database("Aviation2")
                            .Server(@"MDDSK40043\SQLEXPRESS")
                            //.Server(@"DESKTOP-CQKKU19\SQLEXPRESS")
                            .TrustedConnection()))
@@ -50,11 +48,6 @@ namespace Repository.Implemetations
 
             mappingConfiguration.FluentMappings.AddFromAssembly(assembly);
             mappingConfiguration.HbmMappings.AddFromAssembly(assembly);
-            mappingConfiguration.FluentMappings.Conventions.AddFromAssemblyOf<PrimaryKeyConvention>();
-            mappingConfiguration.FluentMappings.Conventions.AddFromAssemblyOf<HasManyConvention>();
-            mappingConfiguration.FluentMappings.Conventions.AddFromAssemblyOf<HasOneConvention>();
-            mappingConfiguration.FluentMappings.Conventions.AddFromAssemblyOf<JoinedSubclassConvention>();
-            mappingConfiguration.FluentMappings.Conventions.AddFromAssemblyOf<ReferencesConvention>();
         }
 
         private SessionGenerator()

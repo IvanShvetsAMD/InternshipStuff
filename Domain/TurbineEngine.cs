@@ -6,19 +6,13 @@ namespace Domain
     public class TurbineEngine : JetEngine, ITurbineEngine
     {
         private readonly bool _hasReverse;
-        private readonly int _numberOfShafts;
+        private readonly uint _numberOfShafts;
         private Generator _generator;
-        private IList<Spool> _spools;
+        private readonly IList<Spool> _spools;
 
-        public virtual bool HasReverse
-        {
-            get { return _hasReverse; }
-        }
+        public virtual bool HasReverse => _hasReverse;
 
-        public virtual int NumberOfShafts
-        {
-            get { return _numberOfShafts; }
-        }
+        public virtual uint NumberOfShafts => _numberOfShafts;
 
         public virtual Generator Generator
         {
@@ -26,11 +20,7 @@ namespace Domain
             set { _generator = value; }
         }
 
-        public virtual IList<Spool> Spools
-        {
-            get { return _spools; }
-            protected set { _spools = value; }
-        }
+        public virtual IList<Spool> Spools => _spools;
 
 
         public virtual void StartGenerator() => Generator.GenerateCurrent();
@@ -55,21 +45,21 @@ namespace Domain
                 HasReverse ? "engine has a thrust reverser" : "engine has no thrust reverser");
         }
 
-        public TurbineEngine(bool hasreverse, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+        public TurbineEngine(bool hasreverse, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
             int numberofcycles, List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
                 operatingtime, parentaircraft, fuelflow, stat)
         {
             _hasReverse = hasreverse;
             _numberOfShafts = numberofshafts;
-            //Spools = spools;
+            _spools = spools;
             _generator = gen;
         }
 
-        protected TurbineEngine()
+        public TurbineEngine()
         {
 
         }

@@ -4,57 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
-using Domain.Dto;
 using NHibernate;
-using NHibernate.Criterion;
-using NHibernate.Transform;
 using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    public class GasCompartmentRepository : Repository<GasCompartment>,  IGasCompartmentRepository
+    internal class GasCompartmentRepository : Repository<GasCompartment>, IGasCompartmentRepository
     {
-        public List<GasCompatrmentsCountAndCapacityDto> GetCompartmetnsCountWithLowerCapacityThan(int capacity)
-        {
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                List<GasCompatrmentsCountAndCapacityDto> results;
-                GasCompartment gasCompartmentAlias = null;
-                GasCompatrmentsCountAndCapacityDto DTO = null;
+        //public void AddGas(float delta, long id)
+        //{
+        //    using (ITransaction transaction = _session.BeginTransaction())
+        //    {
+        //        var gasCompartment = _session.Load<GasCompartment>(id);
 
-                results = session.QueryOver<GasCompartment>(() => gasCompartmentAlias)
-                    .SelectList(list => list
-                        .SelectGroup(() => gasCompartmentAlias.Capacity).WithAlias(() => DTO.Capacity)
-                        .SelectCount(() => gasCompartmentAlias.Capacity).WithAlias(() => DTO.Count))
-                    .Where(Restrictions.Gt(Projections.Property(() => gasCompartmentAlias.Capacity), capacity))
-                    .TransformUsing(Transformers.AliasToBean<GasCompatrmentsCountAndCapacityDto>())
-                    .List<GasCompatrmentsCountAndCapacityDto>().ToList();
+        //        gasCompartment.AddGas(delta);
 
+        //        transaction.Commit();
+        //    }
+        //}
 
-                transaction.Commit();
-                return results;
-            }
-        }
+        //public void RemoveGas(float delta, long id)
+        //{
+        //    using (ITransaction transaction = _session.BeginTransaction())
+        //    {
+        //        var gasCompartment = _session.Load<GasCompartment>(id);
 
-        public List<long> GetCompartmentsWithLessThanDoubleTheAverageVolume()
-        {
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                List<long> results = null;
-                GasCompartment gasCompartmentAlias = null;
-                GasCompartment gasCompartmentAlias2 = null;
-                
-                results = session.QueryOver<GasCompartment>(() => gasCompartmentAlias)
-                    .WithSubquery
-                    .WhereProperty(() => gasCompartmentAlias.CurrentVolume)
-                    .Gt(QueryOver.Of<GasCompartment>().SelectList(list => list.SelectAvg(gc2 => gc2.CurrentVolume)))
-                    .Select(gc => gc.Id)
-                    .List<long>().ToList();
+        //        gasCompartment.RemoveGas(delta);
 
-
-                transaction.Commit();
-                return results;
-            }
-        }
+        //        transaction.Commit();
+        //    }
+        //}
     }
 }

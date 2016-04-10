@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Domain
 {
     public class GasCompartment : Entity
     {
-        private float _capacity;
         private float _currentVolume;
-        private LighterThanAirAircraft _parentAircraft;
+        private float _capacity;
+        //private LighterThanAirAircraft _parentAircraft;
 
         public virtual float Capacity
         {
@@ -21,11 +20,11 @@ namespace Domain
             set { _currentVolume = value; }
         }
 
-        public virtual LighterThanAirAircraft ParentAircraft
-        {
-            get { return _parentAircraft; }
-            set { _parentAircraft = value; }
-        }
+        //public virtual LighterThanAirAircraft ParentAircraft
+        //{
+        //    get { return _parentAircraft; }
+        //    protected set { _parentAircraft = value; }
+        //}
 
         public override string ToString()
         {
@@ -33,41 +32,42 @@ namespace Domain
         }
 
         [Obsolete]
-        protected GasCompartment() { }
-
-        public GasCompartment(float capacity, float currentvolume)
+        protected GasCompartment()
         {
-            _parentAircraft = null;
+            
+        }
+
+        public GasCompartment(float capacity, float currentvolume /*,LighterThanAirAircraft parentAircraft = null*/)
+        {
             _capacity = capacity;
             _currentVolume = currentvolume;
+            //_parentAircraft = parentAircraft;
         }
-    }
 
-    public class GasCompartmentComparer : IEqualityComparer<GasCompartment>
-    {
-        public bool Equals(GasCompartment x, GasCompartment y)
+        public virtual void AddGas(float delta)
         {
-            return NearlyEqual(x.CurrentVolume, y.CurrentVolume, 0.0001f) && NearlyEqual(x.Capacity, y.Capacity, 0.0001f);
+            if (delta >= 0)
+            {
+                if (_currentVolume + delta >= _capacity)
+                    _currentVolume = _capacity;
+                else
+                {
+                    _currentVolume += delta;
+                }
+            }
         }
 
-        public int GetHashCode(GasCompartment obj)
+        public virtual void RemoveGas(float delta)
         {
-            return (int)obj?.ToString().GetHashCode();
+            if (delta >= 0)
+            {
+                if (_currentVolume - delta <= 0)
+                    _currentVolume = 0;
+                else
+                {
+                    _currentVolume -= delta;
+                }
+            }
         }
-
-        public bool NearlyEqual(float a, float b, float epsilon)
-        {
-            float absA = Math.Abs(a);
-            float absB = Math.Abs(b);
-            float diff = Math.Abs(a - b);
-
-            if (a == b)
-                return true;
-            if (a == 0 || b == 0 || diff < float.Epsilon)
-                return diff < epsilon;
-            return diff/(absA + absB) < epsilon;
-        }
-
-        public GasCompartmentComparer() {}
     }
 }

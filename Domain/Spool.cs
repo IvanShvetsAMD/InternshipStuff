@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
     public class Spool : Entity
     {
-        private readonly List<TurbineBlade> _blades;
+        private readonly IList<TurbineBlade> _blades;
         private readonly string _type;
         private TurbineEngine _parentEngine;
 
@@ -21,19 +22,20 @@ namespace Domain
         public virtual TurbineEngine ParentEngine
         {
             get { return _parentEngine; }
-            set { _parentEngine = value; }
+            protected set { _parentEngine = value; }
         }
 
+        public Spool(List<TurbineBlade> blades, string type, TurbineEngine parentEngine = null)
+        {
+            _blades = blades;
+            _type = type;
+            _parentEngine = parentEngine;
+        }
+
+        [Obsolete]
         public Spool()
         {
             
-        }
-
-        public Spool(List<TurbineBlade> blades, string type )
-        {
-            _parentEngine = null;
-            _blades = blades;
-            _type = type;
         }
     }
 }

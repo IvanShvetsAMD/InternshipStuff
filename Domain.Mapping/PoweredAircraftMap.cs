@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentNHibernate.Mapping;
 
 namespace Domain.Mapping
 {
-    public class PoweredAircraftMap : EntityMap<PoweredAircraft>
+    public class PoweredAircraftMap : SubclassMap<PoweredAircraft>
     {
         public PoweredAircraftMap()
         {
             Map(x => x.FuelCapacity).Not.Nullable();
-            HasMany(x => x.Engines);
+            HasMany(x => x.Engines).Cascade.SaveUpdate();
         }
     }
 }

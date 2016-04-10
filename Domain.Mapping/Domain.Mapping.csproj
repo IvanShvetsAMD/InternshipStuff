@@ -53,19 +53,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AircraftMap.cs" />
-    <Compile Include="AircraftRegistryMap.cs" />
     <Compile Include="BladeMap.cs" />
-    <Compile Include="ConstraintConventions\HasManyConvention.cs" />
-    <Compile Include="ConstraintConventions\HasOneConvention.cs" />
-    <Compile Include="ConstraintConventions\JoinedSubclassConvention.cs" />
-    <Compile Include="ConstraintConventions\PrimaryKeyConvention.cs" />
-    <Compile Include="ConstraintConventions\ReferencesConvention.cs" />
     <Compile Include="EngineMap.cs" />
     <Compile Include="EntityMap.cs" />
+    <Compile Include="FixedWingAircraftMap.cs" />
     <Compile Include="GasCompartmentMap.cs" />
     <Compile Include="GeneratorMap.cs" />
+    <Compile Include="HeavierThanAirAircraftMap.cs" />
+    <Compile Include="JetEngineMap.cs" />
+    <Compile Include="LighterThanAirAircraftMap.cs" />
+    <Compile Include="OxidiserMap.cs" />
+    <Compile Include="PistonEngineMap.cs" />
+    <Compile Include="PoweredAircraftMap.cs" />
+    <Compile Include="PropellantMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RamjetMap.cs" />
+    <Compile Include="RocketEngineMap.cs" />
+    <Compile Include="RotorBladeMap.cs" />
+    <Compile Include="RotorCraftMap.cs" />
+    <Compile Include="SolidFuelRocketEngineMap.cs" />
     <Compile Include="SpoolMap.cs" />
+    <Compile Include="TurbineBladeMap.cs" />
+    <Compile Include="TurbineEngineMap.cs" />
+    <Compile Include="TurbofanMap.cs" />
+    <Compile Include="TurbojetMap.cs" />
+    <Compile Include="TurboShaftMap.cs" />
     <Compile Include="VariableGeometryWingMap.cs" />
     <Compile Include="WingMap.cs" />
   </ItemGroup>
@@ -77,16 +89,6 @@
       <Project>{26a5bcce-ce10-4ba0-9124-833460dc5f7a}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DBScripts\NONDeterminism.sql" />
-    <Content Include="DBScripts\SQLQuery1.sql" />
-    <Content Include="DBScripts\SQLQuery2.sql" />
-    <Content Include="DBScripts\SQLQuery3.sql" />
-    <Content Include="DBScripts\SQLQuery4.sql" />
-    <Content Include="DBScripts\SQLQueryMAIN.sql" />
-    <Content Include="DBScripts\SQLQueryProc.sql" />
-    <Content Include="DBScripts\TableDropper%28engage multiple times%29.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

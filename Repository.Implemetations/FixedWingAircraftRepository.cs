@@ -8,7 +8,7 @@ using Repository.Interfaces;
 
 namespace Repository.Implemetations
 {
-    internal class FixedWingRepository: Repository<FixedWingAircraft>, IFixedWingRepository
+    internal class FixedWingAircraftRepository: Repository<FixedWingAircraft>, IFixedWingAircraftRepository
     {
     }
 }

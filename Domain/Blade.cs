@@ -18,9 +18,11 @@
             protected set { chord = value; }
         }
 
-        public virtual string MaterialType
+        public virtual string MaterialType => materialType;
+
+        public Blade()
         {
-            get { return materialType; }
+            
         }
 
         public Blade()

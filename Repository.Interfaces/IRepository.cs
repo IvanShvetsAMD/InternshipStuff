@@ -6,7 +6,5 @@ namespace Repository.Interfaces
     {
         void Save(TEntity entity);
         TEntity LoadEntity<TEntity>(long ID) where TEntity : Entity;
-
-        void Delete(TEntity entity);
     }
 }

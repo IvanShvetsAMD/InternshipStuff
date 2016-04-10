@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Domain
@@ -22,7 +22,7 @@ namespace Domain
             return base.ToString() + "Type: " + (HasSupersonicCombustion ? "Scramjet" : "Ramjet");
         }
 
-        public Ramjet()
+        protected Ramjet()
         {
             
         }
@@ -30,7 +30,7 @@ namespace Domain
         public Ramjet(bool hassupersoniccombustion, int egt, int isp, int numberofcycles, List<Propellant> propellants,
             List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
                 operatingtime, parentaircraft, fuelflow, stat)
