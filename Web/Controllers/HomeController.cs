@@ -15,7 +15,7 @@ namespace Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Could not find anything to write into the About page.";
 
             return View();
         }

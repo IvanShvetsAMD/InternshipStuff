@@ -132,14 +132,14 @@ namespace Domain
             get { return _serialNumber.ToUpperInvariant(); }
         }
 
-        protected AircraftRegistry()
+        public AircraftRegistry()
         {
             
         }
 
         public AircraftRegistry(string aircraftRegistration, bool hasCrashed, DateTime registrationdate, string serialNumber)
         {
-            _aircraftRegistrationEntry = aircraftRegistration;
+            _aircraftRegistrationEntry = aircraftRegistration.ToUpperInvariant();
             _hasCrashed = hasCrashed;
             _serialNumber = serialNumber;
             _registrationDate = registrationdate.Date;

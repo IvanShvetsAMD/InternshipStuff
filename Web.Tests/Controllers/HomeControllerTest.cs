@@ -35,7 +35,7 @@ namespace Web.Tests.Controllers
             ViewResult result = controller.About() as ViewResult;
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            Assert.AreEqual("Could not find anything to write into the About page.", result.ViewBag.Message);
         }
 
         [TestMethod]

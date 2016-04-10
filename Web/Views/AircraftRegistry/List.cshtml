@@ -1,0 +1,61 @@
+﻿@using Domain
+@model IEnumerable<Domain.AircraftRegistry>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+</head>
+<body>
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AircraftRegistrationEntry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasCrashed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AircraftRegistrationEntry)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HasCrashed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationDate.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed }) |
+                    @Html.ActionLink("Details", "Details", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate }) |
+                    @Html.ActionLink("Delete", "Delete", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
