@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -9,7 +9,6 @@ namespace Domain
         private ILiftingGasPumpModule _gasManager = new SafeGasPumpManager();
         private int _ballastMass;
         private readonly string _gasType;
-        private readonly float _gasVolume;
         private readonly IList<GasCompartment> _compartments;
 
         public virtual ILiftingGasPumpModule GasManager
@@ -29,20 +28,16 @@ namespace Domain
             get { return _gasType; }
         }
 
-        public virtual float GasVolume
-        {
-            get { return _gasVolume; }
-        }
-
+        //public float GasVolume { get; private set; }
         public virtual IList<GasCompartment> Compartments
         {
-            get { return _compartments.ToList(); }
+            get { return _compartments; }
         }
 
         public override string ToString()
         {
             StringBuilder final = new StringBuilder(base.ToString());
-            final.AppendFormat("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:", BallastMass, GasType, GasVolume);
+            final.AppendFormat("\n ballast mass: {0}, gas type: {1}, gas volume {2}\n Gas compartments:", BallastMass, GasType, Compartments.Sum(x => x.CurrentVolume) /*,GasVolume*/);
 
             foreach (var gasCompartment in Compartments)
             {
@@ -65,7 +60,7 @@ namespace Domain
 
         public virtual void ShiftGas(int originCompartment, int destinationCompartment, float volume)
         {
-            GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments.ToList(), volume: volume);
+            GasManager.PumpGas(originCompartment, destinationCompartment, compartments: Compartments, volume: volume);
         }
 
         public LighterThanAirAircraft()
@@ -81,7 +76,7 @@ namespace Domain
             _ballastMass = ballastmass;
             _gasType = gastype;
             _compartments = compartments;
-            _gasVolume = Compartments?.Sum(chamber => chamber.CurrentVolume) ?? 0;
+            //GasVolume = Compartments?.Sum(chamber => chamber.CurrentVolume) ?? 0;
         }
     }
 }

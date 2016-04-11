@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 
 namespace Domain
 {
     public class PistonEngine : Engine
     {
-        private readonly int _numberOfPistons;
+        private readonly uint _numberOfPistons;
         private readonly float _volume;
         private int _mixture;
 
-        public virtual int NumberOfPistons
+        public virtual uint NumberOfPistons
         {
             get { return _numberOfPistons; }
         }
@@ -33,14 +33,14 @@ namespace Domain
                 NumberOfPistons, Volume, Mixture, base.ToString());
         }
 
-        public PistonEngine()
+        protected PistonEngine()
         {
             
         }
 
-        public PistonEngine(int numberofpistons, float volume, string manufacturer,
+        public PistonEngine(uint numberofpistons, float volume, string manufacturer,
             string model, string serialnumber, float maxpower, float operatingtime,
-            PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
+            Aircraft parentaircraft, float fuelflow, OnOff stat)
             : base(manufacturer, model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)
         {
             _numberOfPistons = numberofpistons;

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using ActionImplementations;
+﻿using ActionImplementations;
 using Interfaces;
 using Ninject;
 using Repository.Implemetations;
@@ -18,13 +17,6 @@ namespace Infrastructure
             //misc
             Kernel.Bind<IGasCompartmentRepository>().To<GasCompartmentRepository>();
             Kernel.Bind<IGeneratorRepository>().To<GeneratorRepository>();
-            Kernel.Bind<IPropellantRepository>().To<PropellantRepository>();
-            Kernel.Bind<IOxidiserRepository>().To<OxidiserRepository>();
-            Kernel.Bind<IAircraftRegistryRepository>().To<AircraftRegistryRepository>();
-
-            //wings
-            Kernel.Bind<IWingRepository>().To<WingRepository>();
-            Kernel.Bind<IVariableGeometryWingRepository>().To<VariableGeometryWingRepository>();
 
             //engines
             Kernel.Bind<IEngineRepository>().To<EngineRepository>();
@@ -34,26 +26,27 @@ namespace Infrastructure
             Kernel.Bind<ISolidFuelRocketEngineRepository>().To<SolidFuelRocketEngineRepository>();
             Kernel.Bind<IRamjetRepository>().To<RamjetRepository>();
             Kernel.Bind<ITurbineEngineRepository>().To<TurbineEngineRepository>();
-            Kernel.Bind<ITurbofanRepository>().To<TurbofanRepository>();
+            Kernel.Bind<ITurbofanRepository>().To<TurboFanRepository>();
             Kernel.Bind<ITurbojetRepository>().To<TurbojetRepository>();
             Kernel.Bind<ITurboshaftRepository>().To<TurboshaftRepository>();
 
-            //airplanes
+            //aircraft
             Kernel.Bind<IAircraftRepository>().To<AircraftRepository>();
             Kernel.Bind<IPoweredAircraftRepository>().To<PoweredAircraftRepository>();
             Kernel.Bind<ILighterThanAirAircraftRepository>().To<LighterThanAirAircraftRepository>();
             Kernel.Bind<IHeavierThanAirAircraftRepository>().To<HeavierThanAirAircraftRepository>();
-            Kernel.Bind<IFixedWingAircraftRepository>().To<FixedWingAircraftRepository>();
             Kernel.Bind<IRotorCraftRepository>().To<RotorCraftRepository>();
+            Kernel.Bind<IFixedWingAircraftRepository>().To<FixedWingAircraftRepository>();
 
-            //blades
+            //wings
+            Kernel.Bind<IWingRepository>().To<WingRepository>();
+            Kernel.Bind<IVariableGeometryWingRepository>().To<VariableGeometryWingRepository>();
+            
+            //spools and blades
+            Kernel.Bind<ISpoolRepository>().To<SpoolRepository>();
             Kernel.Bind<IBladeRepository>().To<BladeRepository>();
             Kernel.Bind<ITurbineBladeRepository>().To<TurbineBladeRepository>();
             Kernel.Bind<IRotorBladeRepository>().To<RotorBladeRepository>();
-
-            //spool
-            Kernel.Bind<ISpoolRepository>().To<SpoolRepository>();
-
         }
 
         public static T Get<T>()

@@ -41,21 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aircraft.cs" />
-    <Compile Include="Blades.cs" />
-    <Compile Include="Decorator.cs" />
-    <Compile Include="Dto\AicraftInfoAndIfRegisteredBool.cs" />
-    <Compile Include="Dto\AicraftInfoAndNumberOfTimesRegisteredDto.cs" />
-    <Compile Include="Dto\AicraftInfoDateOfRegistrationDto.cs" />
-    <Compile Include="Dto\GasCompatrmentsCountAndCapacityDto.cs" />
-    <Compile Include="Dto\TurbineBladeAndSpoolTypeInfoDto.cs" />
-    <Compile Include="Dto\TurbineBladeCountDifferentiateOnCoolingChannelsDto.cs" />
+    <Compile Include="Blade.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="Enums.cs" />
+    <Compile Include="Decorator.cs" />
+    <Compile Include="Engines.Enums.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="AviationAdministration.cs" />
     <Compile Include="FixedWingAircraft.cs" />
     <Compile Include="GasCompartment.cs" />
+    <Compile Include="GasCompartmentComparer.cs" />
     <Compile Include="GasPumps.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="HeavierThanAirAircraft.cs" />
@@ -85,6 +80,9 @@
     <Compile Include="Turboshaft.cs" />
     <Compile Include="VariableGeometryWing.cs" />
     <Compile Include="Wing.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -536,7 +536,7 @@ namespace SideTasts
                 adapter.InsertCommand = insert;
 
 
-                sqlCommandText2 = "UPDATE [dbo].[AircraftRegistry] SET[AircraftRegistry].[SerialNumber] = @SerialNUmber, [AircraftRegistry].[Registration] = @Registration, [AircraftRegistry].[RegistrationDate] = @RegistrationDate";
+                sqlCommandText2 = "UPDATE [dbo].[AircraftRegistry] SET [AircraftRegistry].[SerialNumber] = @SerialNUmber, [AircraftRegistry].[Registration] = @Registration, [AircraftRegistry].[RegistrationDate] = @RegistrationDate WHERE [AircraftRegistry].[SerialNumber] = @SerialNUmber";
                 var update = new SqlCommand(sqlCommandText2, connection);
                 update.Parameters.Add("@SerialNumber", SqlDbType.Int, Int32.MaxValue, "SerialNumber");
                 update.Parameters.Add("@Registration", SqlDbType.NVarChar, 2000, "Registration");
@@ -565,7 +565,6 @@ namespace SideTasts
                 DataTable AircraftRegistry = new DataTable("AircraftRegistry");
                 DataSet dataSet = new DataSet();
 
-                //AircraftRegistry.Columns.Add("EntryID", typeof(int));
                 AircraftRegistry.Columns.Add("SerialNumber", typeof(int));
                 AircraftRegistry.Columns.Add("Registration", typeof(string));
                 AircraftRegistry.Columns.Add("RegistrationDate", typeof(DateTime));
@@ -573,7 +572,6 @@ namespace SideTasts
 
                 //INSERT
                 DataRow regRow = AircraftRegistry.NewRow();
-                //regRow["EntryID"] = 8;
                 regRow["SerialNumber"] = 8;
                 regRow["Registration"] = "B-HXJ";
                 regRow["RegistrationDate"] = "1998-07-28";
@@ -608,12 +606,14 @@ namespace SideTasts
                 ShowResults(dataSet);
 
                 //UPDATE
-                DataRow changedRow = dataSet.Tables["AircraftRegistry"].Select("SerialNumber = 10").First();
-                changedRow["RegistrationDate"] = "2014-12-18";
-
-                //adapter.Update(AircraftRegistry);
-                ShowResults(dataSet);
                 
+                AircraftRegistry.Select("SerialNumber = 10").First()["RegistrationDate"] = "2014-12-18";
+
+                adapter.Update(AircraftRegistry);
+                dataSet.Tables["AircraftRegistry"].Clear();
+                adapter.Fill(dataSet, "AircraftRegistry");
+                ShowResults(dataSet);
+
                 for (int i = 0; i < AircraftRegistry.Rows.Count; i++)
                 {
                     DataRow dr = AircraftRegistry.Rows[i];
@@ -626,6 +626,8 @@ namespace SideTasts
                 adapter.Fill(dataSet, "AircraftRegistry");
 
                 ShowResults(dataSet);
+
+                connection.Close();
             }
         }
 

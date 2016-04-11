@@ -3,28 +3,28 @@
     public class RotorBlade : Blade
     {
         private readonly bool _hasSupersonicTip;
-        private RotorCraft _parentAircraft;
+        private RotorCraft _parentRotorCraft;
 
         public virtual bool HasSupersonicTip
         {
             get { return _hasSupersonicTip; }
         }
 
-        public virtual RotorCraft ParentAircraft
+        public virtual RotorCraft ParentRotorCraft
         {
-            get { return _parentAircraft; }
-            set { _parentAircraft = value; }
+            get { return _parentRotorCraft; }
+            protected set { _parentRotorCraft = value; }
         }
 
-        public RotorBlade()
+        protected RotorBlade()
         {
             
         }
 
-        public RotorBlade(bool hassupersonictip, int length, int chord, string materialType) : base(length, chord, materialType)
+        public RotorBlade(bool hassupersonictip, int length, int chord, string materialType, RotorCraft parentRotorCraft = null) : base(length, chord, materialType)
         {
-            _parentAircraft = null;
             _hasSupersonicTip = hassupersonictip;
+            _parentRotorCraft = parentRotorCraft;
         }
     }
 }

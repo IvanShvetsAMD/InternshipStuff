@@ -1,9 +1,9 @@
-﻿namespace Domain
+namespace Domain
 {
     public class TurbineBlade : Blade
     {
-        private readonly bool _hasCoolingChannels;
         private readonly int _maxTemp;
+        private readonly bool _hasCoolingChannels;
         private Spool _parentSpool;
 
         public virtual int MaxTemp
@@ -19,7 +19,7 @@
         public virtual Spool ParentSpool
         {
             get { return _parentSpool; }
-            set { _parentSpool = value; }
+            protected set { _parentSpool = value; }
         }
 
         public TurbineBlade()
@@ -27,11 +27,11 @@
             
         }
 
-        public TurbineBlade(int maxtemp, bool hascoolingchannels, int length, int chord, string materialType):base(length, chord, materialType)
+        public TurbineBlade(int maxtemp, bool hascoolingchannels, int length, int chord, string materialType, Spool parentSpool = null):base(length, chord, materialType)
         {
-            _parentSpool = null;
             _maxTemp = maxtemp;
             _hasCoolingChannels = hascoolingchannels;
+            _parentSpool = parentSpool;
         }
     }
 }

@@ -16,25 +16,25 @@ namespace Factories
         }
 
         public RotorCraft MakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor",
-                                         int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
+                                         /*int numberofrotors = 1,*/ int fuelcapacity = 0, string manufacturer = "generic aircraft maker", int maxTOweight = 1000)
         {
             if (string.IsNullOrWhiteSpace(serialnumber))
                 throw new ArgumentNullException(nameof(serialnumber), "No serial number provided");
             if (rotorblades == null)
                 throw new ArgumentNullException(nameof(rotorblades), "No rotor(s) provided");
 
-            return new RotorCraft(numberofrotors, rotorblades, rotortype, new List<Engine>(), fuelcapacity, manufacturer, "generic model", maxTOweight, 0, serialnumber);
+            return new RotorCraft(/*numberofrotors,*/ rotorblades, rotortype, new List<Engine>(), fuelcapacity, manufacturer, "generic model", maxTOweight, 0, serialnumber);
         }
 
         public RotorCraft TryMakeRotorCraft(string serialnumber, List<RotorBlade> rotorblades, string rotortype = "standart rotor",
-                                            int numberofrotors = 1, int fuelcapacity = 0, string manufacturer = "generic aircraft maker",
+                                            /*int numberofrotors = 1,*/ int fuelcapacity = 0, string manufacturer = "generic aircraft maker",
                                             int maxTOweight = 1000)
         {
             RotorCraft rotorCraft = new RotorCraft();
 
             try
             {
-                rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, numberofrotors, fuelcapacity,
+                rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, /*numberofrotors,*/ fuelcapacity,
                     manufacturer, maxTOweight);
 
             }
@@ -45,12 +45,12 @@ namespace Factories
                 {
                     case nameof(rotorblades):
                         rotorblades = new List<RotorBlade>();
-                        rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, numberofrotors,
+                        rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, /*numberofrotors,*/
                             fuelcapacity, manufacturer, maxTOweight);
                         break;
                     case nameof(serialnumber):
                         serialnumber = "No serial number specified";
-                        rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, numberofrotors,
+                        rotorCraft = MakeRotorCraft(serialnumber, rotorblades, rotortype, /*numberofrotors,*/
                             fuelcapacity, manufacturer, maxTOweight);
                         break;
                 }

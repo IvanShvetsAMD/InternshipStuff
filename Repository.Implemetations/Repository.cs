@@ -6,40 +6,28 @@ namespace Repository.Implemetations
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        protected ISession session = SessionGenerator.Instance.GetSession();
+        protected readonly ISession _session = SessionGenerator.Instance.GetSession();
 
         public void Save(TEntity entity)
         {
+            using (ITransaction transaction = _session.BeginTransaction())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
+                _session.SaveOrUpdate(entity);
 
-                    session.SaveOrUpdate(entity);
-
-                    transaction.Commit();
-                }
+                transaction.Commit();
             }
         }
 
         public TEntity LoadEntity<TEntity>(long ID) where TEntity : Entity
         {
             TEntity entity;
-            using (ITransaction transaction = session.BeginTransaction())
+            using (ITransaction transaction = _session.BeginTransaction())
             {
-                entity = session.Load<TEntity>(ID);
+                entity = _session.Load<TEntity>(ID);
+
                 transaction.Commit();
 
                 return entity;
-            }
-
-        }
-
-        public void Delete(TEntity entity)
-        {
-            using (ITransaction transaction = session.BeginTransaction())
-            {
-                session.Delete(entity);
-                transaction.Commit();
             }
         }
     }
