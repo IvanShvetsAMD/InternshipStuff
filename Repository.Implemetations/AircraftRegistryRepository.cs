@@ -322,5 +322,16 @@ namespace Repository.Implemetations
                 return results;
             }
         }
+
+        public List<AircraftRegistry> GetAllAircraftRegistries()
+        {
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                List<AircraftRegistry> results = session.QueryOver<AircraftRegistry>().List<AircraftRegistry>().ToList();
+
+                transaction.Commit();
+                return results;
+            }
+        } 
     }
 }

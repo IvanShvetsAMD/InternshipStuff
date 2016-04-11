@@ -49,9 +49,9 @@
                     @Html.DisplayFor(modelItem => item.SerialNumber)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed }) |
+                    @*@Html.ActionLink("Edit", "Edit", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed }) |*@
                     @Html.ActionLink("Details", "Details", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate }) |
-                    @Html.ActionLink("Delete", "Delete", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed })
+                    @*@Html.ActionLink("Delete", "Delete", new { SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed })*@
                 </td>
             </tr>
         }
