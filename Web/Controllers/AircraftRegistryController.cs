@@ -4,12 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Domain;
+using Repository.Interfaces;
 
 
 namespace Web.Controllers
 {
     public class AircraftRegistryController : Controller
     {
+        IAircraftRegistryRepository aircraftRegistryRepository;
+
         //TEST
         private List<AircraftRegistry> rep = new List<AircraftRegistry>()
         {
@@ -26,11 +29,13 @@ namespace Web.Controllers
         };
 
 
-        public ActionResult Details(string serialNumber, string registration, DateTime registrationDate)
+        public ActionResult Details(long id, string serialNumber, string registration, DateTime registrationDate, bool hasCrashed)
         {
+            AircraftRegistry ar;
             try
             {
-                ViewData.Model = rep.First(x => x.SerialNumber == serialNumber && x.AircraftRegistrationEntry == registration && x.RegistrationDate == registrationDate);
+                //ViewData.Model = rep.First(x => x.SerialNumber == serialNumber && x.AircraftRegistrationEntry == registration && x.RegistrationDate == registrationDate);
+                ar = aircraftRegistryRepository.LoadEntity<AircraftRegistry>(id);
             }
             catch (Exception e)
             {
@@ -43,7 +48,16 @@ namespace Web.Controllers
 
         public ActionResult List()
         {
+            List<AircraftRegistry> rep;
 
+            try
+            {
+                rep = aircraftRegistryRepository.GetAllAircraftRegistries();
+            }
+            catch (Exception e)
+            {
+                return View("Error");
+            }
 
             if (rep == null)
             {
@@ -59,26 +73,29 @@ namespace Web.Controllers
             return View();
         }
 
-        //public ActionResult Edit(string serialNumber, string registration, DateTime registrationDate, bool hasCrashed)
-        //{
-        //    //rep.Where(
-        //    //    x =>
-        //    //        x.serialNumber == serialNumber && x.AircraftRegistrationEntry == registration &&
-        //    //        x.registrationDate == registrationDate && x.HasCrashed == hasCrashed);
+        public ActionResult Edit(long id, string serialNumber, string registration, DateTime registrationDate, bool hasCrashed)
+        {
+            AircraftRegistry ar = aircraftRegistryRepository.LoadEntity<AircraftRegistry>(id);
 
-        //    return View();
-        //}
+            ar.HasCrashed = hasCrashed;
+
+            aircraftRegistryRepository.Save(ar);
+
+            
+            return View("List");
+        }
 
 
-        //public ActionResult Delete(string serialnumber, string registration, DateTime registrationdate, bool hascrashed)
-        //{
-        //    int n = rep.RemoveAll(x =>
-        //        x.SerialNumber == serialnumber && x.AircraftRegistrationEntry == registration &&
-        //        x.RegistrationDate == registrationdate && x.HasCrashed == hascrashed);
+        public ActionResult Delete(long id, string serialNumber, string registration, DateTime registrationDate, bool hasCrashed)
+        {
+            aircraftRegistryRepository.DeleteById(id);
 
-        //    ViewData.Model = n;
+            return View("ObjectsRemoved");
+        }
 
-        //    return View("ObjectsRemoved");
-        //}
+        public AircraftRegistryController(IAircraftRegistryRepository aircraftRegistryRepository)
+        {
+            this.aircraftRegistryRepository = aircraftRegistryRepository;
+        }
     }
 }

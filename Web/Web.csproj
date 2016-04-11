@@ -291,6 +291,10 @@
       <Project>{26a5bcce-ce10-4ba0-9124-833460dc5f7a}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Repository.Interfaces\Repository.Interfaces.csproj">
+      <Project>{f5f0d5e7-198a-4a2d-aa97-337462642ac3}</Project>
+      <Name>Repository.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

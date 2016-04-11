@@ -10,6 +10,7 @@ using NHibernate;
 using NHibernate.Cfg.XmlHbmBinding;
 using NHibernate.Criterion;
 using NHibernate.Transform;
+using Remotion.Linq.Clauses.ResultOperators;
 using Repository.Interfaces;
 
 namespace Repository.Implemetations
@@ -332,6 +333,16 @@ namespace Repository.Implemetations
                 transaction.Commit();
                 return results;
             }
-        } 
+        }
+        
+        public void DeleteById(long id, string serialnumber, string registration, DateTime registrationdate, bool hascrashed)
+        {
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                session.Delete(session.Load<AircraftRegistry>(id));
+
+                transaction.Commit();
+            }
+        }
     }
 }

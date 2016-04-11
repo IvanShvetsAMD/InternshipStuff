@@ -19,6 +19,9 @@ namespace Repository.Interfaces
         List<AicraftInfoAndIfRegisteredBoolDto> GetAicraftInfoAndIfRegisteredBoolDto();
 
         List<string> GetAircraftRegisteredInTwoSpecificYears(int yearOne, int yearTwo);
+
         List<AircraftRegistry> GetAllAircraftRegistries();
+
+        void DeleteById(long id, string serialnumber = null, string registration = null, DateTime registrationdate = default(DateTime), bool hascrashed = false);
     }
 }
