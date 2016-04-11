@@ -19,5 +19,6 @@ namespace Repository.Interfaces
         List<AicraftInfoAndIfRegisteredBoolDto> GetAicraftInfoAndIfRegisteredBoolDto();
 
         List<string> GetAircraftRegisteredInTwoSpecificYears(int yearOne, int yearTwo);
+        List<AircraftRegistry> GetAllAircraftRegistries();
     }
 }
