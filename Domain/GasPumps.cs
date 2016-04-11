@@ -8,9 +8,9 @@ namespace Domain
 {
     public abstract class GasPump : ILiftingGasPumpModule
     {
-        public void PumpGas(int originCompartment, int destinationCompartment, float volume, IList<GasCompartment> сompartments)
+        public void PumpGas(int originCompartment, int destinationCompartment, float volume, List<GasCompartment> сompartments)
         {
-            MainPump(originCompartment, destinationCompartment, volume, сompartments.ToList());
+            MainPump(originCompartment, destinationCompartment, volume, сompartments);
         }
 
         protected abstract void TakePrecautions(int originCompartment, float volume, List<GasCompartment> сompartments);

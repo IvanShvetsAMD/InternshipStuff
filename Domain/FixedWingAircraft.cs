@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Domain
 {
     public class FixedWingAircraft : HeavierThanAirAircraft
     {
-        private IList<Wing> _wings;
+        private readonly IList<Wing> _wings;
         private readonly int? _cruiseSpeed;
         private readonly int? _stallSpeed;
 
         public virtual IList<Wing> Wings
         {
-            get { return _wings; }
-            set { _wings = value; }
+            get { return _wings.ToList(); }
         }
 
         public virtual int? CruiseSpeed
@@ -25,7 +25,7 @@ namespace Domain
             get { return _stallSpeed; }
         }
 
-        protected FixedWingAircraft()
+        public FixedWingAircraft()
         {
             
         }

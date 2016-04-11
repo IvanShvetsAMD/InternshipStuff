@@ -52,33 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AircraftRegistryRepository.cs" />
     <Compile Include="AircraftRepository.cs" />
     <Compile Include="BladeRepository.cs" />
     <Compile Include="EngineRepository.cs" />
-    <Compile Include="FixedWingAircraftRepository.cs" />
     <Compile Include="GasCompartmentRepository.cs" />
     <Compile Include="GeneratorRepository.cs" />
-    <Compile Include="HeavierThanAirAircraftRepository.cs" />
-    <Compile Include="JetEngineRepository.cs" />
-    <Compile Include="LighterThanAirAircraftRepository.cs" />
-    <Compile Include="OxidiserRepository.cs" />
-    <Compile Include="PistonEngineRepository.cs" />
-    <Compile Include="PoweredAircraftRepository.cs" />
-    <Compile Include="PropellantRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RamjetRepository.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="RocketEngineRepository.cs" />
-    <Compile Include="RotorBladeRepository.cs" />
-    <Compile Include="RotorCraftRepository.cs" />
     <Compile Include="SessionGenerator.cs" />
-    <Compile Include="SolidFuelRocketEngineRepository.cs" />
+    <Compile Include="SessionSingleton.cs" />
     <Compile Include="SpoolRepository.cs" />
-    <Compile Include="TurbineBladeRepository.cs" />
-    <Compile Include="TurbineEngineRepository.cs" />
-    <Compile Include="TurboFanRepository.cs" />
-    <Compile Include="TurbojetRepository.cs" />
-    <Compile Include="TurboshaftRepository.cs" />
     <Compile Include="VariableGeometryWingRepository.cs" />
     <Compile Include="WingRepository.cs" />
   </ItemGroup>

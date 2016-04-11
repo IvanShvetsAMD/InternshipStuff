@@ -1,0 +1,58 @@
+﻿@model Domain.AircraftRegistry
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AicraftRegistryDetails</title>
+</head>
+<body>
+    <div>
+        <h4>AircraftRegistry</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.AircraftRegistrationEntry)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AircraftRegistrationEntry)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HasCrashed)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HasCrashed)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RegistrationDate.Date);
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SerialNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SerialNumber)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+        @Html.ActionLink("Back to List", "List")
+    </p>
+</body>
+</html>

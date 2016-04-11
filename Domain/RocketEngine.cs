@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -31,7 +31,7 @@ namespace Domain
         public RocketEngine(bool isreignitable, string nozzlebelltype, int egt, int isp, int numberofcycles,
             List<Propellant> propellants, List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 egt, isp, numberofcycles, propellants, oxidisers, manufacturer, model, serialnumber, maxpower,
                 operatingtime, parentaircraft, fuelflow, stat)

@@ -8,6 +8,6 @@ namespace Domain
 {
     public interface ILiftingGasPumpModule
     {
-        void PumpGas(int origin, int destination, float volume, IList<GasCompartment> compartments );
+        void PumpGas(int origin, int destination, float volume, List<GasCompartment> compartments );
     }
 }

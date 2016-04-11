@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Domain
@@ -11,10 +11,9 @@ namespace Domain
         private readonly string _serialNumber;
         private float _maxPower;
         private readonly float _operatingTime;
-        private readonly Aircraft _parentAircraft;
+        private readonly PoweredAircraft _parentAircraft;
         private float _fuelFlow;
         private OnOff _onOffStatus;
-
 
         public virtual string Manufacturer
         {
@@ -29,7 +28,7 @@ namespace Domain
         public virtual float CurrentPower
         {
             get { return _currentPower; }
-            protected set { _currentPower = value; }
+            set { _currentPower = value; }
         }
 
         public virtual string SerialNumber
@@ -48,7 +47,7 @@ namespace Domain
             get { return _operatingTime; }
         }
 
-        public virtual Aircraft ParentAircraft
+        public virtual PoweredAircraft ParentAircraft
         {
             get { return _parentAircraft; }
         }
@@ -70,7 +69,7 @@ namespace Domain
             return
                 String.Format(
                     ", Manufacturer: {0}, model: {1}, current power setting: {2}, serial number: {3}, maximum power output: {4}, operating time: {5}, parent aircraft: {6}, fuel flow {7}, Status: {8}",
-                    Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraft, FuelFlow,
+                    Manufacturer, Model, CurrentPower, SerialNumber, MaxPower, OperatingTime, ParentAircraft.Id, FuelFlow,
                     OnOffStatus);
         }
 
@@ -137,7 +136,7 @@ namespace Domain
         }
 
         public Engine(string manufacturer, string model, string serialnumber, float maxpower, float operatingtime,
-            Aircraft parentaircraft, float fuelflow, OnOff stat)
+            PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
         {
             _manufacturer = manufacturer;
             _model = model;

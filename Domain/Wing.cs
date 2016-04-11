@@ -1,14 +1,11 @@
-﻿using System.ComponentModel.Design;
-
-namespace Domain
+﻿namespace Domain
 {
     public class Wing : Entity
     {
         private readonly int _fuelCapacity;
         private readonly float _rootThickness;
         private float _wingAngle;
-        private FixedWingAircraft _parentfFixedWingAircraft;
-
+        private FixedWingAircraft _parentAircraft;
 
         public virtual int FuelCapacity
         {
@@ -26,22 +23,22 @@ namespace Domain
             protected set { _wingAngle = value; }
         }
 
-        public virtual FixedWingAircraft ParentfFixedWingAircraft
+        public virtual FixedWingAircraft ParentAircraft
         {
-            get { return _parentfFixedWingAircraft; }
-            protected set { _parentfFixedWingAircraft = value; }
+            get { return _parentAircraft; }
+            set { _parentAircraft = value; }
         }
 
-        protected Wing()
+        public Wing()
         {
             
         }
 
-        public Wing(int fuelcapacity, float rootThickness, FixedWingAircraft parentfFixedWingAircraft = null)
+        public Wing(int fuelcapacity, float rootThickness)
         {
+            _parentAircraft = null;
             _fuelCapacity = fuelcapacity;
             _rootThickness = rootThickness;
-            _parentfFixedWingAircraft = parentfFixedWingAircraft;
         }
     }
 }

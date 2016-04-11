@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,12 +6,15 @@ namespace Domain
 {
     public class PoweredAircraft : Aircraft, IPowered
     {
-        private readonly IList<Engine> _engines;
+        private readonly List<Engine> _engines;// = new List<Engine>();
         private readonly int _fuelCapacity;
 
         public virtual IList<Engine> Engines
         {
-            get { return _engines; }
+            get
+            {
+                return _engines?.ToList();
+            }
         }
 
         public virtual int FuelCapacity
@@ -24,7 +27,6 @@ namespace Domain
         public override string ToString()
         {
             string FinalString = base.ToString() + String.Format(" fuel capacity: {0}\n Engines:", FuelCapacity);
-
             if (Engines != null)
             {
                 for (int i = 0; i < Engines.Count; i++)
@@ -82,7 +84,7 @@ namespace Domain
                 throw;
             }
         }
-        
+
         public PoweredAircraft(List<Engine> engines, int fuelcapacity, string manufacturer, string model, int maxTOweight, int vne, string serialnumber)
             : base(manufacturer, model, maxTOweight, vne, serialnumber)
         {
@@ -94,12 +96,18 @@ namespace Domain
 
         public virtual void MaxPower(Engine engine)
         {
-            throw new NotImplementedException();
+            if (Engines.Contains(engine, new Engine.EngineComparer()))
+            {
+                Engines.Where(v => v.SerialNumber == engine.SerialNumber).Select(v => v).First().CurrentPower = engine.MaxPower;
+            }
         }
 
         public virtual void IdlePower(Engine engine)
         {
-            throw new NotImplementedException();
+            if (Engines.Contains(engine, new Engine.EngineComparer()))
+            {
+                Engines.Where(v => v.SerialNumber == engine.SerialNumber).Select(v => v).First().CurrentPower = 1;
+            }
         }
     }
 }

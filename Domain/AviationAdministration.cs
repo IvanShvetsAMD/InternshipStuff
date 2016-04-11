@@ -10,20 +10,10 @@ namespace Domain
     public class AviationAdministration : IFAA
     {
         static readonly Lazy<AviationAdministration> LazyInstance = new Lazy<AviationAdministration>(() => new AviationAdministration(), true);
-        private List<AircraftRegistration> registeredAircraft;// = new List<AircraftRegistration>();
-        private List<Tuple<string, List<Engine>>> registeredEngines;// = new List<Tuple<string, List<Engine>>>();
+        private List<AircraftRegistration> registeredAircraft = new List<AircraftRegistration>();
+        private List<Tuple<string, List<Engine>>> registeredEngines = new List<Tuple<string, List<Engine>>>();
 
-        public virtual IList<AircraftRegistration> RegisteredAircraft
-        {
-            get { return registeredAircraft; }
-            set { registeredAircraft = value.ToList(); }
-        }
-
-        public virtual IList<Tuple<string, List<Engine>>> RegisteredEngines
-        {
-            get { return registeredEngines; }
-            set { registeredEngines = value.ToList(); }
-        }
+        //List<Tuple<PoweredAircraft, bool>> Registry = new List<Tuple<PoweredAircraft, bool>>();
 
         public static AviationAdministration GetInstance() => LazyInstance.Value;
 
@@ -39,6 +29,14 @@ namespace Domain
             {
                 registrationEntry.HasCrashed = false;
             }
+
+            //for (int index = 0; index < Registry.Count; index++)
+            //{
+            //    if (Registry[index].Item1 == aircraft)
+            //    {
+            //        Registry[index] = new Tuple<PoweredAircraft, bool>(Registry[index].Item1, true);
+            //    }
+            //}
             Console.WriteLine("Aircraft crash registered");
         }
 
@@ -48,12 +46,12 @@ namespace Domain
             registeredEngines.Add(new Tuple<string, List<Engine>>(aircraft.SerialNumber, aircraft.Engines.ToList()));
         }
 
-        public void RegisterAircraft(List<AircraftRegistration> registry)
+        public void RegisterAircraftList(List<AircraftRegistration> registry)
         {
-            RegisteredAircraft.ToList().AddRange(registry);
+            registeredAircraft.AddRange(registry);
             foreach (var aircraftRegistration in registry)
             {
-                RegisteredEngines.Add(new Tuple<string, List<Engine>>(aircraftRegistration.Aircraft.SerialNumber, aircraftRegistration.Aircraft.Engines.ToList()));
+                registeredEngines.Add(new Tuple<string, List<Engine>>(aircraftRegistration.Aircraft.SerialNumber, aircraftRegistration.Aircraft.Engines.ToList()));
             }
         }
 
@@ -70,8 +68,7 @@ namespace Domain
 
         private AviationAdministration()
         {
-            registeredAircraft = new List<AircraftRegistration>();
-            registeredEngines = new List<Tuple<string, List<Engine>>>();
+
         }
 
         //public AviationAdministration(List<AircraftRegistration> crafts, List<Tuple<string, List<Engine>>> engines)
@@ -79,6 +76,18 @@ namespace Domain
         //    RegisteredAircraft = crafts;
         //    RegisteredEngines = engines;
         //}
+    }
+
+    public class AircraftRegistration
+    {
+        public bool HasCrashed { get; set; }
+        public PoweredAircraft Aircraft { get; set; }
+
+        public AircraftRegistration(PoweredAircraft Aircraft, bool HasCrashed)
+        {
+            this.HasCrashed = HasCrashed;
+            this.Aircraft = Aircraft;
+        }
     }
 
     public class NTSB : IAviationAdministration
@@ -95,15 +104,45 @@ namespace Domain
         }
     }
 
-    public class AircraftRegistration
+    public class AircraftRegistry : Entity
     {
-        public PoweredAircraft Aircraft { get; private set; }
-        public bool HasCrashed { get; set; }
+        private bool _hasCrashed;
+        private readonly string _aircraftRegistrationEntry;
+        private readonly DateTime _registrationDate;
+        private readonly string _serialNumber;
 
-        public AircraftRegistration(PoweredAircraft aircraft, bool isOperational)
+        public virtual String AircraftRegistrationEntry
         {
-            Aircraft = aircraft;
-            HasCrashed = isOperational;
+            get { return _aircraftRegistrationEntry.ToUpperInvariant(); }
+        }
+
+        public virtual bool HasCrashed
+        {
+            get { return _hasCrashed; }
+            set { _hasCrashed = value; }
+        }
+
+        public virtual DateTime RegistrationDate
+        {
+            get { return _registrationDate; }
+        }
+
+        public virtual string SerialNumber
+        {
+            get { return _serialNumber.ToUpperInvariant(); }
+        }
+
+        public AircraftRegistry()
+        {
+            
+        }
+
+        public AircraftRegistry(string aircraftRegistration, bool hasCrashed, DateTime registrationdate, string serialNumber)
+        {
+            _aircraftRegistrationEntry = aircraftRegistration.ToUpperInvariant();
+            _hasCrashed = hasCrashed;
+            _serialNumber = serialNumber;
+            _registrationDate = registrationdate.Date;
         }
     }
 }

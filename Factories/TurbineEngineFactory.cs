@@ -15,10 +15,10 @@ namespace Factories
 
         public static TurbineEngineFactory GeTurbineEngineFactory() => LazyInstance.Value;
 
-        public Turbofan MakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+        public Turbofan MakeTurbofan(float bypassratio, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                     int numberofcycles, List<Propellant> fueList, List<Oxidiser> oxidisers, string manuf, string model,
                                     string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, bool isgeared = false,
-                                    bool hasreverse = true, Aircraft parentvehicle = null)
+                                    bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             //return new Turbofan(3, false, true, 3, new Dictionary<Generator, double>(new GeneratorComparer()),
             //                    new List<Spool>(), 600, 500, 5, new List<Propellants> { Propellants.Jet_A },
@@ -33,10 +33,10 @@ namespace Factories
                 manuf, model, serialnumber, maxpower, operatingtime, parentvehicle, fuelflow, stat);
         }
 
-        public bool TryMakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+        public bool TryMakeTurbofan(float bypassratio, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                     int numberofcycles, List<Propellant> fueList, List<Oxidiser> oxidisers, string manuf, string model,
                                     string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, out Turbofan incomingTurbofan, bool isgeared = false,
-                                    bool hasreverse = true, Aircraft parentvehicle = null)
+                                    bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             try
             {
@@ -69,10 +69,10 @@ namespace Factories
         }
 
 
-        public Turbofan TryMakeTurbofan(float bypassratio, uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
+        public Turbofan TryMakeTurbofan(float bypassratio, int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp,
                                         int numberofcycles, List<Propellant> fueList, List<Oxidiser> oxidisers, string manuf, string model,
                                         string serialnumber, float maxpower, float operatingtime, float fuelflow, OnOff stat, bool isgeared = false,
-                                        bool hasreverse = true, Aircraft parentvehicle = null)
+                                        bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             Turbofan turbofan = new Turbofan();
 
@@ -142,10 +142,10 @@ namespace Factories
             return turbofan;
         }
 
-        public Turboshaft MakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts, Generator gen,
+        public Turboshaft MakeTurboshaft(float gearingR, float maxtorque, int numberofshafts, Generator gen,
                                         List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> fueList,
                                         List<Oxidiser> oxidisers, string manuf, string model, string serialnumber, float maxpower,
-                                        float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
+                                        float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             GeneralConditionsChecker(numberofshafts, spools, fueList, oxidisers, serialnumber);
 
@@ -195,10 +195,10 @@ namespace Factories
         //}
 
 
-        public Turboshaft TryMakeTurboshaft(float gearingR, float maxtorque, uint numberofshafts, Generator gen,
+        public Turboshaft TryMakeTurboshaft(float gearingR, float maxtorque, int numberofshafts, Generator gen,
                                             List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> fueList,
                                             List<Oxidiser> oxidisers, string manuf, string model, string serialnumber, float maxpower,
-                                            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
+                                            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             Turboshaft turboshaft = new Turboshaft();
 
@@ -272,7 +272,7 @@ namespace Factories
             }
             return turboshaft;
         }
-        private void GeneralConditionsChecker(uint numberofshafts, List<Spool> spools, List<Propellant> fueList, List<Oxidiser> oxidisers, string serialnumber)
+        private void GeneralConditionsChecker(int numberofshafts, List<Spool> spools, List<Propellant> fueList, List<Oxidiser> oxidisers, string serialnumber)
         {
             if (numberofshafts < 1)
                 throw new ArgumentException("There could be no turbofan with less than one shaft", nameof(numberofshafts));
@@ -288,9 +288,9 @@ namespace Factories
                 throw new ArgumentNullException(nameof(serialnumber), "No serial number provided");
         }
 
-        public Turbojet MakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles,
+        public Turbojet MakeTurbojet(int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles,
                                      List<Propellant> fueList, List<Oxidiser> oxidisers, string manuf, string model, string serialnumber, float maxpower,
-                                     float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
+                                     float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             GeneralConditionsChecker(numberofshafts, spools, fueList, oxidisers, serialnumber);
 
@@ -299,9 +299,9 @@ namespace Factories
                 oxidisers, manuf, model, serialnumber, maxpower, operatingtime, parentvehicle, fuelflow, stat);
         }
 
-        public bool TryMakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> fueList,
+        public bool TryMakeTurbojet(int numberofshafts, Generator gen, List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> fueList,
                                     List<Oxidiser> oxidisers, string manuf, string model, string serialnumber, float maxpower, float operatingtime,
-                                    float fuelflow, OnOff stat, out Turbojet incomingTurbojet, bool hasreverse = true, Aircraft parentvehicle = null)
+                                    float fuelflow, OnOff stat, out Turbojet incomingTurbojet, bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             try
             {
@@ -332,11 +332,11 @@ namespace Factories
             }
         }
 
-        public Turbojet TryMakeTurbojet(uint numberofshafts, Generator gen, List<Spool> spools,
+        public Turbojet TryMakeTurbojet(int numberofshafts, Generator gen, List<Spool> spools,
             int egt, int isp, int numberofcycles,
             List<Propellant> fueList, List<Oxidiser> oxidisers, string manuf, string model, string serialnumber,
             float maxpower,
-            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, Aircraft parentvehicle = null)
+            float operatingtime, float fuelflow, OnOff stat, bool hasreverse = true, PoweredAircraft parentvehicle = null)
         {
             Turbojet turbojet = new Turbojet();
 

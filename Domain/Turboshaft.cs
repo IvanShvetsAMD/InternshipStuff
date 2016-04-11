@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 
 namespace Domain
@@ -8,9 +7,15 @@ namespace Domain
         private readonly float _gearingRatio;
         private readonly float _maxTorque;
 
-        public virtual float GearingRatio => _gearingRatio;
+        public virtual float GearingRatio
+        {
+            get { return _gearingRatio; }
+        }
 
-        public virtual float MaxTorque => _maxTorque;
+        public virtual float MaxTorque
+        {
+            get { return _maxTorque; }
+        }
 
         public virtual void IncreaseGearingRatio()
         {
@@ -20,13 +25,13 @@ namespace Domain
         {
         }
 
-        public virtual void IncreasePower()
+        public override void IncreasePower()
         {
             //check for torque limits
             base.IncreasePower();
         }
 
-        public virtual void DecreasePower()
+        public override void DecreasePower()
         {
             base.DecreasePower();
         }
@@ -40,11 +45,11 @@ namespace Domain
         {
         }
 
-        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, uint numberofshafts, Generator gen,
+        public Turboshaft(float gearingratio, float maxtorque, bool hasreverse, int numberofshafts, Generator gen,
             List<Spool> spools, int egt, int isp, int numberofcycles, List<Propellant> propellants,
             List<Oxidiser> oxidisers,
             string manufacturer, string model, string serialnumber,
-            float maxpower, float operatingtime, Aircraft parentaircraft, float fuelflow, OnOff stat)
+            float maxpower, float operatingtime, PoweredAircraft parentaircraft, float fuelflow, OnOff stat)
             : base(
                 hasreverse, numberofshafts, gen, spools, egt, isp, numberofcycles, propellants, oxidisers, manufacturer,
                 model, serialnumber, maxpower, operatingtime, parentaircraft, fuelflow, stat)

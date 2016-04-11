@@ -1,0 +1,12 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "ObjectsRemoved";
+}
+
+<h2> @Html.DisplayFor(modelItem => Model) object(s) were removed.</h2>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to List", "List")
+</p>
+

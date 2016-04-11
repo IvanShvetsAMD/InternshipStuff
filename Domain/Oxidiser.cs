@@ -6,6 +6,7 @@ namespace Domain
     {
         private int _intValue;
         private string _name;
+        private JetEngine _parentEngine;
 
         public virtual int IntValue
         {
@@ -24,6 +25,12 @@ namespace Domain
             get { return (OxidisersEnum)IntValue; }
         }
 
+        public virtual JetEngine ParentEngine
+        {
+            get { return _parentEngine; }
+            set { _parentEngine = value; }
+        }
+
         public Oxidiser()
         {
 
@@ -31,12 +38,14 @@ namespace Domain
 
         public Oxidiser(OxidisersEnum ox)
         {
+            _parentEngine = null;
             _intValue = (int)ox;
             _name = ox.ToString();
         }
 
         public Oxidiser(int value, string name)
         {
+            _parentEngine = null;
             _intValue = value;
             _name = name;
         }

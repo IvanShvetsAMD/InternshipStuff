@@ -4,16 +4,15 @@
     {
         private readonly float _maxBackSweepAngle;
         private readonly float _maxForwardSweepAngle;
-        private FixedWingAircraft _parentfFixedWingAircraft;
 
-        public virtual float MaxBackSweepAngle => _maxBackSweepAngle;
-
-        public virtual float MaxForwardSweepAngle => _maxForwardSweepAngle;
-
-        public virtual FixedWingAircraft ParentfFixedWingAircraft
+        public virtual float MaxBackSweepAngle
         {
-            get { return _parentfFixedWingAircraft; }
-            protected set { _parentfFixedWingAircraft = value; }
+            get { return _maxBackSweepAngle; }
+        }
+
+        public virtual float MaxForwardSweepAngle
+        {
+            get { return _maxForwardSweepAngle; }
         }
 
         public virtual void DecreaseAngle(float SweepToAngle)
@@ -38,16 +37,15 @@
 
         public virtual void SweepMaxForward() => WingAngle = MaxForwardSweepAngle;
 
-        protected VariableGeometryWing()
+        public VariableGeometryWing()
         {
             
         }
 
-        public VariableGeometryWing(float maxsweepBackAngle, float maxsweepforwardangle, int fuelcapacity, float rootThickness, FixedWingAircraft parentFixedWingAircraft):base(fuelcapacity, rootThickness)
+        public VariableGeometryWing(float maxsweepBackAngle, float maxsweepforwardangle, int fuelcapacity, float rootThickness):base(fuelcapacity, rootThickness)
         {
             _maxForwardSweepAngle = maxsweepforwardangle;
             _maxBackSweepAngle = maxsweepBackAngle;
-            _parentfFixedWingAircraft = parentFixedWingAircraft;
         }
     }
 }
