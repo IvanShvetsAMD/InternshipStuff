@@ -42,7 +42,6 @@ namespace Repository.Implemetations
             {
                 List<long> results = null;
                 GasCompartment gasCompartmentAlias = null;
-                GasCompartment gasCompartmentAlias2 = null;
                 
                 results = session.QueryOver<GasCompartment>(() => gasCompartmentAlias)
                     .WithSubquery

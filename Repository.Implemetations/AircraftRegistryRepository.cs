@@ -207,8 +207,6 @@ namespace Repository.Implemetations
                 Aircraft aircraftAlias = null;
                 AircraftRegistry aircraftRegistryAlias = null;
 
-                AicraftInfoAndDateOfRegistrationDto DTO = null;
-
 
                 //results = session.QueryOver<Aircraft>(() => aircraftAlias)
                 //    .WithSubquery
