@@ -1,10 +1,16 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using ActionImplementations;
 using Interfaces;
 using Ninject;
 using Repository.Implemetations;
 using Repository.Interfaces;
 using System.Web;
+using System.Web.Mvc;
+using Ninject.Components;
+using Ninject.Web.Common;
 
 namespace Infrastructure
 {
@@ -54,6 +60,13 @@ namespace Infrastructure
 
             //spool
             Kernel.Bind<ISpoolRepository>().To<SpoolRepository>();
+
+            //////////////////////////////////////////////
+            //// WEB
+            ////////////////////////////////////////
+
+            
+
 
         }
 

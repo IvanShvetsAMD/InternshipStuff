@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Infrastructure;
 
 [assembly: OwinStartupAttribute(typeof(Web.Startup))]
 namespace Web
@@ -9,6 +10,7 @@ namespace Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ServiceLocator.RegisterAll();
         }
     }
 }
