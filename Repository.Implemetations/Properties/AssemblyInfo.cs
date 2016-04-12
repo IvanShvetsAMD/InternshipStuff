@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("Infrastructure")]
 [assembly: InternalsVisibleTo("PresentationCode")]
+[assembly: InternalsVisibleTo("Web")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

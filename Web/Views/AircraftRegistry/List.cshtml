@@ -50,8 +50,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { Id = item.Id, SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed }) |
-                    @Html.ActionLink("Details", "Details", new { Id = item.Id, SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate }) |
-                    @Html.ActionLink("Delete", "Delete", new { Id = item.Id, SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed })
+                    @Html.ActionLink("Details", "Details", new { Id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { Id = item.Id })
                 </td>
             </tr>
         }
