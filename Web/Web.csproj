@@ -215,7 +215,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="ApplicationCastleInstaller.cs" />
+    <Compile Include="ControllersInsaller.cs" />
     <Compile Include="CustomControllerFactory.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AircraftRegistryController.cs" />
@@ -312,6 +312,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{26a5bcce-ce10-4ba0-9124-833460dc5f7a}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InfrastructureCastle\InfrastructureCastle.csproj">
+      <Project>{2e85f3c5-1ece-4ebb-8499-37a06fc8fc1f}</Project>
+      <Name>InfrastructureCastle</Name>
     </ProjectReference>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
       <Project>{1b1a25dd-4d06-44bc-b119-25855403e340}</Project>

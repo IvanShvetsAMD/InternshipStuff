@@ -5,18 +5,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Repository.Implemetations")]
+[assembly: AssemblyTitle("InfrastructureCastle")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Repository.Implemetations")]
+[assembly: AssemblyProduct("InfrastructureCastle")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: InternalsVisibleTo("Infrastructure")]
-[assembly: InternalsVisibleTo("InfrastructureCastle")]
-[assembly: InternalsVisibleTo("PresentationCode")]
-[assembly: InternalsVisibleTo("Web")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -24,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0d4ec24b-872c-4719-ba7b-32e1e3f2e339")]
+[assembly: Guid("2e85f3c5-1ece-4ebb-8499-37a06fc8fc1f")]
 
 // Version information for an assembly consists of the following four values:
 //

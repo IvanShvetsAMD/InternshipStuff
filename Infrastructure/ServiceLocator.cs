@@ -10,7 +10,6 @@ using Repository.Interfaces;
 using System.Web;
 using System.Web.Mvc;
 using Ninject.Components;
-using Ninject.Web.Common;
 
 namespace Infrastructure
 {

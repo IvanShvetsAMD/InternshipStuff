@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Castle.Windsor;
+using InfrastructureCastle;
 
 namespace Web
 {
@@ -18,8 +19,9 @@ namespace Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             var container = new WindsorContainer();
-            var applicationInstaller = new ApplicationCastleInstaller();
-            container.Install(applicationInstaller);
+            var repositoriesInstaller = new RepositoriesInstaller();
+            container.Install(repositoriesInstaller);
+            container.Install(new ControllersInstaller());
             var controllerFactory = new CustomControllerFactory(container);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
         }
