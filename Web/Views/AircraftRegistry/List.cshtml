@@ -16,46 +16,50 @@
     <p>
         @*@Html.ActionLink("Create New", "Create")*@
     </p>
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AircraftRegistrationEntry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasCrashed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationDate.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SerialNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AircraftRegistrationEntry)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HasCrashed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegistrationDate.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SerialNumber)
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(modelItem => item.AircraftRegistrationEntry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasCrashed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {Id = item.Id, SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed}) |
+                @Html.ActionLink("Details", "Details", new {Id = item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {Id = item.Id})
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AircraftRegistrationEntry)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HasCrashed)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegistrationDate.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SerialNumber)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { Id = item.Id, SerialNumber = item.SerialNumber, Registration = item.AircraftRegistrationEntry, RegistrationDate = item.RegistrationDate, HasCrashed = item.HasCrashed }) |
-                    @Html.ActionLink("Details", "Details", new { Id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { Id = item.Id })
-                </td>
-            </tr>
-        }
+</table>
 
-    </table>
+<div>
+    @Html.ActionLink("Create new entry", "Create")
+</div>
 </body>
 </html>

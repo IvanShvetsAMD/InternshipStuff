@@ -296,6 +296,7 @@
     <Content Include="Views\AircraftRegistry\Delete.cshtml" />
     <Content Include="Views\Shared\ErrorNoData.cshtml" />
     <Content Include="Views\AircraftRegistry\ObjectsRemoved.cshtml" />
+    <Content Include="Views\AircraftRegistry\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

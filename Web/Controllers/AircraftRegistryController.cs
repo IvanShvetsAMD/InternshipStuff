@@ -93,6 +93,22 @@ namespace Web.Controllers
             return View("ObjectsRemoved");
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View("Create");
+        }
+
+        [HttpPost]
+        public ActionResult Create(string serialNumber, string registration, DateTime registrationDate, bool hasCrashed)
+        {
+            AircraftRegistry ar = new AircraftRegistry(registration, hasCrashed, registrationDate, serialNumber);
+
+            aircraftRegistryRepository.Save(ar);
+
+            return RedirectToAction("List");
+        }
+
         public AircraftRegistryController(IAircraftRegistryRepository aircraftRegistryRepository)
         {
             this.aircraftRegistryRepository = aircraftRegistryRepository;
